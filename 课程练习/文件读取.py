@@ -13,7 +13,7 @@ f.close()
 #with 语句块，可以将文件打开后，操作完毕，自动关闭这个文件
 #图片读取需要使用rb权限 读取二进制的格式
 #正常的文本，可以使用rt，也就是默认读取格式
-with open('data.py','rt')  as f:
+with open('data.py', 'rt')  as f:
     while True:
         line = f.readline()
         if line:
