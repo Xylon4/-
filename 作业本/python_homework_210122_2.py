@@ -22,8 +22,9 @@ class Cat(Animal):
         print("喵喵叫")
 
 
-bulecat = Cat()
-print(f"我是一只{bulecat.age}岁的{bulecat.hair}{bulecat.color}{bulecat.name}")
-bulecat.catching_mice()
-bulecat.call()
-bulecat.run()
+if __name__ == '__main__':
+    bulecat = Cat()
+    print(f"我是一只{bulecat.age}岁的{bulecat.hair}{bulecat.color}{bulecat.name}")
+    bulecat.catching_mice()
+    bulecat.call()
+    bulecat.run()
