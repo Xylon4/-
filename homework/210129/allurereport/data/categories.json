@@ -1,0 +1,77 @@
+{
+  "uid" : "4b4757e66a1912dae1a509f688f20b0f",
+  "name" : "categories",
+  "children" : [ {
+    "name" : "Product defects",
+    "children" : [ {
+      "name" : "AssertionError: assert -0.1 == 0.3\n  +-0.1\n  -0.3",
+      "children" : [ {
+        "name" : "test_add[failed]",
+        "uid" : "8c06ae40dee13bed",
+        "parentUid" : "727731a6eb279f270e2d336b647c2847",
+        "status" : "failed",
+        "time" : {
+          "start" : 1613919483943,
+          "stop" : 1613919483943,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "[0.1, -0.2, 0.3]" ]
+      } ],
+      "uid" : "727731a6eb279f270e2d336b647c2847"
+    }, {
+      "name" : "AssertionError: assert -0.29 == -0.291\n  +-0.29\n  --0.291",
+      "children" : [ {
+        "name" : "test_sub[float]",
+        "uid" : "2b37046cdee6e366",
+        "parentUid" : "abb8fab4eb9518fd8508863799e8f355",
+        "status" : "failed",
+        "time" : {
+          "start" : 1613919484029,
+          "stop" : 1613919484029,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "[0.009, 0.3, -0.291]" ]
+      } ],
+      "uid" : "abb8fab4eb9518fd8508863799e8f355"
+    }, {
+      "name" : "AssertionError: assert 0.15 == 0.155\n  +0.15\n  -0.155",
+      "children" : [ {
+        "name" : "test_sub[failed]",
+        "uid" : "db84a515dab93082",
+        "parentUid" : "2b283e1410d9823e617db4d20903ab6f",
+        "status" : "failed",
+        "time" : {
+          "start" : 1613919484035,
+          "stop" : 1613919484035,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "[0.105, -0.05, 0.155]" ]
+      } ],
+      "uid" : "2b283e1410d9823e617db4d20903ab6f"
+    }, {
+      "name" : "AssertionError: assert -0.05 == -0.0525\n  +-0.05\n  --0.0525",
+      "children" : [ {
+        "name" : "test_mul[failed]",
+        "uid" : "cd190a75867692c",
+        "parentUid" : "20b477f3b0c5312570a0fd1750fa6b82",
+        "status" : "failed",
+        "time" : {
+          "start" : 1613919484055,
+          "stop" : 1613919484055,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "[0.175, -0.3, -0.0525]" ]
+      } ],
+      "uid" : "20b477f3b0c5312570a0fd1750fa6b82"
+    } ],
+    "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
+  } ]
+}

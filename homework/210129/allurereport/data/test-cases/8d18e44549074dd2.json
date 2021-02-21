@@ -1,0 +1,137 @@
+{
+  "uid" : "8d18e44549074dd2",
+  "name" : "test_mul[int]",
+  "fullName" : "homework.210129.test_calc.TestCalc#test_mul",
+  "historyId" : "3a023a95d37cea646b578a65c4df2e40",
+  "time" : {
+    "start" : 1613919484044,
+    "stop" : 1613919484044,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "stageprint",
+    "time" : {
+      "start" : 1613919483932,
+      "stop" : 1613919483932,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  }, {
+    "name" : "get_mul_datas",
+    "time" : {
+      "start" : 1613919484044,
+      "stop" : 1613919484044,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  }, {
+    "name" : "get_calc",
+    "time" : {
+      "start" : 1613919483932,
+      "stop" : 1613919483932,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "stageprint::0",
+    "time" : {
+      "start" : 1613919484079,
+      "stop" : 1613919484079,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  }, {
+    "name" : "get_mul_datas::0",
+    "time" : {
+      "start" : 1613919484045,
+      "stop" : 1613919484045,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  } ],
+  "labels" : [ {
+    "name" : "tag",
+    "value" : "run(order=3)"
+  }, {
+    "name" : "parentSuite",
+    "value" : "homework.210129"
+  }, {
+    "name" : "suite",
+    "value" : "test_calc"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestCalc"
+  }, {
+    "name" : "host",
+    "value" : "WIN-MIIS5PS4H3R"
+  }, {
+    "name" : "thread",
+    "value" : "16892-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "homework.210129.test_calc"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "get_mul_datas",
+    "value" : "[1, 2, 2]"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ "run(order=3)" ]
+  },
+  "source" : "8d18e44549074dd2.json",
+  "parameterValues" : [ "[1, 2, 2]" ]
+}
