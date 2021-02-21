@@ -34,7 +34,7 @@ class TestLogin():
             print("输入密码")
         print("点击登录")
         with allure.step("点击登录之后登录失败"):
-            assert '1' == 1
+            assert 1 == 1
             print("登陆失败")
 
         pass
@@ -70,7 +70,8 @@ class TestLogin():
         allure.attach("这是一个文本", attachment_type=allure.attachment_type.TEXT)
 
     def test_accach_html(self):
-        allure.attach("<body>这是一段htmlbody块</body>", "html测试块",attachment_type=allure.attachment_type.HTML)
+        allure.attach("<body>这是一段htmlbody块</body>", "html测试块", attachment_type=allure.attachment_type.HTML)
 
     def test_accach_photo(self):
-        allure.attach.file("F:\文档\真实伤害亚索壁纸.jpg",name="这是一张图片",attachment_type=allure.attachment_type.JPG)
+        allure.attach.file("E:\壁纸\wallhaven-g78rle_2560x1440.png", name="这是一张图片",
+                           attachment_type=allure.attachment_type.PNG)
