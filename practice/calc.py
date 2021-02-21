@@ -10,9 +10,9 @@ class Calculator:
         return a - b
 
     # 乘法
-    def mul(self, a, b, ):
+    def mul(self, a, b):
         return a * b
 
     # 乘法
-    def div(self, a, b, ):
+    def div(self, a, b):
         return a / b
