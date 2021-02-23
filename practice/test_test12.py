@@ -13,6 +13,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 class TestTest12():
   def setup_method(self, method):
     self.driver = webdriver.Chrome()
+    self.driver.maximize_window()
     self.vars = {}
   
   def teardown_method(self, method):
@@ -27,7 +28,6 @@ class TestTest12():
   
   def test_test12(self):
     self.driver.get("https://www.baidu.com/")
-    self.driver.set_window_size(1366, 728)
     self.vars["window_handles"] = self.driver.window_handles
     self.driver.find_element(By.LINK_TEXT, "更多").click()
     self.vars["win4494"] = self.wait_for_window(2000)
