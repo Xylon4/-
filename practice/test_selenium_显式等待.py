@@ -11,7 +11,7 @@ class TestWait:
         # implicitly_wait 隐式等待三秒，适用于全局
         self.driver.implicitly_wait(3)
 
-    def teardwon(self):
+    def teardown(self):
         self.driver.quit()
 
     def test_wait(self):
