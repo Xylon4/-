@@ -40,6 +40,7 @@ class TestJs:
         sleep(3)
         self.driver.execute_script(time_element)
         sleep(3)
+        # 选择value的时候，要考虑格式是否正确，值域是否合理
         self.driver.execute_script("document.getElementById('train_date').value='2021-03-01'")
         sleep(3)
         print(self.driver.execute_script("return document.getElementById('train_date').value"))
