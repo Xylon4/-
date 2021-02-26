@@ -37,7 +37,9 @@ class TestJs:
         self.driver.get("https://www.12306.cn/index/")
         # 通过执行JS来做两步操作：1.获取出发日期的输入框 2.去除输入框的readonly属性，使它能够被修改
         time_element = "document.getElementById('train_date').removeAttribute('readonly')"
+        sleep(3)
         self.driver.execute_script(time_element)
-        self.driver.execute_script("document.getElementById('train_date').value='2020-12-30'")
+        sleep(3)
+        self.driver.execute_script("document.getElementById('train_date').value='2021-03-01'")
         sleep(3)
         print(self.driver.execute_script("return document.getElementById('train_date').value"))
