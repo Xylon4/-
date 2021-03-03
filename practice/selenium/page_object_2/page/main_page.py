@@ -1,14 +1,14 @@
 # 企业微信的主页面
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-
-from web.seleniumPO.page.add_member_page import AddMemberPage
-from web.seleniumPO.page.base_page import BasePage
+from practice.selenium.page_object_2.page.add_member_page import AddMemberPage
+from practice.selenium.page_object_2.page.base_page import BasePage
 
 
 class MainPage(BasePage):
     base_url = "https://work.weixin.qq.com/wework_admin/frame#index"
+
     def goto_add_member(self):
         '''
         添加成员
