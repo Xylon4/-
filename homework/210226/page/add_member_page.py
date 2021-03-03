@@ -5,7 +5,7 @@ from base_page import BasePage
 
 
 class AddMemberPage(BasePage):
-    def addd_member(self, username, alias, account, phonenum, post):
+    def add_member(self, username, alias, account, phonenum, post):
         # 输入用户名
         self.find(By.ID, "username").send_keys(username)
         # 输入别名
@@ -17,7 +17,7 @@ class AddMemberPage(BasePage):
         # 输入职务
         self.find(By.ID, "memberAdd_title").send_keys(post)
         # 点击保存按钮
-        self.find(By.CSS_SELECTOR, "#js_contacts620 > div > div.member_colRight > div > div:nth-child(4) > div > form > div:nth-child(1) > a.qui_btn.ww_btn.js_btn_save").click()
+        self.find(By.CSS_SELECTOR, ".js_btn_save").click()
         return True
 
     def get_member(self):
@@ -25,4 +25,9 @@ class AddMemberPage(BasePage):
         locator = (By.CSS_SELECTOR, ".member_colRight_memberTable_th_Checkbox")
         self.wait_for_click(10, locator)
         # 查找元素
-        element_list = self.finds(By)
+        element_list = self.finds(By.CSS_SELECTOR, ".member_colRight_memberTable_td:nth-child(2)")
+        names = []
+        for ele in element_list:
+            names.append(ele.get_attribute("title"))
+
+        return names

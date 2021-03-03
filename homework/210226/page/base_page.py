@@ -28,7 +28,6 @@ class BasePage:
             # 未指定驱动器类型时，默认为chrome，若有指定，则使用指定类型
             self.driver = driver
 
-        # 当复用浏览器时，main_page指定的base_url和下面的if语句可以删除不用
         if self.base_url != "":
             self.driver.get(self.base_url)
 
