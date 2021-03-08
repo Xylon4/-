@@ -21,6 +21,7 @@ class TestDemo:
     def teardown(self):
         self.driver.quit()
 
+    @pytest.mark.skip
     def test_search(self):
         print("搜索测试用例")
         """
@@ -37,3 +38,29 @@ class TestDemo:
         current_price = float(self.driver.find_element_by_id("com.xueqiu.android:id/stock_current_price").text)
         # print(current_price)
         assert current_price > 200
+
+    def test_attr(self):
+        """
+        打开雪球应用首页
+        定位首页的搜索框
+        判断搜索框是否可用，并查看搜索框name属性值
+        打印搜索框这个元素的左上角坐标和她得宽高
+        向搜索框输入：alibaba
+        判断【阿里巴巴】是否可见
+        如果可见，打印“搜索成功”，如果不可见，打印“搜索失败”
+        """
+        element = self.driver.find_element_by_id("com.xueqiu.android:id/tv_search")
+        search_enable = element.is_enabled()
+        print(element.text)
+        print(element.location)
+        print(element.size)
+        if search_enable == True:
+            element.click()
+            self.driver.find_element_by_id("com.xueqiu.android:id/search_input_text").send_keys("alibaba")
+            alibaba_element = self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/name' and @text='阿里巴巴']")
+            # 获取元素是否可见的两种写法
+            # if alibaba_element.is_displayed() == "true":
+            if alibaba_element.get_attribute("displayed") == "true":
+                print("搜索成功")
+            else:
+                print("搜索失败")
