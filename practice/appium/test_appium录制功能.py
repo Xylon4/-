@@ -17,7 +17,7 @@ desire_cap = {
 
 # 4723是appium的端口号
 driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desire_cap)
-driver.implicitly_wait(10)
+driver.implicitly_wait(20)
 
 el1 = driver.find_element_by_xpath(
     "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TabHost/android.widget.LinearLayout/android.widget.TabWidget/android.widget.RelativeLayout[2]")
