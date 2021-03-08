@@ -1,6 +1,8 @@
 # 常见的ID和xpath定位，安卓实用工具uiautomatorviewer 方便快捷定位元素
 import pytest
 from appium import webdriver
+from appium.webdriver.common.touch_action import TouchAction
+
 
 class TestDemo:
     def setup(self):
@@ -19,7 +21,8 @@ class TestDemo:
         self.driver.implicitly_wait(5)
 
     def teardown(self):
-        self.driver.quit()
+        # self.driver.quit()
+        pass
 
     @pytest.mark.skip
     def test_search(self):
@@ -34,11 +37,13 @@ class TestDemo:
         self.driver.find_element_by_id("com.xueqiu.android:id/tv_search").click()
         self.driver.find_element_by_id("com.xueqiu.android:id/search_input_text").send_keys("阿里巴巴")
         self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/name' and @text='阿里巴巴']").click()
-        self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/stockName' and @text='阿里巴巴']").click()
+        self.driver.find_element_by_xpath(
+            "//*[@resource-id='com.xueqiu.android:id/stockName' and @text='阿里巴巴']").click()
         current_price = float(self.driver.find_element_by_id("com.xueqiu.android:id/stock_current_price").text)
         # print(current_price)
         assert current_price > 200
 
+    @pytest.mark.skip
     def test_attr(self):
         """
         打开雪球应用首页
@@ -57,10 +62,30 @@ class TestDemo:
         if search_enable == True:
             element.click()
             self.driver.find_element_by_id("com.xueqiu.android:id/search_input_text").send_keys("alibaba")
-            alibaba_element = self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/name' and @text='阿里巴巴']")
+            alibaba_element = self.driver.find_element_by_xpath(
+                "//*[@resource-id='com.xueqiu.android:id/name' and @text='阿里巴巴']")
             # 获取元素是否可见的两种写法
             # if alibaba_element.is_displayed() == "true":
             if alibaba_element.get_attribute("displayed") == "true":
                 print("搜索成功")
             else:
                 print("搜索失败")
+
+    def test_touchaction(self):
+        action = TouchAction(self.driver)
+        # get_window_rect获取坐标值
+        window_rect = self.driver.get_window_rect()
+        # 定义窗口宽和高的变量
+        width = window_rect['width']
+        height = window_rect['height']
+        # 定义窗口中间点的宽度
+        # 通过相对位置来定位，方便不同的设备之间的案例通用
+        x1 = int(width / 2)
+        # 定义上下滑动的起始点和终止点高度
+        # 手机显示往下浏览时手势是上滑，所以y_end要高于y_start
+        y_start = int(height * 4 / 5)
+        y_end = int(height * 1 / 5)
+        # .press点击初始点  .move_to移动到目标点
+        # action操作顺序为 点击 等待 移动
+        # 手势操作的方法相同，.press后.move_to多个点，并在每步操作之间添加等待即可
+        action.press(x=x1, y=y_start).wait(200).move_to(x=x1, y=y_end).release().perform()
