@@ -1,4 +1,6 @@
 # 常见的ID和xpath定位，安卓实用工具uiautomatorviewer 方便快捷定位元素
+from time import sleep
+
 import pytest
 from appium import webdriver
 from appium.webdriver.common.touch_action import TouchAction
@@ -18,13 +20,13 @@ class TestDemo:
         desired_caps['unicodeKeyBoard'] = 'true'
         desired_caps['resetKeyBoard'] = 'true'
         self.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
-        self.driver.implicitly_wait(5)
+        self.driver.implicitly_wait(10)
 
     def teardown(self):
         # self.driver.quit()
         pass
 
-    @pytest.mark.skip
+    # @pytest.mark.skip
     def test_search(self):
         print("搜索测试用例")
         """
@@ -43,7 +45,7 @@ class TestDemo:
         # print(current_price)
         assert current_price > 200
 
-    @pytest.mark.skip
+    # @pytest.mark.skip
     def test_attr(self):
         """
         打开雪球应用首页
@@ -89,3 +91,40 @@ class TestDemo:
         # action操作顺序为 点击 等待 移动
         # 手势操作的方法相同，.press后.move_to多个点，并在每步操作之间添加等待即可
         action.press(x=x1, y=y_start).wait(200).move_to(x=x1, y=y_end).release().perform()
+
+    def test_get_current(self):
+        self.driver.find_element_by_id("com.xueqiu.android:id/tv_search").click()
+        self.driver.find_element_by_id("com.xueqiu.android:id/search_input_text").send_keys("阿里巴巴")
+        self.driver.find_element_by_xpath("//*[@resource-id='com.xueqiu.android:id/name' and @text='阿里巴巴']").click()
+        # 高级定位技巧：通过不同层级的数据定位
+        # /.. 当前定位text=09988的位置开始，选择它的父节点   连跳三层父节点后//* 向下选择所有元素 最后通过resource-id精确匹配
+        current_price = self.driver.find_element_by_xpath(
+            "//*[@text='09988']/../../..//*[@resource-id='com.xueqiu.android:id/current_price']").text
+        print(f"当前09988 对应的股价价格是：{current_price}")
+        # 界面上观察到的结果是大于200的，所以断言结果为True
+        assert float(current_price) > 200
+
+    # uiautomator定位
+    def test_myinfo(self):
+        # 单属性查找
+        self.driver.find_element_by_android_uiautomator('new UiSelector().text("热门")').click()
+        # 多属性查找
+        # new UiSelector()后面可以跟多个关键字.resourceId() .text() .class()等
+        self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().resourceId("com.xueqiu.android:id/tab_name").text("我的")').click()
+        sleep(1)
+        # 跨节点查找
+        # 通过夫节点来查找子节点，常规查找后跟 .childSelector(关键字())
+        self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().resourceId("com.xueqiu.android:id/root").childSelector(text("沪深"))').click()
+        sleep(1)
+        # 后退一步
+        self.driver.back()
+        self.driver.find_element_by_android_uiautomator(
+            'new UiSelector().resourceId("com.xueqiu.android:id/tab_name").text("雪球")').click()
+        sleep(1)
+        self.driver.find_element_by_android_uiautomator('new UiSelector().text("推荐")').click()
+        # 滚动查找：首页没有的情况下，先滚动页面，再往下查找
+        self.driver.find_element_by_android_uiautomator(
+            'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("阿里巴巴(BABA)").instance(0));').click()
+        sleep(5)
