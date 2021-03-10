@@ -1,9 +1,12 @@
-# 常见的ID和xpath定位，安卓实用工具uiautomatorviewer 方便快捷定位元素
+# 常见的ID和xpath定位，安卓实用工具 uiautomatorviewer 方便快捷定位元素
 from time import sleep
 
 import pytest
 from appium import webdriver
 from appium.webdriver.common.touch_action import TouchAction
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class TestDemo:
@@ -23,8 +26,9 @@ class TestDemo:
         self.driver.implicitly_wait(10)
 
     def teardown(self):
-        # self.driver.quit()
-        pass
+        # 若没有quit()方法，容易引起案例执行之间资源未释放导致报错：Original error: Could not proxy command to remote server. Original error: Error: socket hang up
+        self.driver.quit()
+        # pass
 
     # @pytest.mark.skip
     def test_search(self):
@@ -114,7 +118,7 @@ class TestDemo:
             'new UiSelector().resourceId("com.xueqiu.android:id/tab_name").text("我的")').click()
         sleep(1)
         # 跨节点查找
-        # 通过夫节点来查找子节点，常规查找后跟 .childSelector(关键字())
+        # 通过父节点来查找子节点，常规查找后跟 .childSelector(关键字())
         self.driver.find_element_by_android_uiautomator(
             'new UiSelector().resourceId("com.xueqiu.android:id/root").childSelector(text("沪深"))').click()
         sleep(1)
@@ -128,3 +132,19 @@ class TestDemo:
         self.driver.find_element_by_android_uiautomator(
             'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("阿里巴巴(BABA)").instance(0));').click()
         sleep(5)
+
+    # 显式等待
+    def test_wait(self):
+        self.driver.find_element_by_xpath('//*[@resource-id="com.xueqiu.android:id/tab_name" and @text="行情"]').click()
+        # 定义显式等待指定元素 locator返回的是定位方法和对应的值
+        # locator需要定义一个元祖，而不是某一个元素，所以要用 By.ID的方法，外面还要加()
+        # 错误方式： (self.driver.find_element_by_id("com.xueqiu.android:id/tv_two"))
+        locator = (By.ID, "com.xueqiu.android:id/tv_two")
+        # locator = (self.driver.find_element_by_id("com.xueqiu.android:id/tv_two"))
+        # 定义显式等待方法,10秒内指定元素能被点击则通过
+        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(locator))
+        self.driver.find_element_by_id("com.xueqiu.android:id/tv_two").click()
+        self.driver.find_element_by_xpath("//*[@text='关注榜']").click()
+        rankprice = self.driver.find_element_by_xpath(
+            '//*[@resource-id="com.xueqiu.android:id/item_rank" and @text="NO.8"]/../..//*[@resource-id="com.xueqiu.android:id/item_name"]').text
+        assert rankprice == "特斯拉"
