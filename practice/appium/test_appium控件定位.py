@@ -46,6 +46,9 @@ class TestDemo:
         self.driver.find_element_by_xpath(
             "//*[@resource-id='com.xueqiu.android:id/stockName' and @text='阿里巴巴']").click()
         current_price = float(self.driver.find_element_by_id("com.xueqiu.android:id/stock_current_price").text)
+        current_name = self.driver.find_element_by_id("com.xueqiu.android:id/stock_current_price")
+        # 元素层面可以使用.get_attribute("属性")来获取属性值，和uiautomatorviewer中看到的相同
+        print(current_name.get_attribute("text"))
         # print(current_price)
         assert current_price > 200
 
