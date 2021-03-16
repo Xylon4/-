@@ -11,7 +11,6 @@ class BasePage:
 
     # 定义查找元素的方法
     def find(self, locator):
-        self.driver.find_element_by_xpath(locator)
         # return查找内容，方便其他方法调用该元素
         return self.driver.find_element_by_xpath(locator)
 
