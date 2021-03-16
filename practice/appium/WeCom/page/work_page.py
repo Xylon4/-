@@ -6,6 +6,5 @@ from practice.appium.WeCom.page.sign_page import SignPage
 
 class WorkPage(BasePage):
     def goto_sign_page(self):
-        self.driver.find_element(MobileBy.ANDROID_UIAUTOMATOR,
-                                 'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("打卡").instance(0));').click()
+        self.swip_find("打卡")
         return SignPage(self.driver)

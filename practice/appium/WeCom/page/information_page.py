@@ -4,5 +4,5 @@ from practice.appium.WeCom.page.work_page import WorkPage
 
 class InformationPage(BasePage):
     def goto_work_page(self):
-        self.driver.find_element_by_xpath("//*[@text='工作台']").click()
+        self.find_click("//*[@text='工作台']")
         return WorkPage(self.driver)
