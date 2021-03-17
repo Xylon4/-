@@ -1,0 +1,15 @@
+sign:
+  - locator: //*[@text='外出打卡']
+    action: find_click
+  - locator: //*[contains(@text,'次外出')]
+    action: find_click
+  - locator: //*[@text='确认打卡']
+    action: find
+
+first_sign:
+  - locator: //*[contains(@text,'上下班打卡')]
+    action: find_click
+  - locator: //*[contains(@text,'上班打卡')]
+    action: find_click
+  - locator: //*[@text='确认打卡']
+    action: find

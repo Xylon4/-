@@ -1,3 +1,6 @@
+from typing import Dict, List
+
+import yaml
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.webdriver import WebDriver
 
@@ -24,3 +27,18 @@ class BasePage:
     def swip_find(self, text):
         self.driver.find_element(MobileBy.ANDROID_UIAUTOMATOR,
                                  f'new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text("{text}").instance(0));').click()
+
+    # 定义解析关键字方法
+    # def parse_action(self, steps: List[Dict]):
+    def parse_action(self, path, fun_name):
+        with open(path, "r", encoding="utf-8") as f:
+            function = yaml.safe_load(f)
+            steps: List[Dict] = function[fun_name]
+        for step in steps:
+            if step["action"] == "find_click":
+                self.find_click(step["locator"])
+            elif step["action"] == "find":
+                self.find(step["locator"])
+
+    def quit(self):
+        self.driver.quit()
