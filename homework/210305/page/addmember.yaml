@@ -1,0 +1,37 @@
+addmember:
+  - locator: //*[@resource-id='com.tencent.wework:id/b7m']
+    text: 乌迪尔
+    action: imput_messages
+  - locator: //*[@resource-id='com.tencent.wework:id/fwi']
+    text: 13765005432
+    action: imput_messages
+  - locator: //*[@resource-id='com.tencent.wework:id/aja']
+    action: find_click
+
+  - locator: //*[@resource-id='com.tencent.wework:id/b7m']
+    text: 卡尔玛
+    action: imput_messages
+  - locator: //*[@resource-id='com.tencent.wework:id/fwi']
+    text: 13128325432
+    action: imput_messages
+  - locator: //*[@resource-id='com.tencent.wework:id/aja']
+    action: find_click
+
+  - locator: //*[@resource-id='com.tencent.wework:id/b7m']
+    text: 卡特琳娜
+    action: imput_messages
+  - locator: //*[@resource-id='com.tencent.wework:id/fwi']
+    text: 13128325432
+    action: imput_messages
+  - locator: //*[@resource-id='com.tencent.wework:id/aj_']
+    action: find_click
+  - locator: //*[@resource-id='com.tencent.wework:id/ig0']
+    action: find_click
+  - locator: 卡特琳娜
+    action: swip_find
+
+maillist:
+  - locator: //*[@text='通讯录']
+    action: find_click
+  - locator: 添加成员
+    action: swip_find
