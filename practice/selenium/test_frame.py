@@ -13,7 +13,7 @@ class TestSwitch:
     def teardown(self):
         self.driver.quit()
 
-    @pytest.mark.skip
+    # @pytest.mark.skip
     def test_switch(self):
         self.driver.get("https://www.baidu.com/")
         self.driver.find_element_by_link_text("登录").click()
