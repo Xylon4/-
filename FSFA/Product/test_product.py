@@ -37,24 +37,28 @@ class TestProduct:
         # 点击产品类型选择框
         self.driver.find_element_by_xpath('//*[@id="commonCombox-1242-inputEl"]').click()
         # 选择产品类型
-        self.driver.find_element_by_xpath("//*[@class='x-boundlist x-boundlist-floating x-layer x-boundlist-default x-border-box x-boundlist-above']//li[1]").click()
+        self.driver.find_element_by_xpath("/html/body/div[7]/div/ul/li[1]").click()
+        # self.driver.find_element_by_xpath("//*[@class='x-boundlist x-boundlist-floating x-layer x-boundlist-default x-border-box x-boundlist-above']//li[1]").click()
         # self.driver.find_element_by_xpath('//*[@id="boundlist-1794-listEl"]/ul/li[1]').click()
         # 输入管理人
-        self.driver.find_element_by_xpath('//*[@id="textfield-1670-inputEl"]').send_keys("浦银理财子公司")
+        self.driver.find_element_by_xpath('//*[@id="textfield-1250-inputEl"]').send_keys("浦银理财子公司")
         # 输入托管人
-        self.driver.find_element_by_xpath('//*[@id="textfield-1671-inputEl"]').send_keys("上海浦东发展银行")
-        mtr_date = self.driver.find_element_by_xpath('//*[@id="datefield-1697-inputEl"]').text + 5
-        self.driver.find_element_by_xpath('//*[@id="datefield-1701-inputEl"]').send_keys(mtr_date)
-        self.driver.find_element_by_xpath('//*[@id="saveButton-1646-btnInnerEl"]').click()
+        self.driver.find_element_by_xpath('//*[@id="textfield-1251-inputEl"]').send_keys("上海浦东发展银行")
+        self.driver.find_element_by_xpath('//*[@id="datefield-1281-inputEl"]').send_keys("20220331")
+        self.driver.find_element_by_xpath('//*[@id="saveButton-1226-btnInnerEl"]').click()
         sleep(2)
         # 点击浮窗中的确定
         self.driver.find_element_by_xpath('//*[@id="button-1005-btnIconEl"]').click()
         # 点击返回按钮
         self.driver.find_element_by_xpath('//*[@id="backButton-1229-btnInnerEl"]').click()
-        # product_type = self.driver.find_element_by_xpath('//*[@id="checkcombo-1487-labelEl"]')
-        # action = TouchActions(self.driver)
-        # action.scroll_from_element(product_type, 0, 10000).perform()
-        self.driver.find_element_by_xpath('//*[@text="FB0331"]').click()
+        # 输入产品代码
+        self.driver.find_element_by_xpath('//*[@id="textfield-1080-inputEl"]').send_keys("FB0331")
+        # 点击搜索按钮
+        self.driver.find_element_by_xpath('//*[@id="searchButton-1108-btnInnerEl"]').click()
+        sleep(1)
+        # 勾选产品
+        self.driver.find_element_by_xpath('//*[@class="x-grid-cell-inner x-grid-cell-inner-row-numberer"]').click()
+        # 点击复核按钮
         self.driver.find_element_by_xpath('//*[@id="reviewButton-1098-btnInnerEl"]').click()
         self.driver.find_element_by_xpath('//*[@id="button-1006-btnIconEl"]').click()
         self.driver.find_element_by_xpath('//*[@id="button-1005-btnIconEl"]').click()
