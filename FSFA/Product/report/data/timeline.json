@@ -1,0 +1,26 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "B1095",
+    "children" : [ {
+      "name" : "37500-MainThread",
+      "children" : [ {
+        "name" : "test_product",
+        "uid" : "d4ce0349e778259c",
+        "parentUid" : "6d598db6109f8b662fccd9a54c5a13a3",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617700618853,
+          "stop" : 1617700659877,
+          "duration" : 41024
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "6d598db6109f8b662fccd9a54c5a13a3"
+    } ],
+    "uid" : "e1498c8667b149360ec53f1dc0fd200b"
+  } ]
+}

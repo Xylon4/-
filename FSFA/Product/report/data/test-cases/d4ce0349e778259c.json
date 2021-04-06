@@ -1,0 +1,86 @@
+{
+  "uid" : "d4ce0349e778259c",
+  "name" : "test_product",
+  "fullName" : "FSFA.Product.test_product.TestProduct#test_product",
+  "historyId" : "9622b978bcac6ce3c90a9430a171e2d3",
+  "time" : {
+    "start" : 1617700618853,
+    "stop" : 1617700659877,
+    "duration" : 41024
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "stagemark",
+    "time" : {
+      "start" : 1617700618842,
+      "stop" : 1617700618842,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "stagemark::0",
+    "time" : {
+      "start" : 1617700662359,
+      "stop" : 1617700662359,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "FSFA.Product"
+  }, {
+    "name" : "suite",
+    "value" : "test_product"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestProduct"
+  }, {
+    "name" : "host",
+    "value" : "B1095"
+  }, {
+    "name" : "thread",
+    "value" : "37500-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "FSFA.Product.test_product"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d4ce0349e778259c.json",
+  "parameterValues" : [ ]
+}

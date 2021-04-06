@@ -1,0 +1,30 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "FSFA.Product",
+    "children" : [ {
+      "name" : "test_product",
+      "children" : [ {
+        "name" : "TestProduct",
+        "children" : [ {
+          "name" : "test_product",
+          "uid" : "d4ce0349e778259c",
+          "parentUid" : "c6b11e42ed93eb94b369450214031aad",
+          "status" : "passed",
+          "time" : {
+            "start" : 1617700618853,
+            "stop" : 1617700659877,
+            "duration" : 41024
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        } ],
+        "uid" : "c6b11e42ed93eb94b369450214031aad"
+      } ],
+      "uid" : "ca900d4c7da073837edd0a820ec4dd74"
+    } ],
+    "uid" : "ad623c539e69dc9044e73da878d328e5"
+  } ]
+}

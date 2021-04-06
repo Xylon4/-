@@ -16,7 +16,7 @@ class Product(BasePageFsfa):
         self.findxpath_click('//*[@id="combobox-1235-inputEl"]')
         self.findxpath_click('//*[@id="boundlist-1369-listEl"]/ul/li[2]')
         # 输入产品代码
-        self.findxpath_sendkey('//*[@id="textfield-1239-inputEl"]', "FB0401-2")
+        self.findxpath_sendkey('//*[@id="textfield-1239-inputEl"]', "FB0401-3")
         # 输入产品名称
         self.findxpath_sendkey('//*[@id="textfield-1241-inputEl"]', "封闭净值型产品")
         # 输入产品全称
@@ -37,7 +37,7 @@ class Product(BasePageFsfa):
         # 点击返回按钮
         self.findxpath_click('//*[@id="backButton-1229-btnInnerEl"]')
         # 输入产品代码
-        self.findxpath_sendkey('//*[@id="textfield-1080-inputEl"]', "FB0401-2")
+        self.findxpath_sendkey('//*[@id="textfield-1080-inputEl"]', "FB0401-3")
         # 点击搜索按钮
         self.findxpath_click('//*[@id="searchButton-1108-btnInnerEl"]')
         sleep(1)

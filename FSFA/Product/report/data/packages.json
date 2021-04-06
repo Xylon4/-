@@ -1,0 +1,22 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "FSFA.Product.test_product",
+    "children" : [ {
+      "name" : "test_product",
+      "uid" : "d4ce0349e778259c",
+      "parentUid" : "ee2dd4b6c8b9daa75bd7406462cde099",
+      "status" : "passed",
+      "time" : {
+        "start" : 1617700618853,
+        "stop" : 1617700659877,
+        "duration" : 41024
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "FSFA.Product.test_product"
+  } ]
+}
