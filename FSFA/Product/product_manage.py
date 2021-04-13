@@ -1,26 +1,32 @@
 # 理财估值核算系统产品端自动化测试用例
 # 账套创建
 from selenium.webdriver import TouchActions
+from selenium.webdriver.common.keys import Keys
 
 from FSFA.basepage_FSFA import BasePageFsfa
 
 
 class ProductManage(BasePageFsfa):
     def productmanage1(self):
+        fee_rate = "0.01"
+        accid01 = "20210413FB0401"
+        accname01 = "托管户20210413FB0401"
+        accid02 = "20210413FB0402"
+        accname02 = "中债登券20210413FB0402"
+        accid03 = "20210413FB0403"
+        accname03 = "中债登资金20210413FB0403"
         # 点击账套管理
         self.findxpath_click('//*[@id="navId"]/li[3]/a')
         # 点击账套设置
         self.findxpath_click('//*[@id="floatMenu"]/dl[1]/dd[2]/a')
         # 选择第一条待创建数据
-        self.findxpath_click('/html/body/div[3]/div[2]/div[3]/div/div/div[3]/div/table/tbody/tr[1]/td[4]/div')
+        self.findxpath_click('/html/body/div[3]/div[2]/div[2]/div/div/div[3]/div/table/tbody/tr[1]/td[4]/div')
         # 点击新增按钮
         self.findxpath_click(
-            '/html/body/div[3]/div[2]/div[3]/div/div/div[1]/span/div/div[1]/div/div/a[2]/span/span/span[1]')
-        # 点击账套选择倒三角
-        self.findxpath_click(
-            '/html/body/div[3]/div[2]/div[3]/div/div[2]/div[1]/div/div[2]/div/div[1]//table[1]/tbody/tr/td[2]/table/tbody/tr/td[2]/div')
+            '/html/body/div[3]/div[2]/div[2]/div/div/div[1]/span/div/div[1]/div/div/a[2]')
         # 选择理财子公司
-        self.findxpath_click('/html/body/div[26]/div[3]/div/table/tbody/tr[4]/td/div/span')
+        self.findxpath_sendkey('//*[@name="investGrpPkgId"]', "理财子公司")
+        self.findxpath_click('//*[@class="x-tree-node-text "]')
         # 页面下滑到底部
         action = TouchActions(self.driver)
         basic1 = self.findxpath('//*[@class="x-component x-fieldset-header-text x-component-default"]')
@@ -29,8 +35,73 @@ class ProductManage(BasePageFsfa):
         self.findxpath_click('/html//div[2]/div[2]/div/div[1]/div/div/a[1]/span/span/span[1]')
         # 输入费率
         self.findxpath_sendkey(
-            '/html/body/div[29]/div[2]/div/div[1]//table[11]/tbody/tr/td[2]/table/tbody/tr/td[1]/input', '0.01')
+            '//*[@name="amountTextFiled-1578-inputEl"]', fee_rate)
         # 点击保存按钮
-        self.findxpath_click('/html/body/div[29]/div[2]/div/div[2]/div/div/a[1]/span/span/span[1]')
+        self.findxpath_click('/html/body/div[14]/div[2]/div/div[2]/div/div/a[1]')
         # 点击清算路径
-        self.findxpath_click('/html/body/div[3]/div[2]/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div[2]/div/a[2]/span/span/span[1]')
+        self.findxpath_click('/html/body/div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[1]/div[1]/div[2]/div/a[2]')
+        # 点击资金账户中的新增按钮
+        self.findxpath_click(
+            '/html/body/div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/div[2]/div/div/a[1]')
+        # 输入资金账号
+        self.findxpath_sendkey(
+            '//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[2]//table[2]/tbody/tr/td[2]/input',
+            accid01)
+        # 输入资金账户名称
+        self.findxpath_sendkey('//*[@name="cashAccExtName"]', accname01)
+        # 选择开户行
+        self.findxpath_sendkey('//*[@name="customerId"]', '310290000013')
+        # 下拉选择的第一个选项的div会随机变更，此处的写法不稳妥，故用模拟键盘方向↓键组合回车键完成
+        # self.findxpath_click('/html/body/div[16]/div/ul/li')
+        bank_name1 = self.findxpath('//*[@name="customerId"]')
+        bank_name1.send_keys(Keys.SPACE)
+        bank_name1.send_keys(Keys.ARROW_DOWN)
+        bank_name1.send_keys(Keys.ENTER)
+        # 选择活期利率
+        self.findxpath_click('//*[@name="rateDefId"]')
+        # 同理，键盘方向↓键组合回车键完成选择
+        interest_rate = self.findxpath('//*[@name="rateDefId"]')
+        interest_rate.send_keys(Keys.ARROW_DOWN)
+        interest_rate.send_keys(Keys.ENTER)
+        # 点击保存
+        self.findxpath_click(
+            '/html/body/div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[3]/div/div/a[1]')
+        # 点击银行间账户信息中的新增按钮
+        self.findxpath_click('//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]//div[2]/div[2]/div/div/a[1]/span/span/span[1]')
+        # 选择托管模式-乙类户
+        self.findxpath_click('//*[@value="多级托管"]')
+        # 同开户行
+        # self.findxpath_click('/html/body/div[30]/div/ul/li[1]')
+        managed_mode = self.findxpath('//*[@value="多级托管"]')
+        managed_mode.send_keys(Keys.ARROW_DOWN)
+        managed_mode.send_keys(Keys.ENTER)
+        # 输入证券账号
+        self.findxpath_sendkey('//*[@name="exhSecu"]', accid02)
+        # 输入账户名称
+        self.findxpath_sendkey('//*[@name="secuAccExtName"]', accname02)
+        # 输入资金账号
+        self.findxpath_sendkey(
+            '//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[4]/div[2]//table[7]/tbody/tr/td[2]/input',
+            accid03)
+        # 输入资金账户名称
+        self.findxpath_sendkey('//*[@name="cashAccDvpName"]', accname03)
+        # 选择开户行-中债登
+        self.findxpath_sendkey(
+            '//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[4]/div[2]//table[9]/tbody/tr/td[2]/table/tbody/tr/td[1]/input', '中债登')
+        # 直接输入关键字"中债登"未能触发关键字匹配，模拟人工操作：输入完成后加一个空格触发匹配
+        bank_name2 = self.findxpath('//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[4]/div[2]//table[9]/tbody/tr/td[2]/table/tbody/tr/td[1]/input')
+        bank_name2.send_keys(Keys.SPACE)
+        bank_name2.send_keys(Keys.ARROW_DOWN)
+        bank_name2.send_keys(Keys.ENTER)
+        # 点击弹窗中的保存
+        self.findxpath_click(
+            '/html/body/div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[4]/div[3]/div/div/a[1]')
+        # 点击保存
+        self.findxpath_click('/html/body/div[3]/div[2]/div[2]/div/div[2]/div[2]/div/div/a[1]')
+        # 点击浮窗中的确定
+        self.findxpath_click('//*[@id="button-1005-btnIconEl"]')
+        # 点击复核按钮
+        self.findxpath_click('/html/body/div[3]/div[2]/div[2]/div/div[2]/div[2]/div/div/a[4]')
+        self.findxpath_click('//*[@id="button-1006-btnIconEl"]')
+        self.findxpath_click('//*[@id="button-1005-btnIconEl"]')
+        return True

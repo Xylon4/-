@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
@@ -13,7 +14,10 @@ class BasePageFsfa:
             self.driver = driver
 
     def start(self):
-        self.driver = webdriver.Chrome()
+        # opt参数用来解决页面下滑动作
+        opt = Options()
+        opt.add_experimental_option('w3c', False)
+        self.driver = webdriver.Chrome(options=opt)
         self.driver.get("http://192.168.64.131:8080/xIR_J2EE")
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
