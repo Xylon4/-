@@ -1,5 +1,6 @@
 import pytest
 
+from cash_flow import CashFlow
 from product import Product
 from product_manage import ProductManage
 
@@ -18,3 +19,7 @@ class TestProduct:
     def test_product_manage(self, stagemark):
         self.product_manage = ProductManage()
         assert self.product_manage.productmanage1()
+
+    def test_cash_flow(self, stagemark):
+        self.cash_flow = CashFlow()
+        assert self.cash_flow.cashflow1()

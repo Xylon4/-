@@ -1,5 +1,5 @@
 # 理财估值核算系统产品端自动化测试用例
-# 账套创建
+# 账套创建及复核
 from selenium.webdriver import TouchActions
 from selenium.webdriver.common.keys import Keys
 
