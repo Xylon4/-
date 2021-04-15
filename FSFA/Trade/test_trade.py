@@ -6,7 +6,7 @@ class TestTrade:
         self.bond_trade = BondTrade()
 
     def teardown(self):
-        pass
+        self.bond_trade.end()
 
     def test_bond_trade1(self, stagemark):
         assert self.bond_trade.bondtrade1()

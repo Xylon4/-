@@ -104,13 +104,14 @@ class BondTrade(BasePageFsfa):
         # 点击银行间费用摊销
         self.findxpath_click('//*[@id="floatMenu"]/dl[9]/dd[6]/a')
         # 定位账套
-        self.findxpath_sendkey('//div[3]/div[2]/div[9]/div[1]//div[2]/div/div/table[1]/tbody/tr/td[2]//td[1]/input', I_CODE)
-        self.findxpath_click('//div[55]/div[3]/div/table/tbody/tr[2]/td/div/span')
-        self.findxpath_click('//div[3]/div[2]/div[9]/div/div/div[1]/span/div/div[2]/div/div/a[1]')
+        self.findxpath_sendkey('//*[@name="wmsunitname$array"]', I_CODE)
         sleep(1)
-        self.findxpath_click('//div[3]/div[2]/div[9]/div/div/div[3]/div/table/tbody/tr/td[2]/div')
+        self.findxpath_click('//div[3]/div/table/tbody/tr[2]/td/div/span')
+        self.findxpath_click('//div[3]/div[2]//div/div/div[1]/span/div/div[2]/div/div/a[1]')
+        sleep(1)
+        self.findxpath_click('//div[3]/div[2]//div/div/div[3]/div/table/tbody/tr/td[2]/div')
         # 点击复核
-        self.findxpath_click('//div[3]/div[2]/div[9]/div/div/div[1]/span/div/div[1]/div/div/a[6]')
+        self.findxpath_click('//div[3]/div[2]//div/div/div[1]/span/div/div[1]/div/div/a[6]')
         # 点击弹窗中的是
         self.findxpath_click('//*[@id="button-1006-btnIconEl"]')
         # 点击确定
