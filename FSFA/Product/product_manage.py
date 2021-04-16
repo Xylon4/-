@@ -1,5 +1,7 @@
 # 理财估值核算系统产品端自动化测试用例
 # 账套创建及复核
+from time import sleep
+
 from selenium.webdriver import TouchActions
 from selenium.webdriver.common.keys import Keys
 
@@ -26,6 +28,7 @@ class ProductManage(BasePageFsfa):
             '/html/body/div[3]/div[2]/div[2]/div/div/div[1]/span/div/div[1]/div/div/a[2]')
         # 选择理财子公司
         self.findxpath_sendkey('//*[@name="investGrpPkgId"]', "理财子公司")
+        sleep(1)
         self.findxpath_click('//*[@class="x-tree-node-text "]')
         # 页面下滑到底部
         action = TouchActions(self.driver)
