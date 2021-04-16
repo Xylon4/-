@@ -39,11 +39,14 @@ class Valuation(BasePageFsfa):
         WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(valuation))
         # 点击估值日切
         self.findxpath_click('/html/body/div[3]/div[2]/div[3]/div[1]/div/div/a')
+
         # sleep(120)
         # 等待估值批处理结束-显式等待
         def wait(x):
-            batch_status = self.findxpath('/html/body/div[3]/div[2]//div[1]/div/div/label[1]').get_attribute('textContent')
+            batch_status = self.findxpath('/html/body/div[3]/div[2]//div[1]/div/div/label[1]').get_attribute(
+                'textContent')
             return batch_status == "批次状态：执行完毕"
+
         WebDriverWait(self.driver, 300).until(wait)
         return True
 
@@ -57,29 +60,19 @@ class Valuation(BasePageFsfa):
         # 查询当日估值表
         self.findxpath_sendkey('//*[@name="wmsunitname$array"]', I_CODE)
         sleep(1)
-        self.findxpath_click('//*[@id="treeview-1073-record-10632_6485"]/td/div/span')
-        # self.findxpath_click('//div[3]/div/table/tbody/tr[2]/td/div/span')
-        # self.findxpath_click('//span[starts-with(@id,"ext-gen")]/div/span')
-        # "//*[contains(@text,'Clicked popup')]"
-        # self.findxpath_click('//*[contains(@id,"ext-gen")]/div/span')
-        # self.findxpath_click('//*[id()="ext-gen")]/div/span')
-        # self.findxpath_click('//*[@id="ext-gen3178"]/div/span')
+        self.findxpath_click('/html/body/div[last()]/div[3]/div/table/tbody/tr[2]/td/div/span')
         self.findxpath_click('/html/body/div[3]/div[2]//div/div/div[1]/div/div/a[3]')
         sleep(5)
         # 判断值是否正确
-        amount = self.findxpath('/html/body/div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[5]/td[3]/div')
-        # print(amount)
-        # cp = self.findxpath('/html/body/div[3]/div[2]/div[3]/div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[5]/td[5]/div')
-        # print(cp)
-        # asset = self.findxpath('/html/body/div[3]/div[2]/div[3]/div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[19]/td[5]/div')
-        # print(asset)
-        # cash = self.findxpath('/html/body/div[3]/div[2]/div[3]/div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[42]/td[5]/div')
-        # print(cash)
-        # nav = self.findxpath('/html/body/div[3]/div[2]/div[3]/div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[53]/td[5]/div')
-        # print(nav)
-        ele = amount
-        ele1 = ele.text
-        ele2 = ele.get_attribute('textContent')
-        ele3 = ele.get_attribute('innerHTML')
-        ele4 = ele.get_attribute('outerHTML')
-        return ele2 == "1,000,000.00"
+        amount = self.findxpath('//div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[5]/td[3]/div')
+        cp = self.findxpath('//div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[5]/td[5]/div')
+        asset = self.findxpath('//div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[19]/td[5]/div')
+        cash = self.findxpath('//div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[42]/td[5]/div')
+        nav = self.findxpath('//div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[53]/td[5]/div')
+        ele1 = amount.get_attribute('textContent')
+        ele2 = cp.get_attribute('textContent')
+        ele3 = asset.get_attribute('textContent')
+        ele4 = cash.get_attribute('textContent')
+        ele5 = nav.get_attribute('textContent')
+        while ele1 == "1,000,000.00" and ele2 == "99,930,843.84" and ele3 == "99,930,843.84" and ele4 == "87,786.30" and ele5 == "1.000181":
+            return True

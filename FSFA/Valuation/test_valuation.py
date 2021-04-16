@@ -6,9 +6,8 @@ class TestValuation:
         self.valuation = Valuation()
 
     def teardown(self):
-        # self.valuation.end()
-        pass
+        self.valuation.end()
 
-    def test_valuation(self):
+    def test_valuation(self, stagemark):
         assert self.valuation.valuation1()
         assert self.valuation.valuation2()
