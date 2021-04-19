@@ -9,7 +9,7 @@ from FSFA.basepage_FSFA import BasePageFsfa
 
 class CashFlow(BasePageFsfa):
     def cashflow1(self):
-        I_CODE = "FB0401"
+        I_CODE = "FB0419"
         REAL_AMOUNT = "100000000"
         REAL_CP = "100000000"
         # 点击账套管理
@@ -17,7 +17,7 @@ class CashFlow(BasePageFsfa):
         # 点击产品现金流管理
         self.findxpath_click('//*[@id="floatMenu"]/dl[3]/dd[1]/a')
         # 点击新增
-        self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[1]/span/div/div[1]/div/div/a[2]/span/span/span[1]')
+        self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[1]/span/div/div[1]/div/div/a[2]')
         # 选择产品代码
         self.findxpath_sendkey('//*[@name="wmpsProductCombox-1254-inputEl"]', I_CODE)
         i_code = self.findxpath('//*[@name="wmpsProductCombox-1254-inputEl"]')
@@ -40,7 +40,7 @@ class CashFlow(BasePageFsfa):
         # 定位现金流
         self.findxpath_sendkey('//*[@name="fuzzCondi"]', I_CODE)
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div[1]/div[1]/span/div/div[3]/div/div/a[1]')
-        sleep(1)
+        sleep(2)
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[1]/div[2]/div/table/tbody/tr/td[2]/div')
         # 点击复核按钮
         self.findxpath_click('/html/body/div[3]/div[2]/div[2]/div/div[1]/div[1]/span/div/div[1]/div/div/a[8]')

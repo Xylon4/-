@@ -11,12 +11,12 @@ from FSFA.basepage_FSFA import BasePageFsfa
 class ProductManage(BasePageFsfa):
     def productmanage1(self):
         fee_rate = "0.01"
-        accid01 = "20210413FB0401"
-        accname01 = "托管户20210413FB0401"
-        accid02 = "20210413FB0402"
-        accname02 = "中债登券20210413FB0402"
-        accid03 = "20210413FB0403"
-        accname03 = "中债登资金20210413FB0403"
+        accid01 = "2021041901"
+        accname01 = "托管户2021041901"
+        accid02 = "2021041902"
+        accname02 = "中债登券2021041902"
+        accid03 = "2021041903"
+        accname03 = "中债登资金2021041903"
         # 点击账套管理
         self.findxpath_click('//*[@id="navId"]/li[3]/a')
         # 点击账套设置

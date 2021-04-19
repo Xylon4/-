@@ -13,7 +13,7 @@ from FSFA.basepage_FSFA import BasePageFsfa
 class Valuation(BasePageFsfa):
     # 估值批处理执行
     def valuation1(self):
-        I_CODE = "FB0331"
+        I_CODE = "FB0419"
         CALC_DATE = "2020-03-04"
         # 点击批处理
         self.findxpath_click('//*[@id="navId"]/li[8]/a')
@@ -28,16 +28,18 @@ class Valuation(BasePageFsfa):
         self.findxpath_click('//div[3]/div[2]/div[2]/div[2]//div[2]/div[4]/div/table/tbody/tr/td[2]/div')
         # 点击估值日切
         self.findxpath_click('//div[3]/div[2]/div[2]/div[1]/div/div/a[1]')
+        sleep(1)
         # 输入目标估值日期
         date = self.findxpath('//div[3]/div[2]/div[3]/div[1]//tbody/tr/td[2]/table/tbody/tr/td[1]/input')
         date.send_keys(Keys.CONTROL, "a")
         date.send_keys(Keys.DELETE)
         # self.findxpath('//div[3]/div[2]/div[3]/div[1]//tbody/tr/td[2]/table/tbody/tr/td[1]/input').clear()
         self.findxpath_sendkey('//div[3]/div[2]/div[3]/div[1]//tbody/tr/td[2]/table/tbody/tr/td[1]/input', CALC_DATE)
-        sleep(1)
         valuation = (By.XPATH, '/html/body/div[3]/div[2]/div[3]/div[1]/div/div/a')
         WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(valuation))
+        sleep(1)
         # 点击估值日切
+        # 实际执行中，visibility_of_element_located这个方法也并不能展现元素的可点击状态，实际生效的还是强制等待这一秒，待优化
         self.findxpath_click('/html/body/div[3]/div[2]/div[3]/div[1]/div/div/a')
 
         # sleep(120)
@@ -52,7 +54,7 @@ class Valuation(BasePageFsfa):
 
     # 估值表检查
     def valuation2(self):
-        I_CODE = "FB0331"
+        I_CODE = "FB0419"
         # 点击估值管理
         self.findxpath_click('//*[@id="navId"]/li[7]/a')
         # 点击估值表查询
