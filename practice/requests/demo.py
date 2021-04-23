@@ -1,5 +1,6 @@
 import requests
 from jsonpath import jsonpath
+from requests.auth import HTTPBasicAuth
 
 
 class TestDemo:
@@ -73,3 +74,23 @@ class TestDemo:
         assert r.json()['category_list']['categories'][0]['name'] == "开源项目"
         print(jsonpath(r.json(), '$..name'))
         assert jsonpath(r.json(), '$..name')[0] == "开源项目"
+
+    # cookie 两种传递方法：
+    # 1.通过header传递Cookie，修改User-Agent
+    # 2.通过cookies传递(两种方法不可同时存在，cookie只能传一次)
+    def test_cookie(self):
+        url = 'https://httpbin.testing-studio.com/cookies'
+        header = {"Cookie": "adc"}
+        # header = {'User-Agent': 'fight'}
+        cookie_data = {"position": "mid"}
+        r = requests.get(url=url, headers=header, cookies=cookie_data)
+        print(r.request.headers)
+        # print(r.text)
+
+    # 认证体系
+    # 执行python时，需要关闭Charles，代码和工具两者是冲突的，同时抓取会失效
+    # url为网页中的Request URL
+    def test_auth(self):
+        r = requests.get(url='https://httpbin.testing-studio.com/basic-auth/abc/123',
+                         auth=HTTPBasicAuth("abc", "123"))
+        print(r.text)
