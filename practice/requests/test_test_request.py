@@ -1,10 +1,12 @@
+from unittest import TestCase
+
 from practice.requests import test_request
 
 
-class TestApiRequest:
+class TestApiRequest(TestCase):
     req_data = {
         "method": "get",
-        "url": "http://127.0.0.1:9999/demo.txt",
+        "url": "http://192.168.64.129:9999/demo.txt",
         "headers": None,
         "encoding": "base64"
     }
