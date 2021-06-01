@@ -1,4 +1,5 @@
 from FSFA.Asset.asset_bond import AssetBond
+from FSFA.Asset.asset_nonstandard import AssetNonstandard
 
 
 class TestAssetBond:
@@ -9,3 +10,8 @@ class TestAssetBond:
         self.asset_bond = AssetBond()
         assert self.asset_bond.assetbond1()
         self.asset_bond.end()
+
+    def test_asset_nonstandard(self, stagemark):
+        self.asset_nonstandard = AssetNonstandard()
+        assert self.asset_nonstandard.assetnonstandard1()
+        self.asset_nonstandard.end()
