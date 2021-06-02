@@ -1,9 +1,10 @@
 # 理财估值核算系统资产端自动化测试用例
 # 利率型项目资产新增及复核
 from time import sleep
-
 from selenium.webdriver import ActionChains
-
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 from FSFA.basepage_FSFA import BasePageFsfa
 from selenium.webdriver.common.keys import Keys
 
@@ -26,9 +27,19 @@ class AssetNonstandard(BasePageFsfa):
         self.findxpath_sendkey('//*[@name="assetLBSInfoSub.i_code"]', I_CODE)
         # 输入资产名称
         self.findxpath_sendkey('//*[@name="assetLBSInfoSub.i_name"]', I_NAME)
+        # 选择资产三类
+        self.findxpath_sendkey('//fieldset[1]//div[1]/span/div/table[2]/tbody/tr/td[2]/table/tbody/tr/td[1]/input', P_CLASS)
+        sleep(1)
+        self.findxpath_click('//div[2]/div/table/tbody/tr[3]/td/div/span')
+        sleep(1)
         # 选择核算大类
-        self.findxpath_click('//*[@name="assetLBSInfoSub.pClassAct"]')
-        # 需要补一个显式等待
+        # 该输入框有aria-invalid="false" 属性，会导致display= none，引起元素不可选中，提示报错：ElementNotVisibleException
+        # self.findxpath_click('//*[@name="assetLBSInfoSub.pClassAct"]')
+        self.findxpath_click('//fieldset[1]//div[1]/span/div/table[21]/tbody/tr/td[2]/table/tbody/tr/td[2]/div')
+        # sleep(1)
+        # 点击核算大类弹窗显示有延迟，添加显式等待
+        # locator = (By.XPATH, '/html/body/div/div/ul/li[8]')
+        # WebDriverWait(self.driver, 20).until(expected_conditions.element_to_be_clickable(locator))
         self.findxpath_click('/html/body/div/div/ul/li[8]')
         # PCALSS_ACT = self.findxpath('//*[@name="assetLBSInfoSub.pClassAct"]')
         # 因为北金所债权融资计划在选项的最后，想通过方向键上来选中，但是并未生效，所有的上键均未生效
@@ -44,11 +55,6 @@ class AssetNonstandard(BasePageFsfa):
         # PCALSS_ACT.send_keys(Keys.ARROW_DOWN)
         # PCALSS_ACT.send_keys(Keys.ENTER)
         # sleep(1)
-        # 选择资产三类
-        self.findxpath_sendkey('//fieldset[1]//div[1]/span/div/table[2]/tbody/tr/td[2]/table/tbody/tr/td[1]/input', P_CLASS)
-        sleep(1)
-        self.findxpath_click('//div[2]/div/table/tbody/tr[3]/td/div/span')
-        sleep(1)
         # 输入到期日
         self.findxpath_sendkey('//*[@name="fixedInstrumentSub.mtr_date"]', MTR_DATE)
         # 点击利率调整
@@ -76,7 +82,12 @@ class AssetNonstandard(BasePageFsfa):
         ISEFFCTIVE.send_keys(Keys.ENTER)
         # 查询对应代码
         self.findxpath_sendkey('//div[3]/div[2]/div[2]/div/div[1]/div[1]//div[2]//table[2]//tr/td[2]//tr/td[1]/input', I_CODE)
+        searchlib = self.findxpath('//div[3]/div[2]/div[2]/div/div[1]/div[1]//div[2]//table[2]//tr/td[2]//tr/td[1]/input')
+        searchlib.send_keys(Keys.ARROW_DOWN)
+        searchlib.send_keys(Keys.ENTER)
+        # 输入代码后有一个下拉选择的列表，当列表遮挡下一步的按钮时，操作将会被拦截并提示错误：ElementClickInterceptedException
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div[1]/div[1]//div[3]/div/div/a[1]/span/span/span[1]')
+        sleep(1)
         # 选中对应资产
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[1]/div[2]/div/table/tbody/tr/td[1]/div/div')
         # self.findxpath_click('//div[3]/div[2]/div[2]/div/div[1]/div[2]//div[1]/div[2]/div/table/tbody/tr/td[2]/div')
