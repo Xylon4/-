@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 
 class AssetBond(BasePageFsfa):
     def assetbond1(self):
-        I_CODE = 'bond20210528'
+        I_CODE = 'bond20210618'
         B_NAME1 = '银行债20210528'
         B_NAME2 = '商业银行债20210528'
         P_CLASS = '商业银行债-直接投资'
@@ -98,6 +98,7 @@ class AssetBond(BasePageFsfa):
         STATUS.send_keys(Keys.ENTER)
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[4]/div[1]/div/div/a[1]/span/span/span[1]')
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[4]/div[1]/div/div/a[4]/span/span/span[2]')
+        sleep(1)
         # 选中债券
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[1]/div[3]/div/table/tbody/tr/td[1]/div')
         # 点击复核

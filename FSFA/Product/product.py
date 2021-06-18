@@ -7,7 +7,7 @@ from FSFA.basepage_FSFA import BasePageFsfa
 
 class Product(BasePageFsfa):
     def product1(self):
-        i_Code = "FB0419"
+        i_Code = "FB0619"
         end_date = "20220331"
         # 点击账套管理
         self.findxpath_click('//*[@id="navId"]/li[3]/a')
