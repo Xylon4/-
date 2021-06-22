@@ -23,7 +23,7 @@ class TestLogin:
         self.driver.find_element_by_xpath("//*[@id='txtAccount_I']").send_keys("7654321")
         self.driver.find_element_by_xpath("//*[@id='txtPwd_I']").send_keys("1234567")
         self.driver.find_element_by_xpath("//*[@id='subBtn']").click()
-        message2 = self.driver.find_element_by_xpath('//*[@id="ASPxLabel_Message"]').text
+        message2 = self.driver.find_element_by_xpath('//*[@id="ASPxLabel_Message"]').get_attribute('textContent')
         assert message2 == "用户名或密码错误"
 
     def test_login3(self):

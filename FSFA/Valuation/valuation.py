@@ -38,7 +38,7 @@ class Valuation(BasePageFsfa):
         valuation = (By.XPATH, '/html/body/div[3]/div[2]/div[3]/div[1]/div/div/a/span/span/span[1]')
         # WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(valuation))
         WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(valuation))
-        sleep(1)
+        sleep(2)
         # 点击估值日切
         # 实际执行中，visibility_of_element_located这个方法也并不能展现元素的可点击状态，实际需要采用+1S处理逻辑；
         # 显式等待能保证元素可被点击，之后的强制等待一秒保证顺畅处理，实际等待时间为N+1秒

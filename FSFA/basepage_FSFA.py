@@ -26,8 +26,6 @@ class BasePageFsfa:
         self.driver.find_element_by_xpath("//*[@id='subBtn']").click()
 
     def end(self):
-        
-        
         self.driver.quit()
 
     def findxpath(self, path1):
