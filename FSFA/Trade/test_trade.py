@@ -1,3 +1,5 @@
+import pytest
+
 from FSFA.Trade.bond_trade import BondTrade
 from FSFA.Trade.nonstandard_trade import NonstandardTrade
 
@@ -9,16 +11,19 @@ class TestTrade:
     def teardown(self):
         pass
 
+    # @pytest.mark.skip
     def test_bond_trade1(self, stagemark):
         self.bond_trade = BondTrade()
         assert self.bond_trade.bondtrade1()
         self.bond_trade.end()
 
+    # @pytest.mark.skip
     def test_bond_trade2(self, stagemark):
         self.bond_trade = BondTrade()
         assert self.bond_trade.bondtrade2()
         self.bond_trade.end()
 
+    # @pytest.mark.skip
     def test_bond_trade3(self, stagemark):
         self.bond_trade = BondTrade()
         assert self.bond_trade.bondtrade3()

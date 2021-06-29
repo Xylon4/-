@@ -22,7 +22,7 @@ class NonstandardTrade(BasePageFsfa):
         # 选择账套
         self.findxpath_sendkey('//*[@name="package_code"]', UNIT_CODE)
         sleep(1)
-        self.findxpath_click('//div[30]/div[3]/div/table/tbody/tr[2]/td/div/span')
+        self.findxpath_click('//div[3]/div/table/tbody/tr[2]/td/div/span')
         # 选择交易对手
         self.findxpath_sendkey('//*[@name="partyId"]', Counterparties)
         sleep(1)
@@ -37,10 +37,14 @@ class NonstandardTrade(BasePageFsfa):
         asset = self.findxpath('//*[@name="i_code"]')
         asset.send_keys(Keys.ARROW_DOWN)
         asset.send_keys(Keys.ENTER)
+        # sleep(5)
         # 点击保存
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/div/div/a[2]/span/span/span[1]')
-        sleep(5)
+        sleep(1)
         # 点击确定
+        self.findxpath_click('//*[@id="button-1005-btnIconEl"]')
+        sleep(1)
+        # 自动化时会弹出：当前交易资产和资金账户币种不匹配；是否继续保存交易？的提示，手工操作时不存在该提示，故多加了一步操作
         self.findxpath_click('//*[@id="button-1005-btnIconEl"]')
         # 点击复核
         self.findxpath_click('/html/body/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/div/div/a[5]')
