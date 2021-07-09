@@ -1,0 +1,28 @@
+基础环境准备
+1.pycharm  pycharm-community-2020.3.3.exe
+    安装完后将%PyCharm Community Edition%
+            加入path
+    设置变量PyCharm Community Edition=d:\Program Files\JetBrains\PyCharm Community Edition 2020.3.3\bin
+2.python python-3.8.7-amd64.exe
+    安装完后将Python\Python38\Scripts\
+            Python\Python38\
+            加入path
+3.allure allure-2.13.8.zip
+    解压后将allure-2.13.8\bin
+           加入path
+4.jdk1.8
+5.chromedriver.exe      最新版本驱动
+chromedriver_52.0.2743.exe      指定版本驱动
+    安装完后将\chromedriver_win32
+            加入path
+
+解释器interpreter
+1.pip install pytest
+2.pip install pytest-rerunfailures     失败重跑
+3.pip install pytest-assume 多重校验
+4.pip install pytest-orderding 控制用例的执行顺序
+5.pip install pytest-xdist 分布式并发执行用例
+6.pip install allure-pytest
+
+离线安装插件方法参考
+https://blog.csdn.net/qq_40433737/article/details/107111261
