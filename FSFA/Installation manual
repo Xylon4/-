@@ -26,3 +26,9 @@ chromedriver_52.0.2743.exe      指定版本驱动
 
 离线安装插件方法参考
 https://blog.csdn.net/qq_40433737/article/details/107111261
+
+本地安装-通过添加第三方库的Path实现
+点击工具栏的File选项
+打开的Settings窗口选择 设置->Show all
+在弹出的Progect Interpreters窗口中选择第5个按钮，点击弹出的Interpreter Patha 窗口中选择‘+’按钮，在弹出的Select Path窗口，选择添加本地第三方库文件（例如Scapy）所在位置的路径，点击‘OK’按钮，完成配置。
+添加成功后Inerpreter Paths窗口多出一行，点击ok确认，退出重新运行程序即可（注：需要等待pycharm更新配置完成，才能运行成功，pycharm最下方有显示更新进度的进度条）
