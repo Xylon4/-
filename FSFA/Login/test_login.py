@@ -5,9 +5,9 @@ from selenium import webdriver
 
 
 class TestLogin:
-    def setup(self, get_ip):
+    def setup(self):
         self.driver = webdriver.Chrome()
-        self.driver.get(get_ip[0])
+        self.driver.get('http://192.168.64.131:8080/xIR_J2EE')
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
 

@@ -13,13 +13,13 @@ def stagemark():
 # 读取外部文件并定义,路径中的.代表根目录"FSFA"
 with open("./login.yaml") as f:
     datas = yaml.safe_load(f)['login_data']
-    ip = datas['ipaddr']
+    ipaddr = datas['ipaddr']
     fail_token = datas['fail_token']
     success_token = datas['success_token']
 
 
 # 定义IP的装饰器方法
-@pytest.fixture(params=ip)
+@pytest.fixture(params=ipaddr)
 def get_ip(request):
     ip = request.param
     print(f"测试数据为：{ip}")
