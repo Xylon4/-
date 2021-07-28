@@ -1,22 +1,24 @@
 # 理财估值核算系统产品端自动化测试用例
 # 账套创建及复核
+# from encodings import gbk
 from time import sleep
 
 from selenium.webdriver import TouchActions
 from selenium.webdriver.common.keys import Keys
 
 from FSFA.basepage_FSFA import BasePageFsfa
+# coding = gbk
 
 
 class ProductManage(BasePageFsfa):
-    def productmanage1(self):
-        fee_rate = "0.01"
-        accid01 = "2021061901"
-        accname01 = "托管户2021061901"
-        accid02 = "2021061902"
-        accname02 = "中债登券2021061902"
-        accid03 = "2021061903"
-        accname03 = "中债登资金2021061903"
+    def productmanage1(self, get_product_manage):
+        fee_rate = get_product_manage[0]
+        accid01 = get_product_manage[1]
+        accname01 = get_product_manage[2]
+        accid02 = get_product_manage[3]
+        accname02 = get_product_manage[4]
+        accid03 = get_product_manage[5]
+        accname03 = get_product_manage[6]
         # 点击账套管理
         self.findxpath_click('//*[@id="navId"]/li[3]/a')
         # 点击账套设置
