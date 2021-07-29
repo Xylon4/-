@@ -1,13 +1,11 @@
 # 理财估值核算系统产品端自动化测试用例
 # 账套创建及复核
-# from encodings import gbk
 from time import sleep
 
 from selenium.webdriver import TouchActions
 from selenium.webdriver.common.keys import Keys
 
 from FSFA.basepage_FSFA import BasePageFsfa
-# coding = gbk
 
 
 class ProductManage(BasePageFsfa):
@@ -72,7 +70,8 @@ class ProductManage(BasePageFsfa):
         self.findxpath_click(
             '/html/body/div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[3]/div/div/a[1]')
         # 点击银行间账户信息中的新增按钮
-        self.findxpath_click('//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]//div[2]/div[2]/div/div/a[1]/span/span/span[1]')
+        self.findxpath_click(
+            '//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]//div[2]/div[2]/div/div/a[1]/span/span/span[1]')
         # 选择托管模式-乙类户
         self.findxpath_click('//*[@value="多级托管"]')
         # 同开户行
@@ -92,9 +91,11 @@ class ProductManage(BasePageFsfa):
         self.findxpath_sendkey('//*[@name="cashAccDvpName"]', accname03)
         # 选择开户行-中债登
         self.findxpath_sendkey(
-            '//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[4]/div[2]//table[9]/tbody/tr/td[2]/table/tbody/tr/td[1]/input', '中债登')
+            '//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[4]/div[2]//table[9]/tbody/tr/td[2]/table/tbody/tr/td[1]/input',
+            '中债登')
         # 直接输入关键字"中债登"未能触发关键字匹配，模拟人工操作：输入完成后加一个空格触发匹配
-        bank_name2 = self.findxpath('//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[4]/div[2]//table[9]/tbody/tr/td[2]/table/tbody/tr/td[1]/input')
+        bank_name2 = self.findxpath(
+            '//div[3]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[4]/div[2]//table[9]/tbody/tr/td[2]/table/tbody/tr/td[1]/input')
         bank_name2.send_keys(Keys.SPACE)
         bank_name2.send_keys(Keys.ARROW_DOWN)
         bank_name2.send_keys(Keys.ENTER)

@@ -8,10 +8,10 @@ from FSFA.basepage_FSFA import BasePageFsfa
 
 
 class CashFlow(BasePageFsfa):
-    def cashflow1(self):
-        I_CODE = "FB0619"
-        REAL_AMOUNT = "100000000"
-        REAL_CP = "100000000"
+    def cashflow1(self, get_cash_flow):
+        I_CODE = get_cash_flow[0]
+        REAL_AMOUNT = get_cash_flow[1]
+        REAL_CP = get_cash_flow[1]
         # 点击账套管理
         self.findxpath_click('//*[@id="navId"]/li[3]/a')
         # 点击产品现金流管理
@@ -21,6 +21,7 @@ class CashFlow(BasePageFsfa):
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[1]/span/div/div[1]/div/div/a[2]')
         # 选择产品代码
         self.findxpath_sendkey('//*[@name="wmpsProductCombox-1254-inputEl"]', I_CODE)
+        sleep(1)
         i_code = self.findxpath('//*[@name="wmpsProductCombox-1254-inputEl"]')
         i_code.send_keys(Keys.ARROW_DOWN)
         i_code.send_keys(Keys.ENTER)
