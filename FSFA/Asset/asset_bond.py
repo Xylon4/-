@@ -7,15 +7,15 @@ from selenium.webdriver.common.keys import Keys
 
 
 class AssetBond(BasePageFsfa):
-    def assetbond1(self):
-        I_CODE = 'bond20210618'
-        B_NAME1 = '银行债20210528'
-        B_NAME2 = '商业银行债20210528'
-        P_CLASS = '商业银行债-直接投资'
-        B_ISSUER = '国家开发银行'
-        B_ISSUEDATE = '2020-03-03'
-        B_STARTDATE = '2020-03-03'
-        B_ENDDATE = '2023-03-03'
+    def assetbond1(self, get_bond):
+        I_CODE = get_bond[0]
+        B_NAME1 = get_bond[1]
+        B_NAME2 = get_bond[2]
+        P_CLASS = get_bond[3]
+        B_ISSUER = get_bond[4]
+        B_ISSUEDATE = get_bond[5]
+        B_STARTDATE = get_bond[5]
+        B_ENDDATE = get_bond[6]
         # 点击资产管理
         self.findxpath_click('//*[@id="navId"]/li[4]/a')
         # 点击债券类资产
@@ -98,7 +98,7 @@ class AssetBond(BasePageFsfa):
         STATUS.send_keys(Keys.ENTER)
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[4]/div[1]/div/div/a[1]/span/span/span[1]')
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[4]/div[1]/div/div/a[4]/span/span/span[2]')
-        sleep(1)
+        sleep(2)
         # 选中债券
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[1]/div[3]/div/table/tbody/tr/td[1]/div')
         # 点击复核

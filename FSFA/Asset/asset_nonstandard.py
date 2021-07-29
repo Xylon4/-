@@ -10,17 +10,18 @@ from selenium.webdriver.common.keys import Keys
 
 
 class AssetNonstandard(BasePageFsfa):
-    def assetnonstandard1(self):
-        I_CODE = 'LBS20210601'
-        I_NAME = '利率型资产20210601'
-        P_CLASS = '北金所债权融资计划'
-        MTR_DATE = '2021-03-03'
-        LBS_RATE = '6'
-        CP = '100000000'
+    def assetnonstandard1(self, get_nonstandard):
+        I_CODE = get_nonstandard[0]
+        I_NAME = get_nonstandard[1]
+        P_CLASS = get_nonstandard[2]
+        MTR_DATE = get_nonstandard[3]
+        LBS_RATE = get_nonstandard[4]
+        CP = get_nonstandard[5]
         # 点击资产管理
         self.findxpath_click('//*[@id="navId"]/li[4]/a')
         # 点击利率型项目资产
         self.findxpath_click('//*[@id="floatMenu"]/dl[1]/dd[2]/a')
+        sleep(1)
         # 点击新增
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[1]/span/div/div[1]/div/div/a[2]/span/span/span[1]')
         # 输入资产代码
