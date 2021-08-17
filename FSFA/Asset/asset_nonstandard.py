@@ -21,7 +21,10 @@ class AssetNonstandard(BasePageFsfa):
         self.findxpath_click('//*[@id="navId"]/li[4]/a')
         # 点击利率型项目资产
         self.findxpath_click('//*[@id="floatMenu"]/dl[1]/dd[2]/a')
-        sleep(1)
+        # sleep(1)
+        # 使用显式等待来控制点击新增的时间等待时间
+        locator = (By.XPATH, '//div[3]/div[2]/div[2]/div/div/div[1]/span/div/div[1]/div/div/a[2]/span/span/span[1]')
+        self.wait_for_click(10, locator)
         # 点击新增
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[1]/span/div/div[1]/div/div/a[2]/span/span/span[1]')
         # 输入资产代码
@@ -87,6 +90,7 @@ class AssetNonstandard(BasePageFsfa):
         searchlib.send_keys(Keys.ARROW_DOWN)
         searchlib.send_keys(Keys.ENTER)
         # 输入代码后有一个下拉选择的列表，当列表遮挡下一步的按钮时，操作将会被拦截并提示错误：ElementClickInterceptedException
+        # 下一步操作有概率出现错误
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div[1]/div[1]//div[3]/div/div/a[1]/span/span/span[1]')
         sleep(1)
         # 选中对应资产

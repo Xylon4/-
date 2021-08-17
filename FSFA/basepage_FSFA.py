@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePageFsfa:
@@ -45,3 +47,7 @@ class BasePageFsfa:
 
     def find_sendkey(self, locator3, value3, key3):
         self.find(locator3, value3).send_keys(key3)
+
+    # 定义显式等待方法
+    def wait_for_click(self, timeout, locator):
+        WebDriverWait(self.driver, timeout).until(expected_conditions.element_to_be_clickable(locator))
