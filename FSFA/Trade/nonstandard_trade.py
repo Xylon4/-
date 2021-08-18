@@ -9,10 +9,10 @@ from FSFA.basepage_FSFA import BasePageFsfa
 
 class NonstandardTrade(BasePageFsfa):
     # 利率型项目交易买入及成交确认
-    def nonstandardtrade1(self):
-        UNIT_CODE = 'FB0618'
-        I_CODE = 'LBS20210601'
-        Counterparties = "杭州银行股份有限公司"
+    def nonstandardtrade1(self, get_nonstandard):
+        UNIT_CODE = get_nonstandard[0]
+        I_CODE = get_nonstandard[1]
+        Counterparties = get_nonstandard[2]
         # 点击交易管理
         self.findxpath_click('//*[@id="navId"]/li[5]/a')
         # 点击利率型项目交易
@@ -54,8 +54,8 @@ class NonstandardTrade(BasePageFsfa):
         return True
 
     # 结算非标首期交易
-    def nonstandardtrade2(self):
-        I_CODE = 'LBS20210601'
+    def nonstandardtrade2(self, get_nonstandard):
+        I_CODE = get_nonstandard[1]
         # 点击清算管理
         self.findxpath_click('//*[@id="navId"]/li[6]/a')
         # 点击待复核交易指令
@@ -87,8 +87,8 @@ class NonstandardTrade(BasePageFsfa):
         return True
 
     # 银行间费用摊销复核
-    def nonstandardtrade3(self):
-        I_CODE = "FB0618"
+    def nonstandardtrade3(self, get_nonstandard):
+        I_CODE = get_nonstandard[0]
         # 点击交易管理
         self.findxpath_click('//*[@id="navId"]/li[5]/a')
         # 点击银行间费用摊销
@@ -100,6 +100,21 @@ class NonstandardTrade(BasePageFsfa):
         self.findxpath_click('//div[3]/div[2]//div/div/div[1]/span/div/div[2]/div/div/a[1]')
         sleep(1)
         self.findxpath_click('//div[3]/div[2]//div/div/div[3]/div/table/tbody/tr/td[2]/div')
+
+        check_button = self.findxpath('//div[3]/div[2]//div/div/div[1]/span/div/div[1]/div/div/a[6]')
+        button_status = check_button.is_enabled()
+
+        # 定义判断复核按钮是否可点击方法，不可点击直接返回TRUE，可点击的情况下点击
+        def isElementClickable(self, element):
+            flag = True
+            driver = self.driver
+            try:
+                driver.find_element_by_xpath(element)
+                return flag
+            except:
+                flag = False
+                return flag
+
         # 点击复核
         self.findxpath_click('//div[3]/div[2]//div/div/div[1]/span/div/div[1]/div/div/a[6]')
         # 点击弹窗中的是

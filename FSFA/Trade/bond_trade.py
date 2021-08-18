@@ -9,12 +9,12 @@ from FSFA.basepage_FSFA import BasePageFsfa
 
 class BondTrade(BasePageFsfa):
     # 新增债券交易买入及成交确认
-    def bondtrade1(self):
-        I_CODE = "FB0619"
-        Counterparties = "杭州银行股份有限公司"
-        BOND_CODE = "bond20210618"
-        AMONUT = "10000"
-        YTM = "7.9"
+    def bondtrade1(self, get_bond):
+        I_CODE = get_bond[0]
+        Counterparties = get_bond[1]
+        BOND_CODE = get_bond[2]
+        AMONUT = get_bond[3]
+        YTM = get_bond[4]
         # 点击交易管理
         self.findxpath_click('//*[@id="navId"]/li[5]/a')
         # 点击银行间债券交易(二级市场)
@@ -66,8 +66,8 @@ class BondTrade(BasePageFsfa):
         return True
 
     # 结算债券首期交易
-    def bondtrade2(self):
-        BOND_CODE = "bond20210618"
+    def bondtrade2(self, get_bond):
+        BOND_CODE = get_bond[2]
         # 点击清算管理
         self.findxpath_click('//*[@id="navId"]/li[6]/a')
         # 点击待复核交易指令
@@ -98,8 +98,8 @@ class BondTrade(BasePageFsfa):
         return True
 
     # 银行间费用摊销复核
-    def bondtrade3(self):
-        I_CODE = "FB0619"
+    def bondtrade3(self, get_bond):
+        I_CODE = get_bond[0]
         # 点击交易管理
         self.findxpath_click('//*[@id="navId"]/li[5]/a')
         # 点击银行间费用摊销
