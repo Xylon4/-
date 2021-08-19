@@ -101,24 +101,37 @@ class NonstandardTrade(BasePageFsfa):
         sleep(1)
         self.findxpath_click('//div[3]/div[2]//div/div/div[3]/div/table/tbody/tr/td[2]/div')
 
-        check_button = self.findxpath('//div[3]/div[2]//div/div/div[1]/span/div/div[1]/div/div/a[6]')
-        button_status = check_button.is_enabled()
+        # check_button = self.findxpath('//div[3]/div[2]//div/div/div[1]/span/div/div[1]/div/div/a[6]')
+        # check_button_s = self.findxpath('//div[3]/div[2]/div[2]//div[1]/span/div/div[1]/div/div/a[6]/span/span/span[1]')
+        # button_status1 = check_button.is_enabled()
+        # button_status2 = check_button.is_selected()
+        # button_status3 = check_button.is_displayed()
+        # print(button_status1)
+        # print(button_status2)
+        # print(button_status3)
+        # 不同的按钮状态下返回的结果均为True False True
+        # 根据测试结果和查看元素详细信息后可得出，代码中并未添加is_enabled和is_displayed属性，且因为unselectable="on"，导致并未正确
+        # 区分不同状态的元素属性，所以只需要修改代码，正确反映状态后，并修改函数识别状态为is_selected()即可正确执行判断
 
         # 定义判断复核按钮是否可点击方法，不可点击直接返回TRUE，可点击的情况下点击
+        # 定义判断函数，当元素可点击时，返回TRUE，不可点击时返回FALSE
         def isElementClickable(self, element):
             flag = True
             driver = self.driver
             try:
-                driver.find_element_by_xpath(element)
+                driver.find_element_by_xpath(element).is_enabled()
                 return flag
             except:
                 flag = False
                 return flag
-
-        # 点击复核
-        self.findxpath_click('//div[3]/div[2]//div/div/div[1]/span/div/div[1]/div/div/a[6]')
-        # 点击弹窗中的是
-        self.findxpath_click('//*[@id="button-1006-btnIconEl"]')
-        # 点击确定
-        self.findxpath_click('//*[@id="button-1005-btnIconEl"]')
-        return True
+        # 调用函数，进入条件判断，当判断通过时执行以下步骤并返回TRUE，判断失败时无操作，直接返回TRUE
+        if isElementClickable(self, '//div[3]/div[2]//div/div/div[1]/span/div/div[1]/div/div/a[6]'):
+            # 点击复核
+            self.findxpath_click('//div[3]/div[2]//div/div/div[1]/span/div/div[1]/div/div/a[6]')
+            # 点击弹窗中的是
+            self.findxpath_click('//*[@id="button-1006-btnIconEl"]')
+            # 点击确定
+            self.findxpath_click('//*[@id="button-1005-btnIconEl"]')
+            return True
+        else:
+            return True
