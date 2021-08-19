@@ -34,9 +34,11 @@ class BondTrade(BasePageFsfa):
         party_id.send_keys(Keys.ARROW_DOWN)
         party_id.send_keys(Keys.ENTER)
         # 选择债券
-        self.findxpath_sendkey('//fieldset[6]/div/span/div/div[1]/span/div/table[1]/tbody/tr/td[2]/table/tbody/tr/td[1]/input', BOND_CODE)
+        self.findxpath_sendkey(
+            '//fieldset[6]/div/span/div/div[1]/span/div/table[1]/tbody/tr/td[2]/table/tbody/tr/td[1]/input', BOND_CODE)
         sleep(1)
-        bond_code1 = self.findxpath('//fieldset[6]/div/span/div/div[1]/span/div/table[1]/tbody/tr/td[2]/table/tbody/tr/td[1]/input')
+        bond_code1 = self.findxpath(
+            '//fieldset[6]/div/span/div/div[1]/span/div/table[1]/tbody/tr/td[2]/table/tbody/tr/td[1]/input')
         bond_code1.send_keys(Keys.ARROW_DOWN)
         bond_code1.send_keys(Keys.ENTER)
         # 输入券面总额
@@ -77,7 +79,8 @@ class BondTrade(BasePageFsfa):
         self.findxpath_click('//div[7]/div/div[2]/div[2]/div[2]/a')
         self.findxpath_click('//div[2]/span/div/div[2]/span/div/table[4]/tbody/tr/td[2]/table/tbody/tr/td[1]/input')
         sleep(1)
-        self.findxpath_sendkey('//div[2]/span/div/div[2]/span/div/table[4]/tbody/tr/td[2]/table/tbody/tr/td[1]/input', BOND_CODE)
+        self.findxpath_sendkey('//div[2]/span/div/div[2]/span/div/table[4]/tbody/tr/td[2]/table/tbody/tr/td[1]/input',
+                               BOND_CODE)
         sleep(1)
         bond_code = self.findxpath(
             '//div[2]/span/div/div[2]/span/div/table[4]/tbody/tr/td[2]/table/tbody/tr/td[1]/input')
@@ -111,10 +114,27 @@ class BondTrade(BasePageFsfa):
         self.findxpath_click('//div[3]/div[2]//div/div/div[1]/span/div/div[2]/div/div/a[1]')
         sleep(1)
         self.findxpath_click('//div[3]/div[2]//div/div/div[3]/div/table/tbody/tr/td[2]/div')
-        # 点击复核
-        self.findxpath_click('//div[3]/div[2]//div/div/div[1]/span/div/div[1]/div/div/a[6]')
-        # 点击弹窗中的是
-        self.findxpath_click('//*[@id="button-1006-btnIconEl"]')
-        # 点击确定
-        self.findxpath_click('//*[@id="button-1005-btnIconEl"]')
-        return True
+
+        # 定义判断复核按钮是否存在，不可点击时返回TRUE，可点击时点击
+        # 定义判断函数，当不可点击的元素存在时，返回TRUE，不存在时返回FALSE
+        def isElementClickable(self, element):
+            flag = True
+            driver = self.driver
+            try:
+                driver.find_element_by_xpath(element)
+                return flag
+            except:
+                flag = False
+                return flag
+
+        # 调用函数，进入条件判断，当判断通过时无操作，直接返回TRUE；判断失败时执行以下步骤并返回TRUE
+        if isElementClickable(self, '//a[contains(@class,"disabled") and contains(@id,"reviewButton")]'):
+            return True
+        else:
+            # 点击复核
+            self.findxpath_click('//div[3]/div[2]//div/div/div[1]/span/div/div[1]/div/div/a[6]')
+            # 点击弹窗中的是
+            self.findxpath_click('//*[@id="button-1006-btnIconEl"]')
+            # 点击确定
+            self.findxpath_click('//*[@id="button-1005-btnIconEl"]')
+            return True

@@ -43,6 +43,7 @@ class TestTrade:
 
     # 因为元素属性不正确导致判断函数失败，所以需要针对用例不同做区分对待，影响代码的完整性
     # 当非标和债券使用相同的账套进行操作时，费用摊销步骤只需要执行一次
+    # 以上两个问题已解决
     # @pytest.mark.skip
     def test_nonstandard_trade3(self, get_nonstandard, stagemark):
         self.nonstandard_trade = NonstandardTrade()
