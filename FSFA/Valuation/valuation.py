@@ -12,9 +12,9 @@ from FSFA.basepage_FSFA import BasePageFsfa
 
 class Valuation(BasePageFsfa):
     # 估值批处理执行
-    def valuation1(self):
-        I_CODE = "FB0619"
-        CALC_DATE = "2020-03-04"
+    def valuation1(self, get_batch):
+        I_CODE = get_batch[0]
+        CALC_DATE = get_batch[1]
         # 点击批处理
         self.findxpath_click('//*[@id="navId"]/li[8]/a')
         # 点击估值批处理
@@ -56,8 +56,13 @@ class Valuation(BasePageFsfa):
         return True
 
     # 估值表检查
-    def valuation2(self):
-        I_CODE = "FB0619"
+    def valuation2(self, get_batch):
+        I_CODE = get_batch[0]
+        amount_check = get_batch[2]
+        cp_check = get_batch[3]
+        asset_check = get_batch[4]
+        cash_check = get_batch[5]
+        nav_check = get_batch[6]
         # 点击估值管理
         self.findxpath_click('//*[@id="navId"]/li[7]/a')
         # 点击估值表查询
@@ -79,17 +84,17 @@ class Valuation(BasePageFsfa):
         ele3 = asset.get_attribute('textContent')
         ele4 = cash.get_attribute('textContent')
         ele5 = nav.get_attribute('textContent')
-        while ele1 == "1,000,000.00" and ele2 == "93,949,338.36" and ele3 == "93,949,338.36" and ele4 == "6,067,100.00" and ele5 == "1.000162":
+        while ele1 == amount_check and ele2 == cp_check and ele3 == asset_check and ele4 == cash_check and ele5 == nav_check:
             return True
 
     # 估值回历史
-    def valuation3(self):
-        I_CODE = "FB0619"
+    def valuation3(self, get_batch):
+        I_CODE = get_batch[0]
         # 点击批处理
         self.findxpath_click('//*[@id="navId"]/li[8]/a')
         # 点击估值批处理
         self.findxpath_click('//*[@id="floatMenu"]/dl[1]/dd[2]/a')
-        #定位账套
+        # 定位账套
         self.findxpath_sendkey('//*[@name="accSecuId"]', I_CODE)
         sleep(1)
         self.findxpath_click('//div[3]/div/table/tbody/tr[2]/td/div/span')
@@ -101,6 +106,7 @@ class Valuation(BasePageFsfa):
         # 在新页签中点击估值回历史
         sleep(2)
         self.findxpath_click('//div[3]/div[2]/div[3]/div[1]/div/div/a/span/span/span[2]')
+
         # 等待估值批处理结束-显式等待
         def wait(x):
             batch_status = self.findxpath('/html/body/div[3]/div[2]/div[3]/div[1]/div/div/label[1]').get_attribute(
