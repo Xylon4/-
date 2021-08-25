@@ -1,3 +1,5 @@
+import pytest
+
 from FSFA.Valuation.valuation import Valuation
 
 
@@ -14,5 +16,6 @@ class TestValuation:
         assert self.valuation.valuation2(get_batch)
 
     # 估值回历史独立执行，解决多个页签情况下回历史按钮不可点击问题
+    # @pytest.mark.skip
     def test_valuation2(self, get_batch, stagemark):
         assert self.valuation.valuation3(get_batch)

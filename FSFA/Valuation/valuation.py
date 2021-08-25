@@ -35,12 +35,13 @@ class Valuation(BasePageFsfa):
         date.send_keys(Keys.DELETE)
         # self.findxpath('//div[3]/div[2]/div[3]/div[1]//tbody/tr/td[2]/table/tbody/tr/td[1]/input').clear()
         self.findxpath_sendkey('//div[3]/div[2]/div[3]/div[1]//tbody/tr/td[2]/table/tbody/tr/td[1]/input', CALC_DATE)
-        valuation = (By.XPATH, '/html/body/div[3]/div[2]/div[3]/div[1]/div/div/a/span/span/span[1]')
+        # valuation = (By.XPATH, '/html/body/div[9]/div/div')
         # WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(valuation))
-        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(valuation))
-        sleep(2)
+        # WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(valuation))
+        # WebDriverWait(self.driver, 10).until(expected_conditions.NoSuchElementException(valuation))
+        sleep(5)
         # 点击估值日切
-        # 实际执行中，visibility_of_element_located这个方法也并不能展现元素的可点击状态，实际需要采用+1S处理逻辑；
+        # 实际执行中，visibility_of_element_located这个方法也并不能展现元素的可点击状态，因为代码不完善，元素状态不随着肉眼可见的状态变更；
         # 显式等待能保证元素可被点击，之后的强制等待一秒保证顺畅处理，实际等待时间为N+1秒
         # 将visibility_of_element_located修改为element_to_be_clickable方法，沿用+1S逻辑，目前运行稳定
         self.findxpath_click('/html/body/div[3]/div[2]/div[3]/div[1]/div/div/a/span/span/span[1]')
@@ -74,11 +75,11 @@ class Valuation(BasePageFsfa):
         self.findxpath_click('/html/body/div[3]/div[2]//div/div/div[1]/div/div/a[3]')
         sleep(5)
         # 判断值是否正确
-        amount = self.findxpath('//div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[5]/td[3]/div')
-        cp = self.findxpath('//div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[5]/td[5]/div')
-        asset = self.findxpath('//div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[19]/td[5]/div')
-        cash = self.findxpath('//div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[42]/td[5]/div')
-        nav = self.findxpath('//div[3]/div[2]//div/div/div[2]/div/div/div[2]/div[2]/div/table/tbody/tr[53]/td[5]/div')
+        amount = self.findxpath('//tbody/tr[4]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
+        cp = self.findxpath('//tbody/tr[10]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
+        asset = self.findxpath('//tbody/tr[31]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
+        cash = self.findxpath('//tbody/tr[54]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
+        nav = self.findxpath('//tbody/tr[65]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
         ele1 = amount.get_attribute('textContent')
         ele2 = cp.get_attribute('textContent')
         ele3 = asset.get_attribute('textContent')
