@@ -17,6 +17,11 @@ Installation manual  安装手册
 chromedriver_52.0.2743.exe      指定版本驱动
     安装完后将\chromedriver_win32
             加入path
+6.git   Git-2.30.1-64-bit.exe       终端不联网的环境不需要配置
+    安装完成后将Git\cmd
+            加入path
+    配置git:在pycharm中点击file→settings→version control→git
+            第二行下拉选择git的安装路径，一般为D:\Program Files\Git\cmd\git.exe （设置过环境变量后重启能自动选择）
 
 解释器interpreter
 1.pip install pytest
