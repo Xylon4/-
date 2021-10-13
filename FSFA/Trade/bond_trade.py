@@ -94,6 +94,7 @@ class BondTrade(BasePageFsfa):
         self.findxpath_click('//div/div/div[3]/div/table/tbody/tr/td[2]/div')
         # 点击复核
         self.findxpath_click('/html/body/div[3]/div[2]//div/div/div[1]/div/div/a[2]')
+        sleep(1)
         # 点击弹窗中的是
         self.findxpath_click('//*[@id="button-1006-btnIconEl"]')
         # 点击确定
@@ -112,7 +113,7 @@ class BondTrade(BasePageFsfa):
         sleep(1)
         self.findxpath_click('//div[3]/div/table/tbody/tr[2]/td/div/span')
         self.findxpath_click('//div[3]/div[2]//div/div/div[1]/span/div/div[2]/div/div/a[1]')
-        sleep(1)
+        sleep(2)
         self.findxpath_click('//div[3]/div[2]//div/div/div[3]/div/table/tbody/tr/td[2]/div')
 
         # 定义判断复核按钮是否存在，不可点击时返回TRUE，可点击时点击

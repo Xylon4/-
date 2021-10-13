@@ -41,6 +41,7 @@ class CashFlow(BasePageFsfa):
         self.findxpath_click('/html/body/div[3]/div[2]/div[2]/div/div[2]/div[3]/div/div/a[3]')
         # 定位现金流
         self.findxpath_sendkey('//*[@name="fuzzCondi"]', I_CODE)
+        sleep(1)
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div[1]/div[1]/span/div/div[3]/div/div/a[1]')
         sleep(3)
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[1]/div[2]/div/table/tbody/tr/td[2]/div')
