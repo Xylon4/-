@@ -39,7 +39,7 @@ class Valuation(BasePageFsfa):
         # WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(valuation))
         # WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(valuation))
         # WebDriverWait(self.driver, 10).until(expected_conditions.NoSuchElementException(valuation))
-        sleep(5)
+        sleep(10)
         # 点击估值日切
         # 实际执行中，visibility_of_element_located这个方法也并不能展现元素的可点击状态，因为代码不完善，元素状态不随着肉眼可见的状态变更；
         # 显式等待能保证元素可被点击，之后的强制等待一秒保证顺畅处理，实际等待时间为N+1秒
@@ -75,11 +75,11 @@ class Valuation(BasePageFsfa):
         self.findxpath_click('/html/body/div[3]/div[2]//div/div/div[1]/div/div/a[3]')
         sleep(5)
         # 判断值是否正确
-        amount = self.findxpath('//tbody/tr[4]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
-        cp = self.findxpath('//tbody/tr[10]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
-        asset = self.findxpath('//tbody/tr[31]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
-        cash = self.findxpath('//tbody/tr[54]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
-        nav = self.findxpath('//tbody/tr[65]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
+        amount = self.findxpath('//tbody/tr[5]/td[3]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
+        cp = self.findxpath('//tbody/tr[6]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
+        asset = self.findxpath('//tbody/tr[19]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
+        cash = self.findxpath('//tbody/tr[42]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
+        nav = self.findxpath('//tbody/tr[54]/td[5]/div[@class="x-grid-cell-inner " and @style="text-align:right;"]')
         ele1 = amount.get_attribute('textContent')
         ele2 = cp.get_attribute('textContent')
         ele3 = asset.get_attribute('textContent')

@@ -16,7 +16,7 @@ class CashFlow(BasePageFsfa):
         self.findxpath_click('//*[@id="navId"]/li[3]/a')
         # 点击产品现金流管理
         self.findxpath_click('//*[@id="floatMenu"]/dl[3]/dd[1]/a')
-        sleep(1)
+        sleep(2)
         # 点击新增
         self.findxpath_click('//div[3]/div[2]/div[2]/div/div/div[1]/span/div/div[1]/div/div/a[2]')
         # 选择产品代码

@@ -33,7 +33,7 @@ class ProductManage(BasePageFsfa):
         # 页面下滑到底部
         action = TouchActions(self.driver)
         basic1 = self.findxpath('//*[@class="x-component x-fieldset-header-text x-component-default"]')
-        action.scroll_from_element(basic1, 0, 10000).perform()
+        action.scroll_from_element(basic1, 0, 1000).perform()
         # 点击费用的新增按钮
         self.findxpath_click('/html//div[2]/div[2]/div/div[1]/div/div/a[1]/span/span/span[1]')
         # 输入费率
