@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -28,7 +30,9 @@ class BasePageFsfa:
         self.driver.find_element_by_xpath('//*[@type="text"]').send_keys("T999999")
         self.driver.find_element_by_xpath('//*[@type="password"]').send_keys("123456")
         self.driver.find_element_by_xpath('//*[@type="button"]').click()
-        self.wait_for_click(20, '//*[@class="x-tool-img x-tool-close"]')
+        sleep(2)
+        # 登录页面跳转之前，查询出的元素过多导致没法使用显式等待
+        # self.wait_for_click(20, '//*[@class="x-tool-img x-tool-close"]')
         # 关闭浙商首页的弹窗
         self.findxpath_click('//*[@class="x-tool-img x-tool-close"]')
 
@@ -53,6 +57,6 @@ class BasePageFsfa:
     def find_sendkey(self, locator3, value3, key3):
         self.find(locator3, value3).send_keys(key3)
 
-    # 定义显式等待方法
+    # 定义点击显式等待方法
     def wait_for_click(self, timeout, locator):
         WebDriverWait(self.driver, timeout).until(expected_conditions.element_to_be_clickable(locator))
