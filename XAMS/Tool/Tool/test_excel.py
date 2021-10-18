@@ -3,15 +3,16 @@
 # 3、后面的函数循环读取参数执行操作
 import xlrd
 
-from XAMS.basepage_XAMS import BasePageFsfa
+
+# from XAMS.basepage_XAMS import BasePageFsfa
 
 
-class TestExcel(BasePageFsfa):
+class TestExcel():
     def test_excel(self):
         # wb = xlrd.open_workbook_xls()
         # 打开Excel文件
-        wb = xlrd.open_workbook('C:\Users/\/1\Desktop\自动化读取报表.xlsx')
-        # 获取sheet，通过Excel表哥名称(rank)获取工作表
+        wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
+        # 获取sheet，通过Excel表格名称(rank)获取工作表
         sheet = wb.sheet_by_name('一级菜单')
         # 创建空list
         dat = []
@@ -20,12 +21,11 @@ class TestExcel(BasePageFsfa):
             data = int(cells[0])  # 因为表内可能存在多列数据，0代表第一列数据，1代表第二列，以此类推
             dat.append(data)  # 把每次循环读取的数据插入到list
         return dat
-    a = test_excel()  # 返回整个函数的值
-    print(a)
 
+    def test_list(self):  # a变量传入
+        a = self.test_excel()  # 返回整个函数的值
+        print(a)
+        for b in a:  # 循环读取a变量list
+            print(b)
 
-    # def test(a):  # a变量传入
-    #     for b in a:  # 循环读取a变量list
-    #         print(b)
-    #
     # test(a)
