@@ -5,7 +5,7 @@ import xlrd
 
 
 class TestExcel():
-    # 定义获取单列数据,并将数据存入列表[]
+    # 定义获取单列数据,并将数据存入列表[]的方法
     def test_list(self):
         # wb = xlrd.open_workbook_xls()
         # 打开excel文件
@@ -21,32 +21,90 @@ class TestExcel():
             dat.append(data)  # 把每次循环读取的数据插入到list
         return dat
 
-    # 取值入口
-    def test_value(self):
-        a = self.test_list()  # 调用test_list方法获取整列数据
-        print(a)  # 返回整个函数的值
-        for b in a:  # 循环读取a变量list
-            print(b)
-
-    # 定义获取整行数据，并将数据存入元组()
-    def test_tuple(self):
+    # 定义获取整行数据，并将数据存入字典{}的方法
+    def test_dic(self):
         # 打开excel文件
         wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
-        # 获取sheet页信息
-        # print(wb.sheets())
-        # print(wb.sheet_names())
-        # 打印sheet的名称，行数，列数
+        # 通过名称定位所有sheet
         sheet1 = wb.sheet_by_name('一级菜单')
         sheet2 = wb.sheet_by_name('二级菜单')
         sheet3 = wb.sheet_by_name('资产池注册表')
         sheet4 = wb.sheet_by_name('产品信息表')
         sheet5 = wb.sheet_by_name('资负信息注册(浙商)')
-        # print(sheet1.name, sheet1.nrows, sheet1.ncols)
-        # print(sheet2.name, sheet2.nrows, sheet2.ncols)
+        # 打印sheet的名称，行数，列数，用来校验字典中item数量
+        print(sheet2.name, sheet2.nrows, sheet2.ncols)
         # 获取整行或整列的值
         rows2 = sheet2.row_values(8)
         cols = sheet2.col_values(1)
-        print(sheet2.row_values(8))
-        print(sheet2.row_values(9))
-        print(sheet2.row_values(10))
-        print(sheet2.col_values(1))
+        # print(sheet2.row_values(8))
+        # print(sheet2.row_values(9))     # 可知合并单元格不能显示在后续的行或者列中，需要取消合并复制粘贴
+        # print(sheet2.row_values(10))
+        # print(sheet2.col_values(1))
+
+    # 创建"一级菜单"xpath字典
+    def first_menu(self):
+        wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
+        sheet = wb.sheet_by_name('一级菜单')
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"一级菜单"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            col1 = str(cells[0])  # 每行第一列数据赋值给col1
+            col2 = str(cells[1])  # 每行第二列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对
+        return dat
+
+    # 创建"二级菜单"xpath字典
+    def second_menu(self):
+        wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
+        sheet = wb.sheet_by_name('二级菜单')
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"二级菜单"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分，中间的空白数据形成'': ''字典，不影响使用
+            col1 = str(cells[1])  # 每行第二列数据赋值给col1
+            col2 = str(cells[2])  # 每行第三列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对
+        return dat
+
+    # 创建"二级菜单"映射一级菜单字典
+    def secondmatch_menu(self):
+        wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
+        sheet = wb.sheet_by_name('二级菜单')
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"二级菜单"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分，中间的空白数据形成'': ''字典，不影响使用
+            col1 = str(cells[1])  # 每行第二列数据赋值给col1
+            col2 = str(cells[0])  # 每行第一列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
+        return dat
+
+    # 创建"资产池注册表"操作点xpath字典
+    def registry_xpath(self):
+        wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
+        sheet = wb.sheet_by_name('资产池注册表')
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"资产池注册表"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            col1 = str(cells[0])  # 每行第一列数据赋值给col1
+            col2 = str(cells[1])  # 每行第二列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
+        return dat
+
+    # 测试入口
+    def test_value(self):
+        # a = self.test_list()  # 调用test_list方法获取整列数据
+        # print(a)  # 返回整个函数的值
+        # for b in a:  # 循环读取a变量list
+        #     print(b)
+        c = self.registry_xpath()
+        print(c)
+        # for d in c:
+        #     print(d)
+        print(c.get('落地'))  # 通过key获取value
