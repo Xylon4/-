@@ -4,7 +4,14 @@
 import xlrd
 
 
-class TestExcel():
+class TestExcel:
+    # excel路径
+    Excel_report = 'C:\\Users\\1\\Desktop\\自动化读取报表.xlsx'
+
+    # 定义初始化参数方法
+    # def __init__(self, Excel_report):
+    #     self.Excel_report = Excel_report
+
     # 定义获取单列数据,并将数据存入列表[]的方法
     def test_list(self):
         # wb = xlrd.open_workbook_xls()
@@ -97,14 +104,42 @@ class TestExcel():
             dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
         return dat
 
+    # 创建"产品信息表"操作点xpath字典
+    def product_xpath(self):
+        wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
+        sheet = wb.sheet_by_name('产品信息表')
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"产品信息表"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            col1 = str(cells[0])  # 每行第一列数据赋值给col1
+            col2 = str(cells[1])  # 每行第二列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
+        return dat
+
+    # 创建"资负信息注册(浙商)"操作点xpath字典
+    def registration_xpath (self):
+        wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
+        sheet = wb.sheet_by_name('资负信息注册(浙商)')
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"资负信息注册(浙商)"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            col1 = str(cells[0])  # 每行第一列数据赋值给col1
+            col2 = str(cells[1])  # 每行第二列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
+        return dat
+
     # 测试入口
     def test_value(self):
         # a = self.test_list()  # 调用test_list方法获取整列数据
         # print(a)  # 返回整个函数的值
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.registry_xpath()
+        c = self.registration_xpath()
         print(c)
         # for d in c:
         #     print(d)
-        print(c.get('落地'))  # 通过key获取value
+        print(c.get('日期年'))  # 通过key获取value

@@ -8,6 +8,7 @@ from XAMS.basepage_XAMS import BasePageFsfa
 
 
 class AssetPoolRegistry(BasePageFsfa):
+    # 版本更新校验历史数据自动化测试案例
     def registry(self, get_registry):
         unit_id = get_registry[0]
         check_date = get_registry[1]
@@ -29,3 +30,8 @@ class AssetPoolRegistry(BasePageFsfa):
         ele1 = beg_date.get_attribute('textContent')
         while ele1 == check_date:
             return True
+
+    # 自动化测试工具案例
+    def registry_excel(self):
+        pass
+
