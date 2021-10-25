@@ -33,5 +33,6 @@ class AssetPoolRegistry(BasePageFsfa):
 
     # 自动化测试工具案例
     def registry_excel(self):
-        pass
+        print("资产池注册表已响应")
+        return True
 

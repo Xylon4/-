@@ -15,3 +15,10 @@ def get_registry(request):
     registry = request.param
     print(f"测试数据为：{registry}")
     return registry
+
+
+Excel_report = 'E:\自动化读取报表.xlsx'
+# 获取sheet，通过Excel表格名称(rank)获取工作表
+sheet1 = '资产池注册表'
+sheet2 = '产品信息表'
+sheet3 = '资负信息注册(浙商)'

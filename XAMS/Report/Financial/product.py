@@ -124,3 +124,8 @@ class Product(BasePageFsfa):
         ele25 = identification.get_attribute('textContent')
         while ele1 == check1 and ele2 == check2 and ele3 == check3 and ele4 == check4 and ele5 == check5 and ele6 == check6 and ele7 == check7 and ele8 == check8 and ele9 == check9 and ele10 == check10 and ele11 == check11 and ele12 == check12 and ele13 == check13 and ele14 == check14 and ele15 == check15 and ele16 == check16 and ele17 == check17 and ele18 == check18 and ele19 == check19 and ele20 == check20 and ele21 == check21 and ele22 == check22 and ele23 == check23 and ele24 == check24 and ele25 == check25:
             return True
+
+    # 自动化测试工具案例
+    def product_excel(self):
+        print('产品信息表已响应')
+        return True
