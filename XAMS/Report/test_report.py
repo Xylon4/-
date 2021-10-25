@@ -10,7 +10,11 @@ class TestReport:
         # 打开excel文件
         excel = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
         # 获取sheet，通过Excel表格名称(rank)获取工作表
-        sheet = excel.sheet_by_name('一级菜单')
+        sheet1 = excel.sheet_by_name('资产池注册表')
+        sheet2 = excel.sheet_by_name('产品信息表')
+        sheet3 = excel.sheet_by_name('资负信息注册(浙商)')
+        # 校验工作表数据(统计操作列表中"1"的重复次数)
+
 
     @pytest.mark.skip
     def test_asset_pool_registry(self, get_registry, stagemark):

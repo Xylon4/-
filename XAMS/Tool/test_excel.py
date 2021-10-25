@@ -1,3 +1,4 @@
+# 封装excel读取、生成字典等公共方法
 # 1、读取Excel表数据
 # 2、把数据作为参数传给后面的函数
 # 3、后面的函数循环读取参数执行操作
@@ -47,6 +48,12 @@ class TestExcel:
         # print(sheet2.row_values(9))     # 可知合并单元格不能显示在后续的行或者列中，需要取消合并复制粘贴
         # print(sheet2.row_values(10))
         # print(sheet2.col_values(1))
+        # sheet页第三列数据从第二行开始标记是否有值
+        print(sheet3.col_types(3, 1))
+        print(sheet3.col_values(3, 1))
+        # sheet页第三列数据从第二行开始做切片展示(字典列表)，两种方法都可以，第二种写法不包含结尾行
+        print(sheet3.col_slice(3, 1))
+        print(sheet3.col_slice(3, 1, 9))
 
     # 创建"一级菜单"xpath字典
     def first_menu(self):
@@ -104,6 +111,14 @@ class TestExcel:
             dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
         return dat
 
+    # 创建"资产池注册表"操作列表并校验
+    def registry_list(self):
+        wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
+        sheet = wb.sheet_by_name('资产池注册表')
+        # 获取"执行操作"列的数据列表
+        dat = sheet.col_types(3, 1)
+        return dat
+
     # 创建"产品信息表"操作点xpath字典
     def product_xpath(self):
         wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
@@ -119,7 +134,7 @@ class TestExcel:
         return dat
 
     # 创建"资负信息注册(浙商)"操作点xpath字典
-    def registration_xpath (self):
+    def registration_xpath(self):
         wb = xlrd.open_workbook(r'C:\Users\1\Desktop\自动化读取报表.xlsx')
         sheet = wb.sheet_by_name('资负信息注册(浙商)')
         # 创建空字典
@@ -138,8 +153,9 @@ class TestExcel:
         # print(a)  # 返回整个函数的值
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.registration_xpath()
+        c = self.registry_list()
         print(c)
+        print(c[0])
         # for d in c:
         #     print(d)
-        print(c.get('日期年'))  # 通过key获取value
+        # print(c.get('日期年'))  # 通过key获取value
