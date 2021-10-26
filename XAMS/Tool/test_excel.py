@@ -17,7 +17,7 @@ class TestExcel:
         # wb = xlrd.open_workbook_xls()
         # 打开excel文件
         wb = xlrd.open_workbook(Excel_report)
-        # 获取sheet，通过Excel表格名称(rank)获取工作表
+        # 获取sheet，通过Excel表格名称()获取工作表
         sheet = wb.sheet_by_name('一级菜单')
         # 创建空list
         dat = []
