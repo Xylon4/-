@@ -22,8 +22,10 @@ class TestReport:
         count2 = self.list.product_list().count(1)
         while count1 > 0:
             self.test_registry_excel(stagemark)
+            count1 = 0
         while count2 > 0:
             self.test_product_excel(stagemark)
+            count2 = 0
         else:
             print("没有可运行的数据")
 
