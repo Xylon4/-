@@ -4,6 +4,7 @@ from time import sleep
 
 from selenium.webdriver.common.keys import Keys
 
+from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageFsfa
 
 
@@ -33,6 +34,14 @@ class AssetPoolRegistry(BasePageFsfa):
 
     # 自动化测试工具案例
     def registry_excel(self):
-        print("资产池注册表已响应")
+        # 获取字典
+        self.excel = TestExcel()
+        # 点击综合管理
+        self.findxpath_click(self.excel.first_menu().get('综合管理'))
+        # self.findxpath_click('//*[@id="navId"]/li[10]/a')
+        # 点击资产池注册表
+        self.findxpath_click(self.excel.second_menu().get('资产池注册表'))
+        # self.findxpath_click('//*[@id="floatMenu"]/dl[3]/dd[1]/a')
+        sleep(1)
         return True
 
