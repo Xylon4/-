@@ -2,7 +2,7 @@ import pytest
 import xlrd
 from XAMS.Report.Financial.Asset_pool_registry import AssetPoolRegistry
 from XAMS.Report.Financial.product import Product
-from XAMS.Report.conftest import Excel_report, sheet1, sheet2, sheet3
+from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.conftest import stagemark
 
@@ -11,7 +11,7 @@ class TestReport:
     # 定义根据excel导入内容选择执行案例的方法
     def test_option(self):
         # 打开excel文件
-        excel = xlrd.open_workbook(Excel_report)
+        excel = xlrd.open_workbook(Excel_basedata)
         # 获取sheet，通过Excel表格名称()获取工作表
         S1 = excel.sheet_by_name(f'{sheet1}')
         S2 = excel.sheet_by_name(f'{sheet2}')
