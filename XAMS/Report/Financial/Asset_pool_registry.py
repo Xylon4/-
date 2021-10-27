@@ -34,6 +34,8 @@ class AssetPoolRegistry(BasePageFsfa):
 
     # 自动化测试工具案例
     def registry_excel(self):
+        unit_id = 'gyxjzcpt001'
+        unit_id_xpath = '//tbody/tr[3]/td/div/span[@class="x-tree-node-text "]'
         # 获取字典
         self.excel = TestExcel()
         # 点击综合管理
@@ -43,5 +45,45 @@ class AssetPoolRegistry(BasePageFsfa):
         self.findxpath_click(self.excel.second_menu().get('资产池注册表'))
         # self.findxpath_click('//*[@id="floatMenu"]/dl[3]/dd[1]/a')
         sleep(1)
-        return True
+        # 选择投组
+        if self.excel.registry_list()[3] == 1:
+            self.findxpath_sendkey(self.excel.registry_xpath().get('投组'), unit_id)
+            sleep(1)
+            self.findxpath_click(unit_id_xpath)
+        # 输入产品名称/代码
+        if self.excel.registry_list()[4] == 1:
+            self.findxpath_sendkey(self.excel.registry_xpath().get('产品名称/代码'),
+                                   self.excel.get_cell_value('资产池注册表', 5, 3))
+        # 输入开始日期日
+        if self.excel.registry_list()[5] == 1:
+            if self.excel.get_cell_value('资产池注册表', 6, 3) == '置空':
+                start_date = self.findxpath(self.excel.registry_xpath().get('开始日期'))
+                start_date.send_keys(Keys.CONTROL, 'a')
+                start_date.send_keys(Keys.BACK_SPACE)
+            else:
+                start_date = self.findxpath(self.excel.registry_xpath().get('开始日期'))
+                start_date.send_keys(Keys.CONTROL, 'a')
+                start_date.send_keys(Keys.BACK_SPACE)
+                start_date.send_keys(self.excel.get_cell_value('资产池注册表', 6, 3))
+        # 输入结束日期
+        if self.excel.registry_list()[6] == 1:
+            if self.excel.get_cell_value('资产池注册表', 7, 3) == '置空':
+                start_date = self.findxpath(self.excel.registry_xpath().get('结束日期'))
+                start_date.send_keys(Keys.CONTROL, 'a')
+                start_date.send_keys(Keys.BACK_SPACE)
+            else:
+                start_date = self.findxpath(self.excel.registry_xpath().get('结束日期'))
+                start_date.send_keys(Keys.CONTROL, 'a')
+                start_date.send_keys(Keys.BACK_SPACE)
+                start_date.send_keys(self.excel.get_cell_value('资产池注册表', 7, 3))
+        # 点击搜索
+        if self.excel.registry_list()[7] == 1:
+            self.findxpath_click(self.excel.registry_xpath().get('搜索'))
+        # 点击落地
 
+        # 点击导出
+        if self.excel.registry_list()[0] == 1:
+            self.findxpath_click(self.excel.registry_xpath().get('导出'))
+        # 点击批量导出
+
+        return True

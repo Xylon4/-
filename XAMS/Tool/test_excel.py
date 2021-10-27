@@ -53,6 +53,21 @@ class TestExcel:
         # sheet页第三列数据从第二行开始做切片展示(字典列表)，两种方法都可以，第二种写法不包含结尾行
         print(sheet3.col_slice(3, 1))
         print(sheet3.col_slice(3, 1, 9))
+        # 获取指定单元格内容
+        print(sheet3.cell_value(5, 3))
+
+    # 获取指定单元格内容方法
+    def get_cell_value(self, name, rowx, colx):
+        wb = xlrd.open_workbook(Excel_report)
+        sheet1 = wb.sheet_by_name('资产池注册表')
+        sheet2 = wb.sheet_by_name('产品信息表')
+        sheet3 = wb.sheet_by_name('资负信息注册(浙商)')
+        if name == '资产池注册表':
+            return sheet1.cell_value(rowx, colx)
+        if name == '产品信息表':
+            return sheet2.cell_value(rowx, colx)
+        if name == '资负信息注册(浙商)':
+            return sheet3.cell_value(rowx, colx)
 
     # 创建"一级菜单"xpath字典
     def first_menu(self):
@@ -161,9 +176,9 @@ class TestExcel:
         # print(a)  # 返回整个函数的值
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.product_list()
+        c = self.registry_list()
         print(c)
-        print(c[0])
+        print(c[3])
         print(c.count(1))
         # for d in c:
         #     print(d)
