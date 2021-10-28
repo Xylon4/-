@@ -2,7 +2,7 @@ import pytest
 import xlrd
 from XAMS.Report.Financial.Asset_pool_registry import AssetPoolRegistry
 from XAMS.Report.Financial.product import Product
-from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3
+from XAMS.Report.conftest import Excel_basedata, Excel_custom, sheet1, sheet2, sheet3
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.conftest import stagemark
 

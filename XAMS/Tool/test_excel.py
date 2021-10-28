@@ -2,9 +2,10 @@
 # 1、读取Excel表数据
 # 2、把数据作为参数传给后面的函数
 # 3、后面的函数循环读取参数执行操作
+import pandas as pd
 import xlrd
 
-from XAMS.Tool.conftest import Excel_basedata
+from XAMS.Tool.conftest import Excel_basedata, Excel_custom
 
 
 class TestExcel:
@@ -170,16 +171,74 @@ class TestExcel:
             dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
         return dat
 
+    # 创建"估值表"操作点xpath字典
+    def valuation_xpath(self):
+        wb = xlrd.open_workbook(Excel_basedata)
+        sheet = wb.sheet_by_name('估值表')
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"估值表"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            col1 = str(cells[0])  # 每行第一列数据赋值给col1
+            col2 = str(cells[1])  # 每行第二列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
+        return dat
+
+    # 创建"用例编号"枚举项列表
+    def code_list(self):
+        # 读取excel
+        df = pd.DataFrame(pd.read_excel(Excel_custom))
+        # 获取"用例编号"枚举项
+        code = list(set(df['用例编号']))
+        code.sort()  # 将列表中的数据进行升序排列
+        return code
+
+    # 创建"用例编号"和"操作元素"映射列表
+    def group_list(self):
+        wb = xlrd.open_workbook(Excel_custom)
+        sheet = wb.sheet_by_name('Sheet1')
+        # 创建空列表
+        group_list = []
+        for i in range(sheet.nrows):  # 循环读取"sheet1"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            data = [str(cells[1]), str(cells[4])]  # 取第二列和第五列数据生成列表
+            group_list.append(data)  # 讲列表数据循环插入group_list
+        return group_list
+
+    # 创建"用例编号"对应"操作元素"的映射字典
+    def group_dic(self):
+        # 创建空字典
+        dat = {}
+        # 创建空列表
+        data = []
+        a = self.group_list()
+        c = self.code_list()
+        l = len(c)
+        for b in a:
+            n = 0
+            while n <= l - 1:
+                if c[n] == b[0]:
+                    data.append(b[1])  # 将根据枚举项的映射值填入列表
+                    dat.setdefault(c[n], data)  # 将枚举项:映射值列表作为key:value插入字典
+                    n = n + 1
+        return dat
+
+    # 创建"操作元素"
     # 测试入口
     def test_value(self):
-        # a = self.test_list()  # 调用test_list方法获取整列数据
+        # a = self.group_dic()  # 调用test_list方法获取整列数据
         # print(a)  # 返回整个函数的值
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.registry_list()
-        print(c)
-        print(c[3])
-        print(c.count(1))
-        # for d in c:
-        #     print(d)
-        # print(c.get('日期年'))  # 通过key获取value
+        c = self.group_list()
+        # print(c)
+        # print(len(c))
+        # print(c[1])
+        # print(c.count(1))
+        for d in c:
+            # print(d)
+            if d[0] == 'temp01':
+                print(d[1])
+        # print(a.get('temp01'))  # 通过key获取value
