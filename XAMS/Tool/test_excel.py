@@ -209,36 +209,35 @@ class TestExcel:
 
     # 创建"用例编号"对应"操作元素"的映射字典
     def group_dic(self):
-        # 创建空字典
-        dat = {}
-        # 创建空列表
-        data = []
+        dat = {}  # 创建空字典
         a = self.group_list()
         c = self.code_list()
-        l = len(c)
+        l = len(c)  # 读取数组长度
         for b in a:
             n = 0
-            while n <= l - 1:
+            while n < l:
+                if c[n] not in dat:
+                    dat.setdefault(c[n], [])  # 将枚举项先插入字典生成key，value列表为空
                 if c[n] == b[0]:
-                    data.append(b[1])  # 将根据枚举项的映射值填入列表
-                    dat.setdefault(c[n], data)  # 将枚举项:映射值列表作为key:value插入字典
-                    n = n + 1
+                    dat[c[n]].append(b[1])  # 将枚举项的映射值填入value列表
+                n = n + 1
         return dat
 
     # 创建"操作元素"
+
     # 测试入口
     def test_value(self):
-        # a = self.group_dic()  # 调用test_list方法获取整列数据
-        # print(a)  # 返回整个函数的值
+        a = self.group_dic()  # 调用test_list方法获取整列数据
+        print(a)  # 返回整个函数的值
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.group_list()
+        c = self.code_list()
         # print(c)
         # print(len(c))
         # print(c[1])
         # print(c.count(1))
-        for d in c:
-            # print(d)
-            if d[0] == 'temp01':
-                print(d[1])
+        # for b in a:
+        # print(d)
+        #     if c[1] == b[0]:
+        #         print(b[1])
         # print(a.get('temp01'))  # 通过key获取value
