@@ -1,14 +1,21 @@
 import pytest
 import xlrd
+
+from XAMS.Report.Finance.valuation import Valuation
 from XAMS.Report.Financial.Asset_pool_registry import AssetPoolRegistry
 from XAMS.Report.Financial.product import Product
-from XAMS.Report.conftest import Excel_basedata, Excel_custom, sheet1, sheet2, sheet3
+from XAMS.Report.conftest import Excel_basedata, Excel_custom, sheet1, sheet2, sheet3, sheet4
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.conftest import stagemark
 
 
 class TestReport:
-    # 定义根据excel导入内容选择执行案例的方法
+    # 万能导入用例
+    def test_universal(self):
+        pass
+
+    @pytest.mark.skip
+    # 根据excel导入内容选择执行案例
     def test_option(self):
         # 打开excel文件
         excel = xlrd.open_workbook(Excel_basedata)
@@ -54,3 +61,9 @@ class TestReport:
         self.product = Product()
         assert self.product.product_excel()
         print(f"{sheet2}自动化操作执行完毕")
+
+    @pytest.mark.skip
+    def test_valuation_excel(self, stagemark):
+        self.valuation = Valuation()
+        assert self.valuation.valuation_excel()
+        print(f"{sheet4}自动化操作执行完毕")

@@ -93,9 +93,10 @@ class TestExcel:
         for i in range(sheet.nrows):  # 循环读取"二级菜单"的数据（每次读取一行数据）
             cells = sheet.row_values(i)  # 每行数据赋值给cells
             # 根据每列的数据类型进行拆分，中间的空白数据形成'': ''字典，不影响使用
+            col0 = str(cells[0])  # 每行第一列数据赋值给col1
             col1 = str(cells[1])  # 每行第二列数据赋值给col1
             col2 = str(cells[2])  # 每行第三列数据赋值给col2
-            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对
+            dat.setdefault(f'{col0}-{col1}', col2)  # 用setdefault方法成对插入键值对
         return dat
 
     # 创建"二级菜单"映射一级菜单字典
@@ -195,7 +196,7 @@ class TestExcel:
         return code
 
     # 创建"用例编号"和"操作元素"映射列表
-    def group_list(self):
+    def group_ele_list(self):
         wb = xlrd.open_workbook(Excel_custom)
         sheet = wb.sheet_by_name('Sheet1')
         # 创建空列表
@@ -207,10 +208,23 @@ class TestExcel:
             group_list.append(data)  # 讲列表数据循环插入group_list
         return group_list
 
+    # 创建"用例编号"和"值"映射列表
+    def group_value_list(self):
+        wb = xlrd.open_workbook(Excel_custom)
+        sheet = wb.sheet_by_name('Sheet1')
+        # 创建空列表
+        group_list = []
+        for i in range(sheet.nrows):  # 循环读取"sheet1"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            data = [str(cells[1]), str(cells[6])]  # 取第二列和第七列数据生成列表
+            group_list.append(data)  # 讲列表数据循环插入group_list
+        return group_list
+
     # 创建"用例编号"对应"操作元素"的映射字典
-    def group_dic(self):
+    def group_ele_dic(self):
         dat = {}  # 创建空字典
-        a = self.group_list()
+        a = self.group_ele_list()
         c = self.code_list()
         l = len(c)  # 读取数组长度
         for b in a:
@@ -223,16 +237,53 @@ class TestExcel:
                 n = n + 1
         return dat
 
-    # 创建"操作元素"
+    # 创建"用例编号"对应"值"的映射字典
+    def group_value_dic(self):
+        dat = {}  # 创建空字典
+        a = self.group_value_list()
+        c = self.code_list()
+        l = len(c)  # 读取数组长度
+        for b in a:
+            n = 0
+            while n < l:
+                if c[n] not in dat:
+                    dat.setdefault(c[n], [])  # 将枚举项先插入字典生成key，value列表为空
+                if c[n] == b[0]:
+                    dat[c[n]].append(b[1])  # 将枚举项的映射值填入value列表
+                n = n + 1
+        return dat
+
+    # 通过"用例编号"获取一二级菜单xpath
+    def match_menu(self, code):
+        a = self.group_ele_dic()
+        b = self.first_menu()
+        c = self.second_menu()
+        first_menu = a.get(code)[0]
+        second_menu = a.get(code)[1]
+        first_menu_xpath = b.get(first_menu)
+        second_menu_xpath = c.get(f'{first_menu}-{second_menu}')
+        return [first_menu_xpath, second_menu_xpath]
+
+    # 通过"用例编号"获取操作步骤
+    def match_step(self, code):
+        a = self.group_ele_dic()
+        b = self.group_value_dic()
+        c = len(a.get(code))  # "操作元素"最少是三个
+        n = 2
+        data = []
+        while n < c:
+            data.append([a.get(code)[n], b.get(code)[n]])
+            n = n + 1
+        return data
 
     # 测试入口
     def test_value(self):
-        a = self.group_dic()  # 调用test_list方法获取整列数据
+        a = self.match_step('temp01')
         print(a)  # 返回整个函数的值
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.code_list()
-        # print(c)
+        c = self.group_value_dic()
+        print(c)
         # print(len(c))
         # print(c[1])
         # print(c.count(1))
