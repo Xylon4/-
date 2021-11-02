@@ -278,8 +278,9 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        a = self.match_step('temp01')
+        a = self.group_ele_dic()
         print(a)  # 返回整个函数的值
+        print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
         c = self.group_value_dic()
