@@ -9,10 +9,6 @@ from XAMS.Tool.conftest import Excel_basedata, Excel_custom
 
 
 class TestExcel:
-    # 定义初始化参数方法
-    # def __init__(self, Excel_basedata):
-    #     self.Excel_basedata = Excel_basedata
-
     # 定义获取单列数据,并将数据存入列表[]的方法
     def test_list(self):
         # wb = xlrd.open_workbook_xls()
@@ -283,7 +279,7 @@ class TestExcel:
         print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.group_value_dic()
+        c = self.code_list()
         print(c)
         # print(len(c))
         # print(c[1])
