@@ -5,7 +5,7 @@
 import pandas as pd
 import xlrd
 
-from XAMS.Tool.conftest import Excel_basedata, Excel_custom
+from XAMS.Tool.conftest import Excel_basedata, Excel_custom, universal_sheet
 
 
 class TestExcel:
@@ -184,8 +184,8 @@ class TestExcel:
 
     # 创建"用例编号"枚举项列表
     def code_list(self):
-        # 读取excel
-        df = pd.DataFrame(pd.read_excel(Excel_custom))
+        # 读取excel,指定sheet页
+        df = pd.DataFrame(pd.read_excel(Excel_custom, sheet_name=universal_sheet))
         # 获取"用例编号"枚举项
         code = list(set(df['用例编号']))
         code.sort()  # 将列表中的数据进行升序排列
