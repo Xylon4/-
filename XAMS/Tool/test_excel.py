@@ -200,7 +200,7 @@ class TestExcel:
         for i in range(sheet.nrows):  # 循环读取"sheet1"的数据（每次读取一行数据）
             cells = sheet.row_values(i)  # 每行数据赋值给cells
             # 根据每列的数据类型进行拆分
-            data = [str(cells[1]), str(cells[4])]  # 取第二列和第五列数据生成列表
+            data = [str(cells[1]), str(cells[5])]  # 取第二列和第五列数据生成列表
             group_list.append(data)  # 讲列表数据循环插入group_list
         return group_list
 
@@ -213,7 +213,7 @@ class TestExcel:
         for i in range(sheet.nrows):  # 循环读取"sheet1"的数据（每次读取一行数据）
             cells = sheet.row_values(i)  # 每行数据赋值给cells
             # 根据每列的数据类型进行拆分
-            data = [str(cells[1]), str(cells[6])]  # 取第二列和第七列数据生成列表
+            data = [str(cells[1]), str(cells[8])]  # 取第二列和第七列数据生成列表
             group_list.append(data)  # 讲列表数据循环插入group_list
         return group_list
 
