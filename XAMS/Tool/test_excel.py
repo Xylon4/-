@@ -182,6 +182,20 @@ class TestExcel:
             dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
         return dat
 
+    # 创建"表1-1产品募集余额统计表"操作点xpath字典
+    def product_remain_xpath(self):
+        wb = xlrd.open_workbook(Excel_basedata)
+        sheet = wb.sheet_by_name('表1-1产品募集余额统计表')
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"表1-1产品募集余额统计表"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            col1 = str(cells[0])  # 每行第一列数据赋值给col1
+            col2 = str(cells[1])  # 每行第二列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
+        return dat
+
     # 创建"用例编号"枚举项列表
     def code_list(self):
         # 读取excel,指定sheet页
@@ -275,11 +289,11 @@ class TestExcel:
     # 测试入口
     def test_value(self):
         a = self.group_ele_dic()
-        print(a)  # 返回整个函数的值
-        print(len(a.get('temp01')))
+        # print(a)  # 返回整个函数的值
+        # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.code_list()
+        c = self.product_remain_xpath()
         print(c)
         # print(len(c))
         # print(c[1])

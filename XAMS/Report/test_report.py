@@ -4,7 +4,8 @@ import xlrd
 from XAMS.Report.Finance.valuation import Valuation
 from XAMS.Report.Financial.Asset_pool_registry import AssetPoolRegistry
 from XAMS.Report.Financial.product import Product
-from XAMS.Report.conftest import Excel_basedata, Excel_custom, sheet1, sheet2, sheet3, sheet4
+from XAMS.Report.PBC.product_remain import ProductRemain
+from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.conftest import stagemark
 
@@ -22,6 +23,8 @@ class TestReport:
             second_menu = f'{menu[0]}-{menu[1]}'
             if second_menu == '估值管理-估值表':
                 self.test_valuation_excel(stagemark, menu, value)
+            elif second_menu == '综合管理-表1-1产品募集余额统计表':
+                self.test_product_remain_excel(stagemark, menu, value)
             n = n + 1
         print(f'自动化案例执行完毕，共{count}条')
 
@@ -29,11 +32,11 @@ class TestReport:
     # 根据excel导入内容选择执行案例
     def test_option(self):
         # 打开excel文件
-        excel = xlrd.open_workbook(Excel_basedata)
+        # excel = xlrd.open_workbook(Excel_basedata)
         # 获取sheet，通过Excel表格名称()获取工作表
-        S1 = excel.sheet_by_name(f'{sheet1}')
-        S2 = excel.sheet_by_name(f'{sheet2}')
-        S3 = excel.sheet_by_name(f'{sheet3}')
+        # S1 = excel.sheet_by_name(f'{sheet1}')
+        # S2 = excel.sheet_by_name(f'{sheet2}')
+        # S3 = excel.sheet_by_name(f'{sheet3}')
         # 校验工作表数据(统计操作列表中"1"的重复次数)
         self.list = TestExcel()
         count1 = self.list.registry_list().count(1)
@@ -78,3 +81,9 @@ class TestReport:
         self.valuation = Valuation()
         assert self.valuation.valuation_excel(menu, value)
         print(f"{sheet4}自动化操作执行完毕")
+
+    @pytest.mark.skip
+    def test_product_remain_excel(self, stagemark, menu, value):
+        self.product_remain = ProductRemain()
+        assert self.product_remain.product_remain_excel(menu, value)
+        print(f"{sheet5}自动化操作执行完毕")

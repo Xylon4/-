@@ -43,9 +43,14 @@ class Valuation(BasePageFsfa):
                     date.send_keys(Keys.BACK_SPACE)
                     date.send_keys(value[n])
             elif menu[n] == '投组单元':
-                self.findxpath_sendkey(self.base.valuation_xpath().get('投组单元'), value[n])
-                sleep(1)
-                self.findxpath_click(self.base.valuation_xpath().get('投组下拉选择'))
+                if value[n] == '置空':
+                    unit = self.findxpath(self.base.valuation_xpath().get(menu[n]))
+                    unit.send_keys(Keys.CONTROL, 'a')
+                    unit.send_keys(Keys.BACK_SPACE)
+                else:
+                    self.findxpath_sendkey(self.base.valuation_xpath().get('投组单元'), value[n])
+                    sleep(1)
+                    self.findxpath_click(self.base.valuation_xpath().get('投组下拉选择'))
             elif menu[n] == '搜索':
                 self.findxpath_click(self.base.valuation_xpath().get(menu[n]))
                 sleep(1)
