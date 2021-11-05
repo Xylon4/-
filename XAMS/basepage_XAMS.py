@@ -7,23 +7,28 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+from XAMS.conftest import default_address, address
+
 
 class BasePageFsfa:
     def __init__(self, driver: WebDriver = None):
         if driver == None:
-            self.start()
+            self.start(address)
 
         else:
             # 未指定驱动器类型时，默认为chrome，若有指定，则使用指定类型
             self.driver = driver
 
-    def start(self):
+    def start(self, address):
         # opt参数用来解决页面下滑动作
         opt = Options()
         opt.add_experimental_option('w3c', False)
         self.driver = webdriver.Chrome(options=opt)
         # 定义主页地址
-        self.driver.get("http://172.19.6.44:8001/xIR_J2EE")
+        if address == None:
+            self.driver.get(default_address)
+        else:
+            self.driver.get(address)
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         # 定义账户密码

@@ -68,3 +68,11 @@ class ProductRemain(BasePageFsfa):
                 self.findxpath_click(self.base.product_remain_xpath().get(menu[n]))
             n = n + 1
         return True
+
+    # 数据对比自动化案例
+    def product_remain_compare(self, menu, value, address):
+        print(menu)
+        print(value)
+        print(address)
+        self.start(value[1])
+        return True

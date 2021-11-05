@@ -20,11 +20,18 @@ class TestReport:
             code = self.list.code_list()[n]
             menu = self.list.group_ele_dic().get(code)
             value = self.list.group_value_dic().get(code)
-            second_menu = f'{menu[0]}-{menu[1]}'
-            if second_menu == '估值管理-估值表':
-                self.test_valuation_excel(stagemark, menu, value)
-            elif second_menu == '综合管理-表1-1产品募集余额统计表':
-                self.test_product_remain_excel(stagemark, menu, value)
+            test_goal = self.list.group_goal_dic().get(code)
+            if test_goal == '模拟操作':
+                second_menu = f'{menu[0]}-{menu[1]}'
+                if second_menu == '估值管理-估值表':
+                    self.test_valuation_excel(stagemark, menu, value)
+                elif second_menu == '综合管理-表1-1产品募集余额统计表':
+                    self.test_product_remain_excel(stagemark, menu, value)
+            elif test_goal == '升级对比':
+                second_menu = f'{menu[2]}-{menu[3]}'
+                address = value[0]
+                if second_menu == '综合管理-表1-1产品募集余额统计表':
+                    self.test_valuation_excel(stagemark, menu, value, address)
             n = n + 1
         print(f'自动化案例执行完毕，共{count}条')
 
@@ -86,4 +93,10 @@ class TestReport:
     def test_product_remain_excel(self, stagemark, menu, value):
         self.product_remain = ProductRemain()
         assert self.product_remain.product_remain_excel(menu, value)
+        print(f"{sheet5}自动化操作执行完毕")
+
+    @pytest.mark.skip
+    def test_product_remain_compare(self, stagemark, menu, value, address):
+        self.product_remain_compare = ProductRemain()
+        assert self.product_remain_compare.product_remain_compare(menu, value, address)
         print(f"{sheet5}自动化操作执行完毕")

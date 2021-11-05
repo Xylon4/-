@@ -286,6 +286,20 @@ class TestExcel:
             n = n + 1
         return data
 
+    # 创建"用例编号"对应"用例目的"的映射字典
+    def group_goal_dic(self):
+        wb = xlrd.open_workbook(Excel_custom)
+        sheet = wb.sheet_by_name(universal_sheet)
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"sheet1"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            col1 = str(cells[1])  # 每行第二列数据赋值给col1
+            col2 = str(cells[3])  # 每行第四列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
+        return dat
+
     # 测试入口
     def test_value(self):
         a = self.group_ele_dic()
@@ -293,7 +307,7 @@ class TestExcel:
         # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.product_remain_xpath()
+        c = self.code_list()
         print(c)
         # print(len(c))
         # print(c[1])
