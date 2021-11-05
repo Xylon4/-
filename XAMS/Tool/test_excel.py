@@ -302,13 +302,19 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        a = self.group_ele_dic()
-        # print(a)  # 返回整个函数的值
+        a = self.code_list()
+        print(a)  # 返回整个函数的值
         # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.code_list()
+        c = self.group_goal_dic()
         print(c)
+        # menu = self.group_ele_dic().get(a[0])
+        # value = self.group_value_dic().get(a[0])
+        # second_menu = f'{menu[2]}-{menu[3]}'
+        # address = value[0]
+        # print(second_menu)
+        # print(address)
         # print(len(c))
         # print(c[1])
         # print(c.count(1))

@@ -27,11 +27,15 @@ class TestReport:
                     self.test_valuation_excel(stagemark, menu, value)
                 elif second_menu == '综合管理-表1-1产品募集余额统计表':
                     self.test_product_remain_excel(stagemark, menu, value)
+                else:
+                    print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
                 second_menu = f'{menu[2]}-{menu[3]}'
                 address = value[0]
                 if second_menu == '综合管理-表1-1产品募集余额统计表':
-                    self.test_valuation_excel(stagemark, menu, value, address)
+                    self.test_product_remain_compare(stagemark, menu, value, address)
+                else:
+                    print("升级对比案例：该报表暂不支持，请修改用例")
             n = n + 1
         print(f'自动化案例执行完毕，共{count}条')
 
