@@ -17,5 +17,5 @@ curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
-address = None
+# address = None
 default_address = 'http://172.19.6.44:8001/xIR_J2EE'
