@@ -31,9 +31,8 @@ class TestReport:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
                 second_menu = f'{menu[2]}-{menu[3]}'
-                address = value[0]
                 if second_menu == '综合管理-表1-1产品募集余额统计表':
-                    self.test_product_remain_compare(stagemark, menu, value, address)
+                    self.test_product_remain_compare(stagemark, menu, value)
                 else:
                     print("升级对比案例：该报表暂不支持，请修改用例")
             n = n + 1
@@ -100,7 +99,7 @@ class TestReport:
         print(f"{sheet5}自动化操作执行完毕")
 
     @pytest.mark.skip
-    def test_product_remain_compare(self, stagemark, menu, value, address):
+    def test_product_remain_compare(self, stagemark, menu, value):
         self.product_remain_compare = ProductRemain()
-        assert self.product_remain_compare.product_remain_compare(menu, value, address)
+        assert self.product_remain_compare.product_remain_compare(menu, value)
         print(f"{sheet5}自动化操作执行完毕")

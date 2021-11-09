@@ -5,10 +5,10 @@ from time import sleep
 from selenium.webdriver.common.keys import Keys
 
 from XAMS.Tool.test_excel import TestExcel
-from XAMS.basepage_XAMS import BasePageFsfa
+from XAMS.basepage_XAMS import BasePageXams
 
 
-class AssetPoolRegistry(BasePageFsfa):
+class AssetPoolRegistry(BasePageXams):
     # 版本更新校验历史数据自动化测试案例
     def registry(self, get_registry):
         unit_id = get_registry[0]

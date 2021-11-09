@@ -2,10 +2,10 @@
 # 功能描述：统计投组成立时间
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.basepage_XAMS import BasePageFsfa
+from XAMS.basepage_XAMS import BasePageXams
 
 
-class Product(BasePageFsfa):
+class Product(BasePageXams):
     def product(self):
         unit_id = 'gyxjzcpt001'
         check1 = 'C11111'

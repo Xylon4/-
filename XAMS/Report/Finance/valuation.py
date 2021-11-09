@@ -5,10 +5,10 @@ from time import sleep
 from selenium.webdriver.common.keys import Keys
 
 from XAMS.Tool.test_excel import TestExcel
-from XAMS.basepage_XAMS import BasePageFsfa
+from XAMS.basepage_XAMS import BasePageXams
 
 
-class Valuation(BasePageFsfa):
+class Valuation(BasePageXams):
     # 自动化测试工具案例
     def valuation_excel(self, menu, value):
         print(menu)

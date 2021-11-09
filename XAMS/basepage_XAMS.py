@@ -10,7 +10,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from XAMS.conftest import default_address
 
 
-class BasePageFsfa:
+class BasePageXams:
     def __init__(self, driver: WebDriver = None, address=None):
         if driver == None:
             if address == None:

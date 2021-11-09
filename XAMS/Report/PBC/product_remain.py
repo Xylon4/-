@@ -5,10 +5,10 @@ from time import sleep
 from selenium.webdriver.common.keys import Keys
 
 from XAMS.Tool.test_excel import TestExcel
-from XAMS.basepage_XAMS import BasePageFsfa
+from XAMS.basepage_XAMS import BasePageXams
 
 
-class ProductRemain(BasePageFsfa):
+class ProductRemain(BasePageXams):
     # 自动化测试工具案例
     def product_remain_excel(self, menu, value):
         print(menu)
@@ -70,9 +70,10 @@ class ProductRemain(BasePageFsfa):
         return True
 
     # 数据对比自动化案例
-    def product_remain_compare(self, menu, value, address):
+    def product_remain_compare(self, menu, value):
         print(menu)
         print(value)
-        print(address)
+        print(value[0])
+        self.address = value[0]
         self.start(value[1])
         return True
