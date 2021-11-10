@@ -48,6 +48,9 @@ class Valuation(BasePageXams):
                     unit.send_keys(Keys.CONTROL, 'a')
                     unit.send_keys(Keys.BACK_SPACE)
                 else:
+                    unit = self.findxpath(self.base.valuation_xpath().get(menu[n]))
+                    unit.send_keys(Keys.CONTROL, 'a')
+                    unit.send_keys(Keys.BACK_SPACE)
                     self.findxpath_sendkey(self.base.valuation_xpath().get('投组单元'), value[n])
                     sleep(1)
                     self.findxpath_click(self.base.valuation_xpath().get('投组下拉选择'))

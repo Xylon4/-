@@ -12,7 +12,6 @@ from XAMS.conftest import default_address
 
 class BasePageXams:
     def __init__(self, address=None, driver: WebDriver = None):
-        self.address = address
         if driver == None:
             if address == None:
                 self.start(default_address)

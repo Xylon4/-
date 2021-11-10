@@ -196,6 +196,20 @@ class TestExcel:
             dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
         return dat
 
+    # 创建sheet页对应操作点xpath字典
+    def sheet_xpath_dic(self, sheet_name):
+        wb = xlrd.open_workbook(Excel_basedata)
+        sheet = wb.sheet_by_name(sheet_name)
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"表1-1产品募集余额统计表"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            col1 = str(cells[0])  # 每行第一列数据赋值给col1
+            col2 = str(cells[1])  # 每行第二列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
+        return dat
+
     # 创建"用例编号"枚举项列表
     def code_list(self):
         # 读取excel,指定sheet页
