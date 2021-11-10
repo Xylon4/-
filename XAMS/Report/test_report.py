@@ -26,13 +26,15 @@ class TestReport:
                 if second_menu == '估值管理-估值表':
                     self.test_valuation_excel(stagemark, menu, value)
                 elif second_menu == '综合管理-表1-1产品募集余额统计表':
-                    self.test_product_remain_excel(stagemark, menu, value)
+                    address = None
+                    self.test_product_remain_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
                 second_menu = f'{menu[2]}-{menu[3]}'
                 if second_menu == '综合管理-表1-1产品募集余额统计表':
-                    self.test_product_remain_compare(stagemark, menu, value)
+                    address = value[0]
+                    self.test_product_remain_compare(stagemark, menu, value, address)
                 else:
                     print("升级对比案例：该报表暂不支持，请修改用例")
             n = n + 1
@@ -93,13 +95,13 @@ class TestReport:
         print(f"{sheet4}自动化操作执行完毕")
 
     @pytest.mark.skip
-    def test_product_remain_excel(self, stagemark, menu, value):
-        self.product_remain = ProductRemain()
+    def test_product_remain_excel(self, stagemark, menu, value, address):
+        self.product_remain = ProductRemain(address)
         assert self.product_remain.product_remain_excel(menu, value)
         print(f"{sheet5}自动化操作执行完毕")
 
     @pytest.mark.skip
-    def test_product_remain_compare(self, stagemark, menu, value):
-        self.product_remain_compare = ProductRemain()
+    def test_product_remain_compare(self, stagemark, menu, value, address):
+        self.product_remain_compare = ProductRemain(address)
         assert self.product_remain_compare.product_remain_compare(menu, value)
         print(f"{sheet5}自动化操作执行完毕")

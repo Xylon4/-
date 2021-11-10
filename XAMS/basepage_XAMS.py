@@ -11,7 +11,8 @@ from XAMS.conftest import default_address
 
 
 class BasePageXams:
-    def __init__(self, driver: WebDriver = None, address=None):
+    def __init__(self, address=None, driver: WebDriver = None):
+        self.address = address
         if driver == None:
             if address == None:
                 self.start(default_address)
@@ -31,10 +32,6 @@ class BasePageXams:
         opt.add_experimental_option('w3c', False)
         self.driver = webdriver.Chrome(options=opt)
         # 定义主页地址
-        # if address == None:
-        #     self.driver.get(default_address)
-        # else:
-        #     self.driver.get(address)
         self.driver.get(address)
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()

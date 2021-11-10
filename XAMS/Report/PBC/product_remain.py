@@ -74,6 +74,5 @@ class ProductRemain(BasePageXams):
         print(menu)
         print(value)
         print(value[0])
-        self.address = value[0]
         self.start(value[1])
         return True
