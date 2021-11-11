@@ -68,3 +68,4 @@ class BasePageXams:
     # 定义点击显式等待方法
     def wait_for_click(self, timeout, locator):
         WebDriverWait(self.driver, timeout).until(expected_conditions.element_to_be_clickable(locator))
+    # locator = (By.XPATH, '/html/body/div[9]/div/div')

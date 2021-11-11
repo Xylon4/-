@@ -328,7 +328,20 @@ class TestExcel:
             dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
         return dat
 
-    # 筛选字典中的记录点
+    # 筛选列表中的校验点
+    def checkpoint_list(self, sheetname):
+        a = self.sheet_list(sheetname)
+        l = len(a)
+        n = 0
+        x = []
+        while n < l:
+            b = a[n].__contains__('-')
+            if b:
+                x.append(a[n])
+            n = n + 1
+        return x
+
+    # 筛选字典中的校验点
     def checkpoint_dic(self, sheetname):
         a = self.sheet_list(sheetname)
         b = self.sheet_xpath_dic(sheetname)
@@ -344,11 +357,11 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        a = self.sheet_list('表1-1产品募集余额统计表')
-        # print(a)  # 返回整个函数的值
+        a = self.checkpoint_list('表1-1产品募集余额统计表')
+        print(a)  # 返回整个函数的值
         # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
         c = self.checkpoint_dic('表1-1产品募集余额统计表')
-        print(c)
+        print(c.get(a[0]))
         # print(a.get('temp01'))  # 通过key获取value
