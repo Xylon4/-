@@ -135,10 +135,10 @@ class ProductRemain(BasePageXams):
                 self.findxpath_click(self.base.product_remain_xpath().get(menu[n]))
             n = n + 1
         # 触发判断定位点
-        m = self.base.sheet_list(sheet5)
+        m = self.base.checkpoint_list(sheet5)
         point = self.findxpath(self.base.checkpoint_dic(sheet5).get(m[0]))
         # 旧环境的记录值
-        p = len(self.base.sheet_list(sheet5))
+        p = len(self.base.checkpoint_list(sheet5))
         if point.is_displayed():
             i = 0
             x = {}
@@ -222,6 +222,6 @@ class ProductRemain(BasePageXams):
             if x.get(m[t]) == y.get(m[t]):
                 t = t + 1
             else:
-                print('数据核对不一致，请检查并联系开发')
-        print('数据核对一致')
+                print('对比结果：数据核对不一致，请检查并联系开发')
+        print('对比结果：数据核对一致')
         return True

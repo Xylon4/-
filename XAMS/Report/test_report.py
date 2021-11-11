@@ -68,6 +68,7 @@ class TestReport:
         assert self.asset_pool_registry.registry(get_registry)
         print(f"{sheet1}测试通过")
         self.asset_pool_registry.end()
+        print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
     def test_product(self, stagemark):
@@ -75,33 +76,40 @@ class TestReport:
         assert self.product.product()
         print(f"{sheet2}测试通过")
         self.product.end()
+        print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
     def test_registry_excel(self, stagemark):
         self.asset_pool_registry = AssetPoolRegistry()
         assert self.asset_pool_registry.registry_excel()
         print(f"{sheet1}自动化操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
     def test_product_excel(self, stagemark):
         self.product = Product()
         assert self.product.product_excel()
         print(f"{sheet2}自动化操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
     def test_valuation_excel(self, stagemark, menu, value):
         self.valuation = Valuation()
         assert self.valuation.valuation_excel(menu, value)
         print(f"{sheet4}自动化操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
     def test_product_remain_excel(self, stagemark, menu, value, address):
         self.product_remain = ProductRemain(address)
         assert self.product_remain.product_remain_excel(menu, value)
         print(f"{sheet5}自动化操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
     def test_product_remain_compare(self, stagemark, menu, value, address):
         self.product_remain_compare = ProductRemain(address)
         assert self.product_remain_compare.product_remain_compare(menu, value)
+        self.product_remain_compare.end()
         print(f"{sheet5}自动化操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
