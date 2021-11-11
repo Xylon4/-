@@ -25,6 +25,20 @@ class TestExcel:
             dat.append(data)  # 把每次循环读取的数据插入到list
         return dat
 
+    # 获取sheet页第一列数据生成list
+    def sheet_list(self, sheetname):
+        # 打开excel文件
+        wb = xlrd.open_workbook(Excel_basedata)
+        # 获取sheet，通过Excel表格名称()获取工作表
+        sheet = wb.sheet_by_name(sheetname)
+        dat = []
+        for a in range(sheet.nrows):  # 循环读取表格内容（每次读取一行数据）
+            cells = sheet.row_values(a)  # 每行数据赋值给cells
+            # 根据数据类型选择合适的转换类型num选用（int、float、bool、complex）中文选用(str)
+            data = str(cells[0])  # 将第一列数据存入列表
+            dat.append(data)  # 把每次循环读取的数据插入到list
+        return dat
+
     # 定义获取整行数据，并将数据存入字典{}的方法
     def test_dic(self):
         # 打开excel文件
@@ -314,26 +328,27 @@ class TestExcel:
             dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
         return dat
 
+    # 筛选字典中的记录点
+    def checkpoint_dic(self, sheetname):
+        a = self.sheet_list(sheetname)
+        b = self.sheet_xpath_dic(sheetname)
+        l = len(a)
+        n = 0
+        x = {}
+        while n < l:
+            c = a[n].__contains__('-')
+            if c:
+                x.setdefault(a[n], b.get(a[n]))
+            n = n + 1
+        return x
+
     # 测试入口
     def test_value(self):
-        a = self.code_list()
-        print(a)  # 返回整个函数的值
+        a = self.sheet_list('表1-1产品募集余额统计表')
+        # print(a)  # 返回整个函数的值
         # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.group_goal_dic()
+        c = self.checkpoint_dic('表1-1产品募集余额统计表')
         print(c)
-        # menu = self.group_ele_dic().get(a[0])
-        # value = self.group_value_dic().get(a[0])
-        # second_menu = f'{menu[2]}-{menu[3]}'
-        # address = value[0]
-        # print(second_menu)
-        # print(address)
-        # print(len(c))
-        # print(c[1])
-        # print(c.count(1))
-        # for b in a:
-        # print(d)
-        #     if c[1] == b[0]:
-        #         print(b[1])
         # print(a.get('temp01'))  # 通过key获取value
