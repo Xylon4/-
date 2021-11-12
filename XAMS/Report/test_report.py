@@ -4,15 +4,15 @@ import xlrd
 from XAMS.Report.Finance.valuation import Valuation
 from XAMS.Report.Financial.Asset_pool_registry import AssetPoolRegistry
 from XAMS.Report.Financial.product import Product
+from XAMS.Report.PBC.product_amount import ProductAmount
 from XAMS.Report.PBC.product_remain import ProductRemain
-from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5
+from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6
 from XAMS.Tool.test_excel import TestExcel
-from XAMS.conftest import stagemark
 
 
 class TestReport:
     # 万能导入用例
-    def test_universal(self):
+    def test_universal(self, stagemark):
         self.list = TestExcel()
         count = len(self.list.code_list())
         n = 0
@@ -23,18 +23,22 @@ class TestReport:
             test_goal = self.list.group_goal_dic().get(code)
             if test_goal == '模拟操作':
                 second_menu = f'{menu[0]}-{menu[1]}'
+                address = None
                 if second_menu == '估值管理-估值表':
                     self.test_valuation_excel(stagemark, menu, value)
                 elif second_menu == '综合管理-表1-1产品募集余额统计表':
-                    address = None
                     self.test_product_remain_excel(stagemark, menu, value, address)
+                elif second_menu == '综合管理-表1-2产品募集兑付统计表':
+                    self.test_product_amount_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
                 second_menu = f'{menu[2]}-{menu[3]}'
+                address = value[0]
                 if second_menu == '综合管理-表1-1产品募集余额统计表':
-                    address = value[0]
                     self.test_product_remain_compare(stagemark, menu, value, address)
+                elif second_menu == '综合管理-表1-2产品募集兑付统计表':
+                    self.test_product_amount_compare(stagemark, menu, value, address)
                 else:
                     print("升级对比案例：该报表暂不支持，请修改用例")
             n = n + 1
@@ -42,7 +46,7 @@ class TestReport:
 
     @pytest.mark.skip
     # 根据excel导入内容选择执行案例
-    def test_option(self):
+    def test_option(self, stagemark):
         # 打开excel文件
         # excel = xlrd.open_workbook(Excel_basedata)
         # 获取sheet，通过Excel表格名称()获取工作表
@@ -112,4 +116,18 @@ class TestReport:
         assert self.product_remain_compare.product_remain_compare(menu, value)
         self.product_remain_compare.end()
         print(f"{sheet5}自动化操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_product_amount_excel(self, stagemark, menu, value, address):
+        self.product_amount = ProductAmount(address)
+        assert self.product_amount.product_amount_excel(menu, value)
+        print(f"{sheet6}自动化操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_product_amount_compare(self, stagemark, menu, value, address):
+        self.product_amount = ProductAmount(address)
+        assert self.product_amount.product_amount_compare(menu, value)
+        print(f"{sheet6}自动化操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')

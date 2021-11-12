@@ -357,11 +357,11 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        a = self.checkpoint_list('表1-1产品募集余额统计表')
+        a = self.checkpoint_list('表1-2产品募集兑付统计表')
         print(a)  # 返回整个函数的值
         # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        c = self.checkpoint_dic('表1-1产品募集余额统计表')
+        c = self.checkpoint_dic('表1-2产品募集兑付统计表')
         print(c.get(a[0]))
         # print(a.get('temp01'))  # 通过key获取value
