@@ -100,14 +100,14 @@ class TestReport:
     def test_valuation_excel(self, stagemark, menu, value):
         self.valuation = Valuation()
         assert self.valuation.valuation_excel(menu, value)
-        print(f"{sheet4}自动化操作执行完毕")
+        print(f"{sheet4}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
     def test_product_remain_excel(self, stagemark, menu, value, address):
         self.product_remain = ProductRemain(address)
         assert self.product_remain.product_remain_excel(menu, value)
-        print(f"{sheet5}自动化操作执行完毕")
+        print(f"{sheet5}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
@@ -115,19 +115,20 @@ class TestReport:
         self.product_remain_compare = ProductRemain(address)
         assert self.product_remain_compare.product_remain_compare(menu, value)
         self.product_remain_compare.end()
-        print(f"{sheet5}自动化操作执行完毕")
+        print(f"{sheet5}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
     def test_product_amount_excel(self, stagemark, menu, value, address):
         self.product_amount = ProductAmount(address)
         assert self.product_amount.product_amount_excel(menu, value)
-        print(f"{sheet6}自动化操作执行完毕")
+        print(f"{sheet6}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
     def test_product_amount_compare(self, stagemark, menu, value, address):
-        self.product_amount = ProductAmount(address)
-        assert self.product_amount.product_amount_compare(menu, value)
-        print(f"{sheet6}自动化操作执行完毕")
+        self.product_amount_compare = ProductAmount(address)
+        assert self.product_amount_compare.product_amount_compare(menu, value)
+        self.product_amount_compare.end()
+        print(f"{sheet6}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
