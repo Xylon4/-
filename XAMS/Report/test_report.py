@@ -5,8 +5,9 @@ from XAMS.Report.Finance.valuation import Valuation
 from XAMS.Report.Financial.Asset_pool_registry import AssetPoolRegistry
 from XAMS.Report.Financial.product import Product
 from XAMS.Report.PBC.product_amount import ProductAmount
+from XAMS.Report.PBC.product_quantity import ProductQuantity
 from XAMS.Report.PBC.product_remain import ProductRemain
-from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6
+from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -30,6 +31,8 @@ class TestReport:
                     self.test_product_remain_excel(stagemark, menu, value, address)
                 elif second_menu == '综合管理-表1-2产品募集兑付统计表':
                     self.test_product_amount_excel(stagemark, menu, value, address)
+                elif second_menu == '综合管理-表1-3产品只数情况统计表':
+                    self.test_product_quantity_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
@@ -39,6 +42,8 @@ class TestReport:
                     self.test_product_remain_compare(stagemark, menu, value, address)
                 elif second_menu == '综合管理-表1-2产品募集兑付统计表':
                     self.test_product_amount_compare(stagemark, menu, value, address)
+                elif second_menu == '综合管理-表1-3产品只数情况统计表':
+                    self.test_product_quantity_compare(stagemark, menu, value, address)
                 else:
                     print("升级对比案例：该报表暂不支持，请修改用例")
             n = n + 1
@@ -131,4 +136,19 @@ class TestReport:
         assert self.product_amount_compare.product_amount_compare(menu, value)
         self.product_amount_compare.end()
         print(f"{sheet6}升级对比执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_product_quantity_excel(self, stagemark, menu, value, address):
+        self.product_quantity = ProductQuantity(address)
+        assert self.product_quantity.product_quantity_excel(menu, value)
+        print(f"{sheet7}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_product_quantity_compare(self, stagemark, menu, value, address):
+        self.product_quantity_compare = ProductQuantity(address)
+        assert self.product_quantity_compare.product_quantity_compare(menu, value)
+        self.product_quantity_compare.end()
+        print(f"{sheet7}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
