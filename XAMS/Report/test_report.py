@@ -8,7 +8,8 @@ from XAMS.Report.PBC.product_amount import ProductAmount
 from XAMS.Report.PBC.product_delay import ProductDelay
 from XAMS.Report.PBC.product_quantity import ProductQuantity
 from XAMS.Report.PBC.product_remain import ProductRemain
-from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8
+from XAMS.Report.PBC.product_unpaid import ProductUnpaid
+from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8, sheet9
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -36,6 +37,8 @@ class TestReport:
                     self.test_product_quantity_excel(stagemark, menu, value, address)
                 elif second_menu == '综合管理-表1-5产品提前延期兑付统计表':
                     self.test_product_delay_excel(stagemark, menu, value, address)
+                elif second_menu == '综合管理-表1-6产品到期未兑付统计表':
+                    self.test_product_unpaid_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
@@ -49,6 +52,8 @@ class TestReport:
                     self.test_product_quantity_compare(stagemark, menu, value, address)
                 elif second_menu == '综合管理-表1-5产品提前延期兑付统计表':
                     self.test_product_delay_compare(stagemark, menu, value, address)
+                elif second_menu == '综合管理-表1-6产品到期未兑付统计表':
+                    self.test_product_unpaid_compare(stagemark, menu, value, address)
                 else:
                     print("升级对比案例：该报表暂不支持，请修改用例")
             n = n + 1
@@ -171,4 +176,19 @@ class TestReport:
         assert self.product_delay_compare.product_delay_compare(menu, value)
         self.product_delay_compare.end()
         print(f"{sheet8}升级对比执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_product_unpaid_excel(self, stagemark, menu, value, address):
+        self.product_unpaid = ProductUnpaid(address)
+        assert self.product_unpaid.product_unpaid_excel(menu, value)
+        print(f"{sheet9}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_product_unpaid_compare(self, stagemark, menu, value, address):
+        self.product_unpaid_compare = ProductUnpaid(address)
+        assert self.product_unpaid_compare.product_unpaid_compare(menu, value)
+        self.product_unpaid_compare.end()
+        print(f"{sheet9}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
