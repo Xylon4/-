@@ -68,6 +68,9 @@ class ProductUnpaid(BasePageXams):
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet9).get('十一月'))
                 elif value[n] == '12':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet9).get('十二月'))
+                else:
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
             elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet9).get(menu[n]))
             n = n + 1
@@ -131,6 +134,9 @@ class ProductUnpaid(BasePageXams):
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet9).get('十一月'))
                 elif value[n] == '12':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet9).get('十二月'))
+                else:
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
             elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet9).get(menu[n]))
             n = n + 1
@@ -206,6 +212,9 @@ class ProductUnpaid(BasePageXams):
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet9).get('十一月'))
                 elif value[n] == '12':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet9).get('十二月'))
+                else:
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
             elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet9).get(menu[n]))
             n = n + 1

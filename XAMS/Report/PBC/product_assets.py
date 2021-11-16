@@ -69,7 +69,7 @@ class ProductAssets(BasePageXams):
                 elif value[n] == '12':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get('十二月'))
                 else:
-                    print('值输入错误，请检查')
+                    print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '搜索':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(menu[n]))
@@ -80,7 +80,7 @@ class ProductAssets(BasePageXams):
                 elif value[n] == '市值（含应收未收本金，不含应收未收利息）':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(value[n]))
                 else:
-                    print('值输入错误，请检查')
+                    print(f'值"{value[n]}"输入错误，请检查')
                     return False
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
@@ -147,7 +147,7 @@ class ProductAssets(BasePageXams):
                 elif value[n] == '12':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get('十二月'))
                 else:
-                    print('值输入错误，请检查')
+                    print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '搜索':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(menu[n]))
@@ -158,7 +158,7 @@ class ProductAssets(BasePageXams):
                 elif value[n] == '市值（含应收未收本金，不含应收未收利息）':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(value[n]))
                 else:
-                    print('值输入错误，请检查')
+                    print(f'值"{value[n]}"输入错误，请检查')
                     return False
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
@@ -237,7 +237,7 @@ class ProductAssets(BasePageXams):
                 elif value[n] == '12':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get('十二月'))
                 else:
-                    print('值输入错误，请检查')
+                    print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '搜索':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(menu[n]))
@@ -248,7 +248,7 @@ class ProductAssets(BasePageXams):
                 elif value[n] == '市值（含应收未收本金，不含应收未收利息）':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(value[n]))
                 else:
-                    print('值输入错误，请检查')
+                    print(f'值"{value[n]}"输入错误，请检查')
                     return False
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
