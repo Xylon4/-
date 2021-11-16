@@ -228,7 +228,7 @@ class ProductUnpaid(BasePageXams):
                     print(f'对比结果：{m[t]}-{x.get(m[t])}数据核对不一致，请检查并联系开发')
                     return False
         else:
-            print(f'对比结果：{m[0]}-{x.get(m[0])}数据核对不一致，请检查并联系开发')
+            print(f'对比结果：{m[z]}-{x.get(m[z])}数据核对不一致，请检查并联系开发')
             return False
         print('对比结果：数据核对一致')
         return True
