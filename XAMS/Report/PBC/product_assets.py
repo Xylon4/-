@@ -68,6 +68,9 @@ class ProductAssets(BasePageXams):
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get('十一月'))
                 elif value[n] == '12':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get('十二月'))
+                else:
+                    print('值输入错误，请检查')
+                    return False
             elif menu[n] == '搜索':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(menu[n]))
             elif menu[n] == '统计维度':
@@ -80,7 +83,7 @@ class ProductAssets(BasePageXams):
                     print('值输入错误，请检查')
                     return False
             else:
-                print('操作元素输入错误，请检查')
+                print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
             n = n + 1
         return True
@@ -143,7 +146,10 @@ class ProductAssets(BasePageXams):
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get('十一月'))
                 elif value[n] == '12':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get('十二月'))
-            elif menu[n] == '查询':
+                else:
+                    print('值输入错误，请检查')
+                    return False
+            elif menu[n] == '搜索':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(menu[n]))
             elif menu[n] == '统计维度':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(menu[n]))
@@ -155,7 +161,7 @@ class ProductAssets(BasePageXams):
                     print('值输入错误，请检查')
                     return False
             else:
-                print('操作元素输入错误，请检查')
+                print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
             n = n + 1
         # 触发判断定位点
@@ -171,7 +177,7 @@ class ProductAssets(BasePageXams):
                 x.setdefault(m[i], o)
                 i = i + 1
         else:
-            print('案例最终结果不存在查询数据，请合理调整步骤')
+            print('案例最终结果不存在搜索数据，请合理调整步骤')
             return False
         # 关闭浏览器
         self.end()
@@ -230,7 +236,10 @@ class ProductAssets(BasePageXams):
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get('十一月'))
                 elif value[n] == '12':
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get('十二月'))
-            elif menu[n] == '查询':
+                else:
+                    print('值输入错误，请检查')
+                    return False
+            elif menu[n] == '搜索':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(menu[n]))
             elif menu[n] == '统计维度':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet10).get(menu[n]))
@@ -242,7 +251,7 @@ class ProductAssets(BasePageXams):
                     print('值输入错误，请检查')
                     return False
             else:
-                print('操作元素输入错误，请检查')
+                print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
             n = n + 1
         # 新环境的记录值
