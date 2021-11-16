@@ -216,12 +216,19 @@ class ProductAmount(BasePageXams):
             s = self.findxpath(self.base.checkpoint_dic(sheet6).get(m[r])).get_attribute('textContent')
             y.setdefault(m[r], s)
             r = r + 1
-        # 比较值
-        t = 0
-        while t < p:
-            if x.get(m[t]) == y.get(m[t]):
-                t = t + 1
-            else:
-                print('对比结果：数据核对不一致，请检查并联系开发')
+        # 局部校验
+        z = 0
+        if x.get(m[z]) == y.get(m[z]):
+            # 全局校验
+            t = 0
+            while t < p:
+                if x.get(m[t]) == y.get(m[t]):
+                    t = t + 1
+                else:
+                    print(f'对比结果：{m[t]}-{x.get(m[t])}数据核对不一致，请检查并联系开发')
+                    return False
+        else:
+            print(f'对比结果：{m[0]}-{x.get(m[0])}数据核对不一致，请检查并联系开发')
+            return False
         print('对比结果：数据核对一致')
         return True
