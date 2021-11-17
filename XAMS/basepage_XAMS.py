@@ -42,7 +42,7 @@ class BasePageXams:
         # 登录页面跳转之前，查询出的元素过多导致没法使用显式等待
         # self.wait_for_click(20, '//*[@class="x-tool-img x-tool-close"]')
         # 关闭浙商首页的弹窗
-        self.findxpath_click('//*[@class="x-tool-img x-tool-close"]')
+        # self.findxpath_click('//*[@class="x-tool-img x-tool-close"]')
 
     def end(self):
         self.driver.quit()

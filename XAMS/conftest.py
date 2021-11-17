@@ -17,4 +17,8 @@ curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
-default_address = 'http://172.19.6.44:8001/xIR_J2EE'
+# 浙商环境
+default_address1 = 'http://172.19.6.44:8001/xIR_J2EE'
+
+# 案例运行环境
+default_address = 'http://191.168.0.206:8001/xIR_J2EE'
