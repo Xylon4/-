@@ -4,6 +4,7 @@ import xlrd
 from XAMS.Report.Finance.valuation import Valuation
 from XAMS.Report.Financial.Asset_pool_registry import AssetPoolRegistry
 from XAMS.Report.Financial.product import Product
+from XAMS.Report.PBC.loan_region import LoanRegion
 from XAMS.Report.PBC.loan_statistics import LoanStatistics
 from XAMS.Report.PBC.product_amount import ProductAmount
 from XAMS.Report.PBC.product_assets import ProductAssets
@@ -12,7 +13,7 @@ from XAMS.Report.PBC.product_quantity import ProductQuantity
 from XAMS.Report.PBC.product_remain import ProductRemain
 from XAMS.Report.PBC.product_unpaid import ProductUnpaid
 from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8, sheet9, \
-    sheet10, sheet11
+    sheet10, sheet11, sheet12
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -46,6 +47,8 @@ class TestReport:
                     self.test_product_assets_excel(stagemark, menu, value, address)
                 elif second_menu == '综合管理-表2-2贷款分行业及企业规模统计表':
                     self.test_loan_statistics_excel(stagemark, menu, value, address)
+                elif second_menu == '综合管理-表2-3贷款分地区统计表':
+                    self.test_loan_region_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
@@ -65,6 +68,8 @@ class TestReport:
                     self.test_product_assets_compare(stagemark, menu, value, address)
                 elif second_menu == '综合管理-表2-2贷款分行业及企业规模统计表':
                     self.test_loan_statistics_compare(stagemark, menu, value, address)
+                elif second_menu == '综合管理-表2-3贷款分地区统计表':
+                    self.test_loan_region_compare(stagemark, menu, value, address)
                 else:
                     print("升级对比案例：该报表暂不支持，请修改用例")
             n = n + 1
@@ -232,4 +237,19 @@ class TestReport:
         assert self.loan_statistics_compare.loan_statistics_compare(menu, value)
         self.loan_statistics_compare.end()
         print(f"{sheet11}升级对比执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_loan_region_excel(self, stagemark, menu, value, address):
+        self.loan_region = LoanRegion(address)
+        assert self.loan_region.loan_region_excel(menu, value)
+        print(f"{sheet12}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_loan_region_compare(self, stagemark, menu, value, address):
+        self.loan_region_compare = LoanRegion(address)
+        assert self.loan_region_compare.loan_region_compare(menu, value)
+        self.loan_region_compare.end()
+        print(f"{sheet12}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
