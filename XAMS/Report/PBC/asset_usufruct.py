@@ -71,7 +71,7 @@ class AssetUsufruct(BasePageXams):
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
-            elif menu[n] == '搜索':
+            elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
             elif menu[n] == '统计维度':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
@@ -149,7 +149,7 @@ class AssetUsufruct(BasePageXams):
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
-            elif menu[n] == '搜索':
+            elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
             elif menu[n] == '统计维度':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
@@ -177,7 +177,7 @@ class AssetUsufruct(BasePageXams):
                 x.setdefault(m[i], o)
                 i = i + 1
         else:
-            print('案例最终结果不存在搜索数据，请合理调整步骤')
+            print('案例最终结果不存在查询数据，请合理调整步骤')
             return False
         # 关闭浏览器
         self.end()
@@ -239,7 +239,7 @@ class AssetUsufruct(BasePageXams):
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
-            elif menu[n] == '搜索':
+            elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
             elif menu[n] == '统计维度':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
