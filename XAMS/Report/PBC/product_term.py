@@ -1,5 +1,5 @@
-# 表2-5企业债券分行业及企业规模统计表自动化测试用例
-# 功能描述：统计投组企业债券行业和企业规模分布
+# 表3-3资管产品资产负债剩余期限统计表自动化测试用例
+# 功能描述：统计投组产品资产负债数据
 from time import sleep
 
 from selenium.webdriver.common.keys import Keys
