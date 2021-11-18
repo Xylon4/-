@@ -8,15 +8,16 @@ from XAMS.Report.PBC.asset_usufruct import AssetUsufruct
 from XAMS.Report.PBC.enterprise_bond import EnterpriseBond
 from XAMS.Report.PBC.loan_region import LoanRegion
 from XAMS.Report.PBC.loan_statistics import LoanStatistics
+from XAMS.Report.PBC.new_product_contract import NewProductContract
 from XAMS.Report.PBC.product_amount import ProductAmount
 from XAMS.Report.PBC.product_assets import ProductAssets
-from XAMS.Report.PBC.product_contract import ProductContract
+from XAMS.Report.PBC.last_product_contract import LastProductContract
 from XAMS.Report.PBC.product_delay import ProductDelay
 from XAMS.Report.PBC.product_quantity import ProductQuantity
 from XAMS.Report.PBC.product_remain import ProductRemain
 from XAMS.Report.PBC.product_unpaid import ProductUnpaid
 from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8, sheet9, \
-    sheet10, sheet11, sheet12, sheet13, sheet14, sheet15
+    sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -57,7 +58,9 @@ class TestReport:
                 elif second_menu == '综合管理-表2-5企业债券分行业及企业规模统计表':
                     self.test_enterprise_bond_excel(stagemark, menu, value, address)
                 elif second_menu == '综合管理-表3-1存续产品分合同期限募集余额统计表':
-                    self.test_product_contract_excel(stagemark, menu, value, address)
+                    self.test_last_product_contract_excel(stagemark, menu, value, address)
+                elif second_menu == '综合管理-表3-2新发产品分合同期限募集金额统计表':
+                    self.test_new_product_contract_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
@@ -84,7 +87,9 @@ class TestReport:
                 elif second_menu == '综合管理-表2-5企业债券分行业及企业规模统计表':
                     self.test_enterprise_bond_compare(stagemark, menu, value, address)
                 elif second_menu == '综合管理-表3-1存续产品分合同期限募集余额统计表':
-                    self.test_product_contract_compare(stagemark, menu, value, address)
+                    self.test_last_product_contract_compare(stagemark, menu, value, address)
+                elif second_menu == '综合管理-表3-2新发产品分合同期限募集金额统计表':
+                    self.test_new_product_contract_compare(stagemark, menu, value, address)
                 else:
                     print("升级对比案例：该报表暂不支持，请修改用例")
             n = n + 1
@@ -300,16 +305,31 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_contract_excel(self, stagemark, menu, value, address):
-        self.product_contract = ProductContract(address)
-        assert self.product_contract.product_contract_excel(menu, value)
+    def test_last_product_contract_excel(self, stagemark, menu, value, address):
+        self.last_product_contract = LastProductContract(address)
+        assert self.last_product_contract.last_product_contract_excel(menu, value)
         print(f"{sheet15}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_contract_compare(self, stagemark, menu, value, address):
-        self.product_contract_compare = ProductContract(address)
-        assert self.product_contract_compare.product_contract_compare(menu, value)
-        self.product_contract_compare.end()
+    def test_last_product_contract_compare(self, stagemark, menu, value, address):
+        self.last_product_contract_compare = LastProductContract(address)
+        assert self.last_product_contract_compare.last_product_contract_compare(menu, value)
+        self.last_product_contract_compare.end()
         print(f"{sheet15}升级对比执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_new_product_contract_excel(self, stagemark, menu, value, address):
+        self.new_product_contract = NewProductContract(address)
+        assert self.new_product_contract.new_product_contract_excel(menu, value)
+        print(f"{sheet16}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_new_product_contract_compare(self, stagemark, menu, value, address):
+        self.new_product_contract_compare = NewProductContract(address)
+        assert self.new_product_contract_compare.new_product_contract_compare(menu, value)
+        self.new_product_contract_compare.end()
+        print(f"{sheet16}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')

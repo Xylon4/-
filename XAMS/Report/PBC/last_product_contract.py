@@ -9,9 +9,9 @@ from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
 
-class ProductContract(BasePageXams):
+class LastProductContract(BasePageXams):
     # 模拟操作自动化案例
-    def product_contract_excel(self, menu, value):
+    def last_product_contract_excel(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()
@@ -80,7 +80,7 @@ class ProductContract(BasePageXams):
         return True
 
     # 数据对比自动化案例
-    def product_contract_compare(self, menu, value):
+    def last_product_contract_compare(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()
