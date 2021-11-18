@@ -1,5 +1,5 @@
-# 表2-4资产收益权投向分类统计表自动化测试用例
-# 功能描述：统计投组资产收益权投向
+# 表2-5企业债券分行业及企业规模统计表自动化测试用例
+# 功能描述：统计投组企业债券行业和企业规模分布
 from time import sleep
 
 from selenium.webdriver.common.keys import Keys
