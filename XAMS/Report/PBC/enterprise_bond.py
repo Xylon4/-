@@ -4,14 +4,14 @@ from time import sleep
 
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet13
+from XAMS.Report.conftest import sheet14
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
 
-class AssetUsufruct(BasePageXams):
+class EnterpriseBond(BasePageXams):
     # 模拟操作自动化案例
-    def asset_usufruct_excel(self, menu, value):
+    def enterprise_bond_excel(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()
@@ -24,61 +24,61 @@ class AssetUsufruct(BasePageXams):
         n = 2
         while n < l:
             if menu[n] == '导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
             elif menu[n] == '投组单元':
                 if value[n] == '置空':
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                     unit.send_keys(Keys.CONTROL, 'a')
                     unit.send_keys(Keys.BACK_SPACE)
                 else:
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                     unit.send_keys(Keys.CONTROL, 'a')
                     unit.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet13).get('投组单元'), value[n])
+                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet14).get('投组单元'), value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('投组下拉选择'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('投组下拉选择'))
             elif menu[n] == '年':
-                year = self.findxpath(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                year = self.findxpath(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                 year.send_keys(Keys.CONTROL, 'a')
                 year.send_keys(Keys.BACK_SPACE)
                 year.send_keys(value[n])
             elif menu[n] == '月':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                 if value[n] == '1':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('一月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('一月'))
                 elif value[n] == '2':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('二月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('二月'))
                 elif value[n] == '3':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('三月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('三月'))
                 elif value[n] == '4':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('四月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('四月'))
                 elif value[n] == '5':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('五月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('五月'))
                 elif value[n] == '6':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('六月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('六月'))
                 elif value[n] == '7':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('七月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('七月'))
                 elif value[n] == '8':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('八月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('八月'))
                 elif value[n] == '9':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('九月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('九月'))
                 elif value[n] == '10':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('十月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('十月'))
                 elif value[n] == '11':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('十一月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('十一月'))
                 elif value[n] == '12':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('十二月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('十二月'))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '查询':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
             elif menu[n] == '统计维度':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                 if value[n] == '市值（不含应收未收利息、不含应收未收本金）':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(value[n]))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(value[n]))
                 elif value[n] == '市值（含应收未收本金，不含应收未收利息）':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(value[n]))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(value[n]))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
@@ -89,7 +89,7 @@ class AssetUsufruct(BasePageXams):
         return True
 
     # 数据对比自动化案例
-    def asset_usufruct_compare(self, menu, value):
+    def enterprise_bond_compare(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()
@@ -102,61 +102,61 @@ class AssetUsufruct(BasePageXams):
         n = 4
         while n < l:
             if menu[n] == '导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
             elif menu[n] == '投组单元':
                 if value[n] == '置空':
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                     unit.send_keys(Keys.CONTROL, 'a')
                     unit.send_keys(Keys.BACK_SPACE)
                 else:
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                     unit.send_keys(Keys.CONTROL, 'a')
                     unit.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet13).get('投组单元'), value[n])
+                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet14).get('投组单元'), value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('投组下拉选择'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('投组下拉选择'))
             elif menu[n] == '年':
-                year = self.findxpath(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                year = self.findxpath(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                 year.send_keys(Keys.CONTROL, 'a')
                 year.send_keys(Keys.BACK_SPACE)
                 year.send_keys(value[n])
             elif menu[n] == '月':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                 if value[n] == '1':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('一月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('一月'))
                 elif value[n] == '2':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('二月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('二月'))
                 elif value[n] == '3':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('三月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('三月'))
                 elif value[n] == '4':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('四月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('四月'))
                 elif value[n] == '5':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('五月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('五月'))
                 elif value[n] == '6':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('六月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('六月'))
                 elif value[n] == '7':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('七月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('七月'))
                 elif value[n] == '8':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('八月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('八月'))
                 elif value[n] == '9':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('九月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('九月'))
                 elif value[n] == '10':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('十月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('十月'))
                 elif value[n] == '11':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('十一月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('十一月'))
                 elif value[n] == '12':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('十二月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('十二月'))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '查询':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
             elif menu[n] == '统计维度':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                 if value[n] == '市值（不含应收未收利息、不含应收未收本金）':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(value[n]))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(value[n]))
                 elif value[n] == '市值（含应收未收本金，不含应收未收利息）':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(value[n]))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(value[n]))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
@@ -165,15 +165,15 @@ class AssetUsufruct(BasePageXams):
                 return False
             n = n + 1
         # 触发判断定位点
-        m = self.base.checkpoint_list(sheet13)
-        point = self.findxpath(self.base.checkpoint_dic(sheet13).get(m[0]))
+        m = self.base.checkpoint_list(sheet14)
+        point = self.findxpath(self.base.checkpoint_dic(sheet14).get(m[0]))
         # 旧环境的记录值
-        p = len(self.base.checkpoint_list(sheet13))
+        p = len(self.base.checkpoint_list(sheet14))
         if point.is_displayed():
             i = 0
             x = {}
             while i < p:
-                o = self.findxpath(self.base.checkpoint_dic(sheet13).get(m[i])).get_attribute('textContent')
+                o = self.findxpath(self.base.checkpoint_dic(sheet14).get(m[i])).get_attribute('textContent')
                 x.setdefault(m[i], o)
                 i = i + 1
         else:
@@ -192,61 +192,61 @@ class AssetUsufruct(BasePageXams):
         n = 4
         while n < l:
             if menu[n] == '导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
             elif menu[n] == '投组单元':
                 if value[n] == '置空':
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                     unit.send_keys(Keys.CONTROL, 'a')
                     unit.send_keys(Keys.BACK_SPACE)
                 else:
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                     unit.send_keys(Keys.CONTROL, 'a')
                     unit.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet13).get('投组单元'), value[n])
+                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet14).get('投组单元'), value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('投组下拉选择'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('投组下拉选择'))
             elif menu[n] == '年':
-                year = self.findxpath(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                year = self.findxpath(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                 year.send_keys(Keys.CONTROL, 'a')
                 year.send_keys(Keys.BACK_SPACE)
                 year.send_keys(value[n])
             elif menu[n] == '月':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                 if value[n] == '1':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('一月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('一月'))
                 elif value[n] == '2':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('二月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('二月'))
                 elif value[n] == '3':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('三月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('三月'))
                 elif value[n] == '4':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('四月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('四月'))
                 elif value[n] == '5':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('五月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('五月'))
                 elif value[n] == '6':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('六月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('六月'))
                 elif value[n] == '7':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('七月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('七月'))
                 elif value[n] == '8':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('八月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('八月'))
                 elif value[n] == '9':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('九月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('九月'))
                 elif value[n] == '10':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('十月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('十月'))
                 elif value[n] == '11':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('十一月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('十一月'))
                 elif value[n] == '12':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get('十二月'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get('十二月'))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '查询':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
             elif menu[n] == '统计维度':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(menu[n]))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(menu[n]))
                 if value[n] == '市值（不含应收未收利息、不含应收未收本金）':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(value[n]))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(value[n]))
                 elif value[n] == '市值（含应收未收本金，不含应收未收利息）':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet13).get(value[n]))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet14).get(value[n]))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
@@ -258,7 +258,7 @@ class AssetUsufruct(BasePageXams):
         r = 0
         y = {}
         while r < p:
-            s = self.findxpath(self.base.checkpoint_dic(sheet13).get(m[r])).get_attribute('textContent')
+            s = self.findxpath(self.base.checkpoint_dic(sheet14).get(m[r])).get_attribute('textContent')
             y.setdefault(m[r], s)
             r = r + 1
         # 局部校验
