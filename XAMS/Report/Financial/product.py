@@ -202,6 +202,7 @@ class Product(BasePageXams):
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False

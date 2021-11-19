@@ -73,6 +73,9 @@ class ProductDelay(BasePageXams):
                     return False
             elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet8).get(menu[n]))
+            else:
+                print(f'操作元素"{menu[n]}"输入错误，请检查')
+                return False
             n = n + 1
         return True
 
@@ -139,6 +142,9 @@ class ProductDelay(BasePageXams):
                     return False
             elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet8).get(menu[n]))
+            else:
+                print(f'操作元素"{menu[n]}"输入错误，请检查')
+                return False
             n = n + 1
         # 触发判断定位点
         m = self.base.checkpoint_list(sheet8)
@@ -217,6 +223,9 @@ class ProductDelay(BasePageXams):
                     return False
             elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet8).get(menu[n]))
+            else:
+                print(f'操作元素"{menu[n]}"输入错误，请检查')
+                return False
             n = n + 1
         # 新环境的记录值
         r = 0

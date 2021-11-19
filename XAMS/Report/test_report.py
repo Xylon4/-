@@ -2,7 +2,8 @@ import pytest
 import xlrd
 
 from XAMS.Report.Finance.valuation import Valuation
-from XAMS.Report.Financial.Asset_pool_registry import AssetPoolRegistry
+from XAMS.Report.Financial.asset_liability import AssetLiability
+from XAMS.Report.Financial.asset_pool_registry import AssetPoolRegistry
 from XAMS.Report.Financial.product import Product
 from XAMS.Report.Financial.product_termination import ProductTermination
 from XAMS.Report.PBC.asset_usufruct import AssetUsufruct
@@ -69,6 +70,8 @@ class TestReport:
                     self.test_product_termination_excel(stagemark, menu, value, address)
                 elif second_menu == '综合管理-产品信息表':
                     self.test_product_excel(stagemark, menu, value, address)
+                elif second_menu == '综合管理-资负信息注册(浙商)':
+                    self.test_asset_liability_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
@@ -100,6 +103,8 @@ class TestReport:
                     self.test_new_product_contract_compare(stagemark, menu, value, address)
                 elif second_menu == '综合管理-表3-3资管产品资产负债剩余期限统计表':
                     self.test_product_term_compare(stagemark, menu, value, address)
+                elif second_menu == '综合管理-资负信息注册(浙商)':
+                    self.test_asset_liability_compare(stagemark, menu, value, address)
                 else:
                     print("升级对比案例：该报表暂不支持，请修改用例")
             n = n + 1
@@ -364,4 +369,19 @@ class TestReport:
         self.product = Product(address)
         assert self.product.product_excel(menu, value)
         print(f"{sheet2}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_asset_liability_excel(self, stagemark, menu, value, address):
+        self.asset_liability = AssetLiability(address)
+        assert self.asset_liability.asset_liability_excel(menu, value)
+        print(f"{sheet3}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_asset_liability_compare(self, stagemark, menu, value, address):
+        self.asset_liability_compare = AssetLiability(address)
+        assert self.asset_liability_compare.asset_liability_compare(menu, value)
+        self.asset_liability_compare.end()
+        print(f"{sheet3}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
