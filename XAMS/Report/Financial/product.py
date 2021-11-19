@@ -1,8 +1,11 @@
 # 产品信息表自动化测试用例
-# 功能描述：统计投组成立时间
+# 功能描述：统计投组产品核心和管理要素
+from time import sleep
 from selenium.webdriver.common.keys import Keys
 
 from XAMS.basepage_XAMS import BasePageXams
+from XAMS.Report.conftest import sheet2
+from XAMS.Tool.test_excel import TestExcel
 
 
 class Product(BasePageXams):
@@ -125,7 +128,82 @@ class Product(BasePageXams):
         while ele1 == check1 and ele2 == check2 and ele3 == check3 and ele4 == check4 and ele5 == check5 and ele6 == check6 and ele7 == check7 and ele8 == check8 and ele9 == check9 and ele10 == check10 and ele11 == check11 and ele12 == check12 and ele13 == check13 and ele14 == check14 and ele15 == check15 and ele16 == check16 and ele17 == check17 and ele18 == check18 and ele19 == check19 and ele20 == check20 and ele21 == check21 and ele22 == check22 and ele23 == check23 and ele24 == check24 and ele25 == check25:
             return True
 
-    # 自动化测试工具案例
-    def product_excel(self):
-        print('产品信息表已响应')
+    # 模拟操作自动化案例
+    def product_excel(self, menu, value):
+        print(menu)
+        print(value)
+        self.base = TestExcel()
+        # 点击一级菜单
+        self.findxpath_click(self.base.first_menu().get(menu[0]))
+        # 点击二级菜单
+        self.findxpath_click(self.base.second_menu().get(f'{menu[0]}-{menu[1]}'))
+        # 根据自定义顺序执行操作
+        l = len(menu)
+        n = 2
+        while n < l:
+            if menu[n] == '导出':
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+            elif menu[n] == '批量导出':
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+            elif menu[n] == '投组':
+                if value[n] == '置空':
+                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    unit.send_keys(Keys.CONTROL, 'a')
+                    unit.send_keys(Keys.BACK_SPACE)
+                else:
+                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    unit.send_keys(Keys.CONTROL, 'a')
+                    unit.send_keys(Keys.BACK_SPACE)
+                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet2).get(menu[n]), value[n])
+                    sleep(1)
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get('投组下拉选择'))
+            elif menu[n] == '产品名称或代码':
+                if value[n] == '置空':
+                    code = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    code.send_keys(Keys.CONTROL, 'a')
+                    code.send_keys(Keys.BACK_SPACE)
+                else:
+                    code = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    code.send_keys(Keys.CONTROL, 'a')
+                    code.send_keys(Keys.BACK_SPACE)
+                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet2).get(menu[n]), value[n])
+            elif menu[n] == '搜索':
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get('折叠按钮'))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+            elif menu[n] == '起息日起':
+                if value[n] == '置空':
+                    start_date = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    start_date.send_keys(Keys.CONTROL, 'a')
+                    start_date.send_keys(Keys.BACK_SPACE)
+                else:
+                    start_date = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    start_date.send_keys(Keys.CONTROL, 'a')
+                    start_date.send_keys(Keys.BACK_SPACE)
+                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet2).get(menu[n]), value[n])
+            elif menu[n] == '起息日止':
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get('折叠按钮'))
+                if value[n] == '置空':
+                    start_date = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    start_date.send_keys(Keys.CONTROL, 'a')
+                    start_date.send_keys(Keys.BACK_SPACE)
+                else:
+                    start_date = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    start_date.send_keys(Keys.CONTROL, 'a')
+                    start_date.send_keys(Keys.BACK_SPACE)
+                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet2).get(menu[n]), value[n])
+            elif menu[n] == '产品分类(收益特性)':
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                if value[n] == '保证收益型':
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(value[n]))
+                elif value[n] == '保本浮动收益型':
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(value[n]))
+                elif value[n] == '非保本浮动收益型':
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(value[n]))
+                else:
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
+            else:
+                print(f'操作元素"{menu[n]}"输入错误，请检查')
+                return False
+            n = n + 1
         return True

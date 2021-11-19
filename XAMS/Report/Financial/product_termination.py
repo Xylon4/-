@@ -27,7 +27,7 @@ class ProductTermination(BasePageXams):
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet18).get(menu[n]))
             elif menu[n] == '批量导出':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet18).get(menu[n]))
-            elif menu[n] == '投组单元':
+            elif menu[n] == '投组':
                 if value[n] == '置空':
                     unit = self.findxpath(self.base.sheet_xpath_dic(sheet18).get(menu[n]))
                     unit.send_keys(Keys.CONTROL, 'a')

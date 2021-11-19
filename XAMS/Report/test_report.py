@@ -67,6 +67,8 @@ class TestReport:
                     self.test_product_term_excel(stagemark, menu, value, address)
                 elif second_menu == '综合管理-产品终止信息表':
                     self.test_product_termination_excel(stagemark, menu, value, address)
+                elif second_menu == '综合管理-产品信息表':
+                    self.test_product_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
@@ -146,13 +148,6 @@ class TestReport:
         self.asset_pool_registry = AssetPoolRegistry()
         assert self.asset_pool_registry.registry_excel()
         print(f"{sheet1}自动化操作执行完毕")
-        print('-----------------------这是案例分割线-----------------------')
-
-    @pytest.mark.skip
-    def test_product_excel(self, stagemark):
-        self.product = Product()
-        assert self.product.product_excel()
-        print(f"{sheet2}自动化操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
@@ -296,7 +291,7 @@ class TestReport:
         self.asset_usufruct_compare.end()
         print(f"{sheet13}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
-        
+
     @pytest.mark.skip
     def test_enterprise_bond_excel(self, stagemark, menu, value, address):
         self.enterprise_bond = EnterpriseBond(address)
@@ -341,7 +336,7 @@ class TestReport:
         self.new_product_contract_compare.end()
         print(f"{sheet16}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
-        
+
     @pytest.mark.skip
     def test_product_term_excel(self, stagemark, menu, value, address):
         self.product_term = ProductTerm(address)
@@ -362,4 +357,11 @@ class TestReport:
         self.product_termination = ProductTermination(address)
         assert self.product_termination.product_termination_excel(menu, value)
         print(f"{sheet18}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_product_excel(self, stagemark, menu, value, address):
+        self.product = Product(address)
+        assert self.product.product_excel(menu, value)
+        print(f"{sheet2}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
