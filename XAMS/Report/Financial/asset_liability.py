@@ -75,6 +75,8 @@ class AssetLiability(BasePageXams):
                     return False
             elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet3).get(menu[n]))
+                sleep(1)
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet3).get('资产负债总额'))
             elif menu[n] == '统计维度':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet3).get(menu[n]))
                 if value[n] == '市值（不含应收未收利息、不含应收未收本金）':
@@ -155,6 +157,8 @@ class AssetLiability(BasePageXams):
                     return False
             elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet3).get(menu[n]))
+                sleep(1)
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet3).get('资产负债总额'))
             elif menu[n] == '统计维度':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet3).get(menu[n]))
                 if value[n] == '市值（不含应收未收利息、不含应收未收本金）':
@@ -247,6 +251,8 @@ class AssetLiability(BasePageXams):
                     return False
             elif menu[n] == '查询':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet3).get(menu[n]))
+                sleep(1)
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet3).get('资产负债总额'))
             elif menu[n] == '统计维度':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet3).get(menu[n]))
                 if value[n] == '市值（不含应收未收利息、不含应收未收本金）':
