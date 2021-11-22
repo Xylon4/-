@@ -2,7 +2,10 @@
 # 功能描述：统计投组交易信息
 from time import sleep
 
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 from XAMS.Report.conftest import sheet19
 from XAMS.Tool.test_excel import TestExcel
@@ -72,6 +75,9 @@ class DealRegistration(BasePageXams):
                     enddate.send_keys(value[n])
             elif menu[n] == '搜索':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet19).get(menu[n]))
+                sleep(1)
+                wait = (By.XPATH, self.base.sheet_xpath_dic(sheet19).get('加载等待'))
+                self.wait_for_miss(120, wait)
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False

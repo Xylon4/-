@@ -65,7 +65,11 @@ class BasePageXams:
     def find_sendkey(self, locator3, value3, key3):
         self.find(locator3, value3).send_keys(key3)
 
-    # 定义点击显式等待方法
+    # 等待元素可以被点击
     def wait_for_click(self, timeout, locator):
         WebDriverWait(self.driver, timeout).until(expected_conditions.element_to_be_clickable(locator))
     # locator = (By.XPATH, '/html/body/div[9]/div/div')
+
+    # 等待元素消失
+    def wait_for_miss(self, timeout, locator):
+        WebDriverWait(self.driver, timeout).until_not(expected_conditions.visibility_of_element_located(locator))
