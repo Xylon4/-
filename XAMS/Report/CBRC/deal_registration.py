@@ -52,21 +52,21 @@ class DealRegistration(BasePageXams):
                     asset.send_keys(Keys.ENTER)
             elif menu[n] == '开始日期':
                 if value[n] == '置空':
-                    startdate = self.base.sheet_xpath_dic(sheet19).get(menu[n])
+                    startdate = self.findxpath(self.base.sheet_xpath_dic(sheet19).get(menu[n]))
                     startdate.send_keys(Keys.CONTROL, 'a')
                     startdate.send_keys(Keys.BACK_SPACE)
                 else:
-                    startdate = self.base.sheet_xpath_dic(sheet19).get(menu[n])
+                    startdate = self.findxpath(self.base.sheet_xpath_dic(sheet19).get(menu[n]))
                     startdate.send_keys(Keys.CONTROL, 'a')
                     startdate.send_keys(Keys.BACK_SPACE)
                     startdate.send_keys(value[n])
             elif menu[n] == '结束日期':
                 if value[n] == '置空':
-                    enddate = self.base.sheet_xpath_dic(sheet19).get(menu[n])
+                    enddate = self.findxpath(self.base.sheet_xpath_dic(sheet19).get(menu[n]))
                     enddate.send_keys(Keys.CONTROL, 'a')
                     enddate.send_keys(Keys.BACK_SPACE)
                 else:
-                    enddate = self.base.sheet_xpath_dic(sheet19).get(menu[n])
+                    enddate = self.findxpath(self.base.sheet_xpath_dic(sheet19).get(menu[n]))
                     enddate.send_keys(Keys.CONTROL, 'a')
                     enddate.send_keys(Keys.BACK_SPACE)
                     enddate.send_keys(value[n])
