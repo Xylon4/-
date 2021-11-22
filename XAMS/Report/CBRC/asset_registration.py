@@ -1,5 +1,5 @@
-# 交易登记自动化测试用例
-# 功能描述：统计投组交易信息
+# 资产要素登记自动化测试用例
+# 功能描述：统计资产信息
 from time import sleep
 
 from selenium.webdriver.common.by import By
