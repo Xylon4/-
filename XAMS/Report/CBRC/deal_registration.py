@@ -28,7 +28,7 @@ class DealRegistration(BasePageXams):
         while n < l:
             if menu[n] == '导出':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet19).get(menu[n]))
-                wait = (By.XPATH, self.base.sheet_xpath_dic(sheet19).get('下载等待'))
+                wait = (By.XPATH, self.base.sheet_xpath_dic(sheet19).get('加载等待'))
                 self.wait_for_miss(120, wait)
             elif menu[n] == '投组单元':
                 if value[n] == '置空':
@@ -77,7 +77,9 @@ class DealRegistration(BasePageXams):
                     enddate.send_keys(value[n])
             elif menu[n] == '搜索':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet19).get(menu[n]))
-                sleep(1)
+                # sleep(1)
+                wait = (By.XPATH, self.base.sheet_xpath_dic(sheet19).get('加载等待'))
+                self.wait_for_miss(120, wait)
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
