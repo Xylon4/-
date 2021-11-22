@@ -1,6 +1,7 @@
 import pytest
 import xlrd
 
+from XAMS.Report.CBRC.asset_registration import AssetRegistration
 from XAMS.Report.CBRC.deal_registration import DealRegistration
 from XAMS.Report.Finance.valuation import Valuation
 from XAMS.Report.Financial.asset_liability import AssetLiability
@@ -21,7 +22,7 @@ from XAMS.Report.PBC.product_remain import ProductRemain
 from XAMS.Report.PBC.product_term import ProductTerm
 from XAMS.Report.PBC.product_unpaid import ProductUnpaid
 from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8, sheet9, \
-    sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16, sheet17, sheet18, sheet19
+    sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16, sheet17, sheet18, sheet19, sheet20
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -75,6 +76,8 @@ class TestReport:
                     self.test_asset_liability_excel(stagemark, menu, value, address)
                 elif second_menu == '综合管理-交易登记':
                     self.test_deal_registration_excel(stagemark, menu, value, address)
+                elif second_menu == '综合管理-资产要素登记':
+                    self.test_asset_registration_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
@@ -394,4 +397,11 @@ class TestReport:
         self.deal_registration = DealRegistration(address)
         assert self.deal_registration.deal_registration_excel(menu, value)
         print(f"{sheet19}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_asset_registration_excel(self, stagemark, menu, value, address):
+        self.asset_registration = AssetRegistration(address)
+        assert self.asset_registration.asset_registration_excel(menu, value)
+        print(f"{sheet20}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
