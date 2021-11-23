@@ -101,26 +101,25 @@ class AssetDetailPenetration(BasePageXams):
                     sleep(1)
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet22).get('投组下拉选择'))
             elif menu[n] == '估值偏离度符号':
-                imput = self.findxpath(self.base.sheet_xpath_dic(sheet22).get('偏离度输入框'))
-                symbol = self.findxpath(self.base.sheet_xpath_dic(sheet22).get(menu[n]))
+                input = self.findxpath(self.base.sheet_xpath_dic(sheet22).get(menu[n]))
                 if value[n] == '置空':
-                    imput.send_keys(Keys.CONTROL, 'a')
-                    imput.send_keys(Keys.BACK_SPACE)
+                    input.send_keys(Keys.CONTROL, 'a')
+                    input.send_keys(Keys.BACK_SPACE)
                 elif value[n] == '<':
-                    imput.send_keys(Keys.CONTROL, 'a')
-                    imput.send_keys(Keys.BACK_SPACE)
-                    symbol.click()
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet22).get(value[n]))
+                    input.send_keys(Keys.CONTROL, 'a')
+                    input.send_keys(Keys.BACK_SPACE)
+                    input.send_keys(value[n])
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet22).get('符号下拉选择'))
                 elif value[n] == '=':
-                    imput.send_keys(Keys.CONTROL, 'a')
-                    imput.send_keys(Keys.BACK_SPACE)
-                    symbol.click()
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet22).get(value[n]))
+                    input.send_keys(Keys.CONTROL, 'a')
+                    input.send_keys(Keys.BACK_SPACE)
+                    input.send_keys(value[n])
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet22).get('符号下拉选择'))
                 elif value[n] == '>':
-                    imput.send_keys(Keys.CONTROL, 'a')
-                    imput.send_keys(Keys.BACK_SPACE)
-                    symbol.click()
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet22).get(value[n]))
+                    input.send_keys(Keys.CONTROL, 'a')
+                    input.send_keys(Keys.BACK_SPACE)
+                    input.send_keys(value[n])
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet22).get('符号下拉选择'))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
