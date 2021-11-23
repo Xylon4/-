@@ -110,6 +110,7 @@ class AssetDetail(BasePageXams):
                     manager.send_keys(Keys.CONTROL, 'a')
                     manager.send_keys(Keys.BACK_SPACE)
                     manager.send_keys(value[n])
+                    manager.send_keys(Keys.BACK_SPACE)  # 解决全名选不中的情况
                     sleep(1)
                     manager.send_keys(Keys.ARROW_DOWN)
                     manager.send_keys(Keys.ENTER)
