@@ -61,24 +61,24 @@ class AssetDetail(BasePageXams):
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet23).get('资产类型选择'))
             elif menu[n] == '开始日期':
                 if value[n] == '置空':
-                    asset = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    asset.send_keys(Keys.CONTROL, 'a')
-                    asset.send_keys(Keys.BACK_SPACE)
+                    startdate = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
+                    startdate.send_keys(Keys.CONTROL, 'a')
+                    startdate.send_keys(Keys.BACK_SPACE)
                 else:
-                    asset = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    asset.send_keys(Keys.CONTROL, 'a')
-                    asset.send_keys(Keys.BACK_SPACE)
-                    asset.send_keys(value[n])
+                    startdate = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
+                    startdate.send_keys(Keys.CONTROL, 'a')
+                    startdate.send_keys(Keys.BACK_SPACE)
+                    startdate.send_keys(value[n])
             elif menu[n] == '结束日期':
                 if value[n] == '置空':
-                    asset = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    asset.send_keys(Keys.CONTROL, 'a')
-                    asset.send_keys(Keys.BACK_SPACE)
+                    enddate = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
+                    enddate.send_keys(Keys.CONTROL, 'a')
+                    enddate.send_keys(Keys.BACK_SPACE)
                 else:
-                    asset = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    asset.send_keys(Keys.CONTROL, 'a')
-                    asset.send_keys(Keys.BACK_SPACE)
-                    asset.send_keys(value[n])
+                    enddate = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
+                    enddate.send_keys(Keys.CONTROL, 'a')
+                    enddate.send_keys(Keys.BACK_SPACE)
+                    enddate.send_keys(value[n])
             elif menu[n] == '是否穿透':
                 if value[n] not in ['是', '否']:
                     print(f'值"{value[n]}"输入错误，请检查')
@@ -110,7 +110,8 @@ class AssetDetail(BasePageXams):
                     manager.send_keys(Keys.CONTROL, 'a')
                     manager.send_keys(Keys.BACK_SPACE)
                     manager.send_keys(value[n])
-                    manager.send_keys(Keys.SPACE)  # 加一个空格解决全名选不中的情况
+                    manager.click()
+                    manager.send_keys(Keys.SPACE)  # 加一个空格解决全名选不中的问题
                     sleep(1)
                     manager.send_keys(Keys.ARROW_DOWN)
                     manager.send_keys(Keys.ENTER)
