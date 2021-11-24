@@ -29,10 +29,8 @@ class AssetStructure(BasePageXams):
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
             elif menu[n] == 'Excel(当前页)':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                self.wait_for_miss(120, wait)
             elif menu[n] == 'Excel(所有数据)':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                self.wait_for_miss(120, wait)
             elif menu[n] == '全部展开':
                 tree = self.findxpath(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
                 if tree.get_attribute('textContent') == menu[n]:
