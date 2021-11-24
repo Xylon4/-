@@ -104,19 +104,20 @@ class AssetStructure(BasePageXams):
                 # 搜索结束判断依据缺失，产品要改
             elif menu[n] == '图形展示':
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                if value[n][1] == '查询':
+                show = value[n].split(',')  # str类型转换为list，用,分隔
+                if show[1] == '查询':
                     searchdate = self.findxpath(self.base.sheet_xpath_dic(sheet27).get('查询日期'))
                     searchdate.send_keys(Keys.CONTROL, 'a')
                     searchdate.send_keys(Keys.BACK_SPACE)
-                    searchdate.send_keys(value[n][0])
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(value[n][1]))
+                    searchdate.send_keys(show[0])
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(show[1]))
                     sleep(1)
-                elif value[n][1] == '返回':
+                elif show[1] == '返回':
                     searchdate = self.findxpath(self.base.sheet_xpath_dic(sheet27).get('查询日期'))
                     searchdate.send_keys(Keys.CONTROL, 'a')
                     searchdate.send_keys(Keys.BACK_SPACE)
-                    searchdate.send_keys(value[n][0])
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(value[n][1]))
+                    searchdate.send_keys(show[0])
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(show[1]))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
