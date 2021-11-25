@@ -10,6 +10,7 @@ from XAMS.Report.Combinatorial_analysis.asset_structure import AssetStructure
 from XAMS.Report.Combinatorial_analysis.cash_flow import CashFlow
 from XAMS.Report.Combinatorial_analysis.cash_gap import CashGap
 from XAMS.Report.Combinatorial_analysis.profit_loss import ProfitLoss
+from XAMS.Report.Combinatorial_analysis.valuation_detail import ValuationDetail
 from XAMS.Report.Finance.valuation import Valuation
 from XAMS.Report.Financial.asset_liability import AssetLiability
 from XAMS.Report.Financial.asset_pool_registry import AssetPoolRegistry
@@ -30,7 +31,7 @@ from XAMS.Report.PBC.product_term import ProductTerm
 from XAMS.Report.PBC.product_unpaid import ProductUnpaid
 from XAMS.Report.conftest import Excel_basedata, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8, sheet9, \
     sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16, sheet17, sheet18, sheet19, sheet20, sheet21, sheet22, \
-    sheet23, sheet24, sheet25, sheet26, sheet27
+    sheet23, sheet24, sheet25, sheet26, sheet27, sheet28
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -100,6 +101,8 @@ class TestReport:
                     self.test_profit_loss_excel(stagemark, menu, value, address)
                 elif second_menu == '投组管理-资产结构分析表':
                     self.test_asset_structure_excel(stagemark, menu, value, address)
+                elif second_menu == '投组管理-资产结构分析表':
+                    self.test_valuation_detail_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
             elif test_goal == '升级对比':
@@ -475,4 +478,11 @@ class TestReport:
         self.asset_structure = AssetStructure(address)
         assert self.asset_structure.asset_structure_excel(menu, value)
         print(f"{sheet27}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_valuation_detail_excel(self, stagemark, menu, value, address):
+        self.valuation_detail = ValuationDetail(address)
+        assert self.valuation_detail.valuation_detail_excel(menu, value)
+        print(f"{sheet28}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
