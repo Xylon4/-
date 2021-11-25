@@ -101,7 +101,7 @@ class TestReport:
                     self.test_profit_loss_excel(stagemark, menu, value, address)
                 elif second_menu == '投组管理-资产结构分析表':
                     self.test_asset_structure_excel(stagemark, menu, value, address)
-                elif second_menu == '投组管理-资产结构分析表':
+                elif second_menu == '投组管理-投组单元估值明细表':
                     self.test_valuation_detail_excel(stagemark, menu, value, address)
                 else:
                     print("模拟操作案例：该报表暂不支持，请修改用例")
