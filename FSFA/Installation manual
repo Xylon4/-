@@ -12,9 +12,9 @@ Installation manual  安装手册
 3.allure allure-2.13.8.zip
     解压后将allure-2.13.8\bin
            加入path
-4.jdk1.8
+4.jdk1.8    安装appium需要
 5.chromedriver.exe      最新版本驱动
-chromedriver_52.0.2743.exe      指定版本驱动`
+chromedriver_52.0.2743.exe      指定版本驱动
     安装完后将\chromedriver_win32
             加入path
 6.git   Git-2.30.1-64-bit.exe       终端不联网的环境不需要配置
@@ -31,27 +31,9 @@ chromedriver_52.0.2743.exe      指定版本驱动`
 5.pip install pytest-xdist 分布式并发执行用例
 6.pip install allure-pytest
 
-离线安装插件方法参考
-https://blog.csdn.net/qq_40433737/article/details/107111261
+导出命令为：pip freeze > filename.txt,其中filename可以自己定义。
 
-本地安装-通过添加第三方库的Path实现
-点击工具栏的File选项
-打开的Settings窗口选择 设置->Show all
-在弹出的Progect Interpreters窗口中选择第5个按钮，点击弹出的Interpreter Patha 窗口中选择‘+’按钮，在弹出的Select Path窗口，选择添加本地第三方库文件（例如Scapy）所在位置的路径，点击‘OK’按钮，完成配置。
-添加成功后Inerpreter Paths窗口多出一行，点击ok确认，退出重新运行程序即可（注：需要等待pycharm更新配置完成，才能运行成功，pycharm最下方有显示更新进度的进度条）
-
-在Python中我们在项目中会用到各种库，自带的自然不必再说，然而如果是三方库，则在进行项目移植时通常需要在新的环境下安装需要的三方库文件，面对较大项目中众多的三方库，可以先将项目依赖库导出到txt文件中，
-
-                   导出命令为：pip freeze > filename.txt,其中filename可以自己定义。
-
-          在新环境下安装移植项目依赖的三方库方法为：
-
-                                   pip install -r filename.txt
-
-          在其他情况下，我们也可以先将所有要安装的库列在txt文件中，然后再执行pip install -r filename.txt的方式去批量安装。
-
-
-笔者在共享服务器上无root权限，而管理员安装的python包之间版本不匹配（经典的numpy binary incompatibility runtime warning），所以需要本地重安装覆盖原版本。常用的”compile from source+change PYTHONPATH”的方法太麻烦了，阅读文档发现个用pip的简单方法：
+在新环境下安装移植项目依赖的三方库方法为：pip install -r filename.txt
 
 pip install --user -I <package_name>
 其中--user用于本地安装，无需root权限；-I强制重安装。
