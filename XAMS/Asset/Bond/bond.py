@@ -1,0 +1,231 @@
+# 债券类资产(新)自动化测试用例
+# 功能描述：债券条款维护
+from time import sleep
+
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
+from XAMS.Report.conftest import sheet29
+from XAMS.Tool.test_excel import TestExcel
+from XAMS.basepage_XAMS import BasePageXams
+
+
+class Bond(BasePageXams):
+    # 模拟操作自动化案例
+    def bond_excel(self, menu, value):
+        print(menu)
+        print(value)
+        self.base = TestExcel()
+        # 点击一级菜单
+        self.findxpath_click(self.base.first_menu().get(menu[0]))
+        # 点击二级菜单
+        self.findxpath_click(self.base.second_menu().get(f'{menu[0]}-{menu[1]}'))
+        # 根据自定义顺序执行操作
+        l = len(menu)
+        n = 2
+        while n < l:
+            wait = (By.XPATH, self.base.sheet_xpath_dic(sheet29).get('加载等待'))
+            findelement = self.findxpath(self.base.sheet_xpath_dic(sheet29).get(menu[n]))
+            if menu[n] == '导出':
+                findelement.click()
+            elif menu[n] == 'Excel(当前页)':
+                findelement.click()
+            elif menu[n] == 'Excel(所有数据)':
+                findelement.click()
+            elif menu[n] == '新增':
+                findelement.click()
+            elif menu[n] == '修改':
+                findelement.click()
+            elif menu[n] == '删除':
+                findelement.click()
+            elif menu[n] == '复核':
+                findelement.click()
+            elif menu[n] == '计算现金流':
+                findelement.click()
+            elif menu[n] == '刷新金融工具':
+                findelement.click()
+            elif menu[n] == '市场计算':
+                findelement.click()
+            elif menu[n] == '资产状态':
+                if value[n] not in ['已生效', '未生效']:
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
+                else:
+                    findelement.click()
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(value[n]))
+                    sleep(1)  # 点击后立即生效查询
+            elif menu[n] == '代码':
+                if value[n] == '置空':
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                else:
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
+            elif menu[n] == '产品分类':
+                if value[n] == '置空':
+                    findelement.click()
+                    selectall = self.findxpath(self.base.sheet_xpath_dic(sheet29).get('全选'))
+                    action = ActionChains(self.driver)
+                    action.double_click(selectall).perform()
+                    findelement.click()  # 收起下拉框
+                else:
+                    findelement.click()
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(value[n]))
+                    findelement.click()  # 收起下拉框
+            elif menu[n] == '条款是否完整':
+                if value[n] not in ['完整', '不完整', '置空']:
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
+                elif value[n] == '置空':
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                else:
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
+            elif menu[n] == '搜索':
+                findelement.click()
+            # 所有操作为"输入"的元素
+            elif menu[n] in ['基本信息_代码',
+                             '基本信息_银行间代码',
+                             '基本信息_上交所代码',
+                             '基本信息_深交所代码',
+                             '基本信息_报盘代码',
+                             '基本信息_全称',
+                             '基本信息_简称',
+                             '基本信息_上市日期',
+                             '含权信息_实际行权日',
+                             '含权信息_行权价格',
+                             '美式:行权开始日期',
+                             '美式:行权结束日期',
+                             '利率补偿(%)',
+                             '行权意向开始日',
+                             '行权意向结束日',
+                             '欧式:行权日期',
+                             '提前兑付及赎回事件_公布日期',
+                             '提前兑付及赎回事件_提前终止日期',
+                             '提前兑付及赎回事件_提前终止支付日期',
+                             '提前兑付及赎回事件_兑付净价',
+                             '提前兑付及赎回事件_兑付利息',
+                             '其他管理信息_oCode',
+                             '其他管理信息_特殊授信编号',
+                             '其他管理信息_资金投向行业',
+                             '备注信息_备注一',
+                             '备注信息_备注二',
+                             '备注信息_备注三',
+                             '备注信息_备注四',
+                             '备注信息_备注五',
+                             '备注信息_备注六',
+                             '备注信息_备注七',
+                             '备注信息_备注八',
+                             '备注信息_备注九',
+                             '备注信息_备注十',
+                             '计息信息_发行日期',
+                             '计息信息_发行价格(元)',
+                             '计息信息_起息日',
+                             '计息信息_到期日',
+                             '计息信息_首次付息日',
+                             '计息信息_利率(%)',
+                             '评级信息_债项发行评级机构（外部）',
+                             '利率调整_利率（%）',
+                             '利率调整_利率调整日',
+                             '本金序列_还款日期',
+                             '本金序列_本次偿还本金'
+                             ]:
+                if value[n] == '置空':
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                else:
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
+            elif menu[n] in ['基本信息_币种',
+                             '基本信息_产品类型',
+                             '基本信息_产品分类',
+                             '基本信息_发行机构',
+                             '基本信息_报价方式',
+                             '基本信息_托管场所',
+                             '基本信息_清偿等级',
+                             '基本信息_市场类型',
+                             '基本信息_簿记场所',
+                             '基本信息_发行方式(按对象划分)',
+                             '含权信息_含权信息',
+                             '含权信息_行权类型',
+                             '其他管理信息_是否分行推荐',
+                             '其他管理信息_推荐分行',
+                             '其他管理信息_考核归属机构',
+                             '其他管理信息_是否须配置分行个性化产品',
+                             '其他管理信息_是否双计收益',
+                             '其他管理信息_底层是否本行资产',
+                             '其他管理信息_是否为我行主承',
+                             '其他管理信息_风险分类',
+                             '其他管理信息_是否永续债',
+                             '其他管理信息_是否通过SPPI测试',
+                             '其他管理信息_是否不良',
+                             '其他管理信息_是否城投债',
+                             '计息信息_发行方式',
+                             '计息信息_到期收益率计息基准',
+                             '计息信息_交易计息基准',
+                             '计息信息_后台到期收益率计息基准',
+                             '计息信息_后台计息基准',
+                             '计息信息_计息区间',
+                             '计息信息_息票类型',
+                             '计息信息_计息频率',
+                             '计息信息_计息调整规则',
+                             '计息信息_付息频率',
+                             '计息信息_支付调整',
+                             '评级信息_债项当前评级（外部）',
+                             '评级信息_债项评级机构（外部）',
+                             '评级信息_债项评级(内部)',
+                             '评级信息_评级是否负面',
+                             '担保信息维护_担保方式'
+                             ]:
+                elementlist = self.base.sheet_xpath_dic(sheet29).keys()
+                if value[n] not in elementlist:
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
+                else:
+                    findelement.click()
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(value[n]))
+            elif menu[n] in ['基本信息_是否资讯覆盖',
+                             '基本信息_是否提前兑付及赎回',
+                             '基本信息_是否含权',
+                             '自定义含权日期_新增',
+                             '自定义含权日期_一键清空',
+                             '担保信息_新增',
+                             '担保信息_修改',
+                             '担保信息_删除',
+                             '担保信息_勾选框',
+                             '担保信息维护_保存',
+                             '担保信息维护_取消',
+                             '利率调整_新增',
+                             '利率调整_修改',
+                             '利率调整_删除',
+                             '利率调整_勾选框',
+                             '利率调整_确定',
+                             '利率调整_取消',
+                             '本金序列_新增',
+                             '本金序列_修改',
+                             '本金序列_删除',
+                             '本金序列_勾选框',
+                             '本金序列_确定',
+                             '本金序列_取消',
+                             '保存',
+                             '重置',
+                             '返回'
+                             ]:
+                findelement.click()
+            elif menu[n] == '自定义日期_利率补偿(%)':
+                customxpath = self.base.sheet_xpath_dic(sheet29).get(menu[n]).split('_')
+                customvalue = value[n].split(',')
+                self.findxpath_click(customxpath[0])
+                self.findxpath_sendkey(customxpath[0], customvalue[0])
+                self.findxpath_click(customxpath[1])
+                self.findxpath_sendkey(customxpath[1], customvalue[1])
+            else:
+                print(f'操作元素"{menu[n]}"输入错误，请检查')
+                return False
+            n = n + 1
+        return True
