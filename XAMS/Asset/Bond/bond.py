@@ -17,6 +17,8 @@ class Bond(BasePageXams):
         print(menu)
         print(value)
         self.base = TestExcel()
+        basepagewait = (By.XPATH, self.base.sheet_xpath_dic(sheet29).get('首页加载等待'))
+        self.wait_for_visit(120, basepagewait)
         # 点击一级菜单
         self.findxpath_click(self.base.first_menu().get(menu[0]))
         # 点击二级菜单
@@ -87,6 +89,7 @@ class Bond(BasePageXams):
                     findelement.send_keys(value[n])
             elif menu[n] == '搜索':
                 findelement.click()
+                self.wait_for_miss(120, wait)
             # 所有操作为"输入"的元素
             elif menu[n] in ['基本信息_代码',
                              '基本信息_银行间代码',
@@ -97,7 +100,7 @@ class Bond(BasePageXams):
                              '基本信息_简称',
                              '基本信息_上市日期',
                              '含权信息_实际行权日',
-                             '含权信息_行权价格',
+                             '含权信息_行权价格(元)',
                              '美式:行权开始日期',
                              '美式:行权结束日期',
                              '利率补偿(%)',
@@ -145,7 +148,6 @@ class Bond(BasePageXams):
             elif menu[n] in ['基本信息_币种',
                              '基本信息_产品类型',
                              '基本信息_产品分类',
-                             '基本信息_发行机构',
                              '基本信息_报价方式',
                              '基本信息_托管场所',
                              '基本信息_清偿等级',
@@ -163,6 +165,7 @@ class Bond(BasePageXams):
                              '其他管理信息_是否为我行主承',
                              '其他管理信息_风险分类',
                              '其他管理信息_是否永续债',
+                             '其他管理信息_是否权益类',
                              '其他管理信息_是否通过SPPI测试',
                              '其他管理信息_是否不良',
                              '其他管理信息_是否城投债',
@@ -219,6 +222,10 @@ class Bond(BasePageXams):
                              '返回'
                              ]:
                 findelement.click()
+            elif menu[n] == '基本信息_发行机构':
+                findelement.send_keys(value[n])
+                findelement.send_keys(Keys.ARROW_DOWN)
+                findelement.send_keys(Keys.ENTER)
             elif menu[n] == '自定义日期_利率补偿(%)':
                 customxpath = self.base.sheet_xpath_dic(sheet29).get(menu[n]).split('_')
                 customvalue = value[n].split(',')
