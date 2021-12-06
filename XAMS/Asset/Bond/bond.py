@@ -141,6 +141,7 @@ class Bond(BasePageXams):
                     findelement.send_keys(Keys.CONTROL, 'a')
                     findelement.send_keys(Keys.BACK_SPACE)
                     findelement.send_keys(value[n])
+            # 所有操作为"下拉选择"的元素
             elif menu[n] in ['基本信息_币种',
                              '基本信息_产品类型',
                              '基本信息_产品分类',
@@ -189,6 +190,7 @@ class Bond(BasePageXams):
                 else:
                     findelement.click()
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(value[n]))
+            # 所有操作为"点击"或"勾选"的元素
             elif menu[n] in ['基本信息_是否资讯覆盖',
                              '基本信息_是否提前兑付及赎回',
                              '基本信息_是否含权',
@@ -224,6 +226,20 @@ class Bond(BasePageXams):
                 self.findxpath_sendkey(customxpath[0], customvalue[0])
                 self.findxpath_click(customxpath[1])
                 self.findxpath_sendkey(customxpath[1], customvalue[1])
+            elif menu[n] == '计息信息_期限':
+                timexpath = self.base.sheet_xpath_dic(sheet29).get(menu[n]).split('_')
+                timevalue = value[n].split(',')
+                timelimit = self.findxpath(timexpath[0])
+                timelimit.send_keys(Keys.CONTROL, 'a')
+                timelimit.send_keys(Keys.BACK_SPACE)
+                timelimit.send_keys(timevalue[0])
+                self.findxpath_click(timexpath[1])
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(timevalue[1]))
+            elif menu[n] == '担保信息维护_担保机构':
+                findelement.send_keys(value[n])
+                sleep(1)
+                findelement.send_keys(Keys.ARROW_DOWN)
+                findelement.send_keys(Keys.ENTER)
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False

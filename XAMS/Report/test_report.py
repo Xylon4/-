@@ -43,7 +43,7 @@ class TestReport:
             second_menu = f'{menu[0]}-{menu[1]}'
             address = None
             if second_menu == '估值管理-估值表':
-                self.test_valuation_excel(stagemark, menu, value)
+                self.test_valuation_excel(stagemark, menu, value, address)
             elif second_menu == '综合管理-表1-1产品募集余额统计表':
                 self.test_product_remain_excel(stagemark, menu, value, address)
             elif second_menu == '综合管理-表1-2产品募集兑付统计表':
@@ -181,8 +181,8 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_valuation_excel(self, stagemark, menu, value):
-        self.valuation = Valuation()
+    def test_valuation_excel(self, stagemark, menu, value, address):
+        self.valuation = Valuation(address)
         assert self.valuation.valuation_excel(menu, value)
         print(f"{sheet4}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
