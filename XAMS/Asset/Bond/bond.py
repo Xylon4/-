@@ -90,7 +90,7 @@ class Bond(BasePageXams):
             elif menu[n] == '搜索':
                 findelement.click()
                 # self.wait_for_miss(120, wait)
-                sleep(2)
+                sleep(1)
             # 所有操作为"输入"的元素
             elif menu[n] in ['基本信息_代码',
                              '基本信息_银行间代码',
@@ -132,9 +132,19 @@ class Bond(BasePageXams):
                              '计息信息_到期日',
                              '计息信息_首次付息日',
                              '计息信息_利率(%)',
+                             '计息信息_利差(BP)',
+                             '计息信息_浮动利率乘数',
+                             '计息信息_首规则起息日',
+                             '计息信息_首周期定息日',
+                             '计息信息_首周期定息值(%)',
+                             '计息信息_浮动上限(%)',
+                             '计息信息_浮动下线(%)',
                              '评级信息_债项发行评级机构（外部）',
                              '利率调整_利率（%）',
-                             '利率调整_利率调整日',
+                             '利率调整_利率调整日_固定',
+                             '利率调整_利率调整日_浮动',
+                             '利率调整_利差（BP）',
+                             '利率调整_利率乘数',
                              '本金序列_还款日期',
                              '本金序列_本次偿还本金'
                              ]:
@@ -180,6 +190,9 @@ class Bond(BasePageXams):
                              '计息信息_计息调整规则',
                              '计息信息_付息频率',
                              '计息信息_支付调整',
+                             '计息信息_重置日调整规则',
+                             '计息信息_重置频率',
+                             '计息信息_定盘日调整规则',
                              '评级信息_债项当前评级（外部）',
                              '评级信息_债项评级机构（外部）',
                              '评级信息_债项评级(内部)',
@@ -194,7 +207,12 @@ class Bond(BasePageXams):
                     findelement.click()
                     self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(value[n]))
             # 所有操作为"点击"或"勾选"的元素
-            elif menu[n] in ['基本信息_是否资讯覆盖',
+            elif menu[n] in ['基本信息_发行量(亿元)',
+                             '债券发行量_新增',
+                             '债券发行量_删除',
+                             '债券发行量_保存',
+                             '债券发行量_返回',
+                             '基本信息_是否资讯覆盖',
                              '基本信息_是否提前兑付及赎回',
                              '基本信息_是否含权',
                              '自定义含权日期_新增',
@@ -209,8 +227,10 @@ class Bond(BasePageXams):
                              '利率调整_修改',
                              '利率调整_删除',
                              '利率调整_勾选框',
-                             '利率调整_确定',
-                             '利率调整_取消',
+                             '利率调整_确定_固定',
+                             '利率调整_取消_固定',
+                             '利率调整_确定_浮动',
+                             '利率调整_取消_浮动',
                              '本金序列_新增',
                              '本金序列_修改',
                              '本金序列_删除',
@@ -224,6 +244,16 @@ class Bond(BasePageXams):
                              '复核_否'
                              ]:
                 findelement.click()
+            elif menu[n] == '债券发行量_发行量(亿元)':
+                circulation = value[n].split(',')
+                begdate = self.findxpath(self.base.sheet_xpath_dic(sheet29).get('债券发行量_发行开始日期'))
+                findelement.send_keys(Keys.CONTROL, 'a')
+                findelement.send_keys(Keys.BACK_SPACE)
+                findelement.send_keys(circulation[0])
+                begdate.send_keys(Keys.CONTROL, 'a')
+                begdate.send_keys(Keys.BACK_SPACE)
+                begdate.send_keys(circulation[1])
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get('债券发行量_确定'))
             elif menu[n] == '保存':
                 findelement.click()
                 # self.wait_for_miss(60, wait)
@@ -236,19 +266,20 @@ class Bond(BasePageXams):
                 sleep(1)
                 findelement.send_keys(Keys.ARROW_DOWN)
                 findelement.send_keys(Keys.ENTER)
-            elif menu[n] == '自定义日期_利率补偿(%)':
-                customxpath = self.base.sheet_xpath_dic(sheet29).get(menu[n]).split('_')
+            elif menu[n] == '自定义含权日期_自定义日期':
                 customvalue = value[n].split(',')
-                self.findxpath_click(customxpath[0])
-                self.findxpath_sendkey(customxpath[0], customvalue[0])
-                self.findxpath_click(customxpath[1])
-                self.findxpath_sendkey(customxpath[1], customvalue[1])
-            elif menu[n] == '计息信息_期限':
+                compensation = self.findxpath(self.base.sheet_xpath_dic(sheet29).get('自定义含权日期_利率补偿(%)'))
+                findelement.click()
+                findelement.send_keys(customvalue[0])
+                compensation.click()
+                compensation.send_keys(customvalue[1])
+            elif menu[n] in ['计息信息_期限', '计息信息_定盘日偏移']:  # 注意命名规范：模块名_字段名
+                droplist = menu[n].split('_')
                 timevalue = value[n].split(',')
                 findelement.send_keys(Keys.CONTROL, 'a')
                 findelement.send_keys(Keys.BACK_SPACE)
                 findelement.send_keys(timevalue[0])
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get('期限_下拉框'))
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(f'{droplist[1]}_下拉框'))
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(timevalue[1]))
             elif menu[n] == '基本信息_市场类型':
                 marketvalue = value[n].split(',')
