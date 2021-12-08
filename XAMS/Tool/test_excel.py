@@ -367,6 +367,8 @@ class TestExcel:
         # print(c.keys())
         # print(c.get(a[0]))
         # print(a.get('temp01'))  # 通过key获取value
-        z = '//div[2]/div[3]//td[1]/div[@style="text-align:center;"]_//div[2]/div[3]//td[2]/div[@style="text-align:center;"]'
-        y = z.split('_')
-        print(y)
+        z = '//div[1]/span/div/div[1]//input[starts-with(@name,"numberfield")]#//div[1]/span/div/div[1]//input[starts-with(@name,"xcc_timeUnitCombox")]'
+        y = z.split('#')
+        # print(y)
+        timexpath = self.sheet_xpath_dic('债券类资产(新)').get('计息信息_期限').split('#')
+        print(timexpath)

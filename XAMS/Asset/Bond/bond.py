@@ -89,7 +89,8 @@ class Bond(BasePageXams):
                     findelement.send_keys(value[n])
             elif menu[n] == '搜索':
                 findelement.click()
-                self.wait_for_miss(120, wait)
+                # self.wait_for_miss(120, wait)
+                sleep(2)
             # 所有操作为"输入"的元素
             elif menu[n] in ['基本信息_代码',
                              '基本信息_银行间代码',
@@ -148,10 +149,9 @@ class Bond(BasePageXams):
             elif menu[n] in ['基本信息_币种',
                              '基本信息_产品类型',
                              '基本信息_产品分类',
+                             '基本信息_资产化类型',
                              '基本信息_报价方式',
-                             '基本信息_托管场所',
                              '基本信息_清偿等级',
-                             '基本信息_市场类型',
                              '基本信息_簿记场所',
                              '基本信息_发行方式(按对象划分)',
                              '含权信息_含权信息',
@@ -217,13 +217,23 @@ class Bond(BasePageXams):
                              '本金序列_勾选框',
                              '本金序列_确定',
                              '本金序列_取消',
-                             '保存',
                              '重置',
-                             '返回'
+                             '返回',
+                             '搜索_勾选框',
+                             '复核_是',
+                             '复核_否'
                              ]:
                 findelement.click()
-            elif menu[n] == '基本信息_发行机构':
+            elif menu[n] == '保存':
+                findelement.click()
+                # self.wait_for_miss(60, wait)
+                sleep(2)
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get('确定'))
+            elif menu[n] in ['基本信息_发行机构', '担保信息维护_担保机构']:
                 findelement.send_keys(value[n])
+                findelement.send_keys(Keys.SPACE)
+                findelement.send_keys(Keys.BACK_SPACE)
+                sleep(1)
                 findelement.send_keys(Keys.ARROW_DOWN)
                 findelement.send_keys(Keys.ENTER)
             elif menu[n] == '自定义日期_利率补偿(%)':
@@ -234,19 +244,35 @@ class Bond(BasePageXams):
                 self.findxpath_click(customxpath[1])
                 self.findxpath_sendkey(customxpath[1], customvalue[1])
             elif menu[n] == '计息信息_期限':
-                timexpath = self.base.sheet_xpath_dic(sheet29).get(menu[n]).split('_')
                 timevalue = value[n].split(',')
-                timelimit = self.findxpath(timexpath[0])
-                timelimit.send_keys(Keys.CONTROL, 'a')
-                timelimit.send_keys(Keys.BACK_SPACE)
-                timelimit.send_keys(timevalue[0])
-                self.findxpath_click(timexpath[1])
+                findelement.send_keys(Keys.CONTROL, 'a')
+                findelement.send_keys(Keys.BACK_SPACE)
+                findelement.send_keys(timevalue[0])
+                self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get('期限_下拉框'))
                 self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(timevalue[1]))
-            elif menu[n] == '担保信息维护_担保机构':
-                findelement.send_keys(value[n])
-                sleep(1)
-                findelement.send_keys(Keys.ARROW_DOWN)
-                findelement.send_keys(Keys.ENTER)
+            elif menu[n] == '基本信息_市场类型':
+                marketvalue = value[n].split(',')
+                if marketvalue[0] == '市场类型_上交所' and marketvalue[1] != '托管场所_中国证券登记公司上海分公司':
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
+                elif marketvalue[0] == '市场类型_深交所' and marketvalue[1] != '托管场所_中国证券登记公司深圳分公司':
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
+                elif marketvalue[0] == '市场类型_其他' and marketvalue[1] != '托管场所_其他':
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
+                elif marketvalue[0] == '市场类型_柜台' and marketvalue[1] != '托管场所_其他':
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
+                elif marketvalue[0] in ['市场类型_银行间', '市场类型_其他市场', '市场类型_中证报价系统'] and marketvalue[1] not in [
+                    '托管场所_中央国债登记结算有限责任公司', '托管场所_银行间市场清算所股份有限公司']:
+                    print(f'值"{value[n]}"输入错误，请检查')
+                    return False
+                else:
+                    findelement.click()
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(marketvalue[0]))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get('基本信息_托管场所'))
+                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(marketvalue[1]))
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
