@@ -17,7 +17,8 @@ import yaml
 #     return registry
 
 
-Excel_basedata = 'E:\菜单基础数据维护.xlsx'
+Excel_basedata_zs = 'E:\菜单基础数据维护_浙商.xlsx'
+Excel_basedata_nj = 'E:\菜单基础数据维护_南京.xlsx'
 Excel_custom = 'E:\自动化测试用例模板.xlsx'
 # 获取sheet，通过Excel表格名称()获取工作表
 sheet1 = '资产池注册表'

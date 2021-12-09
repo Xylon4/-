@@ -5,7 +5,7 @@
 import pandas as pd
 import xlrd
 
-from XAMS.Tool.conftest import Excel_basedata, Excel_custom, universal_sheet
+from XAMS.Tool.conftest import Excel_basedata_zs, Excel_custom, universal_sheet
 
 
 class TestExcel:
@@ -13,7 +13,7 @@ class TestExcel:
     def test_list(self):
         # wb = xlrd.open_workbook_xls()
         # 打开excel文件
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         # 获取sheet，通过Excel表格名称()获取工作表
         sheet = wb.sheet_by_name('一级菜单')
         # 创建空list
@@ -28,7 +28,7 @@ class TestExcel:
     # 获取sheet页第一列数据生成list
     def sheet_list(self, sheetname):
         # 打开excel文件
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         # 获取sheet，通过Excel表格名称()获取工作表
         sheet = wb.sheet_by_name(sheetname)
         dat = []
@@ -42,7 +42,7 @@ class TestExcel:
     # 定义获取整行数据，并将数据存入字典{}的方法
     def test_dic(self):
         # 打开excel文件
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         # 通过名称定位所有sheet
         sheet1 = wb.sheet_by_name('一级菜单')
         sheet2 = wb.sheet_by_name('二级菜单')
@@ -69,7 +69,7 @@ class TestExcel:
 
     # 获取指定单元格内容方法
     def get_cell_value(self, name, rowx, colx):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet1 = wb.sheet_by_name('资产池注册表')
         sheet2 = wb.sheet_by_name('产品信息表')
         sheet3 = wb.sheet_by_name('资负信息注册(浙商)')
@@ -82,7 +82,7 @@ class TestExcel:
 
     # 创建"一级菜单"xpath字典
     def first_menu(self):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name('一级菜单')
         # 创建空字典
         dat = {}
@@ -96,7 +96,7 @@ class TestExcel:
 
     # 创建"二级菜单"xpath字典
     def second_menu(self):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name('二级菜单')
         # 创建空字典
         dat = {}
@@ -111,7 +111,7 @@ class TestExcel:
 
     # 创建"二级菜单"映射一级菜单字典
     def secondmatch_menu(self):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name('二级菜单')
         # 创建空字典
         dat = {}
@@ -125,7 +125,7 @@ class TestExcel:
 
     # 创建"资产池注册表"操作点xpath字典
     def registry_xpath(self):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name('资产池注册表')
         # 创建空字典
         dat = {}
@@ -139,7 +139,7 @@ class TestExcel:
 
     # 创建"资产池注册表"操作列表
     def registry_list(self):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name('资产池注册表')
         # 获取"执行操作"列的数据列表
         dat = sheet.col_types(3, 1)  # 统计sheet中第四列第二行开始有值的单元格，有值的标记为1，空为0
@@ -148,7 +148,7 @@ class TestExcel:
 
     # 创建"产品信息表"操作点xpath字典
     def product_xpath(self):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name('产品信息表')
         # 创建空字典
         dat = {}
@@ -162,7 +162,7 @@ class TestExcel:
 
     # 创建"产品信息表"操作列表
     def product_list(self):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name('产品信息表')
         # 获取"执行操作"列的数据列表
         dat = sheet.col_types(3, 1)
@@ -170,7 +170,7 @@ class TestExcel:
 
     # 创建"资负信息注册(浙商)"操作点xpath字典
     def registration_xpath(self):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name('资负信息注册(浙商)')
         # 创建空字典
         dat = {}
@@ -184,7 +184,7 @@ class TestExcel:
 
     # 创建"估值表"操作点xpath字典
     def valuation_xpath(self):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name('估值表')
         # 创建空字典
         dat = {}
@@ -198,7 +198,7 @@ class TestExcel:
 
     # 创建"表1-1产品募集余额统计表"操作点xpath字典
     def product_remain_xpath(self):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name('表1-1产品募集余额统计表')
         # 创建空字典
         dat = {}
@@ -212,7 +212,7 @@ class TestExcel:
 
     # 创建sheet页对应操作点xpath字典
     def sheet_xpath_dic(self, sheet_name):
-        wb = xlrd.open_workbook(Excel_basedata)
+        wb = xlrd.open_workbook(Excel_basedata_zs)
         sheet = wb.sheet_by_name(sheet_name)
         # 创建空字典
         dat = {}

@@ -18,10 +18,13 @@ rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
 # 浙商环境
-default_address1 = 'http://172.19.6.44:8001/xIR_J2EE'
+zs_address1 = 'http://191.168.0.206:8001/xIR_J2EE'
+
+# 南京环境
+nj_address1 = 'http://172.19.6.44:8001/xIR_J2EE'
 
 # 案例运行环境
-default_address = 'http://191.168.0.206:8001/xIR_J2EE'
+default_address = nj_address1
 
 # 报表列表
 report_list = ['投组管理-投组单元资产明细表(穿透)',
