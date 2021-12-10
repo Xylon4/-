@@ -6,7 +6,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet29
+from XAMS.Report.conftest import sheet29, Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
@@ -17,7 +17,7 @@ class Bond(BasePageXams):
         print(menu)
         print(value)
         self.base = TestExcel()
-        basepagewait = (By.XPATH, self.base.sheet_xpath_dic(sheet29).get('首页加载等待'))
+        basepagewait = (By.XPATH, self.base.sheet_xpath_dic(Excel_basedata_zs, sheet29).get('首页加载等待'))
         self.wait_for_visit(120, basepagewait)
         # 点击一级菜单
         self.findxpath_click(self.base.first_menu().get(menu[0]))
@@ -27,8 +27,9 @@ class Bond(BasePageXams):
         l = len(menu)
         n = 2
         while n < l:
-            wait = (By.XPATH, self.base.sheet_xpath_dic(sheet29).get('加载等待'))
-            findelement = self.findxpath(self.base.sheet_xpath_dic(sheet29).get(menu[n]))
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet29)
+            findelement = self.findxpath(targetsheet.get(menu[n]))
+            wait = (By.XPATH, targetsheet.get('加载等待'))
             if menu[n] == '导出':
                 findelement.click()
             elif menu[n] == 'Excel(当前页)':
@@ -55,7 +56,7 @@ class Bond(BasePageXams):
                     return False
                 else:
                     findelement.click()
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(value[n]))
+                    self.findxpath_click(targetsheet.get(value[n]))
                     sleep(1)  # 点击后立即生效查询
             elif menu[n] == '代码':
                 if value[n] == '置空':
@@ -68,13 +69,13 @@ class Bond(BasePageXams):
             elif menu[n] == '产品分类':
                 if value[n] == '置空':
                     findelement.click()
-                    selectall = self.findxpath(self.base.sheet_xpath_dic(sheet29).get('全选'))
+                    selectall = self.findxpath(targetsheet.get('全选'))
                     action = ActionChains(self.driver)
                     action.double_click(selectall).perform()
                     findelement.click()  # 收起下拉框
                 else:
                     findelement.click()
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(value[n]))
+                    self.findxpath_click(targetsheet.get(value[n]))
                     findelement.click()  # 收起下拉框
             elif menu[n] == '条款是否完整':
                 if value[n] not in ['完整', '不完整', '置空']:
@@ -214,13 +215,13 @@ class Bond(BasePageXams):
                              '不规则计息区间_定盘日调整方式',
                              '不规则计息区间_支付调整'
                              ]:
-                elementlist = self.base.sheet_xpath_dic(sheet29).keys()
+                elementlist = targetsheet.keys()
                 if value[n] not in elementlist:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
                 else:
                     findelement.click()
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(value[n]))
+                    self.findxpath_click(targetsheet.get(value[n]))
             # 所有操作为"点击"或"勾选"的元素
             elif menu[n] in ['基本信息_发行量(亿元)',
                              '债券发行量_新增',
@@ -272,19 +273,19 @@ class Bond(BasePageXams):
                 findelement.click()
             elif menu[n] == '债券发行量_发行量(亿元)':
                 circulation = value[n].split(',')
-                begdate = self.findxpath(self.base.sheet_xpath_dic(sheet29).get('债券发行量_发行开始日期'))
+                begdate = self.findxpath(targetsheet.get('债券发行量_发行开始日期'))
                 findelement.send_keys(Keys.CONTROL, 'a')
                 findelement.send_keys(Keys.BACK_SPACE)
                 findelement.send_keys(circulation[0])
                 begdate.send_keys(Keys.CONTROL, 'a')
                 begdate.send_keys(Keys.BACK_SPACE)
                 begdate.send_keys(circulation[1])
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get('债券发行量_确定'))
+                self.findxpath_click(targetsheet.get('债券发行量_确定'))
             elif menu[n] == '保存':
                 findelement.click()
                 # self.wait_for_miss(60, wait)
                 sleep(2)
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get('确定'))
+                self.findxpath_click(targetsheet.get('确定'))
             elif menu[n] in ['基本信息_发行机构', '担保信息维护_担保机构']:
                 findelement.send_keys(value[n])
                 findelement.send_keys(Keys.SPACE)
@@ -294,7 +295,7 @@ class Bond(BasePageXams):
                 findelement.send_keys(Keys.ENTER)
             elif menu[n] == '自定义含权日期_自定义日期':
                 customvalue = value[n].split(',')
-                compensation = self.findxpath(self.base.sheet_xpath_dic(sheet29).get('自定义含权日期_利率补偿(%)'))
+                compensation = self.findxpath(targetsheet.get('自定义含权日期_利率补偿(%)'))
                 findelement.click()
                 findelement.send_keys(customvalue[0])
                 compensation.click()
@@ -305,8 +306,8 @@ class Bond(BasePageXams):
                 findelement.send_keys(Keys.CONTROL, 'a')
                 findelement.send_keys(Keys.BACK_SPACE)
                 findelement.send_keys(timevalue[0])
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(f'{droplist[1]}_下拉框'))
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(timevalue[1]))
+                self.findxpath_click(targetsheet.get(f'{droplist[1]}_下拉框'))
+                self.findxpath_click(targetsheet.get(timevalue[1]))
             elif menu[n] == '基本信息_市场类型':
                 marketvalue = value[n].split(',')
                 if marketvalue[0] == '市场类型_上交所' and marketvalue[1] != '托管场所_中国证券登记公司上海分公司':
@@ -327,9 +328,9 @@ class Bond(BasePageXams):
                     return False
                 else:
                     findelement.click()
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(marketvalue[0]))
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get('基本信息_托管场所'))
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet29).get(marketvalue[1]))
+                    self.findxpath_click(targetsheet.get(marketvalue[0]))
+                    self.findxpath_click(targetsheet.get('基本信息_托管场所'))
+                    self.findxpath_click(targetsheet.get(marketvalue[1]))
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False

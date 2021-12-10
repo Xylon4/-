@@ -5,7 +5,7 @@ from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet21
+from XAMS.Report.conftest import sheet21, Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
@@ -24,34 +24,32 @@ class ProductDurationRegistration(BasePageXams):
         l = len(menu)
         n = 2
         while n < l:
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet21)
+            findelement = self.findxpath(targetsheet.get(menu[n]))
+            wait = (By.XPATH, targetsheet.get('加载等待'))
             if menu[n] == '导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet21).get(menu[n]))
-                wait = (By.XPATH, self.base.sheet_xpath_dic(sheet21).get('加载等待'))
+                findelement.click()
                 self.wait_for_miss(120, wait)
             elif menu[n] == '产品名称或代码':
                 if value[n] == '置空':
-                    asset = self.findxpath(self.base.sheet_xpath_dic(sheet21).get(menu[n]))
-                    asset.send_keys(Keys.CONTROL, 'a')
-                    asset.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    asset = self.findxpath(self.base.sheet_xpath_dic(sheet21).get(menu[n]))
-                    asset.send_keys(Keys.CONTROL, 'a')
-                    asset.send_keys(Keys.BACK_SPACE)
-                    asset.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '报表日':
                 if value[n] == '置空':
-                    reportdate = self.findxpath(self.base.sheet_xpath_dic(sheet21).get(menu[n]))
-                    reportdate.send_keys(Keys.CONTROL, 'a')
-                    reportdate.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    reportdate = self.findxpath(self.base.sheet_xpath_dic(sheet21).get(menu[n]))
-                    reportdate.send_keys(Keys.CONTROL, 'a')
-                    reportdate.send_keys(Keys.BACK_SPACE)
-                    reportdate.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '搜索':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet21).get(menu[n]))
+                findelement.click()
                 sleep(1)  # 强制等待用来过渡到显式等待
-                wait = (By.XPATH, self.base.sheet_xpath_dic(sheet21).get('加载等待'))
+                wait = (By.XPATH, targetsheet.get('加载等待'))
                 self.wait_for_miss(120, wait)
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')

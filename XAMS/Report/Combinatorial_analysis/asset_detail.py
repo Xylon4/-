@@ -5,7 +5,7 @@ from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet23
+from XAMS.Report.conftest import sheet23, Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
@@ -24,134 +24,119 @@ class AssetDetail(BasePageXams):
         l = len(menu)
         n = 2
         while n < l:
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet23)
+            findelement = self.findxpath(targetsheet.get(menu[n]))
+            wait = (By.XPATH, targetsheet.get('加载等待'))
             if menu[n] == '导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
+                findelement.click()
             elif menu[n] == 'Excel(当前页)':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                wait = (By.XPATH, self.base.sheet_xpath_dic(sheet23).get('加载等待'))
+                findelement.click()
                 self.wait_for_miss(120, wait)
             elif menu[n] == 'Excel(所有数据)':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                wait = (By.XPATH, self.base.sheet_xpath_dic(sheet23).get('加载等待'))
+                findelement.click()
                 self.wait_for_miss(120, wait)
             elif menu[n] == '资产代码':
                 if value[n] == '置空':
-                    asset = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    asset.send_keys(Keys.CONTROL, 'a')
-                    asset.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    asset = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    asset.send_keys(Keys.CONTROL, 'a')
-                    asset.send_keys(Keys.BACK_SPACE)
-                    asset.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
                     sleep(1)
-                    asset.send_keys(Keys.ARROW_DOWN)
-                    asset.send_keys(Keys.ENTER)
+                    findelement.send_keys(Keys.ARROW_DOWN)
+                    findelement.send_keys(Keys.ENTER)
             elif menu[n] == '资产类型':
                 if value[n] == '置空':
-                    assettype = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    assettype.send_keys(Keys.CONTROL, 'a')
-                    assettype.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    assettype = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    assettype.send_keys(Keys.CONTROL, 'a')
-                    assettype.send_keys(Keys.BACK_SPACE)
-                    assettype.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet23).get('资产类型选择'))
+                    self.findxpath_click(targetsheet.get('资产类型选择'))
             elif menu[n] == '开始日期':
                 if value[n] == '置空':
-                    startdate = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    startdate.send_keys(Keys.CONTROL, 'a')
-                    startdate.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    startdate = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    startdate.send_keys(Keys.CONTROL, 'a')
-                    startdate.send_keys(Keys.BACK_SPACE)
-                    startdate.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '结束日期':
                 if value[n] == '置空':
-                    enddate = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    enddate.send_keys(Keys.CONTROL, 'a')
-                    enddate.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    enddate = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    enddate.send_keys(Keys.CONTROL, 'a')
-                    enddate.send_keys(Keys.BACK_SPACE)
-                    enddate.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '是否穿透':
                 if value[n] not in ['是', '否']:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
                 else:
-                    penetration = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    penetration.send_keys(Keys.CONTROL, 'a')
-                    penetration.send_keys(Keys.BACK_SPACE)
-                    penetration.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '投组单元':
                 if value[n] == '置空':
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
-                    unit.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet23).get('投组下拉选择'))
+                    self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '发行人/融资人/管理人':
                 if value[n] == '置空':
-                    manager = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    manager.send_keys(Keys.CONTROL, 'a')
-                    manager.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    manager = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    manager.send_keys(Keys.CONTROL, 'a')
-                    manager.send_keys(Keys.BACK_SPACE)
-                    manager.send_keys(value[n])
-                    manager.click()
-                    manager.send_keys(Keys.SPACE)  # 加一个空格解决全名选不中的问题
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
+                    findelement.click()
+                    findelement.send_keys(Keys.SPACE)  # 加一个空格解决全名选不中的问题
                     sleep(1)
-                    manager.send_keys(Keys.ARROW_DOWN)
-                    manager.send_keys(Keys.ENTER)
+                    findelement.send_keys(Keys.ARROW_DOWN)
+                    findelement.send_keys(Keys.ENTER)
             elif menu[n] == '估值偏离度符号':
-                input = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
                 if value[n] == '置空':
-                    input.send_keys(Keys.CONTROL, 'a')
-                    input.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 elif value[n] == '<':
-                    input.send_keys(Keys.CONTROL, 'a')
-                    input.send_keys(Keys.BACK_SPACE)
-                    input.send_keys(value[n])
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet23).get('符号下拉选择'))
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
+                    self.findxpath_click(targetsheet.get('符号下拉选择'))
                 elif value[n] == '=':
-                    input.send_keys(Keys.CONTROL, 'a')
-                    input.send_keys(Keys.BACK_SPACE)
-                    input.send_keys(value[n])
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet23).get('符号下拉选择'))
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
+                    self.findxpath_click(targetsheet.get('符号下拉选择'))
                 elif value[n] == '>':
-                    input.send_keys(Keys.CONTROL, 'a')
-                    input.send_keys(Keys.BACK_SPACE)
-                    input.send_keys(value[n])
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet23).get('符号下拉选择'))
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
+                    self.findxpath_click(targetsheet.get('符号下拉选择'))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '估值偏离度数值':
                 if value[n] == '置空':
-                    val = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    val.send_keys(Keys.CONTROL, 'a')
-                    val.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    val = self.findxpath(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
-                    val.send_keys(Keys.CONTROL, 'a')
-                    val.send_keys(Keys.BACK_SPACE)
-                    val.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '搜索':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet23).get(menu[n]))
+                findelement.click()
                 sleep(1)  # 强制等待用来过渡到显式等待
-                wait = (By.XPATH, self.base.sheet_xpath_dic(sheet23).get('加载等待'))
+                wait = (By.XPATH, targetsheet.get('加载等待'))
                 self.wait_for_miss(120, wait)
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')

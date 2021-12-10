@@ -5,7 +5,7 @@ from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet27
+from XAMS.Report.conftest import sheet27, Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
@@ -24,25 +24,25 @@ class AssetStructure(BasePageXams):
         l = len(menu)
         n = 2
         while n < l:
-            wait = (By.XPATH, self.base.sheet_xpath_dic(sheet27).get('加载等待'))
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet27)
+            findelement = self.findxpath(targetsheet.get(menu[n]))
+            wait = (By.XPATH, targetsheet.get('加载等待'))
             if menu[n] == '导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
+                findelement.click()
             elif menu[n] == 'Excel(当前页)':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
+                findelement.click()
             elif menu[n] == 'Excel(所有数据)':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
+                findelement.click()
             elif menu[n] == '全部展开':
-                tree = self.findxpath(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                if tree.get_attribute('textContent') == menu[n]:
-                    tree.click()
+                if findelement.get_attribute('textContent') == menu[n]:
+                    findelement.click()
                     self.wait_for_miss(120, wait)
                 else:
                     print(f'请检查当前按钮显示是否为"{menu[n]}"，若显示一致，请联系测试开发')
                     return False
             elif menu[n] == '一键收起':
-                tree = self.findxpath(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                if tree.get_attribute('textContent') == menu[n]:
-                    tree.click()
+                if findelement.get_attribute('textContent') == menu[n]:
+                    findelement.click()
                     self.wait_for_miss(120, wait)
                 else:
                     print(f'请检查当前按钮显示是否为"{menu[n]}"，若显示一致，请联系测试开发')
@@ -52,70 +52,63 @@ class AssetStructure(BasePageXams):
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
                 else:
-                    penetration = self.findxpath(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                    penetration.send_keys(Keys.CONTROL, 'a')
-                    penetration.send_keys(Keys.BACK_SPACE)
-                    penetration.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '所属投组':
                 if value[n] == '置空':
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
-                    unit.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get('投组下拉选择'))
+                    self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '开始日期':
                 if value[n] == '置空':
-                    startdate = self.findxpath(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                    startdate.send_keys(Keys.CONTROL, 'a')
-                    startdate.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    startdate = self.findxpath(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                    startdate.send_keys(Keys.CONTROL, 'a')
-                    startdate.send_keys(Keys.BACK_SPACE)
-                    startdate.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '结束日期':
                 if value[n] == '置空':
-                    startdate = self.findxpath(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                    startdate.send_keys(Keys.CONTROL, 'a')
-                    startdate.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    startdate = self.findxpath(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
-                    startdate.send_keys(Keys.CONTROL, 'a')
-                    startdate.send_keys(Keys.BACK_SPACE)
-                    startdate.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '数据来源':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
+                findelement.click()
                 if value[n] == '估值核算':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(value[n]))
+                    self.findxpath_click(targetsheet.get(value[n]))
                 elif value[n] == '理财资管':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(value[n]))
+                    self.findxpath_click(targetsheet.get(value[n]))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '搜索':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
+                findelement.click()
                 # 搜索结束判断依据缺失，产品要改
             elif menu[n] == '图形展示':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(menu[n]))
+                findelement.click()
                 show = value[n].split(',')  # str类型转换为list，用,分隔
                 if show[1] == '查询':
-                    searchdate = self.findxpath(self.base.sheet_xpath_dic(sheet27).get('查询日期'))
+                    searchdate = self.findxpath(targetsheet.get('查询日期'))
                     searchdate.send_keys(Keys.CONTROL, 'a')
                     searchdate.send_keys(Keys.BACK_SPACE)
                     searchdate.send_keys(show[0])
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(show[1]))
+                    self.findxpath_click(targetsheet.get(show[1]))
                     sleep(1)
                 elif show[1] == '返回':
-                    searchdate = self.findxpath(self.base.sheet_xpath_dic(sheet27).get('查询日期'))
+                    searchdate = self.findxpath(targetsheet.get('查询日期'))
                     searchdate.send_keys(Keys.CONTROL, 'a')
                     searchdate.send_keys(Keys.BACK_SPACE)
                     searchdate.send_keys(show[0])
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet27).get(show[1]))
+                    self.findxpath_click(targetsheet.get(show[1]))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False

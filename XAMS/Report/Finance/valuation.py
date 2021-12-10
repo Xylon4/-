@@ -4,6 +4,7 @@ from time import sleep
 
 from selenium.webdriver.common.keys import Keys
 
+from XAMS.Report.conftest import Excel_basedata_zs, sheet4
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
@@ -22,40 +23,38 @@ class Valuation(BasePageXams):
         l = len(menu)
         n = 2
         while n < l:
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet4)
+            findelement = self.findxpath(targetsheet.get(menu[n]))
             if menu[n] == '导出':
-                self.findxpath_click(self.base.valuation_xpath().get(menu[n]))
+                findelement.click()
             elif menu[n] == 'Excel(当前页)':
-                self.findxpath_click(self.base.valuation_xpath().get(menu[n]))
+                findelement.click()
             elif menu[n] == 'Excel(所有数据)':
-                self.findxpath_click(self.base.valuation_xpath().get(menu[n]))
+                findelement.click()
             elif menu[n] == '批量导出':
-                self.findxpath_click(self.base.valuation_xpath().get(menu[n]))
+                findelement.click()
             elif menu[n] == '生成估值表':
-                self.findxpath_click(self.base.valuation_xpath().get(menu[n]))
+                findelement.click()
             elif menu[n] == '查询日期':
                 if value[n] == '置空':
-                    date = self.findxpath(self.base.valuation_xpath().get(menu[n]))
-                    date.send_keys(Keys.CONTROL, 'a')
-                    date.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    date = self.findxpath(self.base.valuation_xpath().get(menu[n]))
-                    date.send_keys(Keys.CONTROL, 'a')
-                    date.send_keys(Keys.BACK_SPACE)
-                    date.send_keys(value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '投组单元':
                 if value[n] == '置空':
-                    unit = self.findxpath(self.base.valuation_xpath().get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    unit = self.findxpath(self.base.valuation_xpath().get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.valuation_xpath().get('投组单元'), value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    self.findxpath_sendkey(targetsheet.get('投组单元'), value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.valuation_xpath().get('投组下拉选择'))
+                    self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '搜索':
-                self.findxpath_click(self.base.valuation_xpath().get(menu[n]))
+                findelement.click()
                 sleep(1)
             n = n + 1
         return True

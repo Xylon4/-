@@ -4,7 +4,7 @@ from time import sleep
 from selenium.webdriver.common.keys import Keys
 
 from XAMS.basepage_XAMS import BasePageXams
-from XAMS.Report.conftest import sheet2
+from XAMS.Report.conftest import sheet2, Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -141,68 +141,70 @@ class Product(BasePageXams):
         l = len(menu)
         n = 2
         while n < l:
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet2)
+            findelement = self.findxpath(targetsheet.get(menu[n]))
             if menu[n] == '导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                findelement.click()
             elif menu[n] == '批量导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                findelement.click()
             elif menu[n] == '投组':
                 if value[n] == '置空':
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    unit = self.findxpath(targetsheet.get(menu[n]))
                     unit.send_keys(Keys.CONTROL, 'a')
                     unit.send_keys(Keys.BACK_SPACE)
                 else:
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    unit = self.findxpath(targetsheet.get(menu[n]))
                     unit.send_keys(Keys.CONTROL, 'a')
                     unit.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet2).get(menu[n]), value[n])
+                    self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get('投组下拉选择'))
+                    self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '产品名称或代码':
                 if value[n] == '置空':
-                    code = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    code = self.findxpath(targetsheet.get(menu[n]))
                     code.send_keys(Keys.CONTROL, 'a')
                     code.send_keys(Keys.BACK_SPACE)
                 else:
-                    code = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    code = self.findxpath(targetsheet.get(menu[n]))
                     code.send_keys(Keys.CONTROL, 'a')
                     code.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet2).get(menu[n]), value[n])
+                    self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
             elif menu[n] == '搜索':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get('折叠按钮'))
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                self.findxpath_click(targetsheet.get('折叠按钮'))
+                findelement.click()
             elif menu[n] == '起息日起':
                 if value[n] == '置空':
-                    start_date = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    start_date = self.findxpath(targetsheet.get(menu[n]))
                     start_date.send_keys(Keys.CONTROL, 'a')
                     start_date.send_keys(Keys.BACK_SPACE)
                 else:
-                    start_date = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    start_date = self.findxpath(targetsheet.get(menu[n]))
                     start_date.send_keys(Keys.CONTROL, 'a')
                     start_date.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet2).get(menu[n]), value[n])
+                    self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
             elif menu[n] == '起息日止':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get('折叠按钮'))
+                self.findxpath_click(targetsheet.get('折叠按钮'))
                 if value[n] == '置空':
-                    start_date = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    start_date = self.findxpath(targetsheet.get(menu[n]))
                     start_date.send_keys(Keys.CONTROL, 'a')
                     start_date.send_keys(Keys.BACK_SPACE)
                 else:
-                    start_date = self.findxpath(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                    start_date = self.findxpath(targetsheet.get(menu[n]))
                     start_date.send_keys(Keys.CONTROL, 'a')
                     start_date.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet2).get(menu[n]), value[n])
+                    self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
             elif menu[n] == '产品分类(收益特性)':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                findelement.click()
                 if value[n] == '保证收益型':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(value[n]))
+                    self.findxpath_click(targetsheet.get(value[n]))
                 elif value[n] == '保本浮动收益型':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(value[n]))
+                    self.findxpath_click(targetsheet.get(value[n]))
                 elif value[n] == '非保本浮动收益型':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(value[n]))
+                    self.findxpath_click(targetsheet.get(value[n]))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet2).get(menu[n]))
+                findelement.click()
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False

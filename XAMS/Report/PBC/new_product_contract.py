@@ -2,9 +2,10 @@
 # 功能描述：统计投组新发产品合同期限和金额分布
 from time import sleep
 
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet16
+from XAMS.Report.conftest import sheet16, Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
@@ -23,56 +24,56 @@ class NewProductContract(BasePageXams):
         l = len(menu)
         n = 2
         while n < l:
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet16)
+            findelement = self.findxpath(targetsheet.get(menu[n]))
+            wait = (By.XPATH, targetsheet.get('加载等待'))
             if menu[n] == '导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
+                findelement.click()
             elif menu[n] == '投组单元':
                 if value[n] == '置空':
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet16).get('投组单元'), value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    self.findxpath_sendkey(targetsheet.get('投组单元'), value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('投组下拉选择'))
+                    self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '年':
-                year = self.findxpath(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
-                year.send_keys(Keys.CONTROL, 'a')
-                year.send_keys(Keys.BACK_SPACE)
-                year.send_keys(value[n])
+                findelement.send_keys(Keys.CONTROL, 'a')
+                findelement.send_keys(Keys.BACK_SPACE)
+                findelement.send_keys(value[n])
             elif menu[n] == '月':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
+                findelement.click()
                 if value[n] == '1':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('一月'))
+                    self.findxpath_click(targetsheet.get('一月'))
                 elif value[n] == '2':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('二月'))
+                    self.findxpath_click(targetsheet.get('二月'))
                 elif value[n] == '3':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('三月'))
+                    self.findxpath_click(targetsheet.get('三月'))
                 elif value[n] == '4':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('四月'))
+                    self.findxpath_click(targetsheet.get('四月'))
                 elif value[n] == '5':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('五月'))
+                    self.findxpath_click(targetsheet.get('五月'))
                 elif value[n] == '6':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('六月'))
+                    self.findxpath_click(targetsheet.get('六月'))
                 elif value[n] == '7':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('七月'))
+                    self.findxpath_click(targetsheet.get('七月'))
                 elif value[n] == '8':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('八月'))
+                    self.findxpath_click(targetsheet.get('八月'))
                 elif value[n] == '9':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('九月'))
+                    self.findxpath_click(targetsheet.get('九月'))
                 elif value[n] == '10':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('十月'))
+                    self.findxpath_click(targetsheet.get('十月'))
                 elif value[n] == '11':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('十一月'))
+                    self.findxpath_click(targetsheet.get('十一月'))
                 elif value[n] == '12':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('十二月'))
+                    self.findxpath_click(targetsheet.get('十二月'))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '查询':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
+                findelement.click()
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
@@ -92,56 +93,56 @@ class NewProductContract(BasePageXams):
         l = len(menu)
         n = 4
         while n < l:
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet16)
+            findelement = self.findxpath(targetsheet.get(menu[n]))
+            wait = (By.XPATH, targetsheet.get('加载等待'))
             if menu[n] == '导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
+                findelement.click()
             elif menu[n] == '投组单元':
                 if value[n] == '置空':
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet16).get('投组单元'), value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    self.findxpath_sendkey(targetsheet.get('投组单元'), value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('投组下拉选择'))
+                    self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '年':
-                year = self.findxpath(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
-                year.send_keys(Keys.CONTROL, 'a')
-                year.send_keys(Keys.BACK_SPACE)
-                year.send_keys(value[n])
+                findelement.send_keys(Keys.CONTROL, 'a')
+                findelement.send_keys(Keys.BACK_SPACE)
+                findelement.send_keys(value[n])
             elif menu[n] == '月':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
+                findelement.click()
                 if value[n] == '1':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('一月'))
+                    self.findxpath_click(targetsheet.get('一月'))
                 elif value[n] == '2':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('二月'))
+                    self.findxpath_click(targetsheet.get('二月'))
                 elif value[n] == '3':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('三月'))
+                    self.findxpath_click(targetsheet.get('三月'))
                 elif value[n] == '4':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('四月'))
+                    self.findxpath_click(targetsheet.get('四月'))
                 elif value[n] == '5':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('五月'))
+                    self.findxpath_click(targetsheet.get('五月'))
                 elif value[n] == '6':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('六月'))
+                    self.findxpath_click(targetsheet.get('六月'))
                 elif value[n] == '7':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('七月'))
+                    self.findxpath_click(targetsheet.get('七月'))
                 elif value[n] == '8':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('八月'))
+                    self.findxpath_click(targetsheet.get('八月'))
                 elif value[n] == '9':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('九月'))
+                    self.findxpath_click(targetsheet.get('九月'))
                 elif value[n] == '10':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('十月'))
+                    self.findxpath_click(targetsheet.get('十月'))
                 elif value[n] == '11':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('十一月'))
+                    self.findxpath_click(targetsheet.get('十一月'))
                 elif value[n] == '12':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('十二月'))
+                    self.findxpath_click(targetsheet.get('十二月'))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '查询':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
+                findelement.click()
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
@@ -173,56 +174,56 @@ class NewProductContract(BasePageXams):
         l = len(menu)
         n = 4
         while n < l:
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet16)
+            findelement = self.findxpath(targetsheet.get(menu[n]))
+            wait = (By.XPATH, targetsheet.get('加载等待'))
             if menu[n] == '导出':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
+                findelement.click()
             elif menu[n] == '投组单元':
                 if value[n] == '置空':
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
                 else:
-                    unit = self.findxpath(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(self.base.sheet_xpath_dic(sheet16).get('投组单元'), value[n])
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    self.findxpath_sendkey(targetsheet.get('投组单元'), value[n])
                     sleep(1)
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('投组下拉选择'))
+                    self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '年':
-                year = self.findxpath(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
-                year.send_keys(Keys.CONTROL, 'a')
-                year.send_keys(Keys.BACK_SPACE)
-                year.send_keys(value[n])
+                findelement.send_keys(Keys.CONTROL, 'a')
+                findelement.send_keys(Keys.BACK_SPACE)
+                findelement.send_keys(value[n])
             elif menu[n] == '月':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
+                findelement.click()
                 if value[n] == '1':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('一月'))
+                    self.findxpath_click(targetsheet.get('一月'))
                 elif value[n] == '2':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('二月'))
+                    self.findxpath_click(targetsheet.get('二月'))
                 elif value[n] == '3':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('三月'))
+                    self.findxpath_click(targetsheet.get('三月'))
                 elif value[n] == '4':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('四月'))
+                    self.findxpath_click(targetsheet.get('四月'))
                 elif value[n] == '5':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('五月'))
+                    self.findxpath_click(targetsheet.get('五月'))
                 elif value[n] == '6':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('六月'))
+                    self.findxpath_click(targetsheet.get('六月'))
                 elif value[n] == '7':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('七月'))
+                    self.findxpath_click(targetsheet.get('七月'))
                 elif value[n] == '8':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('八月'))
+                    self.findxpath_click(targetsheet.get('八月'))
                 elif value[n] == '9':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('九月'))
+                    self.findxpath_click(targetsheet.get('九月'))
                 elif value[n] == '10':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('十月'))
+                    self.findxpath_click(targetsheet.get('十月'))
                 elif value[n] == '11':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('十一月'))
+                    self.findxpath_click(targetsheet.get('十一月'))
                 elif value[n] == '12':
-                    self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get('十二月'))
+                    self.findxpath_click(targetsheet.get('十二月'))
                 else:
                     print(f'值"{value[n]}"输入错误，请检查')
                     return False
             elif menu[n] == '查询':
-                self.findxpath_click(self.base.sheet_xpath_dic(sheet16).get(menu[n]))
+                findelement.click()
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False

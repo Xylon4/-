@@ -211,8 +211,8 @@ class TestExcel:
         return dat
 
     # 创建sheet页对应操作点xpath字典
-    def sheet_xpath_dic(self, sheet_name):
-        wb = xlrd.open_workbook(Excel_basedata_zs)
+    def sheet_xpath_dic(self, Excel_basedata, sheet_name):
+        wb = xlrd.open_workbook(Excel_basedata)
         sheet = wb.sheet_by_name(sheet_name)
         # 创建空字典
         dat = {}
@@ -344,7 +344,7 @@ class TestExcel:
     # 筛选字典中的校验点
     def checkpoint_dic(self, sheetname):
         a = self.sheet_list(sheetname)
-        b = self.sheet_xpath_dic(sheetname)
+        b = self.sheet_xpath_dic(Excel_basedata_zs, sheetname)
         l = len(a)
         n = 0
         x = {}
@@ -363,13 +363,11 @@ class TestExcel:
         # for b in a:  # 循环读取a变量list
         #     print(b)
         # c = self.checkpoint_dic('表1-2产品募集兑付统计表')
-        c = self.sheet_xpath_dic('债券类资产(新)')
-        # print(c.keys())
+        c = self.sheet_xpath_dic(Excel_basedata_zs, '债券类资产(新)')
+        print(c.keys())
         # print(c.get(a[0]))
         # print(a.get('temp01'))  # 通过key获取value
         z = '计息信息_期限'
         y = z.split('_')
         print(y)
         print(f'{y[1]}_下拉框')
-        timexpath = self.sheet_xpath_dic('债券类资产(新)').get('计息信息_期限').split('#')
-        # print(timexpath)

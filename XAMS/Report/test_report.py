@@ -1,5 +1,4 @@
 import pytest
-import xlrd
 
 from XAMS.Report.CBRC.asset_registration import AssetRegistration
 from XAMS.Report.CBRC.deal_registration import DealRegistration
@@ -29,7 +28,8 @@ from XAMS.Report.PBC.product_quantity import ProductQuantity
 from XAMS.Report.PBC.product_remain import ProductRemain
 from XAMS.Report.PBC.product_term import ProductTerm
 from XAMS.Report.PBC.product_unpaid import ProductUnpaid
-from XAMS.Report.conftest import Excel_basedata_zs, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8, sheet9, \
+from XAMS.Report.conftest import sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8, \
+    sheet9, \
     sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16, sheet17, sheet18, sheet19, sheet20, sheet21, sheet22, \
     sheet23, sheet24, sheet25, sheet26, sheet27, sheet28
 from XAMS.Tool.test_excel import TestExcel
@@ -134,28 +134,6 @@ class TestReport:
         else:
             print("该测试目的暂不支持，请修改用例")
             return False
-
-    @pytest.mark.skip
-    # 根据excel导入内容选择执行案例
-    def test_option(self, stagemark):
-        # 打开excel文件
-        # excel = xlrd.open_workbook(Excel_basedata_zs)
-        # 获取sheet，通过Excel表格名称()获取工作表
-        # S1 = excel.sheet_by_name(f'{sheet1}')
-        # S2 = excel.sheet_by_name(f'{sheet2}')
-        # S3 = excel.sheet_by_name(f'{sheet3}')
-        # 校验工作表数据(统计操作列表中"1"的重复次数)
-        self.list = TestExcel()
-        count1 = self.list.registry_list().count(1)
-        count2 = self.list.product_list().count(1)
-        while count1 > 0:
-            self.test_registry_excel(stagemark)
-            count1 = 0
-        while count2 > 0:
-            self.test_product_excel(stagemark)
-            count2 = 0
-        else:
-            print("没有可运行的数据")
 
     @pytest.mark.skip
     def test_asset_pool_registry(self, get_registry, stagemark):
