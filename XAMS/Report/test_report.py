@@ -2,6 +2,7 @@ import pytest
 
 from XAMS.Report.CBRC.asset_registration import AssetRegistration
 from XAMS.Report.CBRC.deal_registration import DealRegistration
+from XAMS.Report.CBRC.monthly_statistics import MonthlyStatistics
 from XAMS.Report.CBRC.product_duration_registration import ProductDurationRegistration
 from XAMS.Report.Combinatorial_analysis.asset_detail import AssetDetail
 from XAMS.Report.Combinatorial_analysis.asset_detail_penetration import AssetDetailPenetration
@@ -31,7 +32,7 @@ from XAMS.Report.PBC.product_unpaid import ProductUnpaid
 from XAMS.Report.conftest import sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8, \
     sheet9, \
     sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16, sheet17, sheet18, sheet19, sheet20, sheet21, sheet22, \
-    sheet23, sheet24, sheet25, sheet26, sheet27, sheet28
+    sheet23, sheet24, sheet25, sheet26, sheet27, sheet28, sheet30
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -96,6 +97,8 @@ class TestReport:
                 self.test_asset_structure_excel(stagemark, menu, value, address)
             elif second_menu == '投组管理-投组单元估值明细表':
                 self.test_valuation_detail_excel(stagemark, menu, value, address)
+            elif second_menu == '综合管理-产品情况月度统计表-资产':
+                self.test_monthly_statistics_excel(stagemark, menu, value, address)
             else:
                 print("模拟操作案例：该报表暂不支持，请修改用例")
         elif test_goal == '升级对比':
@@ -129,6 +132,8 @@ class TestReport:
                 self.test_product_term_compare(stagemark, menu, value, address)
             elif second_menu == '综合管理-资负信息注册(浙商)':
                 self.test_asset_liability_compare(stagemark, menu, value, address)
+            elif second_menu == '综合管理-产品情况月度统计表-资产':
+                self.test_monthly_statistics_compare(stagemark, menu, value, address)
             else:
                 print("升级对比案例：该报表暂不支持，请修改用例")
         else:
@@ -457,4 +462,19 @@ class TestReport:
         self.valuation_detail = ValuationDetail(address)
         assert self.valuation_detail.valuation_detail_excel(menu, value)
         print(f"{sheet28}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_monthly_statistics_excel(self, stagemark, menu, value, address):
+        self.monthly_statistics = MonthlyStatistics(address)
+        assert self.monthly_statistics.monthly_statistics_excel(menu, value)
+        print(f"{sheet30}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_monthly_statistics_compare(self, stagemark, menu, value, address):
+        self.monthly_statistics_compare = MonthlyStatistics(address)
+        assert self.monthly_statistics_compare.monthly_statistics_compare(menu, value)
+        self.monthly_statistics_compare.end()
+        print(f"{sheet30}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')

@@ -17,9 +17,9 @@ class ProductDurationRegistration(BasePageXams):
         print(value)
         self.base = TestExcel()
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu().get(menu[0]))
+        self.findxpath_click(self.base.first_menu(Excel_basedata_zs).get(menu[0]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu().get(f'{menu[0]}-{menu[1]}'))
+        self.findxpath_click(self.base.second_menu(Excel_basedata_zs).get(f'{menu[0]}-{menu[1]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 2
@@ -49,7 +49,6 @@ class ProductDurationRegistration(BasePageXams):
             elif menu[n] == '搜索':
                 findelement.click()
                 sleep(1)  # 强制等待用来过渡到显式等待
-                wait = (By.XPATH, targetsheet.get('加载等待'))
                 self.wait_for_miss(120, wait)
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')

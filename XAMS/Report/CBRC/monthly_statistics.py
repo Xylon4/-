@@ -1,48 +1,49 @@
-# 表1-2产品募集兑付统计表自动化测试用例
-# 功能描述：统计投组募集与兑付发生额
+# 产品情况月度统计表-资产自动化测试用例
+# 功能描述：根据持仓资产统计产品分布
 from time import sleep
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet6, Excel_basedata_zs
+from XAMS.Report.conftest import sheet30, Excel_basedata_nj
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
 
-class ProductAmount(BasePageXams):
-    # 模拟操作自动化案例
-    def product_amount_excel(self, menu, value):
+class MonthlyStatistics(BasePageXams):
+    # 模拟操作自动化案例-南京
+    def monthly_statistics_excel(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu(Excel_basedata_zs).get(menu[0]))
+        self.findxpath_click(self.base.first_menu(Excel_basedata_nj).get(menu[0]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu(Excel_basedata_zs).get(f'{menu[0]}-{menu[1]}'))
+        self.findxpath_click(self.base.second_menu(Excel_basedata_nj).get(f'{menu[0]}-{menu[1]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 2
         while n < l:
-            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet6)
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_nj, sheet30)
             findelement = self.findxpath(targetsheet.get(menu[n]))
             wait = (By.XPATH, targetsheet.get('加载等待'))
-            if menu[n] == '导出':
-                findelement.click()
-            elif menu[n] == '投组单元':
+            if menu[n] == '所在账户':
                 if value[n] == '置空':
                     findelement.send_keys(Keys.CONTROL, 'a')
                     findelement.send_keys(Keys.BACK_SPACE)
                 else:
                     findelement.send_keys(Keys.CONTROL, 'a')
                     findelement.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(targetsheet.get('投组单元'), value[n])
-                    sleep(1)
+                    findelement.send_keys(value[n])
                     self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '年':
-                findelement.send_keys(Keys.CONTROL, 'a')
-                findelement.send_keys(Keys.BACK_SPACE)
-                findelement.send_keys(value[n])
+                if value[n] == '置空':
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                else:
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '月':
                 findelement.click()
                 if value[n] == '1':
@@ -74,44 +75,47 @@ class ProductAmount(BasePageXams):
                     return False
             elif menu[n] == '查询':
                 findelement.click()
+                # sleep(1)  # 强制等待用来过渡到显式等待
+                self.wait_for_miss(120, wait)
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
             n = n + 1
         return True
 
-    # 数据对比自动化案例
-    def product_amount_compare(self, menu, value):
+    # 模拟操作自动化案例-南京
+    def monthly_statistics_compare(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu(Excel_basedata_zs).get(menu[2]))
+        self.findxpath_click(self.base.first_menu(Excel_basedata_nj).get(menu[2]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu(Excel_basedata_zs).get(f'{menu[2]}-{menu[3]}'))
+        self.findxpath_click(self.base.second_menu(Excel_basedata_nj).get(f'{menu[2]}-{menu[3]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 4
         while n < l:
-            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet6)
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_nj, sheet30)
             findelement = self.findxpath(targetsheet.get(menu[n]))
             wait = (By.XPATH, targetsheet.get('加载等待'))
-            if menu[n] == '导出':
-                findelement.click()
-            elif menu[n] == '投组单元':
+            if menu[n] == '所在账户':
                 if value[n] == '置空':
                     findelement.send_keys(Keys.CONTROL, 'a')
                     findelement.send_keys(Keys.BACK_SPACE)
                 else:
                     findelement.send_keys(Keys.CONTROL, 'a')
                     findelement.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(targetsheet.get('投组单元'), value[n])
-                    sleep(1)
+                    findelement.send_keys(value[n])
                     self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '年':
-                findelement.send_keys(Keys.CONTROL, 'a')
-                findelement.send_keys(Keys.BACK_SPACE)
-                findelement.send_keys(value[n])
+                if value[n] == '置空':
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                else:
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '月':
                 findelement.click()
                 if value[n] == '1':
@@ -143,20 +147,23 @@ class ProductAmount(BasePageXams):
                     return False
             elif menu[n] == '查询':
                 findelement.click()
+                # sleep(1)  # 强制等待用来过渡到显式等待
+                self.wait_for_miss(120, wait)
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
             n = n + 1
         # 触发判断定位点
-        m = self.base.checkpoint_list(Excel_basedata_zs, sheet6)
-        point = self.findxpath(self.base.checkpoint_dic(Excel_basedata_zs, sheet6).get(m[0]))
+        m = self.base.checkpoint_list(Excel_basedata_nj, sheet30)
+        point = self.findxpath(self.base.checkpoint_dic(Excel_basedata_nj, sheet30).get(m[0]))
         # 旧环境的记录值
         p = len(m)
         if point.is_displayed():
             i = 0
             x = {}
             while i < p:
-                o = self.findxpath(self.base.checkpoint_dic(Excel_basedata_zs, sheet6).get(m[i])).get_attribute('textContent')
+                o = self.findxpath(self.base.checkpoint_dic(Excel_basedata_nj, sheet30).get(m[i])).get_attribute(
+                    'textContent')
                 x.setdefault(m[i], o)
                 i = i + 1
         else:
@@ -167,32 +174,33 @@ class ProductAmount(BasePageXams):
         # 新环境重复操作
         self.start(value[1])
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu(Excel_basedata_zs).get(menu[2]))
+        self.findxpath_click(self.base.first_menu(Excel_basedata_nj).get(menu[2]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu(Excel_basedata_zs).get(f'{menu[2]}-{menu[3]}'))
+        self.findxpath_click(self.base.second_menu(Excel_basedata_nj).get(f'{menu[2]}-{menu[3]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 4
         while n < l:
-            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet6)
+            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_nj, sheet30)
             findelement = self.findxpath(targetsheet.get(menu[n]))
             wait = (By.XPATH, targetsheet.get('加载等待'))
-            if menu[n] == '导出':
-                findelement.click()
-            elif menu[n] == '投组单元':
+            if menu[n] == '所在账户':
                 if value[n] == '置空':
                     findelement.send_keys(Keys.CONTROL, 'a')
                     findelement.send_keys(Keys.BACK_SPACE)
                 else:
                     findelement.send_keys(Keys.CONTROL, 'a')
                     findelement.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(targetsheet.get('投组单元'), value[n])
-                    sleep(1)
+                    findelement.send_keys(value[n])
                     self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '年':
-                findelement.send_keys(Keys.CONTROL, 'a')
-                findelement.send_keys(Keys.BACK_SPACE)
-                findelement.send_keys(value[n])
+                if value[n] == '置空':
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                else:
+                    findelement.send_keys(Keys.CONTROL, 'a')
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    findelement.send_keys(value[n])
             elif menu[n] == '月':
                 findelement.click()
                 if value[n] == '1':
@@ -224,6 +232,8 @@ class ProductAmount(BasePageXams):
                     return False
             elif menu[n] == '查询':
                 findelement.click()
+                # sleep(1)  # 强制等待用来过渡到显式等待
+                self.wait_for_miss(120, wait)
             else:
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
@@ -232,7 +242,8 @@ class ProductAmount(BasePageXams):
         r = 0
         y = {}
         while r < p:
-            s = self.findxpath(self.base.checkpoint_dic(Excel_basedata_zs, sheet6).get(m[r])).get_attribute('textContent')
+            s = self.findxpath(self.base.checkpoint_dic(Excel_basedata_nj, sheet30).get(m[r])).get_attribute(
+                'textContent')
             y.setdefault(m[r], s)
             r = r + 1
         # 局部校验

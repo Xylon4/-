@@ -17,9 +17,9 @@ class ProductDelay(BasePageXams):
         print(value)
         self.base = TestExcel()
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu().get(menu[0]))
+        self.findxpath_click(self.base.first_menu(Excel_basedata_zs).get(menu[0]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu().get(f'{menu[0]}-{menu[1]}'))
+        self.findxpath_click(self.base.second_menu(Excel_basedata_zs).get(f'{menu[0]}-{menu[1]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 2
@@ -86,9 +86,9 @@ class ProductDelay(BasePageXams):
         print(value)
         self.base = TestExcel()
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu().get(menu[2]))
+        self.findxpath_click(self.base.first_menu(Excel_basedata_zs).get(menu[2]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu().get(f'{menu[2]}-{menu[3]}'))
+        self.findxpath_click(self.base.second_menu(Excel_basedata_zs).get(f'{menu[2]}-{menu[3]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 4
@@ -148,15 +148,15 @@ class ProductDelay(BasePageXams):
                 return False
             n = n + 1
         # 触发判断定位点
-        m = self.base.checkpoint_list(sheet8)
-        point = self.findxpath(self.base.checkpoint_dic(sheet8).get(m[0]))
+        m = self.base.checkpoint_list(Excel_basedata_zs, sheet8)
+        point = self.findxpath(self.base.checkpoint_dic(Excel_basedata_zs, sheet8).get(m[0]))
         # 旧环境的记录值
-        p = len(self.base.checkpoint_list(sheet8))
+        p = len(m)
         if point.is_displayed():
             i = 0
             x = {}
             while i < p:
-                o = self.findxpath(self.base.checkpoint_dic(sheet8).get(m[i])).get_attribute('textContent')
+                o = self.findxpath(self.base.checkpoint_dic(Excel_basedata_zs, sheet8).get(m[i])).get_attribute('textContent')
                 x.setdefault(m[i], o)
                 i = i + 1
         else:
@@ -167,9 +167,9 @@ class ProductDelay(BasePageXams):
         # 新环境重复操作
         self.start(value[1])
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu().get(menu[2]))
+        self.findxpath_click(self.base.first_menu(Excel_basedata_zs).get(menu[2]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu().get(f'{menu[2]}-{menu[3]}'))
+        self.findxpath_click(self.base.second_menu(Excel_basedata_zs).get(f'{menu[2]}-{menu[3]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 4
@@ -232,7 +232,7 @@ class ProductDelay(BasePageXams):
         r = 0
         y = {}
         while r < p:
-            s = self.findxpath(self.base.checkpoint_dic(sheet8).get(m[r])).get_attribute('textContent')
+            s = self.findxpath(self.base.checkpoint_dic(Excel_basedata_zs, sheet8).get(m[r])).get_attribute('textContent')
             y.setdefault(m[r], s)
             r = r + 1
         # 局部校验

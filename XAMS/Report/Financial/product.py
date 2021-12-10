@@ -134,9 +134,9 @@ class Product(BasePageXams):
         print(value)
         self.base = TestExcel()
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu().get(menu[0]))
+        self.findxpath_click(self.base.first_menu(Excel_basedata_zs).get(menu[0]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu().get(f'{menu[0]}-{menu[1]}'))
+        self.findxpath_click(self.base.second_menu(Excel_basedata_zs).get(f'{menu[0]}-{menu[1]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 2

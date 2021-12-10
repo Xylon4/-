@@ -4,6 +4,7 @@ from time import sleep
 
 from selenium.webdriver.common.keys import Keys
 
+from XAMS.Report.conftest import Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
@@ -39,10 +40,10 @@ class AssetPoolRegistry(BasePageXams):
         # 获取字典
         self.excel = TestExcel()
         # 点击综合管理
-        self.findxpath_click(self.excel.first_menu().get('综合管理'))
+        self.findxpath_click(self.excel.first_menu(Excel_basedata_zs).get('综合管理'))
         # self.findxpath_click('//*[@id="navId"]/li[10]/a')
         # 点击资产池注册表
-        self.findxpath_click(self.excel.second_menu().get('资产池注册表'))
+        self.findxpath_click(self.excel.second_menu(Excel_basedata_zs).get('资产池注册表'))
         # self.findxpath_click('//*[@id="floatMenu"]/dl[3]/dd[1]/a')
         sleep(1)
         # 选择投组

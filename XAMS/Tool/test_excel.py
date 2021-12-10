@@ -26,9 +26,9 @@ class TestExcel:
         return dat
 
     # 获取sheet页第一列数据生成list
-    def sheet_list(self, sheetname):
+    def sheet_list(self, Excel_basedata, sheetname):
         # 打开excel文件
-        wb = xlrd.open_workbook(Excel_basedata_zs)
+        wb = xlrd.open_workbook(Excel_basedata)
         # 获取sheet，通过Excel表格名称()获取工作表
         sheet = wb.sheet_by_name(sheetname)
         dat = []
@@ -81,8 +81,8 @@ class TestExcel:
             return sheet3.cell_value(rowx, colx)
 
     # 创建"一级菜单"xpath字典
-    def first_menu(self):
-        wb = xlrd.open_workbook(Excel_basedata_zs)
+    def first_menu(self, Excel_basedata):
+        wb = xlrd.open_workbook(Excel_basedata)
         sheet = wb.sheet_by_name('一级菜单')
         # 创建空字典
         dat = {}
@@ -95,8 +95,8 @@ class TestExcel:
         return dat
 
     # 创建"二级菜单"xpath字典
-    def second_menu(self):
-        wb = xlrd.open_workbook(Excel_basedata_zs)
+    def second_menu(self, Excel_basedata):
+        wb = xlrd.open_workbook(Excel_basedata)
         sheet = wb.sheet_by_name('二级菜单')
         # 创建空字典
         dat = {}
@@ -294,8 +294,8 @@ class TestExcel:
     # 通过"用例编号"获取一二级菜单xpath
     def match_menu(self, code):
         a = self.group_ele_dic()
-        b = self.first_menu()
-        c = self.second_menu()
+        b = self.first_menu(Excel_basedata_zs)
+        c = self.second_menu(Excel_basedata_zs)
         first_menu = a.get(code)[0]
         second_menu = a.get(code)[1]
         first_menu_xpath = b.get(first_menu)
@@ -329,8 +329,8 @@ class TestExcel:
         return dat
 
     # 筛选列表中的校验点
-    def checkpoint_list(self, sheetname):
-        a = self.sheet_list(sheetname)
+    def checkpoint_list(self, Excel_basedata, sheetname):
+        a = self.sheet_list(Excel_basedata, sheetname)
         l = len(a)
         n = 0
         x = []
@@ -342,9 +342,9 @@ class TestExcel:
         return x
 
     # 筛选字典中的校验点
-    def checkpoint_dic(self, sheetname):
-        a = self.sheet_list(sheetname)
-        b = self.sheet_xpath_dic(Excel_basedata_zs, sheetname)
+    def checkpoint_dic(self, Excel_basedata, sheetname):
+        a = self.sheet_list(Excel_basedata, sheetname)
+        b = self.sheet_xpath_dic(Excel_basedata, sheetname)
         l = len(a)
         n = 0
         x = {}
