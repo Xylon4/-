@@ -35,6 +35,7 @@ class MonthlyStatistics(BasePageXams):
                     findelement.send_keys(Keys.CONTROL, 'a')
                     findelement.send_keys(Keys.BACK_SPACE)
                     findelement.send_keys(value[n])
+                    sleep(1)
                     self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '年':
                 if value[n] == '置空':
@@ -107,6 +108,7 @@ class MonthlyStatistics(BasePageXams):
                     findelement.send_keys(Keys.CONTROL, 'a')
                     findelement.send_keys(Keys.BACK_SPACE)
                     findelement.send_keys(value[n])
+                    sleep(1)
                     self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '年':
                 if value[n] == '置空':
@@ -192,6 +194,7 @@ class MonthlyStatistics(BasePageXams):
                     findelement.send_keys(Keys.CONTROL, 'a')
                     findelement.send_keys(Keys.BACK_SPACE)
                     findelement.send_keys(value[n])
+                    sleep(1)
                     self.findxpath_click(targetsheet.get('投组下拉选择'))
             elif menu[n] == '年':
                 if value[n] == '置空':
