@@ -18,10 +18,10 @@ rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
 # 浙商环境
-zs_address1 = 'http://191.168.0.206:8001/xIR_J2EE'
+zs_address1 = 'http://191.168.0.206:8001/xIR_J2EE/login.action'
 
 # 南京环境
-nj_address1 = 'http://172.19.6.44:8001/xIR_J2EE'
+nj_address1 = 'http://172.19.6.44:8001/xIR_J2EE/login.action'
 
 # 案例运行环境
 default_address = nj_address1
