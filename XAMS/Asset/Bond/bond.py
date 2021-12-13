@@ -33,6 +33,7 @@ class Bond(BasePageXams):
                 return False
             else:
                 targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
+                findelement = self.findxpath(targetsheet.get(menu[n]))
                 wait = (By.XPATH, targetsheet.get('加载等待'))
                 if menu[n] == '资产状态':
                     findelement = self.findxpath(targetsheet.get(menu[n]))
@@ -81,6 +82,15 @@ class Bond(BasePageXams):
                     findelement.click()
                     self.wait_for_miss(120, wait)
                     # sleep(1)
+                elif menu[n] in ['基本信息_产品分类', '评级信息_债项当前评级（外部）', '评级信息_债项评级(内部)']:
+                    elementlist = targetsheet.keys()
+                    if value[n] not in elementlist:
+                        print(f'值"{value[n]}"输入错误，请检查')
+                        return False
+                    else:
+                        findelement.click()
+                        sleep(1)
+                        self.findxpath_click(targetsheet.get(value[n]))
                 # 所有操作为"输入"的元素
                 elif menu[n] in ['基本信息_代码',
                                  '基本信息_银行间代码',
@@ -159,7 +169,6 @@ class Bond(BasePageXams):
                 # 所有操作为"下拉选择"的元素
                 elif menu[n] in ['基本信息_币种',
                                  '基本信息_产品类型',
-                                 '基本信息_产品分类',
                                  '基本信息_资产化类型',
                                  '基本信息_报价方式',
                                  '基本信息_清偿等级',
@@ -194,9 +203,7 @@ class Bond(BasePageXams):
                                  '计息信息_重置日调整规则',
                                  '计息信息_重置频率',
                                  '计息信息_定盘日调整规则',
-                                 '评级信息_债项当前评级（外部）',
                                  '评级信息_债项评级机构（外部）',
-                                 '评级信息_债项评级(内部)',
                                  '评级信息_评级是否负面',
                                  '担保信息维护_担保方式',
                                  '不规则计息区间_是否还本',
@@ -210,8 +217,6 @@ class Bond(BasePageXams):
                         print(f'值"{value[n]}"输入错误，请检查')
                         return False
                     else:
-                        targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
-                        findelement = self.findxpath(targetsheet.get(menu[n]))
                         findelement.click()
                         self.findxpath_click(targetsheet.get(value[n]))
                 # 所有操作为"点击"或"勾选"的元素
