@@ -307,7 +307,7 @@ class TestExcel:
         a = self.group_ele_dic()
         b = self.group_value_dic()
         c = len(a.get(code))  # "操作元素"最少是三个
-        n = 2
+        n = 3
         data = []
         while n < c:
             data.append([a.get(code)[n], b.get(code)[n]])

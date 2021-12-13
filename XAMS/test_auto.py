@@ -23,7 +23,7 @@ class TestAuto:
             value = self.list.group_value_dic().get(code)
             test_goal = self.list.group_goal_dic().get(code)
             if test_goal == '模拟操作':
-                second_menu = f'{menu[0]}-{menu[1]}'
+                second_menu = f'{menu[1]}-{menu[2]}'
                 simulate = simulate + 1
                 if second_menu in report_list:
                     self.report.test_universal(stagemark, menu, value, test_goal)

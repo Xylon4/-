@@ -41,8 +41,8 @@ class TestReport:
     def test_universal(self, stagemark, menu, value, test_goal):
         self.list = TestExcel()
         if test_goal == '模拟操作':
-            second_menu = f'{menu[0]}-{menu[1]}'
-            address = None
+            second_menu = f'{menu[1]}-{menu[2]}'
+            address = value[0]
             if second_menu == '估值管理-估值表':
                 self.test_valuation_excel(stagemark, menu, value, address)
             elif second_menu == '综合管理-表1-1产品募集余额统计表':
