@@ -210,7 +210,7 @@ class TestExcel:
             dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
         return dat
 
-    # 创建sheet页对应操作点xpath字典
+    # 创建sheet页对应操作点-xpath字典
     def sheet_xpath_dic(self, Excel_basedata, sheet_name):
         wb = xlrd.open_workbook(Excel_basedata)
         sheet = wb.sheet_by_name(sheet_name)
@@ -221,6 +221,20 @@ class TestExcel:
             # 根据每列的数据类型进行拆分
             col1 = str(cells[0])  # 每行第一列数据赋值给col1
             col2 = str(cells[1])  # 每行第二列数据赋值给col2
+            dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
+        return dat
+
+    # 创建sheet页对应操作点-备注字典
+    def sheet_remark_dic(self, Excel_basedata, sheet_name):
+        wb = xlrd.open_workbook(Excel_basedata)
+        sheet = wb.sheet_by_name(sheet_name)
+        # 创建空字典
+        dat = {}
+        for i in range(sheet.nrows):  # 循环读取"表1-1产品募集余额统计表"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            col1 = str(cells[0])  # 每行第一列数据赋值给col1
+            col2 = str(cells[4])  # 每行第五列数据赋值给col2
             dat.setdefault(col1, col2)  # 用setdefault方法成对插入键值对，setdefault方法只会存一次value，不支持更新
         return dat
 
@@ -306,7 +320,7 @@ class TestExcel:
     def match_step(self, code):
         a = self.group_ele_dic()
         b = self.group_value_dic()
-        c = len(a.get(code))  # "操作元素"最少是三个
+        c = len(a.get(code))  # "操作元素"最少是四个
         n = 3
         data = []
         while n < c:
@@ -355,19 +369,33 @@ class TestExcel:
             n = n + 1
         return x
 
+    # 通过备注筛选出支持的可操作点列表
+    def operable_list(self, Excel_basedata, sheetname):
+        a = self.sheet_remark_dic(Excel_basedata, sheetname)
+        b = self.sheet_list(Excel_basedata, sheetname)
+        l = len(b)
+        n = 0
+        x = []
+        while n < l:
+            c = a.get(b[n])
+            if c not in ['暂不支持', '不需要填写', '备注']:
+                x.append(b[n])
+            n = n + 1
+        return x
+
     # 测试入口
     def test_value(self):
-        a = self.checkpoint_list('表1-2产品募集兑付统计表')
-        # print(a)  # 返回整个函数的值
+        a = self.operable_list(Excel_basedata_zs, '表1-6产品到期未兑付统计表')
+        print(a)  # 返回整个函数的值
         # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
         # c = self.checkpoint_dic('表1-2产品募集兑付统计表')
         c = self.sheet_xpath_dic(Excel_basedata_zs, '债券类资产(新)')
-        print(c.keys())
+        # print(c.keys())
         # print(c.get(a[0]))
         # print(a.get('temp01'))  # 通过key获取value
         z = '计息信息_期限'
         y = z.split('_')
-        print(y)
-        print(f'{y[1]}_下拉框')
+        # print(y)
+        # print(f'{y[1]}_下拉框')

@@ -10,8 +10,8 @@ class TestAsset:
     def test_universal(self, stagemark, menu, value, test_goal):
         self.list = TestExcel()
         if test_goal == '模拟操作':
-            second_menu = f'{menu[0]}-{menu[1]}'
-            address = None
+            second_menu = f'{menu[1]}-{menu[2]}'
+            address = value[0]
             if second_menu == '资产管理-债券类资产(新)':
                 self.test_bond_excel(stagemark, menu, value, address)
             else:

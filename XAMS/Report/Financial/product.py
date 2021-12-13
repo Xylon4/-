@@ -133,80 +133,82 @@ class Product(BasePageXams):
         print(menu)
         print(value)
         self.base = TestExcel()
+        basedata = [Excel_basedata_zs, sheet2]
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu(Excel_basedata_zs).get(menu[1]))
+        self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[1]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu(Excel_basedata_zs).get(f'{menu[1]}-{menu[2]}'))
+        self.findxpath_click(self.base.second_menu(basedata[0]).get(f'{menu[1]}-{menu[2]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 3
         while n < l:
-            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_zs, sheet2)
-            findelement = self.findxpath(targetsheet.get(menu[n]))
-            if menu[n] == '导出':
-                findelement.click()
-            elif menu[n] == '批量导出':
-                findelement.click()
-            elif menu[n] == '投组':
-                if value[n] == '置空':
-                    unit = self.findxpath(targetsheet.get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
-                else:
-                    unit = self.findxpath(targetsheet.get(menu[n]))
-                    unit.send_keys(Keys.CONTROL, 'a')
-                    unit.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
-                    sleep(1)
-                    self.findxpath_click(targetsheet.get('投组下拉选择'))
-            elif menu[n] == '产品名称或代码':
-                if value[n] == '置空':
-                    code = self.findxpath(targetsheet.get(menu[n]))
-                    code.send_keys(Keys.CONTROL, 'a')
-                    code.send_keys(Keys.BACK_SPACE)
-                else:
-                    code = self.findxpath(targetsheet.get(menu[n]))
-                    code.send_keys(Keys.CONTROL, 'a')
-                    code.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
-            elif menu[n] == '搜索':
-                self.findxpath_click(targetsheet.get('折叠按钮'))
-                findelement.click()
-            elif menu[n] == '起息日起':
-                if value[n] == '置空':
-                    start_date = self.findxpath(targetsheet.get(menu[n]))
-                    start_date.send_keys(Keys.CONTROL, 'a')
-                    start_date.send_keys(Keys.BACK_SPACE)
-                else:
-                    start_date = self.findxpath(targetsheet.get(menu[n]))
-                    start_date.send_keys(Keys.CONTROL, 'a')
-                    start_date.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
-            elif menu[n] == '起息日止':
-                self.findxpath_click(targetsheet.get('折叠按钮'))
-                if value[n] == '置空':
-                    start_date = self.findxpath(targetsheet.get(menu[n]))
-                    start_date.send_keys(Keys.CONTROL, 'a')
-                    start_date.send_keys(Keys.BACK_SPACE)
-                else:
-                    start_date = self.findxpath(targetsheet.get(menu[n]))
-                    start_date.send_keys(Keys.CONTROL, 'a')
-                    start_date.send_keys(Keys.BACK_SPACE)
-                    self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
-            elif menu[n] == '产品分类(收益特性)':
-                findelement.click()
-                if value[n] == '保证收益型':
-                    self.findxpath_click(targetsheet.get(value[n]))
-                elif value[n] == '保本浮动收益型':
-                    self.findxpath_click(targetsheet.get(value[n]))
-                elif value[n] == '非保本浮动收益型':
-                    self.findxpath_click(targetsheet.get(value[n]))
-                else:
-                    print(f'值"{value[n]}"输入错误，请检查')
-                    return False
-                findelement.click()
-            else:
+            if menu[n] not in self.base.operable_list(basedata[0], basedata[1]):
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
+            else:
+                targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
+                findelement = self.findxpath(targetsheet.get(menu[n]))
+                if menu[n] == '导出':
+                    findelement.click()
+                elif menu[n] == '批量导出':
+                    findelement.click()
+                elif menu[n] == '投组':
+                    if value[n] == '置空':
+                        unit = self.findxpath(targetsheet.get(menu[n]))
+                        unit.send_keys(Keys.CONTROL, 'a')
+                        unit.send_keys(Keys.BACK_SPACE)
+                    else:
+                        unit = self.findxpath(targetsheet.get(menu[n]))
+                        unit.send_keys(Keys.CONTROL, 'a')
+                        unit.send_keys(Keys.BACK_SPACE)
+                        self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
+                        sleep(1)
+                        self.findxpath_click(targetsheet.get('投组下拉选择'))
+                elif menu[n] == '产品名称或代码':
+                    if value[n] == '置空':
+                        code = self.findxpath(targetsheet.get(menu[n]))
+                        code.send_keys(Keys.CONTROL, 'a')
+                        code.send_keys(Keys.BACK_SPACE)
+                    else:
+                        code = self.findxpath(targetsheet.get(menu[n]))
+                        code.send_keys(Keys.CONTROL, 'a')
+                        code.send_keys(Keys.BACK_SPACE)
+                        self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
+                elif menu[n] == '搜索':
+                    self.findxpath_click(targetsheet.get('折叠按钮'))
+                    findelement.click()
+                elif menu[n] == '起息日起':
+                    if value[n] == '置空':
+                        start_date = self.findxpath(targetsheet.get(menu[n]))
+                        start_date.send_keys(Keys.CONTROL, 'a')
+                        start_date.send_keys(Keys.BACK_SPACE)
+                    else:
+                        start_date = self.findxpath(targetsheet.get(menu[n]))
+                        start_date.send_keys(Keys.CONTROL, 'a')
+                        start_date.send_keys(Keys.BACK_SPACE)
+                        self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
+                elif menu[n] == '起息日止':
+                    self.findxpath_click(targetsheet.get('折叠按钮'))
+                    if value[n] == '置空':
+                        start_date = self.findxpath(targetsheet.get(menu[n]))
+                        start_date.send_keys(Keys.CONTROL, 'a')
+                        start_date.send_keys(Keys.BACK_SPACE)
+                    else:
+                        start_date = self.findxpath(targetsheet.get(menu[n]))
+                        start_date.send_keys(Keys.CONTROL, 'a')
+                        start_date.send_keys(Keys.BACK_SPACE)
+                        self.findxpath_sendkey(targetsheet.get(menu[n]), value[n])
+                elif menu[n] == '产品分类(收益特性)':
+                    findelement.click()
+                    if value[n] == '保证收益型':
+                        self.findxpath_click(targetsheet.get(value[n]))
+                    elif value[n] == '保本浮动收益型':
+                        self.findxpath_click(targetsheet.get(value[n]))
+                    elif value[n] == '非保本浮动收益型':
+                        self.findxpath_click(targetsheet.get(value[n]))
+                    else:
+                        print(f'值"{value[n]}"输入错误，请检查')
+                        return False
+                    findelement.click()
             n = n + 1
         return True

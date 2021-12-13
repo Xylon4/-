@@ -16,71 +16,73 @@ class MonthlyStatistics(BasePageXams):
         print(menu)
         print(value)
         self.base = TestExcel()
+        basedata = [Excel_basedata_nj, sheet30]
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu(Excel_basedata_nj).get(menu[1]))
+        self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[1]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu(Excel_basedata_nj).get(f'{menu[1]}-{menu[2]}'))
+        self.findxpath_click(self.base.second_menu(basedata[0]).get(f'{menu[1]}-{menu[2]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 3
         while n < l:
-            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_nj, sheet30)
-            findelement = self.findxpath(targetsheet.get(menu[n]))
-            wait = (By.XPATH, targetsheet.get('加载等待'))
-            if menu[n] == '所在账户':
-                if value[n] == '置空':
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                else:
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                    findelement.send_keys(value[n])
-                    sleep(1)
-                    self.findxpath_click(targetsheet.get('投组下拉选择'))
-            elif menu[n] == '年':
-                if value[n] == '置空':
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                else:
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                    findelement.send_keys(value[n])
-            elif menu[n] == '月':
-                findelement.click()
-                if value[n] == '1':
-                    self.findxpath_click(targetsheet.get('一月'))
-                elif value[n] == '2':
-                    self.findxpath_click(targetsheet.get('二月'))
-                elif value[n] == '3':
-                    self.findxpath_click(targetsheet.get('三月'))
-                elif value[n] == '4':
-                    self.findxpath_click(targetsheet.get('四月'))
-                elif value[n] == '5':
-                    self.findxpath_click(targetsheet.get('五月'))
-                elif value[n] == '6':
-                    self.findxpath_click(targetsheet.get('六月'))
-                elif value[n] == '7':
-                    self.findxpath_click(targetsheet.get('七月'))
-                elif value[n] == '8':
-                    self.findxpath_click(targetsheet.get('八月'))
-                elif value[n] == '9':
-                    self.findxpath_click(targetsheet.get('九月'))
-                elif value[n] == '10':
-                    self.findxpath_click(targetsheet.get('十月'))
-                elif value[n] == '11':
-                    self.findxpath_click(targetsheet.get('十一月'))
-                elif value[n] == '12':
-                    self.findxpath_click(targetsheet.get('十二月'))
-                else:
-                    print(f'值"{value[n]}"输入错误，请检查')
-                    return False
-            elif menu[n] == '查询':
-                findelement.click()
-                # sleep(1)  # 强制等待用来过渡到显式等待
-                self.wait_for_miss(120, wait)
-            else:
+            if menu[n] not in self.base.operable_list(basedata[0], basedata[1]):
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
+            else:
+                targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
+                findelement = self.findxpath(targetsheet.get(menu[n]))
+                wait = (By.XPATH, targetsheet.get('加载等待'))
+                if menu[n] == '所在账户':
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
+                        sleep(1)
+                        self.findxpath_click(targetsheet.get('投组下拉选择'))
+                elif menu[n] == '年':
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
+                elif menu[n] == '月':
+                    findelement.click()
+                    if value[n] == '1':
+                        self.findxpath_click(targetsheet.get('一月'))
+                    elif value[n] == '2':
+                        self.findxpath_click(targetsheet.get('二月'))
+                    elif value[n] == '3':
+                        self.findxpath_click(targetsheet.get('三月'))
+                    elif value[n] == '4':
+                        self.findxpath_click(targetsheet.get('四月'))
+                    elif value[n] == '5':
+                        self.findxpath_click(targetsheet.get('五月'))
+                    elif value[n] == '6':
+                        self.findxpath_click(targetsheet.get('六月'))
+                    elif value[n] == '7':
+                        self.findxpath_click(targetsheet.get('七月'))
+                    elif value[n] == '8':
+                        self.findxpath_click(targetsheet.get('八月'))
+                    elif value[n] == '9':
+                        self.findxpath_click(targetsheet.get('九月'))
+                    elif value[n] == '10':
+                        self.findxpath_click(targetsheet.get('十月'))
+                    elif value[n] == '11':
+                        self.findxpath_click(targetsheet.get('十一月'))
+                    elif value[n] == '12':
+                        self.findxpath_click(targetsheet.get('十二月'))
+                    else:
+                        print(f'值"{value[n]}"输入错误，请检查')
+                        return False
+                elif menu[n] == '查询':
+                    findelement.click()
+                    # sleep(1)  # 强制等待用来过渡到显式等待
+                    self.wait_for_miss(120, wait)
             n = n + 1
         return True
 
@@ -89,82 +91,84 @@ class MonthlyStatistics(BasePageXams):
         print(menu)
         print(value)
         self.base = TestExcel()
+        basedata = [Excel_basedata_nj, sheet30]
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu(Excel_basedata_nj).get(menu[2]))
+        self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[2]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu(Excel_basedata_nj).get(f'{menu[2]}-{menu[3]}'))
+        self.findxpath_click(self.base.second_menu(basedata[0]).get(f'{menu[2]}-{menu[3]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 4
         while n < l:
-            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_nj, sheet30)
-            findelement = self.findxpath(targetsheet.get(menu[n]))
-            wait = (By.XPATH, targetsheet.get('加载等待'))
-            if menu[n] == '所在账户':
-                if value[n] == '置空':
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                else:
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                    findelement.send_keys(value[n])
-                    sleep(1)
-                    self.findxpath_click(targetsheet.get('投组下拉选择'))
-            elif menu[n] == '年':
-                if value[n] == '置空':
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                else:
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                    findelement.send_keys(value[n])
-            elif menu[n] == '月':
-                findelement.click()
-                if value[n] == '1':
-                    self.findxpath_click(targetsheet.get('一月'))
-                elif value[n] == '2':
-                    self.findxpath_click(targetsheet.get('二月'))
-                elif value[n] == '3':
-                    self.findxpath_click(targetsheet.get('三月'))
-                elif value[n] == '4':
-                    self.findxpath_click(targetsheet.get('四月'))
-                elif value[n] == '5':
-                    self.findxpath_click(targetsheet.get('五月'))
-                elif value[n] == '6':
-                    self.findxpath_click(targetsheet.get('六月'))
-                elif value[n] == '7':
-                    self.findxpath_click(targetsheet.get('七月'))
-                elif value[n] == '8':
-                    self.findxpath_click(targetsheet.get('八月'))
-                elif value[n] == '9':
-                    self.findxpath_click(targetsheet.get('九月'))
-                elif value[n] == '10':
-                    self.findxpath_click(targetsheet.get('十月'))
-                elif value[n] == '11':
-                    self.findxpath_click(targetsheet.get('十一月'))
-                elif value[n] == '12':
-                    self.findxpath_click(targetsheet.get('十二月'))
-                else:
-                    print(f'值"{value[n]}"输入错误，请检查')
-                    return False
-            elif menu[n] == '查询':
-                findelement.click()
-                # sleep(1)  # 强制等待用来过渡到显式等待
-                self.wait_for_miss(120, wait)
-            else:
+            if menu[n] not in self.base.operable_list(basedata[0], basedata[1]):
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
+            else:
+                targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
+                findelement = self.findxpath(targetsheet.get(menu[n]))
+                wait = (By.XPATH, targetsheet.get('加载等待'))
+                if menu[n] == '所在账户':
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
+                        sleep(1)
+                        self.findxpath_click(targetsheet.get('投组下拉选择'))
+                elif menu[n] == '年':
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
+                elif menu[n] == '月':
+                    findelement.click()
+                    if value[n] == '1':
+                        self.findxpath_click(targetsheet.get('一月'))
+                    elif value[n] == '2':
+                        self.findxpath_click(targetsheet.get('二月'))
+                    elif value[n] == '3':
+                        self.findxpath_click(targetsheet.get('三月'))
+                    elif value[n] == '4':
+                        self.findxpath_click(targetsheet.get('四月'))
+                    elif value[n] == '5':
+                        self.findxpath_click(targetsheet.get('五月'))
+                    elif value[n] == '6':
+                        self.findxpath_click(targetsheet.get('六月'))
+                    elif value[n] == '7':
+                        self.findxpath_click(targetsheet.get('七月'))
+                    elif value[n] == '8':
+                        self.findxpath_click(targetsheet.get('八月'))
+                    elif value[n] == '9':
+                        self.findxpath_click(targetsheet.get('九月'))
+                    elif value[n] == '10':
+                        self.findxpath_click(targetsheet.get('十月'))
+                    elif value[n] == '11':
+                        self.findxpath_click(targetsheet.get('十一月'))
+                    elif value[n] == '12':
+                        self.findxpath_click(targetsheet.get('十二月'))
+                    else:
+                        print(f'值"{value[n]}"输入错误，请检查')
+                        return False
+                elif menu[n] == '查询':
+                    findelement.click()
+                    # sleep(1)  # 强制等待用来过渡到显式等待
+                    self.wait_for_miss(120, wait)
             n = n + 1
         # 触发判断定位点
-        m = self.base.checkpoint_list(Excel_basedata_nj, sheet30)
-        point = self.findxpath(self.base.checkpoint_dic(Excel_basedata_nj, sheet30).get(m[0]))
+        m = self.base.checkpoint_list(basedata[0], basedata[1])
+        point = self.findxpath(self.base.checkpoint_dic(basedata[0], basedata[1]).get(m[0]))
         # 旧环境的记录值
         p = len(m)
         if point.is_displayed():
             i = 0
             x = {}
             while i < p:
-                o = self.findxpath(self.base.checkpoint_dic(Excel_basedata_nj, sheet30).get(m[i])).get_attribute(
+                o = self.findxpath(self.base.checkpoint_dic(basedata[0], basedata[1]).get(m[i])).get_attribute(
                     'textContent')
                 x.setdefault(m[i], o)
                 i = i + 1
@@ -176,76 +180,77 @@ class MonthlyStatistics(BasePageXams):
         # 新环境重复操作
         self.start(value[1])
         # 点击一级菜单
-        self.findxpath_click(self.base.first_menu(Excel_basedata_nj).get(menu[2]))
+        self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[2]))
         # 点击二级菜单
-        self.findxpath_click(self.base.second_menu(Excel_basedata_nj).get(f'{menu[2]}-{menu[3]}'))
+        self.findxpath_click(self.base.second_menu(basedata[0]).get(f'{menu[2]}-{menu[3]}'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 4
         while n < l:
-            targetsheet = self.base.sheet_xpath_dic(Excel_basedata_nj, sheet30)
-            findelement = self.findxpath(targetsheet.get(menu[n]))
-            wait = (By.XPATH, targetsheet.get('加载等待'))
-            if menu[n] == '所在账户':
-                if value[n] == '置空':
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                else:
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                    findelement.send_keys(value[n])
-                    sleep(1)
-                    self.findxpath_click(targetsheet.get('投组下拉选择'))
-            elif menu[n] == '年':
-                if value[n] == '置空':
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                else:
-                    findelement.send_keys(Keys.CONTROL, 'a')
-                    findelement.send_keys(Keys.BACK_SPACE)
-                    findelement.send_keys(value[n])
-            elif menu[n] == '月':
-                findelement.click()
-                if value[n] == '1':
-                    self.findxpath_click(targetsheet.get('一月'))
-                elif value[n] == '2':
-                    self.findxpath_click(targetsheet.get('二月'))
-                elif value[n] == '3':
-                    self.findxpath_click(targetsheet.get('三月'))
-                elif value[n] == '4':
-                    self.findxpath_click(targetsheet.get('四月'))
-                elif value[n] == '5':
-                    self.findxpath_click(targetsheet.get('五月'))
-                elif value[n] == '6':
-                    self.findxpath_click(targetsheet.get('六月'))
-                elif value[n] == '7':
-                    self.findxpath_click(targetsheet.get('七月'))
-                elif value[n] == '8':
-                    self.findxpath_click(targetsheet.get('八月'))
-                elif value[n] == '9':
-                    self.findxpath_click(targetsheet.get('九月'))
-                elif value[n] == '10':
-                    self.findxpath_click(targetsheet.get('十月'))
-                elif value[n] == '11':
-                    self.findxpath_click(targetsheet.get('十一月'))
-                elif value[n] == '12':
-                    self.findxpath_click(targetsheet.get('十二月'))
-                else:
-                    print(f'值"{value[n]}"输入错误，请检查')
-                    return False
-            elif menu[n] == '查询':
-                findelement.click()
-                # sleep(1)  # 强制等待用来过渡到显式等待
-                self.wait_for_miss(120, wait)
-            else:
+            if menu[n] not in self.base.operable_list(basedata[0], basedata[1]):
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
+            else:
+                targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
+                findelement = self.findxpath(targetsheet.get(menu[n]))
+                wait = (By.XPATH, targetsheet.get('加载等待'))
+                if menu[n] == '所在账户':
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
+                        sleep(1)
+                        self.findxpath_click(targetsheet.get('投组下拉选择'))
+                elif menu[n] == '年':
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
+                elif menu[n] == '月':
+                    findelement.click()
+                    if value[n] == '1':
+                        self.findxpath_click(targetsheet.get('一月'))
+                    elif value[n] == '2':
+                        self.findxpath_click(targetsheet.get('二月'))
+                    elif value[n] == '3':
+                        self.findxpath_click(targetsheet.get('三月'))
+                    elif value[n] == '4':
+                        self.findxpath_click(targetsheet.get('四月'))
+                    elif value[n] == '5':
+                        self.findxpath_click(targetsheet.get('五月'))
+                    elif value[n] == '6':
+                        self.findxpath_click(targetsheet.get('六月'))
+                    elif value[n] == '7':
+                        self.findxpath_click(targetsheet.get('七月'))
+                    elif value[n] == '8':
+                        self.findxpath_click(targetsheet.get('八月'))
+                    elif value[n] == '9':
+                        self.findxpath_click(targetsheet.get('九月'))
+                    elif value[n] == '10':
+                        self.findxpath_click(targetsheet.get('十月'))
+                    elif value[n] == '11':
+                        self.findxpath_click(targetsheet.get('十一月'))
+                    elif value[n] == '12':
+                        self.findxpath_click(targetsheet.get('十二月'))
+                    else:
+                        print(f'值"{value[n]}"输入错误，请检查')
+                        return False
+                elif menu[n] == '查询':
+                    findelement.click()
+                    # sleep(1)  # 强制等待用来过渡到显式等待
+                    self.wait_for_miss(120, wait)
             n = n + 1
         # 新环境的记录值
         r = 0
         y = {}
         while r < p:
-            s = self.findxpath(self.base.checkpoint_dic(Excel_basedata_nj, sheet30).get(m[r])).get_attribute(
+            s = self.findxpath(self.base.checkpoint_dic(basedata[0], basedata[1]).get(m[r])).get_attribute(
                 'textContent')
             y.setdefault(m[r], s)
             r = r + 1
