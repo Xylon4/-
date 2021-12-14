@@ -284,8 +284,8 @@ class Bond(BasePageXams):
                     self.findxpath_click(targetsheet.get('债券发行量_确定'))
                 elif menu[n] == '保存':
                     findelement.click()
-                    # self.wait_for_miss(60, wait)
-                    sleep(2)
+                    self.wait_for_miss(60, wait)
+                    # sleep(2)
                     self.findxpath_click(targetsheet.get('确定'))
                 elif menu[n] in ['基本信息_发行机构', '担保信息维护_担保机构']:
                     findelement.send_keys(value[n])
