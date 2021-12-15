@@ -38,67 +38,67 @@ from XAMS.Tool.test_excel import TestExcel
 
 class TestReport:
     # 万能导入用例
-    def test_universal(self, stagemark, menu, value, test_goal):
+    def test_universal(self, stagemark, menu, value, test_goal, step):
         self.list = TestExcel()
         if test_goal == '模拟操作':
             second_menu = f'{menu[1]}-{menu[2]}'
             address = value[0]
             if second_menu == '估值管理-估值表':
-                self.test_valuation_excel(stagemark, menu, value, address)
+                self.test_valuation_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表1-1产品募集余额统计表':
-                self.test_product_remain_excel(stagemark, menu, value, address)
+                self.test_product_remain_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表1-2产品募集兑付统计表':
-                self.test_product_amount_excel(stagemark, menu, value, address)
+                self.test_product_amount_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表1-3产品只数情况统计表':
-                self.test_product_quantity_excel(stagemark, menu, value, address)
+                self.test_product_quantity_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表1-5产品提前延期兑付统计表':
-                self.test_product_delay_excel(stagemark, menu, value, address)
+                self.test_product_delay_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表1-6产品到期未兑付统计表':
-                self.test_product_unpaid_excel(stagemark, menu, value, address)
+                self.test_product_unpaid_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表2-1产品资产负债统计表':
-                self.test_product_assets_excel(stagemark, menu, value, address)
+                self.test_product_assets_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表2-2贷款分行业及企业规模统计表':
-                self.test_loan_statistics_excel(stagemark, menu, value, address)
+                self.test_loan_statistics_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表2-3贷款分地区统计表':
-                self.test_loan_region_excel(stagemark, menu, value, address)
+                self.test_loan_region_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表2-4资产收益权投向分类统计表':
-                self.test_asset_usufruct_excel(stagemark, menu, value, address)
+                self.test_asset_usufruct_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表2-5企业债券分行业及企业规模统计表':
-                self.test_enterprise_bond_excel(stagemark, menu, value, address)
+                self.test_enterprise_bond_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表3-1存续产品分合同期限募集余额统计表':
-                self.test_last_product_contract_excel(stagemark, menu, value, address)
+                self.test_last_product_contract_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表3-2新发产品分合同期限募集金额统计表':
-                self.test_new_product_contract_excel(stagemark, menu, value, address)
+                self.test_new_product_contract_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表3-3资管产品资产负债剩余期限统计表':
-                self.test_product_term_excel(stagemark, menu, value, address)
+                self.test_product_term_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-产品终止信息表':
-                self.test_product_termination_excel(stagemark, menu, value, address)
+                self.test_product_termination_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-产品信息表':
-                self.test_product_excel(stagemark, menu, value, address)
+                self.test_product_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-资负信息注册(浙商)':
-                self.test_asset_liability_excel(stagemark, menu, value, address)
+                self.test_asset_liability_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-交易登记':
-                self.test_deal_registration_excel(stagemark, menu, value, address)
+                self.test_deal_registration_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-资产要素登记':
-                self.test_asset_registration_excel(stagemark, menu, value, address)
+                self.test_asset_registration_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-产品存续期登记':
-                self.test_product_duration_registration_excel(stagemark, menu, value, address)
+                self.test_product_duration_registration_excel(stagemark, menu, value, address, step)
             elif second_menu == '投组管理-投组单元资产明细表(穿透)':
-                self.test_asset_detail_penetration_excel(stagemark, menu, value, address)
+                self.test_asset_detail_penetration_excel(stagemark, menu, value, address, step)
             elif second_menu == '投组管理-投组单元资产明细表':
-                self.test_asset_detail_excel(stagemark, menu, value, address)
+                self.test_asset_detail_excel(stagemark, menu, value, address, step)
             elif second_menu == '投组管理-现金流缺口表(新)':
-                self.test_cash_gap_excel(stagemark, menu, value, address)
+                self.test_cash_gap_excel(stagemark, menu, value, address, step)
             elif second_menu == '投组管理-现金流明细表(新)':
-                self.test_cash_flow_excel(stagemark, menu, value, address)
+                self.test_cash_flow_excel(stagemark, menu, value, address, step)
             elif second_menu == '投组管理-损益分析表':
-                self.test_profit_loss_excel(stagemark, menu, value, address)
+                self.test_profit_loss_excel(stagemark, menu, value, address, step)
             elif second_menu == '投组管理-资产结构分析表':
-                self.test_asset_structure_excel(stagemark, menu, value, address)
+                self.test_asset_structure_excel(stagemark, menu, value, address, step)
             elif second_menu == '投组管理-投组单元估值明细表':
-                self.test_valuation_detail_excel(stagemark, menu, value, address)
+                self.test_valuation_detail_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-产品情况月度统计表-资产':
-                self.test_monthly_statistics_excel(stagemark, menu, value, address)
+                self.test_monthly_statistics_excel(stagemark, menu, value, address, step)
             else:
                 print("模拟操作案例：该报表暂不支持，请修改用例")
         elif test_goal == '升级对比':

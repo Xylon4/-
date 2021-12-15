@@ -212,7 +212,7 @@ class AssetUsufruct(BasePageXams):
                     else:
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
-                        self.findxpath_sendkey(targetsheet.get('投组单元'), value[n])
+                        findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(targetsheet.get('投组下拉选择'))
                 elif menu[n] == '年':

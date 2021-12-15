@@ -216,7 +216,7 @@ class TestExcel:
         sheet = wb.sheet_by_name(sheet_name)
         # 创建空字典
         dat = {}
-        for i in range(sheet.nrows):  # 循环读取"表1-1产品募集余额统计表"的数据（每次读取一行数据）
+        for i in range(sheet.nrows):  # 循环读取"sheet_name"的数据（每次读取一行数据）
             cells = sheet.row_values(i)  # 每行数据赋值给cells
             # 根据每列的数据类型进行拆分
             col1 = str(cells[0])  # 每行第一列数据赋值给col1
@@ -230,7 +230,7 @@ class TestExcel:
         sheet = wb.sheet_by_name(sheet_name)
         # 创建空字典
         dat = {}
-        for i in range(sheet.nrows):  # 循环读取"表1-1产品募集余额统计表"的数据（每次读取一行数据）
+        for i in range(sheet.nrows):  # 循环读取"sheet_name"的数据（每次读取一行数据）
             cells = sheet.row_values(i)  # 每行数据赋值给cells
             # 根据每列的数据类型进行拆分
             col1 = str(cells[0])  # 每行第一列数据赋值给col1
@@ -256,8 +256,8 @@ class TestExcel:
         for i in range(sheet.nrows):  # 循环读取"sheet1"的数据（每次读取一行数据）
             cells = sheet.row_values(i)  # 每行数据赋值给cells
             # 根据每列的数据类型进行拆分
-            data = [str(cells[1]), str(cells[5])]  # 取第二列和第五列数据生成列表
-            group_list.append(data)  # 讲列表数据循环插入group_list
+            data = [str(cells[1]), str(cells[5])]  # 取第二列和第六列数据生成列表
+            group_list.append(data)  # 将列表数据循环插入group_list
         return group_list
 
     # 创建"用例编号"和"值"映射列表
@@ -269,8 +269,21 @@ class TestExcel:
         for i in range(sheet.nrows):  # 循环读取"sheet1"的数据（每次读取一行数据）
             cells = sheet.row_values(i)  # 每行数据赋值给cells
             # 根据每列的数据类型进行拆分
-            data = [str(cells[1]), str(cells[8])]  # 取第二列和第七列数据生成列表
-            group_list.append(data)  # 讲列表数据循环插入group_list
+            data = [str(cells[1]), str(cells[8])]  # 取第二列和第九列数据生成列表
+            group_list.append(data)  # 将列表数据循环插入group_list
+        return group_list
+
+    # 创建"用例编号"和"操作步骤"映射列表
+    def group_step_list(self):
+        wb = xlrd.open_workbook(Excel_custom)
+        sheet = wb.sheet_by_name('Sheet1')
+        # 创建空列表
+        group_list = []
+        for i in range(sheet.nrows):  # 循环读取"sheet1"的数据（每次读取一行数据）
+            cells = sheet.row_values(i)  # 每行数据赋值给cells
+            # 根据每列的数据类型进行拆分
+            data = [str(cells[1]), str(cells[7])]  # 取第二列和第八列数据生成列表
+            group_list.append(data)  # 将列表数据循环插入group_list
         return group_list
 
     # 创建"用例编号"对应"操作元素"的映射字典
@@ -293,6 +306,22 @@ class TestExcel:
     def group_value_dic(self):
         dat = {}  # 创建空字典
         a = self.group_value_list()
+        c = self.code_list()
+        l = len(c)  # 读取数组长度
+        for b in a:
+            n = 0
+            while n < l:
+                if c[n] not in dat:
+                    dat.setdefault(c[n], [])  # 将枚举项先插入字典生成key，value列表为空
+                if c[n] == b[0]:
+                    dat[c[n]].append(b[1])  # 将枚举项的映射值填入value列表
+                n = n + 1
+        return dat
+
+    # 创建"用例编号"对应"操作步骤"的映射字典
+    def group_step_dic(self):
+        dat = {}  # 创建空字典
+        a = self.group_step_list()
         c = self.code_list()
         l = len(c)  # 读取数组长度
         for b in a:
@@ -383,16 +412,36 @@ class TestExcel:
             n = n + 1
         return x
 
+    # 通过备注和元素关键字精准筛选出枚举项列表
+    def enumeration_list(self, Excel_basedata, sheetname, element):
+        a = self.sheet_remark_dic(Excel_basedata, sheetname)
+        b = self.sheet_list(Excel_basedata, sheetname)
+        l = len(b)
+        n = 0
+        x = []
+        while n < l:
+            c = a.get(b[n])
+            if c in ['不需要填写']:
+                d = b[n].__contains__(f'{element}_')
+                if d:
+                    x.append(b[n])
+            n = n + 1
+        return x
+
     # 测试入口
     def test_value(self):
-        a = self.operable_list(Excel_basedata_zs, '表1-6产品到期未兑付统计表')
-        print(a)  # 返回整个函数的值
+        a = self.enumeration_list(Excel_basedata_zs, '交易所债券审批', '审批状态')
+        a.append('置空')
+        # print(a)  # 返回整个函数的值
         # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
         # c = self.checkpoint_dic('表1-2产品募集兑付统计表')
-        c = self.sheet_xpath_dic(Excel_basedata_zs, '债券类资产(新)')
-        # print(c.keys())
+        c = self.group_step_dic()
+        d = len(c.get('temp47')[0])
+        print(d)
+        if d == 0:
+            print(c)
         # print(c.get(a[0]))
         # print(a.get('temp01'))  # 通过key获取value
         z = '计息信息_期限'
