@@ -40,7 +40,7 @@ class TestAuto:
                         self.trade.test_universal(stagemark, menu, value, test_goal, step)
                         sum_trade = sum_trade + 1
                     else:
-                        print("该界面模拟操作暂不支持，请修改用例")
+                        print("该界面不在任何列表中，请修改用例")
                         return False
                 else:
                     step = None
@@ -54,7 +54,7 @@ class TestAuto:
                         self.trade.test_universal(stagemark, menu, value, test_goal, step)
                         sum_trade = sum_trade + 1
                     else:
-                        print("该界面模拟操作暂不支持，请修改用例")
+                        print("该界面不在任何列表中，请修改用例")
                         return False
             elif test_goal == '升级对比':
                 second_menu = f'{menu[2]}-{menu[3]}'
@@ -63,7 +63,7 @@ class TestAuto:
                     self.report.test_universal(stagemark, menu, value, test_goal, step)
                     sum_report = sum_report + 1
                 else:
-                    print("该界面升级对比暂不支持，请修改用例")
+                    print("该界面不在任何列表中，请修改用例")
                     return False
             else:
                 print("该测试目的暂不支持，请修改用例")

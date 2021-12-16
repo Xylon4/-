@@ -1,33 +1,29 @@
-# 交易所债券审批自动化测试用例
-# 功能描述：交易所债券审批
+# 现券审批自动化测试用例
+# 功能描述：现券审批
 from time import sleep
 
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet31, Excel_basedata_zs
+from XAMS.Report.conftest import sheet32, Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
 
-class ExchangeBondApprove(BasePageXams):
+class BondApprove(BasePageXams):
     # 模拟操作自动化案例
-    def exchange_bond_approve_excel(self, menu, value):
+    def bond_approve_excel(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()
-        basedata = [Excel_basedata_zs, sheet31]
+        basedata = [Excel_basedata_zs, sheet32]
         basepagewait = (By.XPATH, self.base.sheet_xpath_dic(basedata[0], basedata[1]).get('首页加载等待'))
         self.wait_for_visit(120, basepagewait)
-        # self.findxpath_click('//*[@class="x-tool-img x-tool-close"]')
         # 点击一级菜单
         self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[1]))
         # 点击二级菜单
         self.findxpath_click(self.base.second_menu(basedata[0]).get(f'{menu[1]}-{menu[2]}'))
-        # sleep(10)
-        # 关闭页签后重新打开
-        # self.findxpath_click('//span[@class="x-tab-close-btn"]')
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 3

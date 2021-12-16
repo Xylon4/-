@@ -164,16 +164,20 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_valuation_excel(self, stagemark, menu, value, address):
+    def test_valuation_excel(self, stagemark, menu, value, address, step):
         self.valuation = Valuation(address)
         assert self.valuation.valuation_excel(menu, value)
+        if step is not None:
+            self.valuation.end()
         print(f"{sheet4}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_remain_excel(self, stagemark, menu, value, address):
+    def test_product_remain_excel(self, stagemark, menu, value, address, step):
         self.product_remain = ProductRemain(address)
         assert self.product_remain.product_remain_excel(menu, value)
+        if step is not None:
+            self.product_remain.end()
         print(f"{sheet5}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -186,9 +190,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_amount_excel(self, stagemark, menu, value, address):
+    def test_product_amount_excel(self, stagemark, menu, value, address, step):
         self.product_amount = ProductAmount(address)
         assert self.product_amount.product_amount_excel(menu, value)
+        if step is not None:
+            self.product_amount.end()
         print(f"{sheet6}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -201,9 +207,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_quantity_excel(self, stagemark, menu, value, address):
+    def test_product_quantity_excel(self, stagemark, menu, value, address, step):
         self.product_quantity = ProductQuantity(address)
         assert self.product_quantity.product_quantity_excel(menu, value)
+        if step is not None:
+            self.product_quantity.end()
         print(f"{sheet7}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -216,9 +224,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_delay_excel(self, stagemark, menu, value, address):
+    def test_product_delay_excel(self, stagemark, menu, value, address, step):
         self.product_delay = ProductDelay(address)
         assert self.product_delay.product_delay_excel(menu, value)
+        if step is not None:
+            self.product_delay.end()
         print(f"{sheet8}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -231,9 +241,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_unpaid_excel(self, stagemark, menu, value, address):
+    def test_product_unpaid_excel(self, stagemark, menu, value, address, step):
         self.product_unpaid = ProductUnpaid(address)
         assert self.product_unpaid.product_unpaid_excel(menu, value)
+        if step is not None:
+            self.product_unpaid.end()
         print(f"{sheet9}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -246,9 +258,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_assets_excel(self, stagemark, menu, value, address):
+    def test_product_assets_excel(self, stagemark, menu, value, address, step):
         self.product_assets = ProductAssets(address)
         assert self.product_assets.product_assets_excel(menu, value)
+        if step is not None:
+            self.product_assets.end()
         print(f"{sheet10}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -261,9 +275,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_loan_statistics_excel(self, stagemark, menu, value, address):
+    def test_loan_statistics_excel(self, stagemark, menu, value, address, step):
         self.loan_statistics = LoanStatistics(address)
         assert self.loan_statistics.loan_statistics_excel(menu, value)
+        if step is not None:
+            self.loan_statistics.end()
         print(f"{sheet11}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -276,9 +292,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_loan_region_excel(self, stagemark, menu, value, address):
+    def test_loan_region_excel(self, stagemark, menu, value, address, step):
         self.loan_region = LoanRegion(address)
         assert self.loan_region.loan_region_excel(menu, value)
+        if step is not None:
+            self.loan_region.end()
         print(f"{sheet12}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -291,9 +309,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_asset_usufruct_excel(self, stagemark, menu, value, address):
+    def test_asset_usufruct_excel(self, stagemark, menu, value, address, step):
         self.asset_usufruct = AssetUsufruct(address)
         assert self.asset_usufruct.asset_usufruct_excel(menu, value)
+        if step is not None:
+            self.asset_usufruct.end()
         print(f"{sheet13}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -306,9 +326,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_enterprise_bond_excel(self, stagemark, menu, value, address):
+    def test_enterprise_bond_excel(self, stagemark, menu, value, address, step):
         self.enterprise_bond = EnterpriseBond(address)
         assert self.enterprise_bond.enterprise_bond_excel(menu, value)
+        if step is not None:
+            self.enterprise_bond.end()
         print(f"{sheet14}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -321,9 +343,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_last_product_contract_excel(self, stagemark, menu, value, address):
+    def test_last_product_contract_excel(self, stagemark, menu, value, address, step):
         self.last_product_contract = LastProductContract(address)
         assert self.last_product_contract.last_product_contract_excel(menu, value)
+        if step is not None:
+            self.last_product_contract.end()
         print(f"{sheet15}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -336,9 +360,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_new_product_contract_excel(self, stagemark, menu, value, address):
+    def test_new_product_contract_excel(self, stagemark, menu, value, address, step):
         self.new_product_contract = NewProductContract(address)
         assert self.new_product_contract.new_product_contract_excel(menu, value)
+        if step is not None:
+            self.new_product_contract.end()
         print(f"{sheet16}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -351,9 +377,11 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_term_excel(self, stagemark, menu, value, address):
+    def test_product_term_excel(self, stagemark, menu, value, address, step):
         self.product_term = ProductTerm(address)
         assert self.product_term.product_term_excel(menu, value)
+        if step is not None:
+            self.product_term.end()
         print(f"{sheet17}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -366,23 +394,29 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_termination_excel(self, stagemark, menu, value, address):
+    def test_product_termination_excel(self, stagemark, menu, value, address, step):
         self.product_termination = ProductTermination(address)
         assert self.product_termination.product_termination_excel(menu, value)
+        if step is not None:
+            self.product_termination.end()
         print(f"{sheet18}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_excel(self, stagemark, menu, value, address):
+    def test_product_excel(self, stagemark, menu, value, address, step):
         self.product = Product(address)
         assert self.product.product_excel(menu, value)
+        if step is not None:
+            self.product.end()
         print(f"{sheet2}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_asset_liability_excel(self, stagemark, menu, value, address):
+    def test_asset_liability_excel(self, stagemark, menu, value, address, step):
         self.asset_liability = AssetLiability(address)
         assert self.asset_liability.asset_liability_excel(menu, value)
+        if step is not None:
+            self.asset_liability.end()
         print(f"{sheet3}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
@@ -395,79 +429,101 @@ class TestReport:
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_deal_registration_excel(self, stagemark, menu, value, address):
+    def test_deal_registration_excel(self, stagemark, menu, value, address, step):
         self.deal_registration = DealRegistration(address)
         assert self.deal_registration.deal_registration_excel(menu, value)
+        if step is not None:
+            self.deal_registration.end()
         print(f"{sheet19}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_asset_registration_excel(self, stagemark, menu, value, address):
+    def test_asset_registration_excel(self, stagemark, menu, value, address, step):
         self.asset_registration = AssetRegistration(address)
         assert self.asset_registration.asset_registration_excel(menu, value)
+        if step is not None:
+            self.asset_registration.end()
         print(f"{sheet20}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_product_duration_registration_excel(self, stagemark, menu, value, address):
+    def test_product_duration_registration_excel(self, stagemark, menu, value, address, step):
         self.product_duration_registration = ProductDurationRegistration(address)
         assert self.product_duration_registration.product_duration_registration_excel(menu, value)
+        if step is not None:
+            self.product_duration_registration.end()
         print(f"{sheet21}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_asset_detail_penetration_excel(self, stagemark, menu, value, address):
+    def test_asset_detail_penetration_excel(self, stagemark, menu, value, address, step):
         self.asset_detail_penetration = AssetDetailPenetration(address)
         assert self.asset_detail_penetration.asset_detail_penetration_excel(menu, value)
+        if step is not None:
+            self.asset_detail_penetration.end()
         print(f"{sheet22}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_asset_detail_excel(self, stagemark, menu, value, address):
+    def test_asset_detail_excel(self, stagemark, menu, value, address, step):
         self.asset_detail = AssetDetail(address)
         assert self.asset_detail.asset_detail_excel(menu, value)
+        if step is not None:
+            self.asset_detail.end()
         print(f"{sheet23}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_cash_gap_excel(self, stagemark, menu, value, address):
+    def test_cash_gap_excel(self, stagemark, menu, value, address, step):
         self.cash_gap = CashGap(address)
         assert self.cash_gap.cash_gap_excel(menu, value)
+        if step is not None:
+            self.cash_gap.end()
         print(f"{sheet24}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_cash_flow_excel(self, stagemark, menu, value, address):
+    def test_cash_flow_excel(self, stagemark, menu, value, address, step):
         self.cash_flow = CashFlow(address)
         assert self.cash_flow.cash_flow_excel(menu, value)
+        if step is not None:
+            self.cash_flow.end()
         print(f"{sheet25}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_profit_loss_excel(self, stagemark, menu, value, address):
+    def test_profit_loss_excel(self, stagemark, menu, value, address, step):
         self.profit_loss = ProfitLoss(address)
         assert self.profit_loss.profit_loss_excel(menu, value)
+        if step is not None:
+            self.profit_loss.end()
         print(f"{sheet26}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_asset_structure_excel(self, stagemark, menu, value, address):
+    def test_asset_structure_excel(self, stagemark, menu, value, address, step):
         self.asset_structure = AssetStructure(address)
         assert self.asset_structure.asset_structure_excel(menu, value)
+        if step is not None:
+            self.asset_structure.end()
         print(f"{sheet27}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_valuation_detail_excel(self, stagemark, menu, value, address):
+    def test_valuation_detail_excel(self, stagemark, menu, value, address, step):
         self.valuation_detail = ValuationDetail(address)
         assert self.valuation_detail.valuation_detail_excel(menu, value)
+        if step is not None:
+            self.valuation_detail.end()
         print(f"{sheet28}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
     @pytest.mark.skip
-    def test_monthly_statistics_excel(self, stagemark, menu, value, address):
+    def test_monthly_statistics_excel(self, stagemark, menu, value, address, step):
         self.monthly_statistics = MonthlyStatistics(address)
         assert self.monthly_statistics.monthly_statistics_excel(menu, value)
+        if step is not None:
+            self.monthly_statistics.end()
         print(f"{sheet30}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
 
