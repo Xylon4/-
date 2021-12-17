@@ -419,6 +419,9 @@ class TestExcel:
         l = len(b)
         n = 0
         x = []
+        e = element.__contains__('_')
+        if e:
+            element = element.split('_')[1]  # 如果是弹窗中的字段，用_分隔，取后半段
         while n < l:
             c = a.get(b[n])
             if c in ['不需要填写']:
@@ -430,18 +433,18 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        a = self.enumeration_list(Excel_basedata_zs, '交易所债券审批', '审批状态')
+        a = self.enumeration_list(Excel_basedata_zs, '现券审批', '高级查询_交易状态')
         a.append('置空')
-        # print(a)  # 返回整个函数的值
+        print(a)  # 返回整个函数的值
         # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
         # c = self.checkpoint_dic('表1-2产品募集兑付统计表')
         c = self.group_step_dic()
-        d = len(c.get('temp47')[0])
-        print(d)
-        if d == 0:
-            print(c)
+        # d = len(c.get('temp47')[0])
+        # print(d)
+        # if d == 0:
+        # print(c)
         # print(c.get(a[0]))
         # print(a.get('temp01'))  # 通过key获取value
         z = '计息信息_期限'

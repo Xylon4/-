@@ -69,7 +69,10 @@ class TestAuto:
                 print("该测试目的暂不支持，请修改用例")
                 return False
             n = n + 1
-        print(f'报表案例执行完毕，共{sum_report}条')
-        print(f'资产案例执行完毕，共{sum_asset}条')
-        print(f'交易案例执行完毕，共{sum_trade}条')
+        if sum_report > 0:
+            print(f'报表案例执行完毕，共{sum_report}条')
+        if sum_asset > 0:
+            print(f'资产案例执行完毕，共{sum_asset}条')
+        if sum_trade > 0:
+            print(f'交易案例执行完毕，共{sum_trade}条')
         print(f'自动化案例执行完毕，共{count}条，包含模拟操作{simulate}条，升级对比{compare}条')

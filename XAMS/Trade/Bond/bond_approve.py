@@ -39,8 +39,8 @@ class BondApprove(BasePageXams):
                 if menu[n] in ['导出',
                                'Excel(当前页)',
                                'Excel(所有数据)',
+                               '保存布局',
                                '新增',
-                               '复制',
                                '修改',
                                '撤销审批',
                                '成交确认',
@@ -48,9 +48,13 @@ class BondApprove(BasePageXams):
                                '注销审批单',
                                '撤销注销',
                                '删除',
-                               '详情',
-                               '审批详情',
-                               '交易指令查看'
+                               '提交',
+                               '打印',
+                               '交易指令查看',
+                               '高级查询',
+                               '高级查询_查询',
+                               '高级查询_重置',
+                               '高级查询_返回'
                                ]:
                     findelement.click()
                 # 所有操作为"下拉选择"的元素
@@ -64,8 +68,14 @@ class BondApprove(BasePageXams):
                 #         findelement.click()
                 #         self.findxpath_click(targetsheet.get(value[n]))
                 # 所有操作为"输入"的元素
-                elif menu[n] in ['交易日期始',
-                                 '交易日期止'
+                elif menu[n] in ['交易员',
+                                 '交易日期起',
+                                 '交易日期止',
+                                 '高级查询_交易单号',
+                                 '高级查询_交易日期起',
+                                 '高级查询_交易日期止',
+                                 '高级查询_审批单号',
+                                 '高级查询_外部成交编号'
                                  ]:
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a')
@@ -74,7 +84,8 @@ class BondApprove(BasePageXams):
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
-                elif menu[n] == '投组':
+                elif menu[n] in ['投组']:
+                    findelement.click()
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
@@ -84,11 +95,36 @@ class BondApprove(BasePageXams):
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(targetsheet.get('投组下拉选择'))
-                elif menu[n] == '交易员':
-                    findelement.click()
-                    self.findxpath_click(f'//li[text()=" {value[n]}"]')
-                    findelement.click()
-                elif menu[n] == '审批状态':
+                elif menu[n] == '高级查询_投组单元':
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
+                        sleep(1)
+                        self.findxpath_click(
+                            f'//label[text()="投组单元:"]/../../../../../../../../../../../following-sibling::div/div[last()]//tr[last()]/td/div/span[contains(text(),"{value[n]}")]')
+                elif menu[n] == '高级查询_资产类别':
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
+                        sleep(1)
+                        self.findxpath_click(f'//span[text()="{value[n]}"]')
+                elif menu[n] in ['高级查询_交易对手', '高级查询_债券代码']:
+                    findelement.send_keys(value[n])
+                    findelement.send_keys(Keys.SPACE)
+                    findelement.send_keys(Keys.BACK_SPACE)
+                    sleep(1)
+                    findelement.send_keys(Keys.ARROW_DOWN)
+                    findelement.send_keys(Keys.ENTER)
+                    findelement.click()  # 尝试解决回车后无法正常过渡到下个元素定位的问题
+                elif menu[n] in ['审批状态', '高级查询_审批状态', '高级查询_业务种类', '高级查询_交易状态']:
                     a = self.base.enumeration_list(basedata[0], basedata[1], menu[n])
                     a.append('置空')
                     if value[n] not in a:
@@ -96,7 +132,7 @@ class BondApprove(BasePageXams):
                         return False
                     elif value[n] == '置空':
                         findelement.click()
-                        selectall = self.findxpath(targetsheet.get('审批状态_全选'))
+                        selectall = self.findxpath(targetsheet.get(f'{menu[n]}_全选'))
                         action = ActionChains(self.driver)
                         action.double_click(selectall).perform()
                         findelement.click()  # 收起下拉框
