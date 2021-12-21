@@ -54,19 +54,28 @@ class BondApprove(BasePageXams):
                                '高级查询',
                                '高级查询_查询',
                                '高级查询_重置',
-                               '高级查询_返回'
+                               '高级查询_返回',
+                               '清算速度_T + 0',
+                               '清算速度_T + 1',
+                               '重置',
+                               '返回'
                                ]:
                     findelement.click()
                 # 所有操作为"下拉选择"的元素
-                # elif menu[n] in ['审批状态'
-                #                  ]:
-                #     elementlist = targetsheet.keys()
-                #     if value[n] not in elementlist:
-                #         print(f'值"{value[n]}"输入错误，请检查')
-                #         return False
-                #     else:
-                #         findelement.click()
-                #         self.findxpath_click(targetsheet.get(value[n]))
+                elif menu[n] in ['业务种类&币种_业务种类',
+                                 '交易对手信息_银行账户',
+                                 '交易基本信息_交易市场',
+                                 '交易基本信息_执行市场',
+                                 '交易要素_结算方式',
+                                 '交易要素_清算方式'
+                                 ]:
+                    a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
+                    if value[n] not in a:
+                        print(f'值"{value[n]}"输入错误，请检查')
+                        return False
+                    else:
+                        findelement.click()
+                        self.findxpath_click(f'//li[text()="{value[n]}"]')
                 # 所有操作为"输入"的元素
                 elif menu[n] in ['交易员',
                                  '交易日期起',
@@ -75,7 +84,16 @@ class BondApprove(BasePageXams):
                                  '高级查询_交易日期起',
                                  '高级查询_交易日期止',
                                  '高级查询_审批单号',
-                                 '高级查询_外部成交编号'
+                                 '高级查询_外部成交编号',
+                                 '交易基本信息_交易日期',
+                                 '交易基本信息_成交编号',
+                                 '交易要素_券面总额(万元)',
+                                 '交易要素_到期收益率(%)',
+                                 '交易要素_净价(元)',
+                                 '交易要素_全价(元)',
+                                 '银行间交易费用信息_交易费(元)',
+                                 '银行间交易费用信息_结算费(元)',
+                                 '交易备注信息_备注'
                                  ]:
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a')
@@ -84,7 +102,7 @@ class BondApprove(BasePageXams):
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
-                elif menu[n] in ['投组']:
+                elif menu[n] in ['投组', '投组单元_投组单元']:
                     findelement.click()
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a')
@@ -116,14 +134,21 @@ class BondApprove(BasePageXams):
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(f'//span[text()="{value[n]}"]')
-                elif menu[n] in ['高级查询_交易对手', '高级查询_债券代码']:
+                # 所有操作为"输入后选择"的元素
+                elif menu[n] in ['高级查询_交易对手',
+                                 '高级查询_债券代码',
+                                 '投组单元_会计分类',
+                                 '本方账户信息_资金账户',
+                                 '交易对手信息_外部交易',
+                                 '交易要素_代码'
+                                 ]:
                     findelement.send_keys(value[n])
                     findelement.send_keys(Keys.SPACE)
                     findelement.send_keys(Keys.BACK_SPACE)
                     sleep(1)
                     findelement.send_keys(Keys.ARROW_DOWN)
                     findelement.send_keys(Keys.ENTER)
-                    findelement.click()  # 尝试解决回车后无法正常过渡到下个元素定位的问题
+                    # findelement.click()  # 尝试解决回车后无法正常过渡到下个元素定位的问题
                 elif menu[n] in ['审批状态', '高级查询_审批状态', '高级查询_业务种类', '高级查询_交易状态']:
                     a = self.base.enumeration_list(basedata[0], basedata[1], menu[n])
                     a.append('置空')
@@ -140,6 +165,22 @@ class BondApprove(BasePageXams):
                         findelement.click()
                         self.findxpath_click(targetsheet.get(value[n]))
                         findelement.click()  # 收起下拉框
+                elif menu[n] == '交易要素_总应计利息(元)':
+                    findelement.click()
+                    sleep(1)
+                    accrued = self.findxpath(targetsheet.get('总应计利息(元)'))
+                    accrued.send_keys(Keys.CONTROL, 'a')
+                    accrued.send_keys(Keys.BACK_SPACE)
+                    accrued.send_keys(value[n])
+                elif menu[n] in ['保存', '保存并提交']:
+                    findelement.click()
+                    remind = self.findxpath(targetsheet.get('提醒_继续'))
+                    self.driver.execute_script("arguments[0].click();", remind)
+                    determine = self.findxpath(targetsheet.get('成功_确定'))
+                    self.driver.execute_script("arguments[0].click();", determine)
+                    sleep(2)  # 使用时存在因为机器性能较低而延长
+                    if menu[n] == '保存并提交':
+                        self.driver.execute_script("arguments[0].click();", determine)
                 elif menu[n] == '搜索':
                     findelement.click()
                     self.wait_for_miss(120, wait)

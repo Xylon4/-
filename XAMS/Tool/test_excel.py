@@ -412,7 +412,7 @@ class TestExcel:
             n = n + 1
         return x
 
-    # 通过备注和元素关键字精准筛选出枚举项列表
+    # 通过备注和元素关键字精准筛选出枚举项列表 eg:['业务种类_银行间现券买入', '业务种类_银行间现券卖出']
     def enumeration_list(self, Excel_basedata, sheetname, element):
         a = self.sheet_remark_dic(Excel_basedata, sheetname)
         b = self.sheet_list(Excel_basedata, sheetname)
@@ -431,10 +431,30 @@ class TestExcel:
             n = n + 1
         return x
 
+    # 通过备注和元素关键字精准筛选出枚举项列表2.0 eg:['银行间现券买入', '银行间现券卖出']
+    def enumeration_list2(self, Excel_basedata, sheetname, element):
+        a = self.sheet_remark_dic(Excel_basedata, sheetname)
+        b = self.sheet_list(Excel_basedata, sheetname)
+        l = len(b)
+        n = 0
+        x = []
+        e = element.__contains__('_')
+        if e:
+            element = element.split('_')[1]  # 如果是弹窗中的字段，用_分隔，取后半段
+        while n < l:
+            c = a.get(b[n])
+            if c in ['不需要填写']:
+                d = b[n].__contains__(f'{element}_')
+                if d:
+                    f = b[n].split('_')[1]
+                    x.append(f)
+            n = n + 1
+        return x
+
     # 测试入口
     def test_value(self):
-        a = self.enumeration_list(Excel_basedata_zs, '现券审批', '高级查询_交易状态')
-        a.append('置空')
+        a = self.enumeration_list2(Excel_basedata_zs, '现券审批', '交易要素_结算方式')
+        # a.append('置空')
         print(a)  # 返回整个函数的值
         # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
