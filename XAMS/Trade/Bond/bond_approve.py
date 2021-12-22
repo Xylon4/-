@@ -150,7 +150,6 @@ class BondApprove(BasePageXams):
                     sleep(1)
                     findelement.send_keys(Keys.ARROW_DOWN)
                     findelement.send_keys(Keys.ENTER)
-                    # findelement.click()  # 尝试解决回车后无法正常过渡到下个元素定位的问题
                 elif menu[n] in ['审批状态', '高级查询_审批状态', '高级查询_业务种类', '高级查询_交易状态']:
                     a = self.base.enumeration_list(basedata[0], basedata[1], menu[n])
                     a.append('置空')
