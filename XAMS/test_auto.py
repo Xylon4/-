@@ -1,7 +1,7 @@
 from XAMS.Asset.test_asset import TestAsset
 from XAMS.Report.test_report import TestReport
 from XAMS.Tool.test_excel import TestExcel
-from XAMS.Trade.Bond.test_trade import TestTrade
+from XAMS.Trade.test_trade import TestTrade
 from XAMS.conftest import report_list, asset_list, trade_list
 
 
