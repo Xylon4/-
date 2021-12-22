@@ -48,15 +48,17 @@ class BondApprove(BasePageXams):
                                '注销审批单',
                                '撤销注销',
                                '删除',
-                               '提交',
                                '打印',
                                '交易指令查看',
                                '高级查询',
                                '高级查询_查询',
                                '高级查询_重置',
                                '高级查询_返回',
+                               '搜索_勾选框',
+                               '确认_否',
                                '清算速度_T + 0',
                                '清算速度_T + 1',
+                               '新建',
                                '重置',
                                '返回'
                                ]:
@@ -181,6 +183,14 @@ class BondApprove(BasePageXams):
                     sleep(2)  # 使用时存在因为机器性能较低而延长
                     if menu[n] == '保存并提交':
                         self.driver.execute_script("arguments[0].click();", determine)
+                elif menu[n] in ['确认_是', '提交']:
+                    findelement.click()
+                    self.wait_for_miss(120, wait)
+                    determine = self.findxpath(targetsheet.get('成功_确定'))
+                    self.driver.execute_script("arguments[0].click();", determine)
+                elif menu[n] == '模板新建':
+                    self.findxpath_click(targetsheet.get('新建_倒三角'))
+                    findelement.click()
                 elif menu[n] == '搜索':
                     findelement.click()
                     self.wait_for_miss(120, wait)
