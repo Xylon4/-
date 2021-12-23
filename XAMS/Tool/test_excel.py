@@ -455,16 +455,17 @@ class TestExcel:
     def test_value(self):
         a = self.enumeration_list2(Excel_basedata_zs, '现券审批', '交易要素_结算方式')
         # a.append('置空')
-        print(a)  # 返回整个函数的值
+        # print(a)  # 返回整个函数的值
         # print(len(a.get('temp01')))
         # for b in a:  # 循环读取a变量list
         #     print(b)
-        # c = self.checkpoint_dic('表1-2产品募集兑付统计表')
-        c = self.group_step_dic()
-        # d = len(c.get('temp47')[0])
+        c = self.operable_list(Excel_basedata_zs, '同业存单审批')
+        # c = self.group_step_dic()
+        d = ['选择工作流_勾选']
         # print(d)
-        # if d == 0:
-        # print(c)
+        if d in c:
+            return True
+        print(c)
         # print(c.get(a[0]))
         # print(a.get('temp01'))  # 通过key获取value
         z = '计息信息_期限'

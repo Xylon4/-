@@ -60,12 +60,13 @@ class BondApprove(BasePageXams):
                                '清算速度_T + 1',
                                '新建',
                                '重置',
-                               '返回'
+                               '返回',
+                               '选择工作流_取消',
+                               '限额占用结果_返回'
                                ]:
                     findelement.click()
                 # 所有操作为"下拉选择"的元素
                 elif menu[n] in ['业务种类&币种_业务种类',
-                                 '交易对手信息_银行账户',
                                  '交易基本信息_交易市场',
                                  '交易基本信息_执行市场',
                                  '交易要素_结算方式',
@@ -104,6 +105,9 @@ class BondApprove(BasePageXams):
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
+                elif menu[n] == '交易对手信息_银行账户':
+                    findelement.click()
+                    self.findxpath_click(f'//li[text()="{value[n]}"]')
                 elif menu[n] in ['投组', '投组单元_投组单元']:
                     findelement.click()
                     if value[n] == '置空':
@@ -115,6 +119,8 @@ class BondApprove(BasePageXams):
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(targetsheet.get('投组下拉选择'))
+                elif menu[n] == '选择工作流_勾选':
+                    self.findxpath_click(f'//td[3]/div[contains(text(),"{value[n]}")]')
                 elif menu[n] == '高级查询_投组单元':
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a')
@@ -182,7 +188,7 @@ class BondApprove(BasePageXams):
                     sleep(2)  # 使用时存在因为机器性能较低而延长
                     if menu[n] == '保存并提交':
                         self.driver.execute_script("arguments[0].click();", determine)
-                elif menu[n] in ['确认_是', '提交']:
+                elif menu[n] in ['确认_是', '提交', '选择工作流_确定']:
                     self.driver.execute_script("arguments[0].click();", findelement)
                     self.wait_for_miss(120, wait)
                     determine = self.findxpath(targetsheet.get('成功_确定'))
