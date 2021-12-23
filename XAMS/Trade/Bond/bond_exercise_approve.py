@@ -178,7 +178,7 @@ class BondExerciseApprove(BasePageXams):
                     if menu[n] == '保存并提交':
                         self.driver.execute_script("arguments[0].click();", determine)
                 elif menu[n] in ['确认_是', '提交', '选择工作流_确定']:
-                    findelement.click()
+                    self.driver.execute_script("arguments[0].click();", findelement)
                     self.wait_for_miss(120, wait)
                     determine = self.findxpath(targetsheet.get('成功_确定'))
                     self.driver.execute_script("arguments[0].click();", determine)
