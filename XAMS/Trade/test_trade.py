@@ -1,10 +1,11 @@
 import pytest
 
-from XAMS.Report.conftest import sheet31, sheet32, sheet33
+from XAMS.Report.conftest import sheet31, sheet32, sheet33, sheet34
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.Trade.Bond.bond_approve import BondApprove
 from XAMS.Trade.Bond.bond_exercise_approve import BondExerciseApprove
 from XAMS.Trade.Bond.exchange_bond_approve import ExchangeBondApprove
+from XAMS.Trade.Bond.ncd_approve import NcdApprove
 
 
 class TestTrade:
@@ -20,6 +21,8 @@ class TestTrade:
                 self.test_bond_approve_excel(stagemark, menu, value, address, step)
             elif second_menu == '交易管理-银行间债券行权审批':
                 self.test_bond_exercise_approve_excel(stagemark, menu, value, address, step)
+            elif second_menu == '交易管理-同业存单审批':
+                self.test_ncd_approve_excel(stagemark, menu, value, address, step)
             else:
                 print("模拟操作案例：该报表暂不支持，请修改用例")
         else:
@@ -51,4 +54,13 @@ class TestTrade:
         if step is not None:
             self.bond_exercise_approve.end()
         print(f"{sheet33}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_ncd_approve_excel(self, stagemark, menu, value, address, step):
+        self.ncd_approve = NcdApprove(address)
+        assert self.ncd_approve.ncd_approve_excel(menu, value)
+        if step is not None:
+            self.ncd_approve.end()
+        print(f"{sheet34}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')

@@ -1,23 +1,23 @@
-# 现券审批自动化测试用例
-# 功能描述：现券审批
+# 同业存单审批自动化测试用例
+# 功能描述：同业存单审批
 from time import sleep
 
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet32, Excel_basedata_zs
+from XAMS.Report.conftest import sheet33, Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
 
-class BondApprove(BasePageXams):
+class NcdApprove(BasePageXams):
     # 模拟操作自动化案例
-    def bond_approve_excel(self, menu, value):
+    def ncd_approve_excel(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()
-        basedata = [Excel_basedata_zs, sheet32]
+        basedata = [Excel_basedata_zs, sheet33]
         basepagewait = (By.XPATH, self.base.sheet_xpath_dic(basedata[0], basedata[1]).get('首页加载等待'))
         self.wait_for_visit(120, basepagewait)
         # 点击一级菜单
@@ -69,7 +69,8 @@ class BondApprove(BasePageXams):
                                  '交易基本信息_交易市场',
                                  '交易基本信息_执行市场',
                                  '交易要素_结算方式',
-                                 '交易要素_清算方式'
+                                 '交易要素_清算方式',
+                                 '资产分类_业务模式'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
                     if value[n] not in a:
@@ -139,7 +140,6 @@ class BondApprove(BasePageXams):
                 # 所有操作为"输入后选择"的元素
                 elif menu[n] in ['高级查询_交易对手',
                                  '高级查询_债券代码',
-                                 '投组单元_会计分类',
                                  '本方账户信息_资金账户',
                                  '交易对手信息_外部交易',
                                  '交易要素_代码'
