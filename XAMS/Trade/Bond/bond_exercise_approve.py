@@ -139,12 +139,18 @@ class BondExerciseApprove(BasePageXams):
                                  '本方账户信息_资金账户',
                                  '交易要素_代码'
                                  ]:
-                    findelement.send_keys(value[n])
-                    findelement.send_keys(Keys.SPACE)
-                    findelement.send_keys(Keys.BACK_SPACE)
-                    sleep(1)
-                    findelement.send_keys(Keys.ARROW_DOWN)
-                    findelement.send_keys(Keys.ENTER)
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
+                        findelement.send_keys(Keys.SPACE)
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        sleep(1)
+                        findelement.send_keys(Keys.ARROW_DOWN)
+                        findelement.send_keys(Keys.ENTER)
                 elif menu[n] in ['审批状态', '高级查询_审批状态', '高级查询_业务种类', '高级查询_交易状态']:
                     a = self.base.enumeration_list(basedata[0], basedata[1], menu[n])
                     a.append('置空')
