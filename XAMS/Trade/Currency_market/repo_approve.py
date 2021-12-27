@@ -6,7 +6,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet34, Excel_basedata_zs
+from XAMS.Report.conftest import sheet35, Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
@@ -17,7 +17,7 @@ class RepoApprove(BasePageXams):
         print(menu)
         print(value)
         self.base = TestExcel()
-        basedata = [Excel_basedata_zs, sheet34]
+        basedata = [Excel_basedata_zs, sheet35]
         basepagewait = (By.XPATH, self.base.sheet_xpath_dic(basedata[0], basedata[1]).get('首页加载等待'))
         self.wait_for_visit(120, basepagewait)
         # 点击一级菜单
@@ -63,7 +63,6 @@ class RepoApprove(BasePageXams):
                                '质押券_删除',
                                '质押券_勾选框',
                                '选择质押券_搜索',
-                               '选择质押券_确定',
                                '选择质押券_返回',
                                '新建',
                                '重置',
@@ -107,6 +106,7 @@ class RepoApprove(BasePageXams):
                                  '到期结算要素_结算金额(元)',
                                  '银行间交易费用信息_交易费(元)',
                                  '银行间交易费用信息_结算费(元)',
+                                 '银行间交易费用信息_清算费(元)',
                                  '交易备注信息_备注'
                                  ]:
                     if value[n] == '置空':
@@ -142,7 +142,7 @@ class RepoApprove(BasePageXams):
                         self.findxpath_click(
                             f'//label[text()="投组单元:"]/../../../../../../../../../../../following-sibling::div/div[last()]//tr[last()]/td/div/span[contains(text(),"{value[n]}")]')
                 elif menu[n] == '选择工作流_勾选':
-                    self.findxpath_click(f'//td[3]/div[contains(text(),"{value[n]}")]')
+                    self.findxpath_click(f'/html/body/div[last()-2]//td[3]/div[contains(text(),"{value[n]}")]')
                 # 所有操作为"输入后选择"的元素
                 elif menu[n] in ['高级查询_交易对手',
                                  '本方账户信息_资金账户',
@@ -182,16 +182,25 @@ class RepoApprove(BasePageXams):
                     findelement.click()
                     remind = self.findxpath(targetsheet.get('提醒_继续'))
                     self.driver.execute_script("arguments[0].click();", remind)
+                    # self.findxpath_click(targetsheet.get('成功_确定'))
                     determine = self.findxpath(targetsheet.get('成功_确定'))
                     self.driver.execute_script("arguments[0].click();", determine)
                     sleep(2)  # 使用时存在因为机器性能较低而延长
                     if menu[n] == '保存并提交':
+                        # self.findxpath_click(targetsheet.get('成功_确定'))
                         self.driver.execute_script("arguments[0].click();", determine)
-                elif menu[n] in ['确认_是', '提交', '选择工作流_确定']:
+                elif menu[n] in ['确认_是', '提交']:
                     self.driver.execute_script("arguments[0].click();", findelement)
                     self.wait_for_miss(120, wait)
+                    # self.findxpath_click(targetsheet.get('成功_确定'))
                     determine = self.findxpath(targetsheet.get('成功_确定'))
                     self.driver.execute_script("arguments[0].click();", determine)
+                elif menu[n] in ['选择质押券_确定', '选择工作流_确定']:
+                    findelement.click()
+                    self.findxpath_click(targetsheet.get('成功_确定'))
+                    sleep(1)
+                elif menu[n] in ['强制通过_是', '强制通过_否']:
+                    self.driver.execute_script("arguments[0].click();", findelement)
                 elif menu[n] == '模板新建':
                     self.findxpath_click(targetsheet.get('新建_倒三角'))
                     findelement.click()
