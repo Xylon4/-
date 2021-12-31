@@ -453,22 +453,27 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        a = self.enumeration_list2(Excel_basedata_zs, '现券审批', '交易要素_结算方式')
-        # a.append('置空')
-        # print(a)  # 返回整个函数的值
-        # print(len(a.get('temp01')))
-        # for b in a:  # 循环读取a变量list
-        #     print(b)
-        c = self.operable_list(Excel_basedata_zs, '同业存单审批')
-        # c = self.group_step_dic()
-        d = ['选择工作流_勾选']
-        # print(d)
-        if d in c:
-            return True
-        print(c)
-        # print(c.get(a[0]))
-        # print(a.get('temp01'))  # 通过key获取value
-        z = '计息信息_期限'
-        y = z.split('_')
-        # print(y)
-        # print(f'{y[1]}_下拉框')
+        df1 = pd.read_excel(Excel_custom, sheet_name='Sheet6')
+        df2 = pd.read_excel(Excel_custom, sheet_name='Sheet3')
+        length = len(df1) if len(df1) >= len(df2) else len(df2)
+        # print(df)
+        # print(dm)
+        # print(len(dn))
+        # print(length)
+        # e = {}
+        # for i in dn.columns:
+        #     e[i] = ['' for x in range(len(dm) - len(dn))]
+        # concat_df = pd.DataFrame(e)
+        # dn = pd.concat([dn, concat_df])
+        # print(range(len(dm)))
+        dis_index = []
+        for i in range(len(df1)):
+            f = df1.iloc[i, :]
+            g = df2.iloc[i, :]
+            ret = df1.iloc[i, :] == df2.iloc[i, :]
+            # print(ret.tolist())
+            # print('=============')
+            if False in ret.tolist():
+                dis_index.append(i)
+            print(dis_index)
+
