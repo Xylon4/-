@@ -4,8 +4,9 @@
 # 3、后面的函数循环读取参数执行操作
 import pandas as pd
 import xlrd
+from openpyxl.utils import get_column_letter
 
-from XAMS.Tool.conftest import Excel_basedata_zs, Excel_custom, universal_sheet
+from XAMS.Tool.conftest import Excel_basedata_zs, Excel_custom, universal_sheet, auto_sheet, Excel_xls, Excel_xlsx
 
 
 class TestExcel:
@@ -453,27 +454,25 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        df1 = pd.read_excel(Excel_custom, sheet_name='Sheet6')
-        df2 = pd.read_excel(Excel_custom, sheet_name='Sheet3')
-        length = len(df1) if len(df1) >= len(df2) else len(df2)
-        # print(df)
-        # print(dm)
-        # print(len(dn))
-        # print(length)
-        # e = {}
-        # for i in dn.columns:
-        #     e[i] = ['' for x in range(len(dm) - len(dn))]
-        # concat_df = pd.DataFrame(e)
-        # dn = pd.concat([dn, concat_df])
-        # print(range(len(dm)))
-        dis_index = []
-        for i in range(len(df1)):
-            f = df1.iloc[i, :]
-            g = df2.iloc[i, :]
-            ret = df1.iloc[i, :] == df2.iloc[i, :]
-            # print(ret.tolist())
-            # print('=============')
-            if False in ret.tolist():
-                dis_index.append(i)
-            print(dis_index)
-
+        book1 = xlrd.open_workbook(Excel_xls, formatting_info=True)
+        sheet1 = book1.sheet_by_name(auto_sheet)
+        book2 = xlrd.open_workbook(Excel_xlsx)
+        sheet2 = book2.sheet_by_name(auto_sheet)
+        rows = sheet1.nrows  # 最大行数
+        cols = sheet1.ncols  # 最大列数
+        a = sheet1.colinfo_map
+        b = list(sheet1.colinfo_map.keys())
+        c = list(sheet2.colinfo_map.keys())
+        d = sheet1.nrows
+        e = sheet1.ncols
+        for row in range(0, rows):
+            for col in range(0, cols):
+                e1 = sheet1.cell_value(row, col)
+                e2 = sheet1.cell_type(row, col)
+                e1 = str(e1)
+                if (e1.split(".")[0]).isdigit() or e1.isdigit() or (e1.split('-')[-1]).split(".")[
+                    -1].isdigit():
+                    # print(e1)
+                    e1 = float(e1)
+                    print(e1)
+                    print(get_column_letter(col + 1))
