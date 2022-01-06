@@ -24,6 +24,8 @@ class FundPurchaseRedemptionApprove(BasePageXams):
         self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[1]))
         # 点击二级菜单
         self.findxpath_click(self.base.second_menu(basedata[0]).get(f'{menu[1]}-{menu[2]}'))
+        searchwait = (By.XPATH, self.base.sheet_xpath_dic(basedata[0], basedata[1]).get('搜索'))
+        self.wait_for_click(120, searchwait)
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 3
@@ -54,9 +56,7 @@ class FundPurchaseRedemptionApprove(BasePageXams):
                                '撤销确认',
                                '继续',
                                '高级查询',
-                               '高级查询_查询',
                                '高级查询_重置',
-                               '高级查询_返回',
                                '搜索_勾选框',
                                '确认_否',
                                '新建',
@@ -67,7 +67,7 @@ class FundPurchaseRedemptionApprove(BasePageXams):
                                ]:
                     findelement.click()
                 # 所有操作为"下拉选择"的元素
-                elif menu[n] in ['高级查询_结算状态'
+                elif menu[n] in ['高级查询_结算状态',
                                  '业务种类&币种_业务种类',
                                  '交易要素_确认速度',
                                  '资产分类_业务模式'
@@ -186,7 +186,7 @@ class FundPurchaseRedemptionApprove(BasePageXams):
                 elif menu[n] == '模板新建':
                     self.findxpath_click(targetsheet.get('新建_倒三角'))
                     findelement.click()
-                elif menu[n] == '搜索':
+                elif menu[n] == ['搜索', '高级查询_查询', '高级查询_返回']:
                     findelement.click()
                     self.wait_for_miss(120, wait)
             n = n + 1
