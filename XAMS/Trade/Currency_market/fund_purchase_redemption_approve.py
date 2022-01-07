@@ -24,8 +24,9 @@ class FundPurchaseRedemptionApprove(BasePageXams):
         self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[1]))
         # 点击二级菜单
         self.findxpath_click(self.base.second_menu(basedata[0]).get(f'{menu[1]}-{menu[2]}'))
-        searchwait = (By.XPATH, self.base.sheet_xpath_dic(basedata[0], basedata[1]).get('搜索'))
-        self.wait_for_click(120, searchwait)
+        targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
+        wait = (By.XPATH, targetsheet.get('加载等待'))
+        self.wait_for_miss(120, wait)
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 3
@@ -34,9 +35,7 @@ class FundPurchaseRedemptionApprove(BasePageXams):
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
             else:
-                targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
                 findelement = self.findxpath(targetsheet.get(menu[n]))
-                wait = (By.XPATH, targetsheet.get('加载等待'))
                 # 所有操作为"点击"或"勾选"的元素
                 if menu[n] in ['导出',
                                'Excel(当前页)',
@@ -56,21 +55,20 @@ class FundPurchaseRedemptionApprove(BasePageXams):
                                '撤销确认',
                                '继续',
                                '高级查询',
+                               '高级查询_查询',
                                '高级查询_重置',
                                '搜索_勾选框',
                                '确认_否',
                                '新建',
                                '重置',
                                '返回',
-                               '选择工作流_取消',
-                               '限额占用结果_返回'
+                               '选择工作流_取消'
                                ]:
                     findelement.click()
                 # 所有操作为"下拉选择"的元素
                 elif menu[n] in ['高级查询_结算状态',
                                  '业务种类&币种_业务种类',
-                                 '交易要素_确认速度',
-                                 '资产分类_业务模式'
+                                 '交易要素_确认速度'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
                     if value[n] not in a:
@@ -128,6 +126,7 @@ class FundPurchaseRedemptionApprove(BasePageXams):
                 # 所有操作为"输入后选择"的元素
                 elif menu[n] in ['高级查询_交易对手',
                                  '高级查询_基金代码',
+                                 '投组单元_会计分类',
                                  '本方账户信息_资金账户',
                                  '交易对手信息_外部交易',
                                  '交易要素_基金代码'
@@ -174,9 +173,9 @@ class FundPurchaseRedemptionApprove(BasePageXams):
                 elif menu[n] in ['确认_是', '提交']:
                     self.driver.execute_script("arguments[0].click();", findelement)
                     self.wait_for_miss(120, wait)
-                    # self.findxpath_click(targetsheet.get('成功_确定'))
-                    determine = self.findxpath(targetsheet.get('成功_确定'))
-                    self.driver.execute_script("arguments[0].click();", determine)
+                    self.findxpath_click(targetsheet.get('成功_确定'))
+                    # determine = self.findxpath(targetsheet.get('成功_确定'))
+                    # self.driver.execute_script("arguments[0].click();", determine)
                 elif menu[n] in ['选择工作流_确定']:
                     findelement.click()
                     self.findxpath_click(targetsheet.get('成功_确定'))
@@ -186,8 +185,11 @@ class FundPurchaseRedemptionApprove(BasePageXams):
                 elif menu[n] == '模板新建':
                     self.findxpath_click(targetsheet.get('新建_倒三角'))
                     findelement.click()
-                elif menu[n] == ['搜索', '高级查询_查询', '高级查询_返回']:
+                elif menu[n] in ['搜索', '高级查询_返回', '限额占用结果_返回']:
                     findelement.click()
+                    sleep(1)  # 强制等待过渡到显式等待
                     self.wait_for_miss(120, wait)
+                    if menu[n] in ['高级查询_返回', '限额占用结果_返回']:
+                        sleep(2)
             n = n + 1
         return True
