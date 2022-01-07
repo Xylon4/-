@@ -1,11 +1,11 @@
-# 产品情况月度统计表-资产自动化测试用例
-# 功能描述：根据持仓资产统计产品分布
+# 表内外投资业务基础资产情况表自动化测试用例
+# 功能描述：统计表内外投资资产
 from time import sleep
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet30, Excel_basedata_nj
+from XAMS.Report.conftest import sheet37, Excel_basedata_nj
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
@@ -16,11 +16,13 @@ class MonthlyStatistics(BasePageXams):
         print(menu)
         print(value)
         self.base = TestExcel()
-        basedata = [Excel_basedata_nj, sheet30]
+        basedata = [Excel_basedata_nj, sheet37]
         # 点击一级菜单
         self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[1]))
         # 点击二级菜单
         self.findxpath_click(self.base.second_menu(basedata[0]).get(f'{menu[1]}-{menu[2]}'))
+        targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
+        wait = (By.XPATH, targetsheet.get('加载等待'))
         # 根据自定义顺序执行操作
         l = len(menu)
         n = 3
@@ -29,9 +31,7 @@ class MonthlyStatistics(BasePageXams):
                 print(f'操作元素"{menu[n]}"输入错误，请检查')
                 return False
             else:
-                targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
                 findelement = self.findxpath(targetsheet.get(menu[n]))
-                wait = (By.XPATH, targetsheet.get('加载等待'))
                 if menu[n] == '所在账户':
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a')
@@ -50,35 +50,19 @@ class MonthlyStatistics(BasePageXams):
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
-                elif menu[n] == '月':
-                    findelement.click()
-                    if value[n] == '1':
-                        self.findxpath_click(targetsheet.get('一月'))
-                    elif value[n] == '2':
-                        self.findxpath_click(targetsheet.get('二月'))
-                    elif value[n] == '3':
-                        self.findxpath_click(targetsheet.get('三月'))
-                    elif value[n] == '4':
-                        self.findxpath_click(targetsheet.get('四月'))
-                    elif value[n] == '5':
-                        self.findxpath_click(targetsheet.get('五月'))
-                    elif value[n] == '6':
-                        self.findxpath_click(targetsheet.get('六月'))
-                    elif value[n] == '7':
-                        self.findxpath_click(targetsheet.get('七月'))
-                    elif value[n] == '8':
-                        self.findxpath_click(targetsheet.get('八月'))
-                    elif value[n] == '9':
-                        self.findxpath_click(targetsheet.get('九月'))
-                    elif value[n] == '10':
-                        self.findxpath_click(targetsheet.get('十月'))
-                    elif value[n] == '11':
-                        self.findxpath_click(targetsheet.get('十一月'))
-                    elif value[n] == '12':
-                        self.findxpath_click(targetsheet.get('十二月'))
-                    else:
+                elif menu[n] == '季度':
+                    a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
+                    a.append('置空')
+                    if value[n] not in a:
                         print(f'值"{value[n]}"输入错误，请检查')
                         return False
+                    elif value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
                 elif menu[n] == '查询':
                     findelement.click()
                     # sleep(1)  # 强制等待用来过渡到显式等待
@@ -93,7 +77,7 @@ class MonthlyStatistics(BasePageXams):
         print(menu)
         print(value)
         self.base = TestExcel()
-        basedata = [Excel_basedata_nj, sheet30]
+        basedata = [Excel_basedata_nj, sheet37]
         # 点击一级菜单
         self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[2]))
         # 点击二级菜单
@@ -127,35 +111,19 @@ class MonthlyStatistics(BasePageXams):
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
-                elif menu[n] == '月':
-                    findelement.click()
-                    if value[n] == '1':
-                        self.findxpath_click(targetsheet.get('一月'))
-                    elif value[n] == '2':
-                        self.findxpath_click(targetsheet.get('二月'))
-                    elif value[n] == '3':
-                        self.findxpath_click(targetsheet.get('三月'))
-                    elif value[n] == '4':
-                        self.findxpath_click(targetsheet.get('四月'))
-                    elif value[n] == '5':
-                        self.findxpath_click(targetsheet.get('五月'))
-                    elif value[n] == '6':
-                        self.findxpath_click(targetsheet.get('六月'))
-                    elif value[n] == '7':
-                        self.findxpath_click(targetsheet.get('七月'))
-                    elif value[n] == '8':
-                        self.findxpath_click(targetsheet.get('八月'))
-                    elif value[n] == '9':
-                        self.findxpath_click(targetsheet.get('九月'))
-                    elif value[n] == '10':
-                        self.findxpath_click(targetsheet.get('十月'))
-                    elif value[n] == '11':
-                        self.findxpath_click(targetsheet.get('十一月'))
-                    elif value[n] == '12':
-                        self.findxpath_click(targetsheet.get('十二月'))
-                    else:
+                elif menu[n] == '季度':
+                    a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
+                    a.append('置空')
+                    if value[n] not in a:
                         print(f'值"{value[n]}"输入错误，请检查')
                         return False
+                    elif value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
                 elif menu[n] == '查询':
                     findelement.click()
                     # sleep(1)  # 强制等待用来过渡到显式等待
@@ -216,35 +184,19 @@ class MonthlyStatistics(BasePageXams):
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
-                elif menu[n] == '月':
-                    findelement.click()
-                    if value[n] == '1':
-                        self.findxpath_click(targetsheet.get('一月'))
-                    elif value[n] == '2':
-                        self.findxpath_click(targetsheet.get('二月'))
-                    elif value[n] == '3':
-                        self.findxpath_click(targetsheet.get('三月'))
-                    elif value[n] == '4':
-                        self.findxpath_click(targetsheet.get('四月'))
-                    elif value[n] == '5':
-                        self.findxpath_click(targetsheet.get('五月'))
-                    elif value[n] == '6':
-                        self.findxpath_click(targetsheet.get('六月'))
-                    elif value[n] == '7':
-                        self.findxpath_click(targetsheet.get('七月'))
-                    elif value[n] == '8':
-                        self.findxpath_click(targetsheet.get('八月'))
-                    elif value[n] == '9':
-                        self.findxpath_click(targetsheet.get('九月'))
-                    elif value[n] == '10':
-                        self.findxpath_click(targetsheet.get('十月'))
-                    elif value[n] == '11':
-                        self.findxpath_click(targetsheet.get('十一月'))
-                    elif value[n] == '12':
-                        self.findxpath_click(targetsheet.get('十二月'))
-                    else:
+                elif menu[n] == '季度':
+                    a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
+                    a.append('置空')
+                    if value[n] not in a:
                         print(f'值"{value[n]}"输入错误，请检查')
                         return False
+                    elif value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a')
+                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
                 elif menu[n] == '查询':
                     findelement.click()
                     # sleep(1)  # 强制等待用来过渡到显式等待
