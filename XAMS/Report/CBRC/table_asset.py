@@ -10,9 +10,9 @@ from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 
 
-class MonthlyStatistics(BasePageXams):
+class TableAsset(BasePageXams):
     # 模拟操作自动化案例-南京
-    def monthly_statistics_excel(self, menu, value):
+    def table_asset_excel(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()
@@ -73,7 +73,7 @@ class MonthlyStatistics(BasePageXams):
         return True
 
     # 模拟操作自动化案例-南京
-    def monthly_statistics_compare(self, menu, value):
+    def table_asset_compare(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()

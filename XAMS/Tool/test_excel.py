@@ -6,7 +6,8 @@ import pandas as pd
 import xlrd
 from openpyxl.utils import get_column_letter
 
-from XAMS.Tool.conftest import Excel_basedata_zs, Excel_custom, universal_sheet, auto_sheet, Excel_xls, Excel_xlsx
+from XAMS.Tool.conftest import Excel_basedata_zs, Excel_custom, universal_sheet, auto_sheet, Excel_xls, Excel_xlsx, \
+    Excel_basedata_nj
 
 
 class TestExcel:
@@ -454,25 +455,7 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        book1 = xlrd.open_workbook(Excel_xls, formatting_info=True)
-        sheet1 = book1.sheet_by_name(auto_sheet)
-        book2 = xlrd.open_workbook(Excel_xlsx)
-        sheet2 = book2.sheet_by_name(auto_sheet)
-        rows = sheet1.nrows  # 最大行数
-        cols = sheet1.ncols  # 最大列数
-        a = sheet1.colinfo_map
-        b = list(sheet1.colinfo_map.keys())
-        c = list(sheet2.colinfo_map.keys())
-        d = sheet1.nrows
-        e = sheet1.ncols
-        for row in range(0, rows):
-            for col in range(0, cols):
-                e1 = sheet1.cell_value(row, col)
-                e2 = sheet1.cell_type(row, col)
-                e1 = str(e1)
-                if (e1.split(".")[0]).isdigit() or e1.isdigit() or (e1.split('-')[-1]).split(".")[
-                    -1].isdigit():
-                    # print(e1)
-                    e1 = float(e1)
-                    print(e1)
-                    print(get_column_letter(col + 1))
+        a = self.checkpoint_list(Excel_basedata_nj, '表内外投资业务基础资产情况表')
+        # print(a[0])
+        print(len(a))
+
