@@ -2,6 +2,7 @@ import pytest
 
 from XAMS.Report.CBRC.asset_registration import AssetRegistration
 from XAMS.Report.CBRC.deal_registration import DealRegistration
+from XAMS.Report.CBRC.interbank_counterparty import InterbankCounterparty
 from XAMS.Report.CBRC.monthly_statistics import MonthlyStatistics
 from XAMS.Report.CBRC.product_duration_registration import ProductDurationRegistration
 from XAMS.Report.CBRC.table_asset import TableAsset
@@ -34,7 +35,7 @@ from XAMS.Report.PBC.product_unpaid import ProductUnpaid
 from XAMS.Report.conftest import sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8, \
     sheet9, \
     sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16, sheet17, sheet18, sheet19, sheet20, sheet21, sheet22, \
-    sheet23, sheet24, sheet25, sheet26, sheet27, sheet28, sheet30, sheet37, sheet38
+    sheet23, sheet24, sheet25, sheet26, sheet27, sheet28, sheet30, sheet37, sheet38, sheet39
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -105,6 +106,8 @@ class TestReport:
                 self.test_table_asset_excel(stagemark, menu, value, address, step)
             elif second_menu == '综合管理-表内外投资业务期限结构及成本收益表':
                 self.test_table_term_cost_excel(stagemark, menu, value, address, step)
+            elif second_menu == '综合管理-表七同业交易对手情况表':
+                self.test_interbank_counterparty_excel(stagemark, menu, value, address, step)
             else:
                 print("模拟操作案例：该报表暂不支持，请修改用例")
         elif test_goal == '升级对比':
@@ -144,6 +147,8 @@ class TestReport:
                 self.test_table_asset_compare(stagemark, menu, value, address)
             elif second_menu == '综合管理-表内外投资业务期限结构及成本收益表':
                 self.test_table_term_cost_compare(stagemark, menu, value, address)
+            elif second_menu == '综合管理-表七同业交易对手情况表':
+                self.test_interbank_counterparty_compare(stagemark, menu, value, address)
             else:
                 print("升级对比案例：该报表暂不支持，请修改用例")
         else:
@@ -577,4 +582,21 @@ class TestReport:
         assert self.table_term_cost_compare.table_term_cost_compare(menu, value)
         self.table_term_cost_compare.end()
         print(f"{sheet38}升级对比执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_interbank_counterparty_excel(self, stagemark, menu, value, address, step):
+        self.interbank_counterparty = InterbankCounterparty(address)
+        assert self.interbank_counterparty.interbank_counterparty_excel(menu, value)
+        if step is not None:
+            self.interbank_counterparty.end()
+        print(f"{sheet39}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_interbank_counterparty_compare(self, stagemark, menu, value, address):
+        self.interbank_counterparty_compare = InterbankCounterparty(address)
+        assert self.interbank_counterparty_compare.interbank_counterparty_compare(menu, value)
+        self.interbank_counterparty_compare.end()
+        print(f"{sheet39}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
