@@ -40,7 +40,6 @@ class CurrentPay(BasePageXams):
                                '撤销',
                                '搜索',
                                '搜索_勾选框',
-                               '活期账户余额_提前收息',
                                '活期账户余额_搜索',
                                '活期账户余额_关闭',
                                '交易信息_保留未收利息',
@@ -92,9 +91,13 @@ class CurrentPay(BasePageXams):
                         action = ActionChains(self.driver)
                         action.double_click(selectall).perform()
                         findelement.click()
-                    else:
+                    elif value[n] == '全部':
                         findelement.click()
                         self.findxpath_click(f'//div[contains(text(),"{value[n]}")]')
+                        findelement.click()
+                    else:
+                        findelement.click()
+                        self.findxpath_click(f'//li[contains(text(),"{value[n]}")]')
                         findelement.click()
                 elif menu[n] == '搜索':
                     findelement.click()
@@ -108,5 +111,9 @@ class CurrentPay(BasePageXams):
                     # self.driver.execute_script("arguments[0].click();", determine)
                 elif menu[n] == '确认_否':
                     self.driver.execute_script("arguments[0].click();", findelement)
+                elif menu[n] == '活期账户余额_提前收息':
+                    # 勾选查询结果
+                    self.findxpath_click(targetsheet.get('提前收息勾选'))
+                    findelement.click()
             n = n + 1
         return True
