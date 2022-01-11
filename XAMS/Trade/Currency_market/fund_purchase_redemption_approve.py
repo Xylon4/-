@@ -58,7 +58,6 @@ class FundPurchaseRedemptionApprove(BasePageXams):
                                '高级查询_查询',
                                '高级查询_重置',
                                '搜索_勾选框',
-                               '确认_否',
                                '新建',
                                '重置',
                                '返回',
@@ -180,7 +179,7 @@ class FundPurchaseRedemptionApprove(BasePageXams):
                     findelement.click()
                     self.findxpath_click(targetsheet.get('成功_确定'))
                     sleep(1)
-                elif menu[n] in ['强制通过_是', '强制通过_否']:
+                elif menu[n] in ['强制通过_是', '强制通过_否', '确认_否']:
                     self.driver.execute_script("arguments[0].click();", findelement)
                 elif menu[n] == '模板新建':
                     self.findxpath_click(targetsheet.get('新建_倒三角'))

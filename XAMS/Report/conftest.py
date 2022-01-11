@@ -19,6 +19,7 @@ import yaml
 
 Excel_basedata_zs = 'E:\PycharmProjects\菜单基础数据维护_浙商.xlsx'
 Excel_basedata_nj = 'E:\PycharmProjects\菜单基础数据维护_南京.xlsx'
+Excel_basedata_tj = 'E:\PycharmProjects\菜单基础数据维护_天津.xlsx'
 Excel_custom = 'E:\PycharmProjects\自动化测试用例模板.xlsx'
 # 获取sheet，通过Excel表格名称()获取工作表
 sheet1 = '资产池注册表'
@@ -60,3 +61,4 @@ sheet36 = '货币基金申购赎回审批'
 sheet37 = '表内外投资业务基础资产情况表'
 sheet38 = '表内外投资业务期限结构及成本收益表'
 sheet39 = '表七同业交易对手情况表'
+sheet40 = '活期账户提前收息'

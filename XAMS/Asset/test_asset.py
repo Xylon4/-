@@ -1,7 +1,8 @@
 import pytest
 
+from XAMS.Asset.Asset_duration.current_pay import CurrentPay
 from XAMS.Asset.Bond.bond import Bond
-from XAMS.Report.conftest import sheet29
+from XAMS.Report.conftest import sheet29, sheet40
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -14,6 +15,8 @@ class TestAsset:
             address = value[0]
             if second_menu == '资产管理-债券类资产(新)':
                 self.test_bond_excel(stagemark, menu, value, address, step)
+            elif second_menu == '资产管理-活期账户提前收息':
+                self.test_current_pay_excel(stagemark, menu, value, address, step)
             else:
                 print("模拟操作案例：该报表暂不支持，请修改用例")
         elif test_goal == '升级对比':
@@ -30,4 +33,13 @@ class TestAsset:
         if step is not None:
             self.bond.end()
         print(f"{sheet29}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_current_pay_excel(self, stagemark, menu, value, address, step):
+        self.current_pay = CurrentPay(address)
+        assert self.current_pay.current_pay_excel(menu, value)
+        if step is not None:
+            self.current_pay.end()
+        print(f"{sheet40}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')

@@ -72,7 +72,7 @@ class TableTermCost(BasePageXams):
             n = n + 1
         return True
 
-    # 模拟操作自动化案例-南京
+    # 升级对比自动化案例-南京
     def table_term_cost_compare(self, menu, value):
         print(menu)
         print(value)

@@ -88,7 +88,7 @@ class MonthlyStatistics(BasePageXams):
             n = n + 1
         return True
 
-    # 模拟操作自动化案例-南京
+    # 升级对比自动化案例-南京
     def monthly_statistics_compare(self, menu, value):
         print(menu)
         print(value)
