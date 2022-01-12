@@ -18,7 +18,7 @@ class TestAsset:
             elif second_menu == '资产管理-活期账户提前收息':
                 self.test_current_pay_excel(stagemark, menu, value, address, step)
             else:
-                print("模拟操作案例：该报表暂不支持，请修改用例")
+                print("模拟操作案例：该资产暂不支持，请修改用例")
         elif test_goal == '升级对比':
             second_menu = f'{menu[2]}-{menu[3]}'
             address = value[0]

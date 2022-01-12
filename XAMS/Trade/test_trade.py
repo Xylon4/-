@@ -30,7 +30,7 @@ class TestTrade:
             elif second_menu == '交易管理-货币基金申购赎回审批':
                 self.test_fund_purchase_redemption_approve_excel(stagemark, menu, value, address, step)
             else:
-                print("模拟操作案例：该报表暂不支持，请修改用例")
+                print("模拟操作案例：该交易暂不支持，请修改用例")
         else:
             print("该测试目的暂不支持，请修改用例")
             return False

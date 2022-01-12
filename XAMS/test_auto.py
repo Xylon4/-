@@ -2,7 +2,8 @@ from XAMS.Asset.test_asset import TestAsset
 from XAMS.Report.test_report import TestReport
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.Trade.test_trade import TestTrade
-from XAMS.conftest import report_list, asset_list, trade_list
+from XAMS.Workbench.test_workbench import TestWorkbench
+from XAMS.conftest import report_list, asset_list, trade_list, task_list
 
 
 class TestAuto:
@@ -11,12 +12,14 @@ class TestAuto:
         self.report = TestReport()
         self.asset = TestAsset()
         self.trade = TestTrade()
+        self.task = TestWorkbench()
         count = len(self.list.code_list())
         n = 0
         sum_report = 0
         sum_asset = 0
         sum_trade = 0
         sum_product = 0
+        sum_task = 0
         simulate = 0
         compare = 0
         while n < count:
@@ -39,6 +42,9 @@ class TestAuto:
                     elif second_menu in trade_list:
                         self.trade.test_universal(stagemark, menu, value, test_goal, step)
                         sum_trade = sum_trade + 1
+                    elif second_menu in task_list:
+                        self.task.test_universal(stagemark, menu, value, test_goal, step)
+                        sum_task = sum_task + 1
                     else:
                         print("该界面不在任何列表中，请修改用例")
                         return False
@@ -53,6 +59,9 @@ class TestAuto:
                     elif second_menu in trade_list:
                         self.trade.test_universal(stagemark, menu, value, test_goal, step)
                         sum_trade = sum_trade + 1
+                    elif second_menu in task_list:
+                        self.task.test_universal(stagemark, menu, value, test_goal, step)
+                        sum_task = sum_task + 1
                     else:
                         print("该界面不在任何列表中，请修改用例")
                         return False
@@ -75,4 +84,6 @@ class TestAuto:
             print(f'资产案例执行完毕，共{sum_asset}条')
         if sum_trade > 0:
             print(f'交易案例执行完毕，共{sum_trade}条')
+        if sum_task > 0:
+            print(f'任务案例执行完毕，共{sum_task}条')
         print(f'自动化案例执行完毕，共{count}条，包含模拟操作{simulate}条，升级对比{compare}条')
