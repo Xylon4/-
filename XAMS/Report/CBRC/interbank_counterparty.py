@@ -65,7 +65,7 @@ class InterbankCounterparty(BasePageXams):
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
-                elif menu[n] == '搜索':
+                elif menu[n] == '查询':
                     findelement.click()
                     # sleep(1)  # 强制等待用来过渡到显式等待
                     self.wait_for_miss(120, wait)
@@ -129,7 +129,7 @@ class InterbankCounterparty(BasePageXams):
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
-                elif menu[n] == '搜索':
+                elif menu[n] == '查询':
                     findelement.click()
                     # sleep(1)  # 强制等待用来过渡到显式等待
                     self.wait_for_miss(120, wait)
@@ -205,7 +205,7 @@ class InterbankCounterparty(BasePageXams):
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
-                elif menu[n] == '搜索':
+                elif menu[n] == '查询':
                     findelement.click()
                     # sleep(1)  # 强制等待用来过渡到显式等待
                     self.wait_for_miss(120, wait)

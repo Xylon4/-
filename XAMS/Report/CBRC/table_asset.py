@@ -32,7 +32,7 @@ class TableAsset(BasePageXams):
                 return False
             else:
                 findelement = self.findxpath(targetsheet.get(menu[n]))
-                if menu[n] == '所在账户':
+                if menu[n] == '投组单元':
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
@@ -93,7 +93,7 @@ class TableAsset(BasePageXams):
                 targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
                 findelement = self.findxpath(targetsheet.get(menu[n]))
                 wait = (By.XPATH, targetsheet.get('加载等待'))
-                if menu[n] == '所在账户':
+                if menu[n] == '投组单元':
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
@@ -166,7 +166,7 @@ class TableAsset(BasePageXams):
                 targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
                 findelement = self.findxpath(targetsheet.get(menu[n]))
                 wait = (By.XPATH, targetsheet.get('加载等待'))
-                if menu[n] == '所在账户':
+                if menu[n] == '投组单元':
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a')
                         findelement.send_keys(Keys.BACK_SPACE)
