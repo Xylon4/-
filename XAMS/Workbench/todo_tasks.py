@@ -32,6 +32,7 @@ class TodoTasks(BasePageXams):
                 return False
             else:
                 findelement = self.findxpath(targetsheet.get(menu[n]))
+                # 所有操作为"点击"或"勾选"的元素
                 if menu[n] in ['刷新',
                                '审批通过',
                                '审批拒绝',
@@ -53,6 +54,7 @@ class TodoTasks(BasePageXams):
                                '流程处理_回退到上一步'
                                ]:
                     findelement.click()
+                # 所有操作为"输入"的元素
                 elif menu[n] in ['产品代码',
                                  '产品名称',
                                  '审批单名称',
