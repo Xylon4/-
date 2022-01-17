@@ -72,19 +72,15 @@ class ExchangeBondApprove(BasePageXams):
                                  '交易日期止'
                                  ]:
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '投组':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(targetsheet.get('投组下拉选择'))

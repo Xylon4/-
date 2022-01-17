@@ -99,11 +99,9 @@ class BondApprove(BasePageXams):
                                  '交易备注信息_备注'
                                  ]:
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '交易对手信息_银行账户':
                     findelement.click()
@@ -111,11 +109,9 @@ class BondApprove(BasePageXams):
                 elif menu[n] in ['投组', '投组单元_投组单元']:
                     findelement.click()
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(targetsheet.get('投组下拉选择'))
@@ -123,22 +119,18 @@ class BondApprove(BasePageXams):
                     self.findxpath_click(f'//td[3]/div[contains(text(),"{value[n]}")]')
                 elif menu[n] == '高级查询_投组单元':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(
                             f'//label[text()="投组单元:"]/../../../../../../../../../../../following-sibling::div/div[last()]//tr[last()]/td/div/span[contains(text(),"{value[n]}")]')
                 elif menu[n] == '高级查询_资产类别':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(f'//span[text()="{value[n]}"]')
@@ -151,11 +143,9 @@ class BondApprove(BasePageXams):
                                  '交易要素_代码'
                                  ]:
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                         findelement.send_keys(Keys.SPACE)
                         findelement.send_keys(Keys.BACK_SPACE)

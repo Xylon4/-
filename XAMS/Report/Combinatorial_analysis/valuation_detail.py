@@ -40,29 +40,23 @@ class ValuationDetail(BasePageXams):
                     findelement.click()
                 elif menu[n] == '投组单元':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(targetsheet.get('投组下拉选择'))
                 elif menu[n] == '开始日期':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '结束日期':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '搜索':
                     findelement.click()

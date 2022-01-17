@@ -37,19 +37,15 @@ class ProductDurationRegistration(BasePageXams):
                     self.wait_for_miss(120, wait)
                 elif menu[n] == '产品名称或代码':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '报表日':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '搜索':
                     findelement.click()

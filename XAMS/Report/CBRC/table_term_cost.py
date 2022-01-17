@@ -34,21 +34,17 @@ class TableTermCost(BasePageXams):
                 findelement = self.findxpath(targetsheet.get(menu[n]))
                 if menu[n] == '投组单元':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(targetsheet.get('投组下拉选择'))
                 elif menu[n] == '年':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '季度':
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
@@ -57,11 +53,9 @@ class TableTermCost(BasePageXams):
                         print(f'值"{value[n]}"输入错误，请检查')
                         return False
                     elif value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '查询':
                     findelement.click()
@@ -95,21 +89,17 @@ class TableTermCost(BasePageXams):
                 wait = (By.XPATH, targetsheet.get('加载等待'))
                 if menu[n] == '投组单元':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(targetsheet.get('投组下拉选择'))
                 elif menu[n] == '年':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '季度':
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
@@ -118,11 +108,9 @@ class TableTermCost(BasePageXams):
                         print(f'值"{value[n]}"输入错误，请检查')
                         return False
                     elif value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '查询':
                     findelement.click()
@@ -168,21 +156,17 @@ class TableTermCost(BasePageXams):
                 wait = (By.XPATH, targetsheet.get('加载等待'))
                 if menu[n] == '所在账户':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                         sleep(1)
                         self.findxpath_click(targetsheet.get('投组下拉选择'))
                 elif menu[n] == '年':
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '季度':
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
@@ -191,11 +175,9 @@ class TableTermCost(BasePageXams):
                         print(f'值"{value[n]}"输入错误，请检查')
                         return False
                     elif value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
                 elif menu[n] == '查询':
                     findelement.click()

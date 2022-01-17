@@ -51,9 +51,16 @@ class TodoTasks(BasePageXams):
                                '流程处理_关闭',
                                '流程处理_同意',
                                '流程处理_拒绝',
-                               '流程处理_回退到上一步'
+                               '流程处理_回退到上一步',
+                               '确认_是',
+                               '确认_否'
                                ]:
-                    findelement.click()
+                    if menu[n] == '确认_是':
+                        self.driver.execute_script("arguments[0].click();", findelement)
+                        self.wait_for_miss(120, wait)
+                        self.findxpath_click(targetsheet.get('成功_确定'))
+                    else:
+                        findelement.click()
                 # 所有操作为"输入"的元素
                 elif menu[n] in ['产品代码',
                                  '产品名称',
@@ -61,11 +68,9 @@ class TodoTasks(BasePageXams):
                                  '当前批复信息'
                                  ]:
                     if value[n] == '置空':
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                     else:
-                        findelement.send_keys(Keys.CONTROL, 'a')
-                        findelement.send_keys(Keys.BACK_SPACE)
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         findelement.send_keys(value[n])
             n = n + 1
         return True
