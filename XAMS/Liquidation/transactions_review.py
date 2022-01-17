@@ -1,7 +1,8 @@
-# 待复核交易指令自动化测试用例
+# 待复核交易指令列表自动化测试用例
 # 功能描述：待复核交易指令处理
 from time import sleep
 
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
@@ -78,5 +79,47 @@ class TransactionsReview(BasePageXams):
                                  '高级查询_投组单元'
                                  ]:
                     findelement.send_keys(value[n])
+                    if menu[n] in ['资产类型', '高级查询_资产类型']:
+                        # self.findxpath_click(targetsheet.get('资产类型选择'))
+                        self.findxpath_click(f'//span[text()="{value[n]}"]')
+                    elif menu[n] == '高级查询_业务类型':
+                        self.findxpath_click(f'//li[contains(text(),"{value[n]}")]')
+                    elif menu[n] == '高级查询_资产代码':
+                        self.findxpath_click(f'//li[contains(text(),"{value[n]}(")]')
+                    elif menu[n] == '高级查询_投组单元':
+                        self.findxpath_click(targetsheet.get('投组下拉选择'))
+                # 所有操作为"点击后选择"的元素
+                elif menu[n] in ['市场类型',
+                                 '高级查询_市场类型',
+                                 '高级查询_清算类型'
+                                 ]:
+                    a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
+                    a.append('置空')
+                    if value[n] not in a:
+                        print(f'值"{value[n]}"输入错误，请检查')
+                        return False
+                    elif value[n] == '置空':
+                        findelement.click()
+                        selectall = self.findxpath('//div[contains(text(),"全选")]')
+                        action = ActionChains(self.driver)
+                        action.double_click(selectall).perform()
+                        findelement.click()
+                    elif value[n] == '全选':
+                        findelement.click()
+                        self.findxpath_click(f'//div[contains(text(),"{value[n]}")]')
+                        findelement.click()
+                    else:
+                        findelement.click()
+                        self.findxpath_click(f'//li[contains(text(),"{value[n]}")]')
+                        findelement.click()
+                elif menu[n] in ['结算状态', '高级查询_结算状态']:
+                    a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
+                    if value[n] not in a:
+                        print(f'值"{value[n]}"输入错误，请检查')
+                        return False
+                    else:
+                        findelement.click()
+                        self.findxpath_click(f'//li[contains(text(),"{value[n]}")]')
+                        findelement.click()
             n = n + 1
         return True
