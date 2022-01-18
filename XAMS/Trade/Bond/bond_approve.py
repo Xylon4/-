@@ -70,7 +70,8 @@ class BondApprove(BasePageXams):
                                  '交易基本信息_交易市场',
                                  '交易基本信息_执行市场',
                                  '交易要素_结算方式',
-                                 '交易要素_清算方式'
+                                 '交易要素_清算方式',
+                                 '资产分类_业务模式'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
                     if value[n] not in a:

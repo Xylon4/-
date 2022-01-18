@@ -56,7 +56,13 @@ class TransactionsReview(BasePageXams):
                                '确认_是',
                                '确认_否'
                                ]:
-                    findelement.click()
+                    if menu[n] in ['确认_是']:
+                        self.driver.execute_script("arguments[0].click();", findelement)
+                        self.wait_for_miss(120, wait)
+                        determine = self.findxpath(targetsheet.get('成功_确定'))
+                        self.driver.execute_script("arguments[0].click();", determine)
+                    else:
+                        findelement.click()
                     if menu[n] in ['搜索', '高级查询_返回']:
                         self.wait_for_miss(120, wait)
                 # 所有操作为"输入"的元素
