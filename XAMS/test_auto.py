@@ -33,6 +33,7 @@ class TestAuto:
             test_goal = self.list.group_goal_dic().get(code)
             if test_goal == '模拟操作':
                 second_menu = f'{menu[1]}-{menu[2]}'
+                print(second_menu)
                 simulate = simulate + 1
                 if len(step[0]) > 0:
                     step = 1
@@ -76,6 +77,7 @@ class TestAuto:
                         return False
             elif test_goal == '升级对比':
                 second_menu = f'{menu[2]}-{menu[3]}'
+                print(second_menu)
                 compare = compare + 1
                 if second_menu in report_list:
                     self.report.test_universal(stagemark, menu, value, test_goal, step)

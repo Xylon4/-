@@ -45,7 +45,6 @@ class Fund(BasePageXams):
                                '监管信息维护',
                                '查看变更日志',
                                '搜索',
-                               '搜索_单选框',
                                '搜索_全选框',
                                '确认_是',
                                '确认_否',
@@ -58,7 +57,7 @@ class Fund(BasePageXams):
                                '基金列表_匹配',
                                '基金列表_返回'
                                ]:
-                    if menu[n] in ['确认_是']:
+                    if menu[n] in ['确认_是', '基金列表_匹配', '资产条款信息_保存']:
                         self.driver.execute_script("arguments[0].click();", findelement)
                         self.wait_for_miss(120, wait)
                         determine = self.findxpath(targetsheet.get('成功_确定'))
@@ -91,7 +90,7 @@ class Fund(BasePageXams):
                         sleep(1)
                         findelement.send_keys(value[n] + Keys.SPACE + Keys.BACK_SPACE)
                         sleep(1)
-                        self.findxpath_click(f'//li[contains(text(),"{value[n]}")]')
+                        self.findxpath_click(f'/html/body/div[last()-2]//li[contains(text(),"{value[n]}")]')
                 # 所有操作为"点击后选择"的元素
                 elif menu[n] in ['资产状态',
                                  '基本信息_币种',
