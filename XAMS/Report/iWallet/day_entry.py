@@ -271,7 +271,7 @@ class DayEntry(BasePageXams):
         # 触发判断定位点
         point = self.findxpath(targetsheet.get('数据统计'))
         a = point.text.split(' ')[4]  # 搜索结果条数
-        if a is not 1:
+        if a is not '1':
             print('当前搜索结果不唯一，请调整用例')
             return False
         else:
@@ -279,14 +279,14 @@ class DayEntry(BasePageXams):
             self.findxpath_click('//span[text()="指令号"]/../../../../../following-sibling::div//td[1]/div')
             # 读取分录最大行数
             b = self.findxpath('//span[text()="记账步骤"]/../../../../../following-sibling::div//tr[last()]/td[1]/div')
-            low = b.text
+            low = int(b.text)
             # 旧环境的界面展示记录值
-            m = self.base.checkpoint_list(basedata[0], basedata[1])
+            m = self.base.checkpoint_list2(basedata[0], basedata[1])
             p = len(m)
             i = 0
             x1 = {}
             while i < p:
-                o = self.findxpath(self.base.checkpoint_dic(basedata[0], basedata[1]).get(m[i])).text
+                o = self.findxpath(self.base.checkpoint_dic2(basedata[0], basedata[1]).get(m[i])).text
                 x1.setdefault(m[i], o)
                 i = i + 1
             # 旧环境的分录明细记录值
@@ -432,11 +432,13 @@ class DayEntry(BasePageXams):
                             elif menu[n] in ['高级查询_包含抹账分录']:
                                 self.findxpath_click(f'//li[text()=" {value[n]}"]')
             n = n + 1
+        # 点击唯一数据，展示分录详情
+        self.findxpath_click('//span[text()="指令号"]/../../../../../following-sibling::div//td[1]/div')
         # 新环境的界面展示记录值
         i = 0
         y1 = {}
         while i < p:
-            o = self.findxpath(self.base.checkpoint_dic(basedata[0], basedata[1]).get(m[i])).text
+            o = self.findxpath(self.base.checkpoint_dic2(basedata[0], basedata[1]).get(m[i])).text
             y1.setdefault(m[i], o)
             i = i + 1
         # 新环境的分录明细记录值

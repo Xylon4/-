@@ -386,6 +386,19 @@ class TestExcel:
             n = n + 1
         return x
 
+    # 筛选列表中的校验点2.0
+    def checkpoint_list2(self, Excel_basedata, sheetname):
+        a = self.sheet_list(Excel_basedata, sheetname)
+        l = len(a)
+        n = 0
+        x = []
+        while n < l:
+            b = a[n].__contains__('=')
+            if b:
+                x.append(a[n])
+            n = n + 1
+        return x
+
     # 筛选字典中的校验点
     def checkpoint_dic(self, Excel_basedata, sheetname):
         a = self.sheet_list(Excel_basedata, sheetname)
@@ -395,6 +408,20 @@ class TestExcel:
         x = {}
         while n < l:
             c = a[n].__contains__('-')
+            if c:
+                x.setdefault(a[n], b.get(a[n]))
+            n = n + 1
+        return x
+
+    # 筛选字典中的校验点2.0
+    def checkpoint_dic2(self, Excel_basedata, sheetname):
+        a = self.sheet_list(Excel_basedata, sheetname)
+        b = self.sheet_xpath_dic(Excel_basedata, sheetname)
+        l = len(a)
+        n = 0
+        x = {}
+        while n < l:
+            c = a[n].__contains__('=')
             if c:
                 x.setdefault(a[n], b.get(a[n]))
             n = n + 1
@@ -483,16 +510,9 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        a = self.splicing_dic(Excel_basedata_zs, '日间分录查询', 13)
-        r = []
-        r.extend(a)  # 将字典中的keys导入列表
-        s = len(r)
-        t = 0
-        x2 = {}
-        xpath1 = '//span[text()="记账步骤"]/../../../../../following-sibling::div/div/table/tbody/tr['
-        xpath2 = ']/td['
-        xpath3 = ']/div'
-        while t < s:
-            x2.setdefault(r[t], f'{xpath1}{a.get(r[t])[0]}{xpath2}{a.get(r[t])[1]}{xpath3}')
-            t = t + 1
-        print(x2)
+        a = self.checkpoint_dic2(Excel_basedata_zs, '日间分录查询')
+        # print(a)
+        b = '13'
+        b = int(b)
+        print(b)
+        print(type(b))
