@@ -35,8 +35,9 @@ from XAMS.Report.PBC.product_unpaid import ProductUnpaid
 from XAMS.Report.conftest import sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7, sheet8, \
     sheet9, \
     sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16, sheet17, sheet18, sheet19, sheet20, sheet21, sheet22, \
-    sheet23, sheet24, sheet25, sheet26, sheet27, sheet28, sheet30, sheet37, sheet38, sheet39, sheet44
+    sheet23, sheet24, sheet25, sheet26, sheet27, sheet28, sheet30, sheet37, sheet38, sheet39, sheet44, sheet45
 from XAMS.Report.iWallet.day_entry import DayEntry
+from XAMS.Report.iWallet.periodic_entry import PeriodicEntry
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -111,6 +112,8 @@ class TestReport:
                 self.test_interbank_counterparty_excel(stagemark, menu, value, address, step)
             elif second_menu == '估值管理-日间分录查询':
                 self.test_day_entry_excel(stagemark, menu, value, address, step)
+            elif second_menu == '估值管理-周期分录查询':
+                self.test_periodic_entry_excel(stagemark, menu, value, address, step)
             else:
                 print("模拟操作案例：该报表暂不支持，请修改用例")
         elif test_goal == '升级对比':
@@ -154,6 +157,8 @@ class TestReport:
                 self.test_interbank_counterparty_compare(stagemark, menu, value, address)
             elif second_menu == '估值管理-日间分录查询':
                 self.test_day_entry_compare(stagemark, menu, value, address)
+            elif second_menu == '估值管理-周期分录查询':
+                self.test_periodic_entry_compare(stagemark, menu, value, address)
             else:
                 print("升级对比案例：该报表暂不支持，请修改用例")
         else:
@@ -621,4 +626,21 @@ class TestReport:
         assert self.day_entry_compare.day_entry_compare(menu, value)
         self.day_entry_compare.end()
         print(f"{sheet44}升级对比执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_periodic_entry_excel(self, stagemark, menu, value, address, step):
+        self.periodic_entry = PeriodicEntry(address)
+        assert self.periodic_entry.periodic_entry_excel(menu, value)
+        if step is not None:
+            self.periodic_entry.end()
+        print(f"{sheet45}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_periodic_entry_compare(self, stagemark, menu, value, address):
+        self.periodic_entry_compare = PeriodicEntry(address)
+        assert self.periodic_entry_compare.periodic_entry_compare(menu, value)
+        self.periodic_entry_compare.end()
+        print(f"{sheet45}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
