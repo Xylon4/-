@@ -400,6 +400,34 @@ class TestExcel:
             n = n + 1
         return x
 
+    # 筛选列表中的拼接点
+    def splicing_list(self, Excel_basedata, sheetname):
+        a = self.sheet_list(Excel_basedata, sheetname)
+        l = len(a)
+        n = 0
+        x = []
+        while n < l:
+            b = a[n].__contains__('+')
+            if b:
+                x.append(a[n].split('+')[0])
+            n = n + 1
+        return x
+
+    # 通过拼接点列表生成字典
+    def splicing_dic(self, Excel_basedata, sheetname, low):
+        a = self.splicing_list(Excel_basedata, sheetname)
+        b = len(a)
+        c = low
+        m = 0
+        x = {}
+        while m < b:
+            n = 0  # 子循环的初始参数定义需要写在循环内，一次循环结束后重置成初始值，不然一次子循环后即满足条件结束整个循环
+            while n < c:
+                x.setdefault(f'{a[m]}-{n + 1}', (n + 1, m + 2))
+                n = n + 1
+            m = m + 1
+        return x
+
     # 通过备注筛选出支持的可操作点列表
     def operable_list(self, Excel_basedata, sheetname):
         a = self.sheet_remark_dic(Excel_basedata, sheetname)
@@ -455,7 +483,16 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        a = self.checkpoint_list(Excel_basedata_nj, '表内外投资业务基础资产情况表')
-        # print(a[0])
-        print(len(a))
-
+        a = self.splicing_dic(Excel_basedata_zs, '日间分录查询', 13)
+        r = []
+        r.extend(a)  # 将字典中的keys导入列表
+        s = len(r)
+        t = 0
+        x2 = {}
+        xpath1 = '//span[text()="记账步骤"]/../../../../../following-sibling::div/div/table/tbody/tr['
+        xpath2 = ']/td['
+        xpath3 = ']/div'
+        while t < s:
+            x2.setdefault(r[t], f'{xpath1}{a.get(r[t])[0]}{xpath2}{a.get(r[t])[1]}{xpath3}')
+            t = t + 1
+        print(x2)

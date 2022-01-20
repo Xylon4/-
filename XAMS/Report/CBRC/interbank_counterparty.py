@@ -149,8 +149,6 @@ class InterbankCounterparty(BasePageXams):
         self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[2]))
         # 点击二级菜单
         self.findxpath_click(self.base.second_menu(basedata[0]).get(f'{menu[2]}-{menu[3]}'))
-        targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
-        wait = (By.XPATH, targetsheet.get('加载等待'))
         # 点击需要核对的页签，保证核对正常
         self.findxpath_click(targetsheet.get('同业交易对手情况表'))
         # 根据自定义顺序执行操作
