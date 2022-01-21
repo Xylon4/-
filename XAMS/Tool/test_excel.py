@@ -5,7 +5,7 @@
 import pandas as pd
 import xlrd
 from openpyxl.utils import get_column_letter
-
+import math
 from XAMS.Tool.conftest import Excel_basedata_zs, Excel_custom, universal_sheet, auto_sheet, Excel_xls, Excel_xlsx, \
     Excel_basedata_nj
 
@@ -514,5 +514,12 @@ class TestExcel:
         # print(a)
         b = '13'
         b = int(b)
-        print(b)
-        print(type(b))
+        # print(b)
+        # print(type(b))
+        d = 123
+        a = d / 20
+        print(a, type(a))
+        a = math.ceil(a)
+        print(a, type(a))
+        c = d - (a - 1) * 20
+        print(c, type(c))
