@@ -63,11 +63,9 @@ class PeriodicEntry(BasePageXams):
                 # 所有操作为"输入后选择"的元素
                 elif menu[n] in ['投组单元',
                                  '金融工具代码',
-                                 '客户名称',
                                  '高级查询_投组单元',
                                  '高级查询_产品类型',
-                                 '高级查询_金融工具代码',
-                                 '高级查询_客户名称'
+                                 '高级查询_金融工具代码'
                                  ]:
                     if menu[n] == '高级查询_产品类型':
                         a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
@@ -99,7 +97,7 @@ class PeriodicEntry(BasePageXams):
                             sleep(1)
                             if menu[n] in ['投组单元', '高级查询_投组单元']:
                                 self.findxpath_click(targetsheet.get('投组下拉选择'))
-                            elif menu[n] in ['金融工具代码', '高级查询_金融工具代码', '客户名称', '高级查询_客户名称']:
+                            elif menu[n] in ['金融工具代码', '高级查询_金融工具代码']:
                                 self.findxpath_click(f'/html/body/div[last()-2]//li[contains(text(),"{value[n]}")]')
                 # 所有操作为"点击后选择"的元素
                 elif menu[n] in ['投资类型',
@@ -174,7 +172,8 @@ class PeriodicEntry(BasePageXams):
                                '高级查询_返回'
                                ]:
                     if menu[n] == '分录导出':
-                        self.findxpath_click('//span[text()="投组单元"]/../../../../../following-sibling::div/div/table/tbody/tr/td[2]/div')
+                        self.findxpath_click(
+                            '//span[text()="投组单元"]/../../../../../following-sibling::div/div/table/tbody/tr/td[2]/div')
                     findelement.click()
                     if menu[n] in ['搜索', '高级查询_返回']:
                         self.wait_for_miss(120, wait)
@@ -229,13 +228,14 @@ class PeriodicEntry(BasePageXams):
                             elif menu[n] in ['金融工具代码', '高级查询_金融工具代码']:
                                 self.findxpath_click(f'/html/body/div[last()-2]//li[contains(text(),"{value[n]}")]')
                 # 所有操作为"点击后选择"的元素
-                elif menu[n] in ['会计分类',
+                elif menu[n] in ['投资类型',
+                                 '会计分类',
                                  '高级查询_投资类型',
                                  '高级查询_会计分类',
                                  '高级查询_包含抹账分录'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
-                    if menu[n] == '高级查询_投资类型':
+                    if menu[n] in ['投资类型', '高级查询_投资类型']:
                         a.append('置空')
                         if value[n] not in a:
                             print(f'值"{value[n]}"输入错误，请检查')
@@ -335,7 +335,8 @@ class PeriodicEntry(BasePageXams):
                                '高级查询_返回'
                                ]:
                     if menu[n] == '分录导出':
-                        self.findxpath_click('//span[text()="投组单元"]/../../../../../following-sibling::div/div/table/tbody/tr/td[2]/div')
+                        self.findxpath_click(
+                            '//span[text()="投组单元"]/../../../../../following-sibling::div/div/table/tbody/tr/td[2]/div')
                     findelement.click()
                     if menu[n] in ['搜索', '高级查询_返回']:
                         self.wait_for_miss(120, wait)
@@ -353,11 +354,9 @@ class PeriodicEntry(BasePageXams):
                 # 所有操作为"输入后选择"的元素
                 elif menu[n] in ['投组单元',
                                  '金融工具代码',
-                                 '客户名称',
                                  '高级查询_投组单元',
                                  '高级查询_产品类型',
-                                 '高级查询_金融工具代码',
-                                 '高级查询_客户名称'
+                                 '高级查询_金融工具代码'
                                  ]:
                     if menu[n] == '高级查询_产品类型':
                         a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
@@ -389,16 +388,17 @@ class PeriodicEntry(BasePageXams):
                             sleep(1)
                             if menu[n] in ['投组单元', '高级查询_投组单元']:
                                 self.findxpath_click(targetsheet.get('投组下拉选择'))
-                            elif menu[n] in ['金融工具代码', '高级查询_金融工具代码', '客户名称', '高级查询_客户名称']:
+                            elif menu[n] in ['金融工具代码', '高级查询_金融工具代码']:
                                 self.findxpath_click(f'/html/body/div[last()-2]//li[contains(text(),"{value[n]}")]')
                 # 所有操作为"点击后选择"的元素
-                elif menu[n] in ['会计分类',
+                elif menu[n] in ['投资类型',
+                                 '会计分类',
                                  '高级查询_投资类型',
                                  '高级查询_会计分类',
                                  '高级查询_包含抹账分录'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
-                    if menu[n] == '高级查询_投资类型':
+                    if menu[n] in ['投资类型', '高级查询_投资类型']:
                         a.append('置空')
                         if value[n] not in a:
                             print(f'值"{value[n]}"输入错误，请检查')
