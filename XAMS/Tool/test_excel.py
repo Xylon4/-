@@ -440,8 +440,24 @@ class TestExcel:
             n = n + 1
         return x
 
-    # 通过拼接点列表生成字典
-    def splicing_dic(self, Excel_basedata, sheetname, low):
+    # 通过拼接点列表生成字典-第一列
+    def splicing_dic(self, Excel_basedata, sheetname, low, page, h):  # 当页行数，当前页数，单页最大行数
+        a = self.splicing_list(Excel_basedata, sheetname)
+        b = len(a)
+        c = low
+        d = page - 1
+        m = 0
+        x = {}
+        while m < b:
+            n = 0  # 子循环的初始参数定义需要写在循环内，一次循环结束后重置成初始值，不然一次子循环后即满足条件结束整个循环
+            while n < c:
+                x.setdefault(f'{a[m]}-{d * h + n + 1}', (n + 1, m + 1))
+                n = n + 1
+            m = m + 1
+        return x
+
+    # 通过拼接点列表生成字典-第二列
+    def splicing_dic2(self, Excel_basedata, sheetname, low):
         a = self.splicing_list(Excel_basedata, sheetname)
         b = len(a)
         c = low
@@ -510,16 +526,7 @@ class TestExcel:
 
     # 测试入口
     def test_value(self):
-        a = self.checkpoint_dic2(Excel_basedata_zs, '日间分录查询')
+        a = self.splicing_dic(Excel_basedata_zs, '损益结转分录查询', 20, 6, 20)
         # print(a)
-        b = '13'
-        b = int(b)
-        # print(b)
-        # print(type(b))
-        d = 123
-        a = d / 20
-        print(a, type(a))
-        a = math.ceil(a)
-        print(a, type(a))
-        c = d - (a - 1) * 20
-        print(c, type(c))
+        b = self.splicing_dic(Excel_basedata_zs, '损益结转分录查询', 4, 5, 20)
+        print(b)

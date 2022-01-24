@@ -287,7 +287,7 @@ class PeriodicEntry(BasePageXams):
                 x1.setdefault(m[i], o)
                 i = i + 1
             # 旧环境的分录明细记录值
-            q1 = self.base.splicing_dic(basedata[0], basedata[1], low)
+            q1 = self.base.splicing_dic2(basedata[0], basedata[1], low)
             r = []
             r.extend(q1)  # 将字典中的keys导入列表
             s = len(r)
@@ -299,7 +299,7 @@ class PeriodicEntry(BasePageXams):
             while t < s:
                 q2.setdefault(r[t], f'{xpath1}{q1.get(r[t])[0]}{xpath2}{q1.get(r[t])[1]}{xpath3}')
                 t = t + 1
-            #
+            # 通过路径字典生成值字典
             u = 0
             x2 = {}  # 分录明细字典
             while u < s:
