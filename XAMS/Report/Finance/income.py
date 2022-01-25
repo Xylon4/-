@@ -69,8 +69,7 @@ class Income(BasePageXams):
                                  '查询频率',
                                  '年份',
                                  '半年',
-                                 '季度',
-                                 '月份'
+                                 '季度'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
                     if value[n] not in a:
@@ -86,13 +85,16 @@ class Income(BasePageXams):
                             self.findxpath_click(f'//li[text()="{value[n]}"]')
                         elif menu[n] in ['年份']:
                             self.findxpath_click(f'/html/body/div[last()]//a[text()="{value[n]}"]')
-                            self.findxpath_click(targetsheet.get('年份_确认'))
-                        elif menu[n] in ['月份']:
-                            a = value[n].split('_')[0]
-                            b = value[n].split('_')[1]
-                            self.findxpath_click(f'/html/body/div[last()]//a[text()="{a}"]')
-                            self.findxpath_click(f'//a[text()="{b}"]')
-                            self.findxpath_click(targetsheet.get('月份_确定'))
+                            determine = self.findxpath(targetsheet.get('年份_确认'))
+                            self.driver.execute_script("arguments[0].click();", determine)
+                elif menu[n] == '月份':
+                    findelement.click()
+                    a = value[n].split('_')[0]
+                    b = value[n].split('_')[1]
+                    self.findxpath_click(f'/html/body/div[last()]//a[text()="{a}"]')
+                    self.findxpath_click(f'//a[text()="{b}"and starts-with(@style,"margin")]')
+                    determine = self.findxpath(targetsheet.get('月份_确定'))
+                    self.driver.execute_script("arguments[0].click();", determine)
             n = n + 1
         return True
 
@@ -152,8 +154,7 @@ class Income(BasePageXams):
                                  '查询频率',
                                  '年份',
                                  '半年',
-                                 '季度',
-                                 '月份'
+                                 '季度'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
                     if value[n] not in a:
@@ -169,13 +170,16 @@ class Income(BasePageXams):
                             self.findxpath_click(f'//li[text()="{value[n]}"]')
                         elif menu[n] in ['年份']:
                             self.findxpath_click(f'/html/body/div[last()]//a[text()="{value[n]}"]')
-                            self.findxpath_click(targetsheet.get('年份_确认'))
-                        elif menu[n] in ['月份']:
-                            a = value[n].split('_')[0]
-                            b = value[n].split('_')[1]
-                            self.findxpath_click(f'/html/body/div[last()]//a[text()="{a}"]')
-                            self.findxpath_click(f'//a[text()="{b}"]')
-                            self.findxpath_click(targetsheet.get('月份_确定'))
+                            determine = self.findxpath(targetsheet.get('年份_确认'))
+                            self.driver.execute_script("arguments[0].click();", determine)
+                elif menu[n] == '月份':
+                    findelement.click()
+                    a = value[n].split('_')[0]
+                    b = value[n].split('_')[1]
+                    self.findxpath_click(f'/html/body/div[last()]//a[text()="{a}"]')
+                    self.findxpath_click(f'//a[text()="{b}"and starts-with(@style,"margin")]')
+                    determine = self.findxpath(targetsheet.get('月份_确定'))
+                    self.driver.execute_script("arguments[0].click();", determine)
             n = n + 1
         # 触发判断定位点
         m = self.base.checkpoint_list(basedata[0], basedata[1])
@@ -245,8 +249,7 @@ class Income(BasePageXams):
                                  '查询频率',
                                  '年份',
                                  '半年',
-                                 '季度',
-                                 '月份'
+                                 '季度'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
                     if value[n] not in a:
@@ -262,13 +265,16 @@ class Income(BasePageXams):
                             self.findxpath_click(f'//li[text()="{value[n]}"]')
                         elif menu[n] in ['年份']:
                             self.findxpath_click(f'/html/body/div[last()]//a[text()="{value[n]}"]')
-                            self.findxpath_click(targetsheet.get('年份_确认'))
-                        elif menu[n] in ['月份']:
-                            a = value[n].split('_')[0]
-                            b = value[n].split('_')[1]
-                            self.findxpath_click(f'/html/body/div[last()]//a[text()="{a}"]')
-                            self.findxpath_click(f'//a[text()="{b}"]')
-                            self.findxpath_click(targetsheet.get('月份_确定'))
+                            determine = self.findxpath(targetsheet.get('年份_确认'))
+                            self.driver.execute_script("arguments[0].click();", determine)
+                elif menu[n] == '月份':
+                    findelement.click()
+                    a = value[n].split('_')[0]
+                    b = value[n].split('_')[1]
+                    self.findxpath_click(f'/html/body/div[last()]//a[text()="{a}"]')
+                    self.findxpath_click(f'//a[text()="{b}"and starts-with(@style,"margin")]')
+                    determine = self.findxpath(targetsheet.get('月份_确定'))
+                    self.driver.execute_script("arguments[0].click();", determine)
             n = n + 1
         # 新环境的记录值
         r = 0
