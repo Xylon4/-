@@ -14,6 +14,7 @@ from XAMS.Report.Combinatorial_analysis.cash_flow import CashFlow
 from XAMS.Report.Combinatorial_analysis.cash_gap import CashGap
 from XAMS.Report.Combinatorial_analysis.profit_loss import ProfitLoss
 from XAMS.Report.Combinatorial_analysis.valuation_detail import ValuationDetail
+from XAMS.Report.Finance.account_balance import AccountBalance
 from XAMS.Report.Finance.balance import Balance
 from XAMS.Report.Finance.income import Income
 from XAMS.Report.Finance.valuation import Valuation
@@ -38,7 +39,7 @@ from XAMS.Report.conftest import sheet1, sheet2, sheet3, sheet4, sheet5, sheet6,
     sheet9, \
     sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16, sheet17, sheet18, sheet19, sheet20, sheet21, sheet22, \
     sheet23, sheet24, sheet25, sheet26, sheet27, sheet28, sheet30, sheet37, sheet38, sheet39, sheet44, sheet45, sheet46, \
-    sheet47, sheet48
+    sheet47, sheet48, sheet49
 from XAMS.Report.iWallet.day_entry import DayEntry
 from XAMS.Report.iWallet.periodic_entry import PeriodicEntry
 from XAMS.Report.iWallet.profit_carry_over_entry import ProfitCarryOverEntry
@@ -124,6 +125,8 @@ class TestReport:
                 self.test_income_excel(stagemark, menu, value, address, step)
             elif second_menu == '估值管理-资产负债表(平台)':
                 self.test_balance_excel(stagemark, menu, value, address, step)
+            elif second_menu == '估值管理-科目余额表':
+                self.test_account_balance_excel(stagemark, menu, value, address, step)
             else:
                 print("模拟操作案例：该报表暂不支持，请修改用例")
         elif test_goal == '升级对比':
@@ -710,4 +713,13 @@ class TestReport:
         assert self.balance_compare.balance_compare(menu, value)
         self.balance_compare.end()
         print(f"{sheet48}升级对比执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+        
+    @pytest.mark.skip
+    def test_account_balance_excel(self, stagemark, menu, value, address, step):
+        self.account_balance = AccountBalance(address)
+        assert self.account_balance.account_balance_excel(menu, value)
+        if step is not None:
+            self.account_balance.end()
+        print(f"{sheet49}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
