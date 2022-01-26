@@ -19,6 +19,7 @@ from XAMS.Report.Finance.balance import Balance
 from XAMS.Report.Finance.income import Income
 from XAMS.Report.Finance.nav_change import NavChange
 from XAMS.Report.Finance.valuation import Valuation
+from XAMS.Report.Finance.variable_return_measurement import VariableReturnMeasurement
 from XAMS.Report.Financial.asset_liability import AssetLiability
 from XAMS.Report.Financial.asset_pool_registry import AssetPoolRegistry
 from XAMS.Report.Financial.product import Product
@@ -40,7 +41,7 @@ from XAMS.Report.conftest import sheet1, sheet2, sheet3, sheet4, sheet5, sheet6,
     sheet9, \
     sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16, sheet17, sheet18, sheet19, sheet20, sheet21, sheet22, \
     sheet23, sheet24, sheet25, sheet26, sheet27, sheet28, sheet30, sheet37, sheet38, sheet39, sheet44, sheet45, sheet46, \
-    sheet47, sheet48, sheet49, sheet50
+    sheet47, sheet48, sheet49, sheet50, sheet51
 from XAMS.Report.iWallet.day_entry import DayEntry
 from XAMS.Report.iWallet.periodic_entry import PeriodicEntry
 from XAMS.Report.iWallet.profit_carry_over_entry import ProfitCarryOverEntry
@@ -130,6 +131,8 @@ class TestReport:
                 self.test_account_balance_excel(stagemark, menu, value, address, step)
             elif second_menu == '估值管理-理财产品净值变动表':
                 self.test_nav_change_excel(stagemark, menu, value, address, step)
+            elif second_menu == '估值管理-可变报酬测算表':
+                self.test_variable_return_measurement_excel(stagemark, menu, value, address, step)
             else:
                 print("模拟操作案例：该报表暂不支持，请修改用例")
         elif test_goal == '升级对比':
@@ -744,4 +747,13 @@ class TestReport:
         assert self.nav_change_compare.nav_change_compare(menu, value)
         self.nav_change_compare.end()
         print(f"{sheet50}升级对比执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_variable_return_measurement_excel(self, stagemark, menu, value, address, step):
+        self.variable_return_measurement = VariableReturnMeasurement(address)
+        assert self.variable_return_measurement.variable_return_measurement_excel(menu, value)
+        if step is not None:
+            self.variable_return_measurement.end()
+        print(f"{sheet51}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')
