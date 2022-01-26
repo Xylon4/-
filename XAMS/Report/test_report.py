@@ -16,6 +16,7 @@ from XAMS.Report.Combinatorial_analysis.profit_loss import ProfitLoss
 from XAMS.Report.Combinatorial_analysis.valuation_detail import ValuationDetail
 from XAMS.Report.Finance.account_balance import AccountBalance
 from XAMS.Report.Finance.balance import Balance
+from XAMS.Report.Finance.cash_flow_statement import CashFlowStatement
 from XAMS.Report.Finance.income import Income
 from XAMS.Report.Finance.nav_change import NavChange
 from XAMS.Report.Finance.valuation import Valuation
@@ -41,7 +42,7 @@ from XAMS.Report.conftest import sheet1, sheet2, sheet3, sheet4, sheet5, sheet6,
     sheet9, \
     sheet10, sheet11, sheet12, sheet13, sheet14, sheet15, sheet16, sheet17, sheet18, sheet19, sheet20, sheet21, sheet22, \
     sheet23, sheet24, sheet25, sheet26, sheet27, sheet28, sheet30, sheet37, sheet38, sheet39, sheet44, sheet45, sheet46, \
-    sheet47, sheet48, sheet49, sheet50, sheet51
+    sheet47, sheet48, sheet49, sheet50, sheet51, sheet52
 from XAMS.Report.iWallet.day_entry import DayEntry
 from XAMS.Report.iWallet.periodic_entry import PeriodicEntry
 from XAMS.Report.iWallet.profit_carry_over_entry import ProfitCarryOverEntry
@@ -133,6 +134,8 @@ class TestReport:
                 self.test_nav_change_excel(stagemark, menu, value, address, step)
             elif second_menu == '估值管理-可变报酬测算表':
                 self.test_variable_return_measurement_excel(stagemark, menu, value, address, step)
+            elif second_menu == '估值管理-现金流量表':
+                self.test_cash_flow_statement_excel(stagemark, menu, value, address, step)
             else:
                 print("模拟操作案例：该报表暂不支持，请修改用例")
         elif test_goal == '升级对比':
@@ -186,6 +189,8 @@ class TestReport:
                 self.test_balance_compare(stagemark, menu, value, address)
             elif second_menu == '估值管理-理财产品净值变动表':
                 self.test_nav_change_compare(stagemark, menu, value, address)
+            elif second_menu == '估值管理-现金流量表':
+                self.test_cash_flow_statement_compare(stagemark, menu, value, address)
             else:
                 print("升级对比案例：该报表暂不支持，请修改用例")
         else:
@@ -756,4 +761,21 @@ class TestReport:
         if step is not None:
             self.variable_return_measurement.end()
         print(f"{sheet51}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_cash_flow_statement_excel(self, stagemark, menu, value, address, step):
+        self.cash_flow_statement = CashFlowStatement(address)
+        assert self.cash_flow_statement.cash_flow_statement_excel(menu, value)
+        if step is not None:
+            self.cash_flow_statement.end()
+        print(f"{sheet52}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_cash_flow_statement_compare(self, stagemark, menu, value, address):
+        self.cash_flow_statement_compare = CashFlowStatement(address)
+        assert self.cash_flow_statement_compare.cash_flow_statement_compare(menu, value)
+        self.cash_flow_statement_compare.end()
+        print(f"{sheet52}升级对比执行完毕")
         print('-----------------------这是案例分割线-----------------------')
