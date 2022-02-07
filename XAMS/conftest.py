@@ -92,3 +92,7 @@ task_list = ['我的工作台-待审批任务'
 # 清算列表
 liquidation_list = ['清算管理-待复核交易指令列表'
                     ]
+
+# 估值列表
+valuation_list = ['估值管理-日间跑批'
+                  ]

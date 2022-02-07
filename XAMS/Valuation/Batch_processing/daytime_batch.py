@@ -42,11 +42,31 @@ class DaytimeBatch(BasePageXams):
                                '包含SPV投组',
                                '搜索',
                                '搜索_全选框',
-                               '搜索_单选框'
+                               '搜索_单选框',
+                               '轧账检查_正常轧账',
+                               '轧账检查_撤销轧账',
+                               '轧账检查_刷新',
+                               '轧账检查_返回',
+                               '日间跑批页面_开始跑批',
+                               '日间跑批页面_撤销跑批',
+                               '日间跑批页面_刷新',
+                               '日间跑批页面_关闭'
                                ]:
                     findelement.click()
-                    if menu[n] in ['搜索']:
+                    if menu[n] in ['搜索', '轧账检查_返回', '轧账']:
                         self.wait_for_miss(120, wait)
+                    if menu[n] in ['轧账检查_正常轧账', '轧账检查_撤销轧账']:
+                        rolling_wait = (By.XPATH, targetsheet.get('轧账等待'))
+                        self.wait_for_miss(120, rolling_wait)
+                    if menu[n] in ['日间跑批页面_开始跑批']:
+                        status = (By.XPATH, targetsheet.get('跑批完成'))
+                        self.wait_for_visit(300, status)
+                    if menu[n] in ['日间跑批页面_撤销跑批']:
+                        status = (By.XPATH, targetsheet.get('跑批撤销'))
+                        self.wait_for_visit(300, status)
+                    if menu[n] in ['日间跑批页面_开始跑批', '日间跑批页面_撤销跑批', '轧账检查_正常轧账', '轧账检查_撤销轧账']:
+                        determine = self.findxpath(targetsheet.get('成功_确定'))
+                        self.driver.execute_script("arguments[0].click();", determine)
                 # 所有操作为"输入"的元素
                 elif menu[n] in ['业务日期']:
                     if value[n] == '置空':
@@ -68,7 +88,7 @@ class DaytimeBatch(BasePageXams):
                 # 所有操作为"点击后选择"的元素
                 elif menu[n] in ['清算路径',
                                  '轧账状态',
-                                 '跑批状态'
+                                 '跑批状态',
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
                     a.append('置空')
@@ -77,13 +97,21 @@ class DaytimeBatch(BasePageXams):
                         return False
                     elif value[n] == '置空':
                         findelement.click()
-                        selectall = self.findxpath('//div[last()]/div[text()=" 全选"]')
-                        action = ActionChains(self.driver)
-                        action.double_click(selectall).perform()
+                        if menu[n] == '轧账状态':
+                            selectall = self.findxpath('//li[text()=" 未轧账"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '跑批状态':
+                            selectall = self.findxpath('//li[text()=" 未跑批"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
                         findelement.click()
                     elif value[n] == '全选':
                         findelement.click()
-                        self.findxpath_click('//div[last()]/div[text()=" 全选"]')
+                        if menu[n] == '轧账状态':
+                            self.findxpath_click('//li[text()=" 未轧账"]/../../preceding-sibling::div')
+                        elif menu[n] == '跑批状态':
+                            self.findxpath_click('//li[text()=" 未跑批"]/../../preceding-sibling::div')
                         findelement.click()
                     else:
                         findelement.click()
@@ -93,5 +121,13 @@ class DaytimeBatch(BasePageXams):
                                        ]:
                             self.findxpath_click(f'//li[text()=" {value[n]}"]')
                         findelement.click()
+                elif menu[n] in ['日间跑批页面_撤销至']:
+                    a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
+                    if value[n] not in a:
+                        print(f'值"{value[n]}"输入错误，请检查')
+                        return False
+                    else:
+                        findelement.click()
+                        self.findxpath_click(f'//li[text()="{value[n]}"]')
             n = n + 1
         return True
