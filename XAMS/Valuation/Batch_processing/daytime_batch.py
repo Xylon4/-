@@ -88,7 +88,7 @@ class DaytimeBatch(BasePageXams):
                 # 所有操作为"点击后选择"的元素
                 elif menu[n] in ['清算路径',
                                  '轧账状态',
-                                 '跑批状态',
+                                 '跑批状态'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
                     a.append('置空')
