@@ -42,6 +42,8 @@ class Series(BasePageXams):
                                '修改',
                                '删除',
                                '复核',
+                               '确认_是',
+                               '确认_否',
                                '查看变更日志',
                                '搜索',
                                '搜索_单选框',
@@ -54,21 +56,12 @@ class Series(BasePageXams):
                                '重置',
                                '返回'
                                ]:
-                    findelement.click()
-                    if menu[n] in ['搜索', '轧账检查_返回', '轧账']:
-                        self.wait_for_miss(120, wait)
-                    if menu[n] in ['轧账检查_正常轧账', '轧账检查_撤销轧账']:
-                        rolling_wait = (By.XPATH, targetsheet.get('轧账等待'))
-                        self.wait_for_miss(120, rolling_wait)
-                    if menu[n] in ['日间跑批页面_开始跑批']:
-                        status = (By.XPATH, targetsheet.get('跑批完成'))
-                        self.wait_for_visit(300, status)
-                    if menu[n] in ['日间跑批页面_撤销跑批']:
-                        status = (By.XPATH, targetsheet.get('跑批撤销'))
-                        self.wait_for_visit(300, status)
-                    if menu[n] in ['日间跑批页面_开始跑批', '日间跑批页面_撤销跑批', '轧账检查_正常轧账', '轧账检查_撤销轧账']:
-                        determine = self.findxpath(targetsheet.get('成功_确定'))
-                        self.driver.execute_script("arguments[0].click();", determine)
+                    if menu[n] in ['确认_是', '确认_否']:
+                        self.driver.execute_script("arguments[0].click();", findelement)
+                    else:
+                        findelement.click()
+                        if menu[n] in ['搜索']:
+                            self.wait_for_miss(120, wait)
                 # 所有操作为"输入"的元素
                 elif menu[n] in ['申报系列要素_系列名称',
                                  '申报系列要素_系列代码',
