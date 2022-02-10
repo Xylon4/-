@@ -1,11 +1,12 @@
 from XAMS.Asset.test_asset import TestAsset
 from XAMS.Liquidation.test_liquidation import TestLiquidation
+from XAMS.Product.test_product import TestProduct
 from XAMS.Report.test_report import TestReport
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.Trade.test_trade import TestTrade
 from XAMS.Valuation.test_valuation import TestValuation
 from XAMS.Workbench.test_workbench import TestWorkbench
-from XAMS.conftest import report_list, asset_list, trade_list, task_list, liquidation_list, valuation_list
+from XAMS.conftest import report_list, asset_list, trade_list, task_list, liquidation_list, valuation_list, product_list
 
 
 class TestAuto:
@@ -17,6 +18,7 @@ class TestAuto:
         self.task = TestWorkbench()
         self.liquidation = TestLiquidation()
         self.valuation = TestValuation()
+        self.product = TestProduct()
         count = len(self.list.code_list())
         n = 0
         sum_report = 0
@@ -58,6 +60,9 @@ class TestAuto:
                     elif second_menu in valuation_list:
                         self.valuation.test_universal(stagemark, menu, value, test_goal, step)
                         sum_valuation = sum_valuation + 1
+                    elif second_menu in product_list:
+                        self.product.test_universal(stagemark, menu, value, test_goal, step)
+                        sum_product = sum_product + 1
                     else:
                         print("该界面不在任何列表中，请修改用例")
                         return False
@@ -81,6 +86,9 @@ class TestAuto:
                     elif second_menu in valuation_list:
                         self.valuation.test_universal(stagemark, menu, value, test_goal, step)
                         sum_valuation = sum_valuation + 1
+                    elif second_menu in product_list:
+                        self.product.test_universal(stagemark, menu, value, test_goal, step)
+                        sum_product = sum_product + 1
                     else:
                         print("该界面不在任何列表中，请修改用例")
                         return False
@@ -110,4 +118,6 @@ class TestAuto:
             print(f'清算案例执行完毕，共{sum_liquidation}条')
         if sum_valuation > 0:
             print(f'估值案例执行完毕，共{sum_valuation}条')
+        if sum_product > 0:
+            print(f'产品案例执行完毕，共{sum_product}条')
         print(f'自动化案例执行完毕，共{count}条，包含模拟操作{simulate}条，升级对比{compare}条')

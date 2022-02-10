@@ -131,6 +131,13 @@ class Series(BasePageXams):
                         print('你不能钻空子，命名为"全选"，这会让下拉框中的全选很为难')
                         return False
                     else:
+                        if menu[n] in ['公共监管要素_产品增信机构类型',
+                                       '理财登记托管中心监管信息_产品销售区域',
+                                       '理财登记托管中心监管信息_结构性产品挂钩标的']:
+                            a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
+                            if value[n] not in a:
+                                print(f'值"{value[n]}"输入错误，请检查')
+                                return False
                         if value[n] == '置空':
                             findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                         elif value[n] == '全选':
@@ -215,43 +222,119 @@ class Series(BasePageXams):
                                  '人行监管信息_分级产品标识'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
-                    a.append('置空')
+                    if menu[n] in ['高级查询_产品收益类型',
+                                   '高级查询_客户类型',
+                                   '高级查询_是否金融同业专属',
+                                   '高级查询_产品募集方式',
+                                   '高级查询_产品投资性质',
+                                   '高级查询_新老产品标志',
+                                   '申报系列要素_客户类型',
+                                   '公共监管要素_产品投资国家或地区(境外)',
+                                   '公共监管要素_境外托管机构国别',
+                                   '理财登记托管中心监管信息_投资者风险偏好',
+                                   '人行监管信息_客户类型（人行）'
+                                   ]:
+                        a.append('置空')
                     if value[n] not in a:
                         print(f'值"{value[n]}"输入错误，请检查')
                         return False
                     elif value[n] == '置空':
                         findelement.click()
-                        if menu[n] == '轧账状态':
-                            selectall = self.findxpath('//li[text()=" 未轧账"]/../../preceding-sibling::div')
+                        if menu[n] == '高级查询_产品收益类型':
+                            selectall = self.findxpath('//li[text()=" 01 保证收益型"]/../../preceding-sibling::div')
                             action = ActionChains(self.driver)
                             action.double_click(selectall).perform()
-                        elif menu[n] == '跑批状态':
-                            selectall = self.findxpath('//li[text()=" 未跑批"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_客户类型':
+                            selectall = self.findxpath(
+                                '//li[text()=" 个人"and @class="x-boundlist-item"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '高级查询_是否金融同业专属':
+                            selectall = self.findxpath('//li[text()=" 01 是"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '高级查询_产品募集方式':
+                            selectall = self.findxpath('//li[text()=" 01 公募"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '高级查询_产品投资性质':
+                            selectall = self.findxpath('//li[text()=" 01 固定收益类"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '高级查询_新老产品标志':
+                            selectall = self.findxpath('//li[text()=" 01 新产品"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '申报系列要素_客户类型':
+                            selectall = self.findxpath(
+                                '//li[text()=" 个人"and contains(@class,"selected")]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '公共监管要素_产品投资国家或地区(境外)':
+                            selectall = self.findxpath(
+                                '/html/body/div[last()]//li[text()=" AUS 澳大利亚"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '公共监管要素_境外托管机构国别':
+                            selectall = self.findxpath(
+                                '/html/body/div[last()]//li[text()=" AUS 澳大利亚"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '理财登记托管中心监管信息_投资者风险偏好':
+                            selectall = self.findxpath('//li[text()=" 01 保守型"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '人行监管信息_客户类型（人行）':
+                            selectall = self.findxpath('//li[text()=" 住户"]/../../preceding-sibling::div')
                             action = ActionChains(self.driver)
                             action.double_click(selectall).perform()
                         findelement.click()
                     elif value[n] == '全选':
                         findelement.click()
-                        if menu[n] == '轧账状态':
-                            self.findxpath_click('//li[text()=" 未轧账"]/../../preceding-sibling::div')
-                        elif menu[n] == '跑批状态':
-                            self.findxpath_click('//li[text()=" 未跑批"]/../../preceding-sibling::div')
+                        if menu[n] == '高级查询_产品收益类型':
+                            self.findxpath_click('//li[text()=" 01 保证收益型"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_客户类型':
+                            self.findxpath_click(
+                                '//li[text()=" 个人"and @class="x-boundlist-item"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_是否金融同业专属':
+                            self.findxpath_click('//li[text()=" 01 是"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_产品募集方式':
+                            self.findxpath_click('//li[text()=" 01 公募"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_产品投资性质':
+                            self.findxpath_click('//li[text()=" 01 固定收益类"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_新老产品标志':
+                            self.findxpath_click('//li[text()=" 01 新产品"]/../../preceding-sibling::div')
+                        elif menu[n] == '申报系列要素_客户类型':
+                            self.findxpath_click(
+                                '//li[text()=" 个人"and contains(@class,"selected")]/../../preceding-sibling::div')
+                        elif menu[n] == '公共监管要素_产品投资国家或地区(境外)':
+                            self.findxpath_click(
+                                '/html/body/div[last()]//li[text()=" AUS 澳大利亚"]/../../preceding-sibling::div')
+                        elif menu[n] == '公共监管要素_境外托管机构国别':
+                            self.findxpath_click(
+                                '/html/body/div[last()]//li[text()=" AUS 澳大利亚"]/../../preceding-sibling::div')
+                        elif menu[n] == '理财登记托管中心监管信息_投资者风险偏好':
+                            self.findxpath_click('//li[text()=" 01 保守型"]/../../preceding-sibling::div')
+                        elif menu[n] == '人行监管信息_客户类型（人行）':
+                            self.findxpath_click('//li[text()=" 住户"]/../../preceding-sibling::div')
                         findelement.click()
                     else:
                         findelement.click()
-                        if menu[n] in ['清算路径',
-                                       '轧账状态',
-                                       '跑批状态'
+                        if menu[n] in ['高级查询_产品收益类型',
+                                       '高级查询_客户类型',
+                                       '高级查询_是否金融同业专属',
+                                       '高级查询_产品募集方式',
+                                       '高级查询_产品投资性质',
+                                       '高级查询_新老产品标志',
+                                       '申报系列要素_客户类型',
+                                       '公共监管要素_产品投资国家或地区(境外)',
+                                       '公共监管要素_境外托管机构国别',
+                                       '理财登记托管中心监管信息_投资者风险偏好',
+                                       '人行监管信息_客户类型（人行）'
                                        ]:
                             self.findxpath_click(f'//li[text()=" {value[n]}"]')
-                        findelement.click()
-                elif menu[n] in ['日间跑批页面_撤销至']:
-                    a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
-                    if value[n] not in a:
-                        print(f'值"{value[n]}"输入错误，请检查')
-                        return False
-                    else:
-                        findelement.click()
-                        self.findxpath_click(f'//li[text()="{value[n]}"]')
+                            findelement.click()
+                        else:
+                            self.findxpath_click(f'/html/body/div[last()]//li[text()="{value[n]}"]')
             n = n + 1
         return True
