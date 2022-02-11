@@ -58,10 +58,17 @@ class Series(BasePageXams):
                                ]:
                     if menu[n] in ['确认_是', '确认_否']:
                         self.driver.execute_script("arguments[0].click();", findelement)
+                        if menu[n] == '确认_是':
+                            sleep(1)
+                            determine = self.findxpath(targetsheet.get('成功_确定'))
+                            self.driver.execute_script("arguments[0].click();", determine)
                     else:
                         findelement.click()
-                        if menu[n] in ['搜索']:
+                        if menu[n] in ['搜索', '保存', '高级查询_返回']:
                             self.wait_for_miss(120, wait)
+                        if menu[n] in ['保存']:
+                            determine = self.findxpath(targetsheet.get('成功_确定'))
+                            self.driver.execute_script("arguments[0].click();", determine)
                 # 所有操作为"输入"的元素
                 elif menu[n] in ['申报系列要素_系列名称',
                                  '申报系列要素_系列代码',
@@ -137,10 +144,13 @@ class Series(BasePageXams):
                             findelement.send_keys(value[n] + Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                             if menu[n] == '公共监管要素_产品增信机构类型':
                                 self.findxpath_click('//li[text()=" 01 广义政府"]/../../preceding-sibling::div')
+                                self.findxpath_click('//label[text()="产品增信机构类型:"]')
                             elif menu[n] == '理财登记托管中心监管信息_产品销售区域':
                                 self.findxpath_click('//li[text()=" 110000 北京市"]/../../preceding-sibling::div')
+                                self.findxpath_click('//label[text()="产品销售区域:"]')
                             elif menu[n] == '理财登记托管中心监管信息_结构性产品挂钩标的':
                                 self.findxpath_click('//li[text()=" 01 利率"]/../../preceding-sibling::div')
+                                self.findxpath_click('//label[text()="结构性产品挂钩标的:"]')
                         else:
                             findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
                             sleep(1)
@@ -155,6 +165,10 @@ class Series(BasePageXams):
                                            ]:
                                 findelement.send_keys(Keys.ARROW_DOWN)
                                 findelement.send_keys(Keys.ENTER)
+                                if menu[n] in ['公共监管要素_产品增信机构类型',
+                                               '理财登记托管中心监管信息_产品销售区域',
+                                               '理财登记托管中心监管信息_结构性产品挂钩标的']:
+                                    self.findxpath_click('//label[text()="产品增信机构类型:"]')
                 # 所有操作为"点击后选择"的元素
                 elif menu[n] in ['状态',
                                  '高级查询_产品收益类型',
@@ -310,7 +324,10 @@ class Series(BasePageXams):
                             self.findxpath_click('//li[text()=" 01 保守型"]/../../preceding-sibling::div')
                         elif menu[n] == '人行监管信息_客户类型（人行）':
                             self.findxpath_click('//li[text()=" 住户"]/../../preceding-sibling::div')
-                        findelement.click()
+                            self.findxpath_click('//label[text()="人行代码:"]')
+                            # self.findxpath_click('//label[text()="客户类型（人行）:"]/../following-sibling::td//td[2]/div')
+                        if menu[n] not in ['人行监管信息_客户类型（人行）']:
+                            findelement.click()
                     else:
                         findelement.click()
                         if menu[n] in ['高级查询_产品收益类型',
@@ -325,8 +342,12 @@ class Series(BasePageXams):
                                        '理财登记托管中心监管信息_投资者风险偏好',
                                        '人行监管信息_客户类型（人行）'
                                        ]:
-                            self.findxpath_click(f'//li[text()=" {value[n]}"]')
-                            findelement.click()
+                            self.findxpath_click(f'/html/body/div[last()]//li[text()=" {value[n]}"]')
+                            if menu[n] in ['人行监管信息_客户类型（人行）']:
+                                # self.findxpath_click('//label[text()="客户类型（人行）:"]/../following-sibling::td//td[2]/div')
+                                self.findxpath_click('//label[text()="人行代码:"]')
+                            else:
+                                findelement.click()
                         else:
                             self.findxpath_click(f'/html/body/div[last()]//li[text()="{value[n]}"]')
             n = n + 1
