@@ -1,7 +1,8 @@
 import pytest
 
+from XAMS.Product.Product.filing import Filing
 from XAMS.Product.Product.series import Series
-from XAMS.Report.conftest import sheet54
+from XAMS.Report.conftest import sheet54, sheet55
 from XAMS.Tool.test_excel import TestExcel
 
 
@@ -14,6 +15,8 @@ class TestProduct:
             address = value[0]
             if second_menu == '产品管理-产品系列定义':
                 self.test_series_excel(stagemark, menu, value, address, step)
+            elif second_menu == '产品管理-产品报备管理':
+                self.test_filing_excel(stagemark, menu, value, address, step)
             else:
                 print("模拟操作案例：该估值暂不支持，请修改用例")
         elif test_goal == '升级对比':
@@ -30,4 +33,13 @@ class TestProduct:
         if step is not None:
             self.series.end()
         print(f"{sheet54}模拟操作执行完毕")
+        print('-----------------------这是案例分割线-----------------------')
+
+    @pytest.mark.skip
+    def test_filing_excel(self, stagemark, menu, value, address, step):
+        self.filing = Filing(address)
+        assert self.filing.filing_excel(menu, value)
+        if step is not None:
+            self.filing.end()
+        print(f"{sheet55}模拟操作执行完毕")
         print('-----------------------这是案例分割线-----------------------')

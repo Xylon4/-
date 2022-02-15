@@ -529,4 +529,6 @@ class TestExcel:
         a = self.splicing_dic(Excel_basedata_zs, '损益结转分录查询', 20, 6, 20)
         # print(a)
         b = self.splicing_dic(Excel_basedata_zs, '损益结转分录查询', 4, 5, 20)
-        print(b)
+        # print(b)
+        c = self.enumeration_list2(Excel_basedata_zs, '产品报备管理', '高级查询_产品投资性质')
+        print(c)

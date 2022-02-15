@@ -201,6 +201,7 @@ class Filing(BasePageXams):
                                     self.findxpath_click('//label[text()="产品增信机构类型:"]')
                 # 所有操作为"点击后选择"的元素
                 elif menu[n] in ['状态',
+                                 '高级查询_状态',
                                  '高级查询_产品收益类型',
                                  '高级查询_客户类型',
                                  '高级查询_是否金融同业专属',
