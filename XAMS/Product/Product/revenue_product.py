@@ -1,0 +1,330 @@
+# 收益型产品信息管理自动化测试用例
+# 功能描述：维护收益型产品信息
+from time import sleep
+
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
+from XAMS.Report.conftest import sheet56, Excel_basedata_zs
+from XAMS.Tool.test_excel import TestExcel
+from XAMS.basepage_XAMS import BasePageXams
+import math
+
+
+class RevenueProduct(BasePageXams):
+    # 模拟操作自动化案例-浙商
+    def revenue_product_excel(self, menu, value):
+        print(menu)
+        print(value)
+        self.base = TestExcel()
+        basedata = [Excel_basedata_zs, sheet56]
+        # 点击一级菜单
+        self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[1]))
+        # 点击二级菜单
+        self.findxpath_click(self.base.second_menu(basedata[0]).get(f'{menu[1]}-{menu[2]}'))
+        targetsheet = self.base.sheet_xpath_dic(basedata[0], basedata[1])
+        wait = (By.XPATH, targetsheet.get('加载等待'))
+        # 根据自定义顺序执行操作
+        l = len(menu)
+        n = 3
+        while n < l:
+            if menu[n] not in self.base.operable_list(basedata[0], basedata[1]):
+                print(f'操作元素"{menu[n]}"输入错误，请检查')
+                return False
+            else:
+                findelement = self.findxpath(targetsheet.get(menu[n]))
+                # 所有操作为"点击"或"勾选"的元素
+                if menu[n] in ['导出',
+                               'Excel(当前页)',
+                               'Excel(所有数据)',
+                               '新增',
+                               '修改',
+                               '删除',
+                               '复核',
+                               '确认_是',
+                               '确认_否',
+                               '计算现金流',
+                               '附件上传',
+                               '收益型产品信息导入',
+                               '收益型产品信息导入模板',
+                               '搜索',
+                               '搜索_单选框',
+                               '搜索_全选框',
+                               '高级查询',
+                               '高级查询_查询',
+                               '高级查询_重置',
+                               '高级查询_返回',
+                               '收益支付信息_按实际支付日期计息:是',
+                               '收益支付信息_按实际支付日期计息:否',
+                               '收益支付信息_按实际支付日期计息:是',
+                               '收益支付信息_按实际支付日期计息:否',
+                               '理财费用信息',
+                               '理财费用信息_新增',
+                               '理财费用信息_修改',
+                               '理财费用信息_删除',
+                               '理财费用信息_费率调整',
+                               '理财费用信息_单选框',
+                               '理财费用信息_全选框',
+                               '费用设置_保存',
+                               '费用设置_取消',
+                               '归集账户信息',
+                               '归集账户信息_新增',
+                               '归集账户信息_修改',
+                               '归集账户信息_删除',
+                               '归集账户信息维护_是否自动生成产品清算指令:是',
+                               '归集账户信息维护_是否自动生成产品清算指令:否',
+                               '归集账户信息维护_保存',
+                               '归集账户信息维护_取消',
+                               '保存',
+                               '重置',
+                               '返回',
+                               '利率调整',
+                               '利率调整_新增',
+                               '利率调整_删除',
+                               '利率调整_确定',
+                               '利率调整_取消'
+                               ]:
+                    if menu[n] in ['确认_是', '确认_否']:
+                        self.driver.execute_script("arguments[0].click();", findelement)
+                        if menu[n] == '确认_是':
+                            sleep(1)
+                            determine = self.findxpath(targetsheet.get('成功_确定'))
+                            visit = determine.is_displayed()
+                            if visit:
+                                self.driver.execute_script("arguments[0].click();", determine)
+                    else:
+                        findelement.click()
+                        if menu[n] in ['搜索', '保存', '高级查询_返回']:
+                            self.wait_for_miss(120, wait)
+                        if menu[n] in ['保存']:
+                            determine = self.findxpath(targetsheet.get('成功_确定'))
+                            self.driver.execute_script("arguments[0].click();", determine)
+                # 所有操作为"输入"的元素
+                elif menu[n] in ['高级查询_起息日从',
+                                 '高级查询_起息日止',
+                                 '高级查询_到期日从',
+                                 '高级查询_到期日止',
+                                 '高级查询_支付日从',
+                                 '高级查询_支付日止',
+                                 '产品公共要素_产品代码',
+                                 '产品公共要素_产品名称',
+                                 '产品公共要素_产品全称',
+                                 '收益支付信息_首次付息日',
+                                 '收益支付信息_滚动频率:值',
+                                 '个性要素_客户周期(天)',
+                                 '发行信息_实际募集起始日',
+                                 '发行信息_实际募集结束日',
+                                 '发行信息_起息日',
+                                 '发行信息_预计到期日',
+                                 '发行信息_计划募集金额(元)',
+                                 '发行信息_最低募集金额(元)',
+                                 '发行信息_预期收益率(%)',
+                                 '发行信息_收益区间(起)%',
+                                 '发行信息_收益区间(止)%',
+                                 '发行信息_实际到期日',
+                                 '费用设置_当前费用利率(%)',
+                                 '费用设置_计息开始日期',
+                                 '费用设置_备注',
+                                 '利率调整_调整时间',
+                                 '利率调整_利率(%)'
+                                 ]:
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
+                        findelement.send_keys(value[n])
+                # 所有操作为"输入后选择"的元素
+                elif menu[n] in ['产品报备名称或代码',
+                                 '产品名称或代码',
+                                 '高级查询_产品报备名称或代码',
+                                 '高级查询_产品名称或代码',
+                                 '产品公共要素_产品报备名称',
+                                 '归集账户信息维护_资金账号'
+                                 ]:
+                    if value[n] == '置空':
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
+                    else:
+                        findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
+                        sleep(1)
+                        findelement.send_keys(value[n] + Keys.SPACE + Keys.BACK_SPACE)
+                        sleep(1)
+                        findelement.send_keys(Keys.ARROW_DOWN)
+                        findelement.send_keys(Keys.ENTER)
+                # 所有操作为"点击后选择"的元素
+                elif menu[n] in ['状态',
+                                 '同步状态',
+                                 '高级查询_状态',
+                                 '高级查询_产品状态',
+                                 '高级查询_交易方式',
+                                 '高级查询_销售对象',
+                                 '高级查询_是否代销',
+                                 '高级查询_是否分行推荐产品',
+                                 '产品公共要素_交易方式',
+                                 '产品公共要素_收益支付频率',
+                                 '产品公共要素_收益计算基准',
+                                 '产品公共要素_收益支付日调整规则',
+                                 '产品公共要素_投资性质',
+                                 '产品公共要素_是否代销',
+                                 '产品公共要素_是否分行推荐产品',
+                                 '产品公共要素_销售渠道',
+                                 '产品公共要素_交易日历',
+                                 '产品公共要素_销售对象',
+                                 '产品公共要素_销售数据对接方式',
+                                 '产品公共要素_募集币种',
+                                 '收益支付信息_支付日期:月',
+                                 '收益支付信息_支付日期:日',
+                                 '收益支付信息_周期是否规则',
+                                 '收益支付信息_滚动频率:单位',
+                                 '个性要素_产品模板',
+                                 '理财费用信息_状态',
+                                 '费用设置_费用类别',
+                                 '费用设置_费用基数',
+                                 '费用设置_费用层次',
+                                 '费用设置_基数来源',
+                                 '费用设置_计提规则',
+                                 '费用设置_计息基准',
+                                 '费用设置_日历代码',
+                                 '费用设置_计息调整规则',
+                                 '费用设置_支付频率',
+                                 '费用设置_支付调整规则',
+                                 '费用设置_计息规则',
+                                 '费用设置_支付日期:月',
+                                 '费用设置_支付日期:日',
+                                 '归集账户信息维护_账户分类',
+                                 '归集账户信息维护_产品业务类型'
+                                 ]:
+                    a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
+                    if menu[n] in ['同步状态',
+                                   '高级查询_产品状态',
+                                   '高级查询_交易方式',
+                                   '高级查询_销售对象',
+                                   '产品公共要素_销售对象',
+                                   '归集账户信息维护_产品业务类型'
+                                   ]:
+                        a.append('置空')
+                    if value[n] not in a:
+                        print(f'值"{value[n]}"输入错误，请检查')
+                        return False
+                    elif value[n] == '置空':
+                        findelement.click()
+                        if menu[n] == '高级查询_产品收益类型':
+                            selectall = self.findxpath('//li[text()=" 01 保证收益型"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '高级查询_客户类型':
+                            selectall = self.findxpath(
+                                '//li[text()=" 个人"and @class="x-boundlist-item"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '高级查询_是否金融同业专属':
+                            selectall = self.findxpath('//li[text()=" 01 是"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '高级查询_产品募集方式':
+                            selectall = self.findxpath('//li[text()=" 01 公募"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '高级查询_产品投资性质':
+                            selectall = self.findxpath('//li[text()=" 01 固定收益类"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '高级查询_新老产品标志':
+                            selectall = self.findxpath('//li[text()=" 01 新产品"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '申报基本信息_客户类型':
+                            selectall = self.findxpath(
+                                '//li[text()=" 个人"and contains(@class,"selected")]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '公共监管要素_产品投资国家或地区(境外)':
+                            selectall = self.findxpath(
+                                '/html/body/div[last()]//li[text()=" AUS 澳大利亚"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '公共监管要素_境外托管机构国别':
+                            selectall = self.findxpath(
+                                '/html/body/div[last()]//li[text()=" AUS 澳大利亚"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '理财登记托管中心监管信息_投资者风险偏好':
+                            selectall = self.findxpath('//li[text()=" 01 保守型"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '人行监管信息_客户类型（人行）':
+                            selectall = self.findxpath('//li[text()=" 住户"]/../../preceding-sibling::div')
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] in ['产品状态', '高级查询_产品状态']:
+                            selectall = self.findxpath(targetsheet.get('产品状态_全选'))
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        elif menu[n] == '高级查询_产品期限':
+                            selectall = self.findxpath(targetsheet.get('产品期限_全选'))
+                            action = ActionChains(self.driver)
+                            action.double_click(selectall).perform()
+                        findelement.click()
+                    elif value[n] == '全选':
+                        findelement.click()
+                        if menu[n] == '高级查询_产品收益类型':
+                            self.findxpath_click('//li[text()=" 01 保证收益型"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_客户类型':
+                            self.findxpath_click(
+                                '//li[text()=" 个人"and @class="x-boundlist-item"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_是否金融同业专属':
+                            self.findxpath_click('//li[text()=" 01 是"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_产品募集方式':
+                            self.findxpath_click('//li[text()=" 01 公募"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_产品投资性质':
+                            self.findxpath_click('//li[text()=" 01 固定收益类"]/../../preceding-sibling::div')
+                        elif menu[n] == '高级查询_新老产品标志':
+                            self.findxpath_click('//li[text()=" 01 新产品"]/../../preceding-sibling::div')
+                        elif menu[n] == '申报基本信息_客户类型':
+                            self.findxpath_click(
+                                '//li[text()=" 个人"and contains(@class,"selected")]/../../preceding-sibling::div')
+                        elif menu[n] == '公共监管要素_产品投资国家或地区(境外)':
+                            self.findxpath_click(
+                                '/html/body/div[last()]//li[text()=" AUS 澳大利亚"]/../../preceding-sibling::div')
+                        elif menu[n] == '公共监管要素_境外托管机构国别':
+                            self.findxpath_click(
+                                '/html/body/div[last()]//li[text()=" AUS 澳大利亚"]/../../preceding-sibling::div')
+                        elif menu[n] == '理财登记托管中心监管信息_投资者风险偏好':
+                            self.findxpath_click('//li[text()=" 01 保守型"]/../../preceding-sibling::div')
+                        elif menu[n] == '人行监管信息_客户类型（人行）':
+                            self.findxpath_click('//li[text()=" 住户"]/../../preceding-sibling::div')
+                            self.findxpath_click('//label[text()="人行代码:"]')
+                            # self.findxpath_click('//label[text()="客户类型（人行）:"]/../following-sibling::td//td[2]/div')
+                        elif menu[n] in ['产品状态', '高级查询_产品状态']:
+                            self.findxpath_click(targetsheet.get('产品状态_全选'))
+                        elif menu[n] == '高级查询_产品期限':
+                            self.findxpath_click(targetsheet.get('产品期限_全选'))
+                        if menu[n] not in ['人行监管信息_客户类型（人行）']:
+                            findelement.click()
+                    else:
+                        findelement.click()
+                        if menu[n] in ['产品状态',
+                                       '高级查询_产品状态',
+                                       '高级查询_产品期限',
+                                       '申报基本信息_客户类型',
+                                       '高级查询_产品收益类型',
+                                       '高级查询_客户类型',
+                                       '高级查询_是否金融同业专属',
+                                       '高级查询_产品募集方式',
+                                       '高级查询_产品投资性质',
+                                       '高级查询_新老产品标志',
+                                       '公共监管要素_产品投资国家或地区(境外)',
+                                       '公共监管要素_境外托管机构国别',
+                                       '理财登记托管中心监管信息_投资者风险偏好',
+                                       '人行监管信息_客户类型（人行）'
+                                       ]:
+                            self.findxpath_click(f'/html/body/div[last()]//li[text()=" {value[n]}"]')
+                            if menu[n] in ['人行监管信息_客户类型（人行）']:
+                                # self.findxpath_click('//label[text()="客户类型（人行）:"]/../following-sibling::td//td[2]/div')
+                                self.findxpath_click('//label[text()="人行代码:"]')
+                            else:
+                                findelement.click()
+                        else:
+                            self.findxpath_click(f'/html/body/div[last()]//li[text()="{value[n]}"]')
+            n = n + 1
+        return True
