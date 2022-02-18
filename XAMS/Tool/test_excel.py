@@ -527,8 +527,10 @@ class TestExcel:
     # 测试入口
     def test_value(self):
         a = self.splicing_dic(Excel_basedata_zs, '损益结转分录查询', 20, 6, 20)
-        # print(a)
+        print(a)
         b = self.splicing_dic(Excel_basedata_zs, '损益结转分录查询', 4, 5, 20)
         # print(b)
         c = self.enumeration_list2(Excel_basedata_zs, '产品报备管理', '高级查询_产品投资性质')
-        print(c)
+        # print(c)
+        d = self.splicing_dic2(Excel_basedata_zs, '损益结转分录查询', 20)
+        print(d)
