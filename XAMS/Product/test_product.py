@@ -18,10 +18,10 @@ class TestProduct:
                 self.test_series_excel(stagemark, menu, value, address, step)
             elif second_menu == '产品管理-产品报备管理':
                 self.test_filing_excel(stagemark, menu, value, address, step)
-            elif second_menu == '产品管理-产品报备管理':
+            elif second_menu == '产品管理-收益型产品信息管理':
                 self.test_revenue_product_excel(stagemark, menu, value, address, step)
             else:
-                print("模拟操作案例：该估值暂不支持，请修改用例")
+                print("模拟操作案例：该产品暂不支持，请修改用例")
         elif test_goal == '升级对比':
             second_menu = f'{menu[2]}-{menu[3]}'
             address = value[0]

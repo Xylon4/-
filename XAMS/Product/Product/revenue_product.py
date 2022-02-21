@@ -83,21 +83,26 @@ class RevenueProduct(BasePageXams):
                                '利率调整_新增',
                                '利率调整_删除',
                                '利率调整_确定',
-                               '利率调整_取消'
+                               '利率调整_取消',
+                               '利率调整_关闭'
                                ]:
-                    if menu[n] in ['确认_是', '确认_否']:
+                    if menu[n] in ['确认_是', '确认_否', '利率调整_确定', '利率调整_取消']:
                         self.driver.execute_script("arguments[0].click();", findelement)
                         if menu[n] == '确认_是':
                             sleep(1)
+                            recheck_wait = (By.XPATH, targetsheet.get('复核加载等待'))
+                            self.wait_for_miss(120, recheck_wait)
                             determine = self.findxpath(targetsheet.get('成功_确定'))
                             visit = determine.is_displayed()
                             if visit:
                                 self.driver.execute_script("arguments[0].click();", determine)
                     else:
                         findelement.click()
-                        if menu[n] in ['搜索', '保存', '高级查询_返回']:
+                        if menu[n] in ['搜索', '高级查询_返回']:
                             self.wait_for_miss(120, wait)
                         if menu[n] in ['保存']:
+                            save_wait = (By.XPATH, targetsheet.get('保存加载等待'))
+                            self.wait_for_miss(120, save_wait)
                             determine = self.findxpath(targetsheet.get('成功_确定'))
                             self.driver.execute_script("arguments[0].click();", determine)
                 # 所有操作为"输入"的元素
@@ -151,6 +156,8 @@ class RevenueProduct(BasePageXams):
                         sleep(1)
                         findelement.send_keys(Keys.ARROW_DOWN)
                         findelement.send_keys(Keys.ENTER)
+                    if menu[n] in ['高级查询_产品报备名称或代码']:
+                        self.findxpath_click('//span[text()="高级查询"and contains(@id,"window")]')
                 # 所有操作为"点击后选择"的元素
                 elif menu[n] in ['状态',
                                  '同步状态',
@@ -160,6 +167,7 @@ class RevenueProduct(BasePageXams):
                                  '高级查询_销售对象',
                                  '高级查询_是否代销',
                                  '高级查询_是否分行推荐产品',
+                                 '高级查询_所属分行',
                                  '产品公共要素_交易方式',
                                  '产品公共要素_收益支付频率',
                                  '产品公共要素_收益计算基准',
@@ -199,6 +207,7 @@ class RevenueProduct(BasePageXams):
                                    '高级查询_产品状态',
                                    '高级查询_交易方式',
                                    '高级查询_销售对象',
+                                   '高级查询_所属分行',
                                    '产品公共要素_销售对象',
                                    '归集账户信息维护_产品业务类型'
                                    ]:
@@ -210,9 +219,9 @@ class RevenueProduct(BasePageXams):
                         findelement.click()
                         e = menu[n].__contains__('_')
                         if e:
-                            select = "f'{menu[n].split('_')[1]}'_全选"
+                            select = f"{menu[n].split('_')[1]}_全选"
                         else:
-                            select = "f'{menu[n]}'_全选"
+                            select = f'{menu[n]}_全选'
                         selectall = self.findxpath(targetsheet.get(select))
                         action = ActionChains(self.driver)
                         action.double_click(selectall).perform()
@@ -221,9 +230,9 @@ class RevenueProduct(BasePageXams):
                         findelement.click()
                         e = menu[n].__contains__('_')
                         if e:
-                            select = "f'{menu[n].split('_')[1]}'_全选"
+                            select = f"{menu[n].split('_')[1]}_全选"
                         else:
-                            select = "f'{menu[n]}'_全选"
+                            select = f'{menu[n]}_全选'
                         self.findxpath_click(targetsheet.get(select))
                         findelement.click()
                     else:
@@ -232,6 +241,7 @@ class RevenueProduct(BasePageXams):
                                        '高级查询_产品状态',
                                        '高级查询_交易方式',
                                        '高级查询_销售对象',
+                                       '高级查询_所属分行',
                                        '产品公共要素_销售对象',
                                        '归集账户信息维护_产品业务类型'
                                        ]:
@@ -239,5 +249,9 @@ class RevenueProduct(BasePageXams):
                             findelement.click()
                         else:
                             self.findxpath_click(f'/html/body/div[last()]//li[text()="{value[n]}"]')
+                elif menu[n] == '高级查询_代销机构':
+                    findelement.click()
+                    self.findxpath_click(f'/html/body/div[last()]//li[text()=" {value[n]}"]')
+                    findelement.click()
             n = n + 1
         return True
