@@ -1,24 +1,24 @@
-# 收益型产品信息管理自动化测试用例
-# 功能描述：维护收益型产品信息
+# 净值型产品信息管理自动化测试用例
+# 功能描述：维护净值型产品信息
 from time import sleep
 
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from XAMS.Report.conftest import sheet56, Excel_basedata_zs
+from XAMS.Report.conftest import sheet57, Excel_basedata_zs
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.basepage_XAMS import BasePageXams
 import math
 
 
-class RevenueProduct(BasePageXams):
+class ValuationProduct(BasePageXams):
     # 模拟操作自动化案例-浙商
-    def revenue_product_excel(self, menu, value):
+    def valuation_product_excel(self, menu, value):
         print(menu)
         print(value)
         self.base = TestExcel()
-        basedata = [Excel_basedata_zs, sheet56]
+        basedata = [Excel_basedata_zs, sheet57]
         # 点击一级菜单
         self.findxpath_click(self.base.first_menu(basedata[0]).get(menu[1]))
         # 点击二级菜单
@@ -84,7 +84,42 @@ class RevenueProduct(BasePageXams):
                                '利率调整_删除',
                                '利率调整_确定',
                                '利率调整_取消',
-                               '利率调整_关闭'
+                               '利率调整_关闭',
+                               '净值周期维护',
+                               '净值产品导入',
+                               '净值产品模板下载',
+                               '查看变更日志',
+                               '费用设置_与产品一起到期:是',
+                               '费用设置_与产品一起到期:否',
+                               '分红方案设置',
+                               '分红方案设置_新增',
+                               '分红方案设置_修改',
+                               '分红方案设置_删除',
+                               '分红方案设置_保存',
+                               '分红方案设置_重置',
+                               '分红方案设置_返回',
+                               '分红方案设置_删除02',
+                               '分红方案设置_全选框',
+                               '业绩比较基准',
+                               '业绩比较基准_新增',
+                               '业绩比较基准_修改',
+                               '业绩比较基准_删除',
+                               '基准设置_新增',
+                               '基准设置_删除',
+                               '基准设置_保存',
+                               '基准设置_撤销',
+                               '业绩比较基准_确定',
+                               '业绩比较基准_取消',
+                               '业绩比较基准_全选框',
+                               '业绩比较基准_单选框',
+                               '净值周期维护',
+                               '周期日历规则_生成日历',
+                               '周期日历_导出',
+                               '周期日历_清空',
+                               '周期日历_导入',
+                               '周期日历_下载模板',
+                               '周期净值产品日历维护_保存',
+                               '周期净值产品日历维护_返回'
                                ]:
                     if menu[n] in ['确认_是', '确认_否', '利率调整_确定', '利率调整_取消']:
                         self.driver.execute_script("arguments[0].click();", findelement)
@@ -132,7 +167,19 @@ class RevenueProduct(BasePageXams):
                                  '费用设置_计息开始日期',
                                  '费用设置_备注',
                                  '利率调整_调整时间',
-                                 '利率调整_利率(%)'
+                                 '利率调整_利率(%)',
+                                 '发行信息_实际终止日',
+                                 '分红方案设置_分红除权日期',
+                                 '分红方案设置_单位回归净值',
+                                 '基准设置_生效日期',
+                                 '基准设置_基准利率乘数',
+                                 '基准设置_基准更新频率:值',
+                                 '业绩比较基准_业绩基准(%)',
+                                 '业绩比较基准_银行超额分成比例(%)',
+                                 '周期日历规则_顺延天数',
+                                 '周期日历规则_开始日',
+                                 '周期日历规则_频率:值',
+                                 '周期日历规则_结束日'
                                  ]:
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
@@ -145,7 +192,8 @@ class RevenueProduct(BasePageXams):
                                  '高级查询_产品报备名称或代码',
                                  '高级查询_产品名称或代码',
                                  '产品公共要素_产品报备名称',
-                                 '归集账户信息维护_资金账号'
+                                 '归集账户信息维护_资金账号',
+                                 '基准设置_基准利率'
                                  ]:
                     if value[n] == '置空':
                         findelement.send_keys(Keys.CONTROL, 'a' + Keys.BACK_SPACE)
@@ -201,7 +249,20 @@ class RevenueProduct(BasePageXams):
                                  '费用设置_支付日期:日',
                                  '归集账户信息维护_账户分类',
                                  '归集账户信息维护_产品业务类型',
-                                 '产品公共要素_所属分行'
+                                 '产品公共要素_所属分行',
+                                 '产品公共要素_运作模式',
+                                 '产品公共要素_平行分级',
+                                 '分红方案设置_分红模式',
+                                 '分红方案设置_分红方式',
+                                 '业绩比较基准_状态',
+                                 '基准设置_业绩基准类型',
+                                 '基准设置_结转方式',
+                                 '基准设置_计提频率',
+                                 '基准设置_是否回拨',
+                                 '基准设置_基准更新日调整规则',
+                                 '基准设置_基准更新频率:单位',
+                                 '周期日历规则_非工作日顺延',
+                                 '周期日历规则_频率:单位'
                                  ]:
                     a = self.base.enumeration_list2(basedata[0], basedata[1], menu[n])
                     if menu[n] in ['同步状态',
@@ -210,7 +271,8 @@ class RevenueProduct(BasePageXams):
                                    '高级查询_销售对象',
                                    '高级查询_所属分行',
                                    '产品公共要素_销售对象',
-                                   '归集账户信息维护_产品业务类型'
+                                   '归集账户信息维护_产品业务类型',
+                                   '分红方案设置_分红方式'
                                    ]:
                         a.append('置空')
                     if value[n] not in a:
