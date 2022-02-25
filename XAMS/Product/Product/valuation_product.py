@@ -44,10 +44,7 @@ class ValuationProduct(BasePageXams):
                                '复核',
                                '确认_是',
                                '确认_否',
-                               '计算现金流',
                                '附件上传',
-                               '收益型产品信息导入',
-                               '收益型产品信息导入模板',
                                '搜索',
                                '搜索_单选框',
                                '搜索_全选框',
@@ -55,10 +52,6 @@ class ValuationProduct(BasePageXams):
                                '高级查询_查询',
                                '高级查询_重置',
                                '高级查询_返回',
-                               '收益支付信息_按实际支付日期计息:是',
-                               '收益支付信息_按实际支付日期计息:否',
-                               '收益支付信息_按实际支付日期计息:是',
-                               '收益支付信息_按实际支付日期计息:否',
                                '理财费用信息',
                                '理财费用信息_新增',
                                '理财费用信息_修改',
@@ -79,12 +72,6 @@ class ValuationProduct(BasePageXams):
                                '保存',
                                '重置',
                                '返回',
-                               '利率调整',
-                               '利率调整_新增',
-                               '利率调整_删除',
-                               '利率调整_确定',
-                               '利率调整_取消',
-                               '利率调整_关闭',
                                '净值周期维护',
                                '净值产品导入',
                                '净值产品模板下载',
@@ -121,7 +108,7 @@ class ValuationProduct(BasePageXams):
                                '周期净值产品日历维护_保存',
                                '周期净值产品日历维护_返回'
                                ]:
-                    if menu[n] in ['确认_是', '确认_否', '利率调整_确定', '利率调整_取消']:
+                    if menu[n] in ['确认_是', '确认_否', '业绩比较基准_确定', '业绩比较基准_取消']:
                         self.driver.execute_script("arguments[0].click();", findelement)
                         if menu[n] == '确认_是':
                             sleep(1)
@@ -131,7 +118,12 @@ class ValuationProduct(BasePageXams):
                             visit = determine.is_displayed()
                             if visit:
                                 self.driver.execute_script("arguments[0].click();", determine)
+                    elif menu[n] == '净值周期维护':
+                        action = ActionChains(self.driver)
+                        action.click(findelement).perform()
                     else:
+                        # if menu[n] == '净值周期维护':
+                        #     sleep(2)
                         findelement.click()
                         if menu[n] in ['搜索', '高级查询_返回']:
                             self.wait_for_miss(120, wait)
@@ -150,8 +142,6 @@ class ValuationProduct(BasePageXams):
                                  '产品公共要素_产品代码',
                                  '产品公共要素_产品名称',
                                  '产品公共要素_产品全称',
-                                 '收益支付信息_首次付息日',
-                                 '收益支付信息_滚动频率:值',
                                  '个性要素_客户周期(天)',
                                  '发行信息_实际募集起始日',
                                  '发行信息_实际募集结束日',
@@ -159,18 +149,13 @@ class ValuationProduct(BasePageXams):
                                  '发行信息_预计到期日',
                                  '发行信息_计划募集金额(元)',
                                  '发行信息_最低募集金额(元)',
-                                 '发行信息_预期收益率(%)',
-                                 '发行信息_收益区间(起)%',
-                                 '发行信息_收益区间(止)%',
-                                 '发行信息_实际到期日',
                                  '费用设置_当前费用利率(%)',
                                  '费用设置_计息开始日期',
                                  '费用设置_备注',
-                                 '利率调整_调整时间',
-                                 '利率调整_利率(%)',
                                  '发行信息_实际终止日',
                                  '分红方案设置_分红除权日期',
                                  '分红方案设置_单位回归净值',
+                                 '分红方案设置_分红总金额(元)',
                                  '基准设置_生效日期',
                                  '基准设置_基准利率乘数',
                                  '基准设置_基准更新频率:值',
@@ -217,9 +202,6 @@ class ValuationProduct(BasePageXams):
                                  '高级查询_是否分行推荐产品',
                                  '高级查询_所属分行',
                                  '产品公共要素_交易方式',
-                                 '产品公共要素_收益支付频率',
-                                 '产品公共要素_收益计算基准',
-                                 '产品公共要素_收益支付日调整规则',
                                  '产品公共要素_投资性质',
                                  '产品公共要素_是否代销',
                                  '产品公共要素_是否分行推荐产品',
@@ -228,10 +210,6 @@ class ValuationProduct(BasePageXams):
                                  '产品公共要素_销售对象',
                                  '产品公共要素_销售数据对接方式',
                                  '产品公共要素_募集币种',
-                                 '收益支付信息_支付日期:月',
-                                 '收益支付信息_支付日期:日',
-                                 '收益支付信息_周期是否规则',
-                                 '收益支付信息_滚动频率:单位',
                                  '个性要素_产品模板',
                                  '理财费用信息_状态',
                                  '费用设置_费用类别',
@@ -312,7 +290,7 @@ class ValuationProduct(BasePageXams):
                             findelement.click()
                         else:
                             self.findxpath_click(f'/html/body/div[last()]//li[text()="{value[n]}"]')
-                elif menu[n] == '高级查询_代销机构':
+                elif menu[n] in ['高级查询_代销机构', '基准设置_回拨类型']:
                     findelement.click()
                     self.findxpath_click(f'/html/body/div[last()]//li[text()=" {value[n]}"]')
                     findelement.click()
