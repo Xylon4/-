@@ -99,7 +99,7 @@ class ValuationProduct(BasePageXams):
                                '业绩比较基准_取消',
                                '业绩比较基准_全选框',
                                '业绩比较基准_单选框',
-                               '净值周期维护',
+                               '净值型产品信息管理_净值周期维护',
                                '周期日历规则_生成日历',
                                '周期日历_导出',
                                '周期日历_清空',
@@ -118,12 +118,7 @@ class ValuationProduct(BasePageXams):
                             visit = determine.is_displayed()
                             if visit:
                                 self.driver.execute_script("arguments[0].click();", determine)
-                    elif menu[n] == '净值周期维护':
-                        action = ActionChains(self.driver)
-                        action.click(findelement).perform()
                     else:
-                        # if menu[n] == '净值周期维护':
-                        #     sleep(2)
                         findelement.click()
                         if menu[n] in ['搜索', '高级查询_返回']:
                             self.wait_for_miss(120, wait)
