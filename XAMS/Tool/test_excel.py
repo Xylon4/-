@@ -347,7 +347,7 @@ class TestExcel:
         second_menu_xpath = c.get(f'{first_menu}-{second_menu}')
         return [first_menu_xpath, second_menu_xpath]
 
-    # 通过"用例编号"获取操作步骤
+    # 通过"用例编号"获取操作元素和值的列表(模拟操作)
     def match_step(self, code):
         a = self.group_ele_dic()
         b = self.group_value_dic()
@@ -358,6 +358,29 @@ class TestExcel:
             data.append([a.get(code)[n], b.get(code)[n]])
             n = n + 1
         return data
+
+    # 通过"用例编号"获取操作元素和值的列表(流程自动化)
+    def match_step2(self, code):
+        a = self.group_ele_dic()
+        b = self.group_value_dic()
+        c = len(a.get(code))  # "操作元素"从第二行开始
+        n = 1
+        data = []
+        while n < c:
+            data.append([a.get(code)[n], b.get(code)[n]])
+            n = n + 1
+        return data
+
+    # 通过"用例编号"创建操作元素和值的字典(流程自动化)
+    def match_step_dic(self, code):
+        a = self.match_step2(code)
+        l = len(a)
+        n = 0
+        dat = {}
+        while n < l:
+            dat.setdefault(a[n][0], a[n][1])
+            n = n + 1
+        return dat
 
     # 创建"用例编号"对应"用例目的"的映射字典
     def group_goal_dic(self):
@@ -527,10 +550,12 @@ class TestExcel:
     # 测试入口
     def test_value(self):
         a = self.splicing_dic(Excel_basedata_zs, '损益结转分录查询', 20, 6, 20)
-        print(a)
+        # print(a)
         b = self.splicing_dic(Excel_basedata_zs, '损益结转分录查询', 4, 5, 20)
         # print(b)
         c = self.enumeration_list2(Excel_basedata_zs, '产品报备管理', '高级查询_产品投资性质')
         # print(c)
         d = self.splicing_dic2(Excel_basedata_zs, '损益结转分录查询', 20)
-        print(d)
+        # print(d)
+        e = self.match_step_dic('temp70')
+        print(e)

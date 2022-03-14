@@ -1,12 +1,14 @@
 from XAMS.Asset.test_asset import TestAsset
 from XAMS.Liquidation.test_liquidation import TestLiquidation
+from XAMS.Process.test_process import TestProcess
 from XAMS.Product.test_product import TestProduct
 from XAMS.Report.test_report import TestReport
 from XAMS.Tool.test_excel import TestExcel
 from XAMS.Trade.test_trade import TestTrade
 from XAMS.Valuation.test_valuation import TestValuation
 from XAMS.Workbench.test_workbench import TestWorkbench
-from XAMS.conftest import report_list, asset_list, trade_list, task_list, liquidation_list, valuation_list, product_list
+from XAMS.conftest import report_list, asset_list, trade_list, task_list, liquidation_list, valuation_list, \
+    product_list, trade_process_list
 
 
 class TestAuto:
@@ -19,6 +21,7 @@ class TestAuto:
         self.liquidation = TestLiquidation()
         self.valuation = TestValuation()
         self.product = TestProduct()
+        self.process = TestProcess()
         count = len(self.list.code_list())
         n = 0
         sum_report = 0
@@ -30,6 +33,8 @@ class TestAuto:
         sum_valuation = 0
         simulate = 0
         compare = 0
+        process = 0
+        sum_trade_process = 0
         while n < count:
             code = self.list.code_list()[n]
             menu = self.list.group_ele_dic().get(code)
@@ -102,6 +107,15 @@ class TestAuto:
                 else:
                     print("该界面不在任何列表中，请修改用例")
                     return False
+            elif test_goal == '流程自动化':
+                print(value[1])
+                process = process + 1
+                if value[1] in trade_process_list:
+                    self.process.test_universal(stagemark, code, menu, value, test_goal)
+                    sum_trade_process = sum_trade_process + 1
+                else:
+                    print("该流程不在任何列表中，请修改用例")
+                    return False
             else:
                 print("该测试目的暂不支持，请修改用例")
                 return False
@@ -120,4 +134,6 @@ class TestAuto:
             print(f'估值案例执行完毕，共{sum_valuation}条')
         if sum_product > 0:
             print(f'产品案例执行完毕，共{sum_product}条')
-        print(f'自动化案例执行完毕，共{count}条，包含模拟操作{simulate}条，升级对比{compare}条')
+        if sum_trade_process > 0:
+            print(f'交易流程自动化执行完毕，共{sum_trade_process}条')
+        print(f'自动化案例执行完毕，共{count}条，包含模拟操作{simulate}条，升级对比{compare}条，流程自动化{process}条')

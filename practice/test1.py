@@ -49,8 +49,71 @@
 #
 # print(requests.post("http://www.baidu.com"))
 
-import yaml
+# import yaml
+#
+# print(yaml.load("""
+# a:1
+# """, Loader=yaml.FullLoader))
 
-print(yaml.load("""
-a:1
-""", Loader=yaml.FullLoader))
+
+# def differ():
+#     if _name_ == '_main_':
+#         print('我正在自己执行函数')
+#         print('%s' % _name_)
+#         print(f'{_name_}')
+#     else:
+#         print('我在被别人调用')
+#         print('%s' % _name_)
+#         print(f'{_name_}')
+#
+#
+# differ()
+#
+#
+# def decorator_name(a):
+#     def decorated(*args, **kwargs):
+#         if not can_run:
+#             return "Function will not run"
+#         return a(*args, **kwargs)
+#
+#     return decorated
+#
+#
+# @decorator_name
+# def func():
+#     return ("Function is running")
+#
+# for can_run in ['true',15151, 0 ,'false' , 'qsdad']:
+#     print(func())
+#
+# can_run = True
+# print(func())
+# can_run = False
+# print(func())
+
+# from functools import wraps
+#
+#
+# def logit(func):
+#     @wraps(func)
+#     def with_logging(*args, **kwargs):
+#         print(func.__name__ + " was called")
+#         return func(*args, **kwargs)
+#     return with_logging
+#
+#
+# @logit
+# def addition_func(x):
+#     """Do some math."""
+#     return x + x
+#
+#
+# result = addition_func(4)
+# print(result)
+
+# 字符串倒序排列
+a ='adsgheh71'
+A = ''
+for i in a:
+    A = i + A
+print(A)

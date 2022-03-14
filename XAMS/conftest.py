@@ -9,6 +9,11 @@ def stagemark():
     print("自动化案例执行结束")
 
 
+@pytest.fixture(scope="module")
+def logit():
+    print(__name__ + " was called")
+
+
 # 解决命令行执行找不到调用的包
 import sys
 import os
@@ -101,3 +106,7 @@ liquidation_list = ['清算管理-待复核交易指令列表'
 # 估值列表
 valuation_list = ['估值管理-日间跑批'
                   ]
+
+# 交易流程列表
+trade_process_list = ['银行间现券买入'
+                      ]
